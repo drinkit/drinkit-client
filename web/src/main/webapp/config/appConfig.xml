@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<remoting>
+		<endPoint>http://{server.name}:{server.port}/spring/messagebroker/amf</endPoint>
+	</remoting>
+</application>

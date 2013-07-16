@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Object xmlns:mx="http://www.adobe.com/2006/mxml">
+    <mx:Script>
+        <![CDATA[
+            [Bindable]
+            public var config:XML = null
+        ]]>
+    </mx:Script>
+
+    <mx:RemoteObject 
+    	id="authService" 
+    	endpoint="{config.remoting.endPoint}" 
+    	destination="authService" 
+    	showBusyCursor="true"/>   	
+
+	      
+</mx:Object>
+
+
+
