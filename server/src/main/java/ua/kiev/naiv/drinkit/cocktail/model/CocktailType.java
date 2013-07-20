@@ -1,9 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,6 +15,7 @@ public class CocktailType {
 
     private Integer id;
     private String name;
+    private Set<Cocktail> cocktails;
 
     @Id
     @Column(name = "ncocktaletypekey")
@@ -35,5 +34,14 @@ public class CocktailType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @OneToMany(mappedBy = "cocktailType")
+    public Set<Cocktail> getCocktails() {
+        return cocktails;
+    }
+
+    public void setCocktails(Set<Cocktail> cocktails) {
+        this.cocktails = cocktails;
     }
 }

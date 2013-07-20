@@ -58,6 +58,7 @@ public class Cocktail {
     }
 
     @ManyToOne()
+    @JoinColumn(name = "ntype")
     public CocktailType getCocktailType() {
         return cocktailType;
     }

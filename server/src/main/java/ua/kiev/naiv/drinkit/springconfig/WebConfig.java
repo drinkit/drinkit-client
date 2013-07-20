@@ -5,6 +5,7 @@ import org.hibernate.ejb.HibernatePersistence;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -19,8 +20,8 @@ import java.util.Properties;
  * Time: 22:27
  */
 @Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = "com.springapp.mvc.controllers")
+@ComponentScan("ua.kiev.naiv.drinkit.cocktail")
+@EnableJpaRepositories("ua.kiev.naiv.drinkit.cocktail.repository")
 public class WebConfig {
 
 //    @Bean
@@ -36,7 +37,7 @@ public class WebConfig {
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/mycocktails");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/cocktail");
         dataSource.setUsername("drinkit");
         dataSource.setPassword("drinkit");
         return dataSource;

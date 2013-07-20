@@ -21,7 +21,7 @@ public class Ingredient {
     private Set<CocktailIngredient> cocktailIngredients;
 
     @Id
-    @Column(name = "cdescription")
+    @Column(name = "ningredientkey")
     public Integer getId() {
         return id;
     }
