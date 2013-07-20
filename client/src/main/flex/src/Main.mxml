@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" currentState="{_model.currentView}" 
+			   xmlns:views="views.*" applicationComplete="application1_applicationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import design.DesignModel;
+			
+			import models.MainModel;
+			
+			import mx.events.FlexEvent;
+			
+			public const darkGreen:uint = DesignModel.DARK_GREEN;
+			public const sandBeach:uint = DesignModel.SAND_BEACH;
+			public const lightPink:uint = DesignModel.LIGHT_PINK;
+			public const orangeBeach:uint = DesignModel.ORANGE_BEACH;
+			public const lightGreen:uint = DesignModel.LIGHT_GREEN;
+			
+			[Bindable]
+			private var _model:MainModel;
+			
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				_model = new MainModel();
+			}
+			
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	<fx:Style source="/design/main_style.css" />
+	<s:states>
+		<s:State name="searchView" />
+		<s:State name="cocktailView" />
+	</s:states>
+	<views:MainSearchView includeIn="searchView" width="100%" height="100%" />
 </s:Application>
