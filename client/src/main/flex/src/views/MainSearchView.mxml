@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1024" height="768" xmlns:components="components.*" xmlns:ccomponents="ccomponents.*" creationComplete="creationCompleteHandler(event)">
+		 xmlns:s="library://ns.adobe.com/flex/spark" xmlns:flextras="spark.flextras.autoCompleteComboBox.*" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1024" height="768" xmlns:components="components.*" creationComplete="creationCompleteHandler(event)">
 	<s:layout>
 		<s:VerticalLayout />
 	</s:layout>
 	<fx:Script>
 		<![CDATA[
 			import controllers.SearchViewController;
+			
+			import design.DesignModel;
 			
 			import models.SearchViewModel;
 			
@@ -26,18 +28,15 @@
 			{
 				if (event.newIndex >= 0)
 					_controller.addIngredientToQuery(ingrChoose.selectedItem);
-				
-				ingrChoose.selectedItem = null;
-				ingrChoose.textInput.text = "";	
-				
-							
+
+				ingrChoose.selectedIndex = -1;				
 			}
 			
 			private function filterCBList(item:Object):Boolean
 			{
-				var inputValue:String = ingrChoose.textInput.text.toLowerCase();
+				var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
 				
-				if (String(item.cname).toLowerCase().indexOf(inputValue)>-1)             
+				if (String(item.cname).toLowerCase().search(inputValue) > -1)             
 					return true;
 				
 				return false;
@@ -48,15 +47,6 @@
 				_model = new SearchViewModel();
 				_controller = new SearchViewController(_model);
 				//
-			}
-			
-			protected function ingrChoose_textInputHandler(event:TextEvent):void
-			{
-				var cbData:ArrayCollection = ArrayCollection(ingrChoose.dataProvider);
-				if (cbData.filterFunction != filterCBList)
-					cbData.filterFunction = filterCBList;
-				
-				cbData.refresh();	
 			}
 			
 		]]>
@@ -83,13 +73,13 @@
 		</s:VGroup>
 		<s:Line height="100%" xFrom="0" xTo="0">
 			<s:stroke>
-				<s:SolidColorStroke weight="2" color="0x000000" />
+				<s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}" />
 			</s:stroke>
 		</s:Line>
 		<s:VGroup width="100%" height="100%">
-			<s:Label text="Ингридиенты" />
-			<s:ComboBox id="ingrChoose" width="200" labelField="cname" dataProvider="{_model.ingredientsList}" change="combobox1_changeHandler(event)" textInput="ingrChoose_textInputHandler(event)"/>
-			<s:List width="100%" height="100%" borderVisible="false" itemRenderer="components.renderers.IngredientItemRenderer" dataProvider="{_model.ingredientsQueryList}" >
+			<s:Label text="Ингридиенты" fontSize="16" />
+			<flextras:AutoCompleteComboBoxLite id="ingrChoose" itemRenderer="components.renderers.AutoCompleteRenderer" width="200" labelField="cname" dataProvider="{_model.ingredientsList}" change="combobox1_changeHandler(event)" filterFunction="filterCBList" />
+			<s:List minWidth="200" width="100%" height="100%" borderVisible="false" itemRenderer="components.renderers.IngredientItemRenderer" dataProvider="{_model.ingredientsQueryList}" >
 				<s:layout>
 					<components:FlowLayout clipAndEnableScrolling="false" />
 				</s:layout>
@@ -98,7 +88,7 @@
 	</s:HGroup>
 	<s:Line width="100%" yFrom="0" yTo="0">
 		<s:stroke>
-			<s:SolidColorStroke weight="2" color="0x000000" />
+			<s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}" />
 		</s:stroke>
 	</s:Line>
 	<s:List id="recipesList" width="100%" height="100%" />
