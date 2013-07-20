@@ -18,6 +18,11 @@ s|List
 	contentBackgroundColor: PropertyReference("sandBeach");
 }
 
+s|TextInput
+{
+	contentBackgroundColor: PropertyReference("sandBeach");
+}
+
 components|IconRadioButton
 {
 	selectedColor: #00ff00;

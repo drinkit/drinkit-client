@@ -31,6 +31,21 @@ public class FlowLayout extends LayoutBase
             layoutTarget.invalidateDisplayList();
         }
     }
+	
+	private var _verticalGap:Number = 6;
+	
+	public function set verticalGap(value:Number):void
+	{
+		_verticalGap = value;
+		
+		// We must invalidate the layout
+		var layoutTarget:GroupBase = target;
+		if (layoutTarget)
+		{
+			layoutTarget.invalidateSize();
+			layoutTarget.invalidateDisplayList();
+		}
+	}
     
     //---------------------------------------------------------------
     //
@@ -121,7 +136,7 @@ public class FlowLayout extends LayoutBase
                 
                 // Move down by elementHeight, we're assuming all 
                 // elements are of equal height
-                y += elementHeight;
+                y += elementHeight + _verticalGap;
             }
             
             // Position the element
