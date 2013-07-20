@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1760355769">
+    <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.1.61-community" jdbc-version="3.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.9 ( Revision: ${svn.Revision} )" uuid="cdf8b57f-fc1a-45cc-bf7c-af9451852467">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost/cocktail</jdbc-url>
+      <user-name>drinkit</user-name>
+      <user-password>dfcedfd8dfc3dfc4dfc1dfc3dfde</user-password>
+      <libraries>
+        <library>
+          <url>jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.9/mysql-connector-java-5.1.9.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
+
