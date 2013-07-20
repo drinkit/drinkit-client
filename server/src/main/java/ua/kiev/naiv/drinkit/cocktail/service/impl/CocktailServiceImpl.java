@@ -22,22 +22,22 @@ public class CocktailServiceImpl implements CocktailService{
 
     @Override
     public Cocktail create(Cocktail cocktail) {
-        return null;  //TODO Empty implementation
+        throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
     }
 
     @Override
     public Cocktail delete(int id) {
-        return null;  //TODO Empty implementation
+        throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
     }
 
     @Override
     public List<Cocktail> findAll() {
-        return null;  //TODO Empty implementation
+        throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
     }
 
     @Override
     public Cocktail update(Cocktail cocktail) {
-        return null;  //TODO Empty implementation
+        throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
     }
 
     @Override
