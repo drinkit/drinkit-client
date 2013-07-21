@@ -18,6 +18,16 @@ s|List
 	contentBackgroundColor: PropertyReference("sandBeach");
 }
 
+s|TextInput
+{
+	contentBackgroundColor: PropertyReference("sandBeach");
+}
+
+s|ToggleButton
+{
+	skinClass: ClassReference("design.skins.FlatToggleButtonSkin");
+}
+
 components|IconRadioButton
 {
 	selectedColor: #00ff00;

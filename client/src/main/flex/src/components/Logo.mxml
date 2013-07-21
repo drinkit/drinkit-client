@@ -15,5 +15,5 @@
 			<s:SolidColor color="{DesignModel.DARK_GREEN}" />
 		</s:fill>
 	</s:Rect>
-	<s:BitmapImage width="160" height="80" verticalCenter="0" horizontalCenter="0" />
+	<s:BitmapImage width="200" height="80" verticalCenter="0" horizontalCenter="0" source="@Embed(source='/../assets/work-logo.png')" blendMode="normal" />
 </s:Group>

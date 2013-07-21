@@ -14,10 +14,11 @@
 			import design.DesignModel;
 			
 			import flash.filters.BitmapFilterQuality;
+			import flash.filters.BitmapFilterType;
 			
 			import spark.components.List;
 			
-			private const cornerRadius:uint = 10;
+			private const cornerRadius:uint = 5;
 			
 			override public function set data(value:Object):void
 			{
@@ -25,8 +26,8 @@
 				
 				if (data)
 				{
-					labelDisplay.text = data.cname;
-					width = labelDisplay.measureText(data.cname).width + 10;
+					labelDisplay.text = label;
+					width = labelDisplay.measureText(label).width + 10;
 				}
 			}
 			
@@ -46,9 +47,11 @@
 		</s:fill>
 		<s:filters>
 			<s:GlowFilter includeIn="hovered" blurX="32" blurY="32" color="{DesignModel.LIGHT_PINK}" inner="true" strength="128" quality="{BitmapFilterQuality.LOW}" />
+			<s:DropShadowFilter angle="0" blurX="4" blurY="4" color="0x333333" distance="1" />
 		</s:filters>
 	</s:Rect>
-	<s:Label height="100%" horizontalCenter="0" verticalAlign="middle" id="labelDisplay" mouseEnabled="false"/>
+	<s:Label height="100%" horizontalCenter="0" verticalAlign="middle" id="labelDisplay" mouseEnabled="false">
+	</s:Label>
 	<!--<s:Group height="100%" width="24" right="0">
 		<s:Rect>
 			<s:fill>

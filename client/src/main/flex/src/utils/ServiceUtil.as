@@ -8,11 +8,11 @@ package utils
 
 	public class ServiceUtil
 	{
-		public static var serviceAddress:String;
+		public static var serviceAddress:String = "http://naiv.kiev.ua:8080/";
 		
-		public static function requestData(params:URLVariables, handler:Function):void
+		public static function requestData(functionName:String, params:URLVariables, handler:Function):void
 		{
-			var request:URLRequest = new URLRequest(serviceAddress);
+			var request:URLRequest = new URLRequest(serviceAddress + functionName);
 			request.method = URLRequestMethod.GET;
 			request.data = params;
 			var query:URLLoader = new URLLoader(request);

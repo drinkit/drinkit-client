@@ -7,6 +7,6 @@ package design
 		public static const SAND_BEACH:uint = 0xFFEEAD;
 		public static const LIGHT_PINK:uint = 0xFF6F69;
 		public static const ORANGE_BEACH:uint = 0xFFCC5C;
-		public static const LIGHT_GREEN:uint = 0xAAD8B0;
+		public static const LIGHT_GREEN:uint = 0xBECAC0;
 	}
 }

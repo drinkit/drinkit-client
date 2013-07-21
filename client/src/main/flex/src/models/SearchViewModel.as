@@ -4,6 +4,7 @@ package models
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;
+	import mx.events.CollectionEvent;
 	
 	import utils.MockData;
 
@@ -11,12 +12,21 @@ package models
 	{
 		public function SearchViewModel()
 		{
+			ingredientsList = MockData.fakeIngredients();
+			ingredientsQueryList = new ArrayList();
+			//
+			ingredientsQueryList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
 		}
 		
 		[Bindable]
-		public var ingredientsList:ArrayCollection = MockData.fakeIngredients();
+		public var ingredientsList:ArrayCollection;
 		
 		[Bindable]
-		public var ingredientsQueryList:ArrayList = new ArrayList();
+		public var ingredientsQueryList:ArrayList;
+		
+		private function onIngredientsQueryListChange(event:CollectionEvent):void
+		{
+			ingredientsList.refresh();
+		}
 	}
 }

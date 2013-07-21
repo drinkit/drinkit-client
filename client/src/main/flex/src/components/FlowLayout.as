@@ -32,6 +32,9 @@ public class FlowLayout extends LayoutBase
         }
     }
 	
+	//---------------------------------------------------------------
+	//  horizontalGap
+	//---------------------------------------------------------------
 	private var _verticalGap:Number = 6;
 	
 	public function set verticalGap(value:Number):void

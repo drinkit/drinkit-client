@@ -29,14 +29,17 @@
 				if (event.newIndex >= 0)
 					_controller.addIngredientToQuery(ingrChoose.selectedItem);
 
-				ingrChoose.selectedIndex = -1;				
+				ingrChoose.selectedIndex = -1;
+				
+				ingrChoose.validateProperties();
+//				ingrChoose.invalidateProperties();
 			}
 			
 			private function filterCBList(item:Object):Boolean
 			{
 				var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
 				
-				if (String(item.cname).toLowerCase().search(inputValue) > -1)             
+				if (String(item.cname).toLowerCase().search(inputValue) > -1 && (_model.ingredientsQueryList.getItemIndex(item) == -1))             
 					return true;
 				
 				return false;
@@ -47,6 +50,7 @@
 				_model = new SearchViewModel();
 				_controller = new SearchViewController(_model);
 				//
+				_controller.requestIngredients();
 			}
 			
 		]]>
@@ -56,19 +60,22 @@
 	</fx:Declarations>
 	<components:Logo width="100%" height="80" />
 	<s:HGroup id="searchPanel" width="100%" height="200">
-		<s:VGroup width="200" height="100%" paddingLeft="5" paddingRight="5">
+		<s:VGroup width="210" height="100%" paddingLeft="5" paddingRight="5">
 			<s:TextInput width="192" prompt="название коктейля..."/>
-			<s:HGroup gap="0" width="192" height="64">
-				<components:IconRadioButton width="100%" height="100%" icon="@Embed(source='/../assets/long_cocktail.png')" groupName="cocktailType" toolTip="Long drink"/>
+			<s:HGroup width="192" height="64" gap="3">
+				<!--<components:IconRadioButton width="100%" height="100%" icon="@Embed(source='/../assets/long_cocktail.png')" groupName="cocktailType" toolTip="Long drink"/>
 				<components:IconRadioButton width="100%" height="100%" icon="@Embed(source='/../assets/long_cocktail.png')" groupName="cocktailType" toolTip="Short drink" />				
-				<components:IconRadioButton width="100%" height="100%" icon="@Embed(source='/../assets/long_cocktail.png')" groupName="cocktailType" toolTip="Shooter" />
+				<components:IconRadioButton width="100%" height="100%" icon="@Embed(source='/../assets/long_cocktail.png')" groupName="cocktailType" toolTip="Shooter" />-->
+				<s:ToggleButton width="64" height="64" toolTip="Long drink" cornerRadius="10" />
+				<s:ToggleButton width="64" height="64" icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Short drink" cornerRadius="10" />
+				<s:ToggleButton width="64" height="64" icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Shooter" cornerRadius="10" />
 			</s:HGroup>
-			<s:TileGroup width="192" height="48" horizontalGap="0" verticalGap="0">
-				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Горящий" />
-				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Слоёный" />
-				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Со льдом" />
-				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Проверен администрацией" />
-				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Утвержден IBA" />
+			<s:TileGroup width="204" height="48" horizontalGap="2" verticalGap="2">
+				<s:ToggleButton width="48" height="48" toolTip="Горящий" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Слоёный" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Со льдом" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Проверен администрацией" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Утвержден IBA" cornerRadius="10" />
 			</s:TileGroup>
 		</s:VGroup>
 		<s:Line height="100%" xFrom="0" xTo="0">
@@ -77,9 +84,8 @@
 			</s:stroke>
 		</s:Line>
 		<s:VGroup width="100%" height="100%">
-			<s:Label text="Ингридиенты" fontSize="16" />
-			<flextras:AutoCompleteComboBoxLite id="ingrChoose" itemRenderer="components.renderers.AutoCompleteRenderer" width="200" labelField="cname" dataProvider="{_model.ingredientsList}" change="combobox1_changeHandler(event)" filterFunction="filterCBList" />
-			<s:List minWidth="200" width="100%" height="100%" borderVisible="false" itemRenderer="components.renderers.IngredientItemRenderer" dataProvider="{_model.ingredientsQueryList}" >
+			<flextras:AutoCompleteComboBoxLite id="ingrChoose" itemRenderer="components.renderers.AutoCompleteRenderer" prompt="Добавить ингредиент..." width="200" labelField="name" dataProvider="{_model.ingredientsList}" change="combobox1_changeHandler(event)" filterFunction="filterCBList" />
+			<s:List minWidth="200" width="100%" height="100%" borderVisible="false" labelField="name" itemRenderer="components.renderers.IngredientItemRenderer" dataProvider="{_model.ingredientsQueryList}" >
 				<s:layout>
 					<components:FlowLayout clipAndEnableScrolling="false" />
 				</s:layout>
@@ -91,5 +97,5 @@
 			<s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}" />
 		</s:stroke>
 	</s:Line>
-	<s:List id="recipesList" width="100%" height="100%" />
+	<s:List id="recipesList" borderVisible="false" width="100%" height="100%" />
 </s:Group>

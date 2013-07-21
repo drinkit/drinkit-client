@@ -1,6 +1,12 @@
 package controllers
 {
+	import flash.events.Event;
+	
 	import models.SearchViewModel;
+	
+	import mx.collections.ArrayCollection;
+	
+	import utils.ServiceUtil;
 
 	public class SearchViewController
 	{
@@ -14,6 +20,17 @@ package controllers
 		public function addIngredientToQuery(ingr:Object):void
 		{
 			_model.ingredientsQueryList.addItem(ingr);
+//			_model.
+		}
+		
+		public function requestIngredients():void
+		{
+			ServiceUtil.requestData("ingredients/findAll", null, onIngredientsLoad);
+		}
+		
+		private function onIngredientsLoad(event:Event):void
+		{
+			_model.ingredientsList = new ArrayCollection((JSON.parse(event.target.data) as Array));
 		}
 	}
 }

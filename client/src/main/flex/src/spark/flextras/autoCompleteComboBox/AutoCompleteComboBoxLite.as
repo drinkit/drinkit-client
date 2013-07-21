@@ -353,7 +353,7 @@ package spark.flextras.autoCompleteComboBox
 				// if textInput.text is empty it is because an item was just selected and we are resetting the 
 				// dataProvider.  Close the drop down if it's open
 				if((this.textInput.text == '') && (this.isDropDownOpen)){
-					this.closeDropDown(false);
+//					this.closeDropDown(false);
 				}
 				
 				dp.refresh();
@@ -379,9 +379,10 @@ package spark.flextras.autoCompleteComboBox
 		protected function onChange(event:IndexChangeEvent):void{
 			if((event.oldIndex < 0) && (event.newIndex >= 0))
 			{
-				this._typeAheadText = "";
-				this.dispatchEvent(new Event('typeAheadTextChanged'));
-//				this.setTypeAheadText('');
+//				this._typeAheadText = "";
+//				this.dispatchEvent(new Event('typeAheadTextChanged'));
+//				
+				this.setTypeAheadText("");
 			}
 		}
 		
