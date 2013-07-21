@@ -9,30 +9,20 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Properties;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Pavel Kolmykov
- * Date: 18.07.13
- * Time: 22:27
+ * Date: 21.07.13
+ * Time: 14:28
  */
 @Configuration
 @ComponentScan("ua.kiev.naiv.drinkit.cocktail")
-@EnableWebMvc
 @EnableJpaRepositories("ua.kiev.naiv.drinkit.cocktail.repository")
-public class WebConfig {
+public class TestConfig {
 
-//    @Bean
-//    public InternalResourceViewResolver viewResolver() {
-//        InternalResourceViewResolver resolver =
-//                new InternalResourceViewResolver();
-//        resolver.setPrefix("/WEB-INF/view/");
-//        resolver.setSuffix(".jsp");
-//        return resolver;
-//    }
 
     @Bean
     public DriverManagerDataSource dataSource() {

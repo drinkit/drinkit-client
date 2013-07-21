@@ -6,31 +6,28 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
+import ua.kiev.naiv.drinkit.cocktail.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.springconfig.TestConfig;
-import ua.kiev.naiv.drinkit.springconfig.WebConfig;
 
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Pavel Kolmykov
- * Date: 20.07.13
- * Time: 21:36
+ * Date: 21.07.13
+ * Time: 20:14
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
-public class CocktailTest {
+public class IngredientsTest {
 
     @Autowired
-    CocktailService cocktailService;
+    IngredientRepository ingredientRepository;
 
     @Test
-    public void wannaCubaLibre(){
-        Cocktail cubaLibre = cocktailService.findById(1);
-        Assert.assertNotNull(cubaLibre);
-        Assert.assertEquals("Куба Либре", cubaLibre.getName());
-        Set<CocktailIngredient> ingredients = cubaLibre.getIngredients();
-//        ingredients.iterator().next().ge
+    public void getIngredientsList() {
+        List<Ingredient> ingredients = ingredientRepository.findAll();
+        Assert.assertNotNull(ingredients);
     }
 }

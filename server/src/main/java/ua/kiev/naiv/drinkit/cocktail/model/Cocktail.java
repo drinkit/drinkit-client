@@ -1,6 +1,9 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -15,7 +18,7 @@ import java.util.Set;
         @UniqueConstraint(columnNames = "ncocktailkey"),
         @UniqueConstraint(columnNames = "cname")
 })
-public class Cocktail {
+public class Cocktail implements Serializable{
 
     private Integer id;
     private String name;
@@ -59,6 +62,7 @@ public class Cocktail {
 
     @ManyToOne()
     @JoinColumn(name = "ntype")
+    @JsonIdentityReference(alwaysAsId = true)
     public CocktailType getCocktailType() {
         return cocktailType;
     }
@@ -113,7 +117,7 @@ public class Cocktail {
         isFlacky = flacky;
     }
 
-    @OneToMany(mappedBy = "id.cocktail")
+    @OneToMany(mappedBy = "id.cocktail", fetch = FetchType.EAGER)
     public Set<CocktailIngredient> getIngredients() {
         return ingredients;
     }

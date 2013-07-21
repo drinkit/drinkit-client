@@ -1,6 +1,10 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,11 +19,12 @@ import javax.persistence.*;
                 joinColumns = @JoinColumn(name = "cocktails_ncocktailkey")),
         @AssociationOverride(name = "id.ingredient",
                 joinColumns = @JoinColumn(name = "ingredients_ningredientkey")) })
-public class CocktailIngredient {
+public class CocktailIngredient implements Serializable{
 
     private Integer quantity;
     private CocktailIngredientId id;
 
+    @JsonIgnore
     @EmbeddedId
     public CocktailIngredientId getId() {
         return id;
@@ -39,6 +44,7 @@ public class CocktailIngredient {
     }
 
     @Transient
+    @JsonIdentityReference(alwaysAsId = true)
     public Ingredient getIngredient(){
         return getId().getIngredient();
     }
@@ -47,14 +53,14 @@ public class CocktailIngredient {
         getId().setIngredient(ingredient);
     }
 
-    @Transient
-    public Cocktail getCocktail(){
-        return getId().getCocktail();
-    }
-
-    public void setCocktail(Cocktail cocktail){
-        getId().setCocktail(cocktail);
-    }
+//    @Transient
+//    public Cocktail getCocktail(){
+//        return getId().getCocktail();
+//    }
+//
+//    public void setCocktail(Cocktail cocktail){
+//        getId().setCocktail(cocktail);
+//    }
 
 
 

@@ -1,6 +1,10 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
@@ -17,6 +21,7 @@ public class CocktailIngredientId implements Serializable {
     private Cocktail cocktail;
     private Ingredient ingredient;
 
+    @JsonIgnore
     @ManyToOne
     public Cocktail getCocktail() {
         return cocktail;
@@ -26,7 +31,7 @@ public class CocktailIngredientId implements Serializable {
         this.cocktail = cocktail;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     public Ingredient getIngredient() {
         return ingredient;
     }

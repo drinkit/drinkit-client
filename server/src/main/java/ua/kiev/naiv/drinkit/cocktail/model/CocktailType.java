@@ -1,6 +1,10 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
+
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -11,11 +15,12 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "cocktales_types")
-public class CocktailType {
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+public class CocktailType implements Serializable{
 
     private Integer id;
     private String name;
-    private Set<Cocktail> cocktails;
+//    private Set<Cocktail> cocktails;
 
     @Id
     @Column(name = "ncocktaletypekey")
@@ -36,12 +41,12 @@ public class CocktailType {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "cocktailType")
-    public Set<Cocktail> getCocktails() {
-        return cocktails;
-    }
-
-    public void setCocktails(Set<Cocktail> cocktails) {
-        this.cocktails = cocktails;
-    }
+//    @OneToMany(mappedBy = "cocktailType")
+//    public Set<Cocktail> getCocktails() {
+//        return cocktails;
+//    }
+//
+//    public void setCocktails(Set<Cocktail> cocktails) {
+//        this.cocktails = cocktails;
+//    }
 }

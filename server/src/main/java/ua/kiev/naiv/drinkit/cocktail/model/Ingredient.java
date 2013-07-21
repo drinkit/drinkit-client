@@ -1,5 +1,8 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -12,13 +15,14 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ingredients")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Ingredient {
 
     private Integer id;
     private String name;
     private Integer vol;
     private String description;
-    private Set<CocktailIngredient> cocktailIngredients;
+//    private Set<CocktailIngredient> cocktailIngredients;
 
     @Id
     @Column(name = "ningredientkey")
@@ -57,12 +61,12 @@ public class Ingredient {
         this.description = description;
     }
 
-    @OneToMany(mappedBy = "id.ingredient")
-    public Set<CocktailIngredient> getCocktailIngredients() {
-        return cocktailIngredients;
-    }
+//    @OneToMany(mappedBy = "id.ingredient")
+//    public Set<CocktailIngredient> getCocktailIngredients() {
+//        return cocktailIngredients;
+//    }
 
-    public void setCocktailIngredients(Set<CocktailIngredient> cocktailIngredients) {
-        this.cocktailIngredients = cocktailIngredients;
-    }
+//    public void setCocktailIngredients(Set<CocktailIngredient> cocktailIngredients) {
+//        this.cocktailIngredients = cocktailIngredients;
+//    }
 }
