@@ -28,6 +28,12 @@ s|ToggleButton
 	skinClass: ClassReference("design.skins.FlatToggleButtonSkin");
 }
 
+s|TabBar
+{
+	cornerRadius: 0;
+	skinClass: ClassReference("design.skins.FlatTabBarSkin");
+}
+
 components|IconRadioButton
 {
 	selectedColor: #00ff00;

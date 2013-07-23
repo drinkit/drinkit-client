@@ -7,13 +7,13 @@ package utils
 	{
 		public static function fakeIngredients():ArrayCollection
 		{
-			var source:Array = [{cname:"Водка"},
-				{cname:"Ананасовый сок"},
-				{cname:"Джин"},
-				{cname:"Текила"},
-				{cname:"Кока-кола"},
-				{cname:"Виски"},
-				{cname:"Трипл сек"}];
+			var source:Array = [{name:"Водка"},
+				{name:"Ананасовый сок"},
+				{name:"Джин"},
+				{name:"Текила"},
+				{name:"Кока-кола"},
+				{name:"Виски"},
+				{name:"Трипл сек"}];
 			
 			return new ArrayCollection(source);
 		}

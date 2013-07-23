@@ -38,6 +38,7 @@
 	<fx:Script>
 		<![CDATA[
 			import design.DesignModel;
+			import flash.filters.BitmapFilterType;
 		]]>
 	</fx:Script>
     
@@ -101,11 +102,14 @@
 				<s:GradientEntry color="{DesignModel.ORANGE_BEACH}" ratio="1" />
 			</s:LinearGradient>
 		</s:fill.overStates>
-		<s:stroke.selectedStates>
+		<!--<s:stroke.selectedStates>
 			<s:SolidColorStroke weight="2" color="{DesignModel.LIGHT_PINK}" />
-		</s:stroke.selectedStates>
+		</s:stroke.selectedStates>-->
 		<s:filters>
-			<s:DropShadowFilter angle="0" blurX="4" blurY="4" color="0x333333" distance="1" />
+			<s:DropShadowFilter excludeFrom="selectedStates" angle="0" blurX="4" blurY="4" color="0x333333" distance="1" />
+			<s:BevelFilter includeIn="selectedStates" angle="45" blurX="2" blurY="1" highlightAlpha="0.3" highlightColor="0x000000"
+						   shadowColor="0x111111" shadowAlpha="0.1" type="{BitmapFilterType.INNER}" distance="2" strength="1" />
+			<s:GlowFilter includeIn="selectedStates" alpha="0.1" blurX="64" blurY="64" color="0x111111" inner="true" strength="24" />
 		</s:filters>
 	</s:Rect>
     

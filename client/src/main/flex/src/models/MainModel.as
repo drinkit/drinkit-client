@@ -12,8 +12,5 @@ package models
 		{
 			super(null);
 		}
-		
-		[Bindable]
-		public var currentView:String = SEARCH_VIEW;
 	}
 }
