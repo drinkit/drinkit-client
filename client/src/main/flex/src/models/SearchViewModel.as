@@ -9,7 +9,7 @@ package models
 	import utils.MockData;
 
 	public class SearchViewModel extends EventDispatcher
-	{
+	{		
 		public function SearchViewModel()
 		{
 			ingredientsList = MockData.fakeIngredients();

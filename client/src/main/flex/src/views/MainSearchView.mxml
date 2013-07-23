@@ -12,8 +12,11 @@
 			import design.DesignModel;
 			
 			import models.SearchViewModel;
+			import models.supportClasses.CocktailTypes;
+			import models.supportClasses.OptionalParameters;
 			
 			import mx.collections.ArrayCollection;
+			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
 			
 			import spark.events.IndexChangeEvent;
@@ -27,12 +30,48 @@
 			protected function combobox1_changeHandler(event:IndexChangeEvent):void
 			{
 				if (event.newIndex >= 0)
+				{
 					_controller.addIngredientToQuery(ingrChoose.selectedItem);
+					startSearch();
+				}
+					
 
-				ingrChoose.selectedIndex = -1;
-				
+				ingrChoose.selectedIndex = -1;				
 				ingrChoose.validateProperties();
-//				ingrChoose.invalidateProperties();
+				//
+							
+			}
+			
+			private function startSearch():void
+			{
+				var types:Array = [];
+				var ingredients:Array = [];
+				var optionals:Array = [];
+				//
+				var elem:ToggleButton;
+				
+				for (var i:uint = 0; i < cocktailTypesGroup.numElements; i++)
+				{
+					elem = ToggleButton(cocktailTypesGroup.getElementAt(i));
+					
+					if (elem.selected)
+						types.push(uint(elem.name));
+				}
+				
+				for (var j:uint = 0; j < optionalsGroup.numElements; j++)
+				{
+					elem = ToggleButton(optionalsGroup.getElementAt(j));
+					
+					if (elem.selected)
+						optionals.push(uint(elem.name));
+				}
+				
+				for (var k:uint = 0; k < _model.ingredientsQueryList.length; k++)
+				{
+					ingredients.push(_model.ingredientsQueryList.getItemAt(k).id);
+				}
+				
+				_controller.performSearch(types, ingredients, optionals);
 			}
 			
 			private function filterCBList(item:Object):Boolean
@@ -62,20 +101,17 @@
 	<s:HGroup id="searchPanel" width="100%" height="200">
 		<s:VGroup width="210" height="100%" paddingLeft="5" paddingRight="5">
 			<s:TextInput width="192" prompt="название коктейля..."/>
-			<s:HGroup width="192" height="64" gap="3">
-				<!--<components:IconRadioButton width="100%" height="100%" icon="@Embed(source='/../assets/long_cocktail.png')" groupName="cocktailType" toolTip="Long drink"/>
-				<components:IconRadioButton width="100%" height="100%" icon="@Embed(source='/../assets/long_cocktail.png')" groupName="cocktailType" toolTip="Short drink" />				
-				<components:IconRadioButton width="100%" height="100%" icon="@Embed(source='/../assets/long_cocktail.png')" groupName="cocktailType" toolTip="Shooter" />-->
-				<s:ToggleButton width="64" height="64" toolTip="Long drink" cornerRadius="10" />
-				<s:ToggleButton width="64" height="64" icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Short drink" cornerRadius="10" />
-				<s:ToggleButton width="64" height="64" icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Shooter" cornerRadius="10" />
+			<s:HGroup id="cocktailTypesGroup" width="192" height="64" gap="3">
+				<s:ToggleButton width="64" height="64" name="{CocktailTypes.LONG_DRINK}" toolTip="Long drink" cornerRadius="10" />
+				<s:ToggleButton width="64" height="64" name="{CocktailTypes.SHORT_DRINK}" icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Short drink" cornerRadius="10" />
+				<s:ToggleButton width="64" height="64" name="{CocktailTypes.SHOOTER}" icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Shooter" cornerRadius="10" />
 			</s:HGroup>
-			<s:TileGroup width="204" height="48" horizontalGap="2" verticalGap="2">
-				<s:ToggleButton width="48" height="48" toolTip="Горящий" cornerRadius="10" />
-				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Слоёный" cornerRadius="10" />
-				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Со льдом" cornerRadius="10" />
-				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Проверен администрацией" cornerRadius="10" />
-				<s:ToggleButton width="48" height="48" icon="@Embed(source='/../assets/burning.png')" toolTip="Утвержден IBA" cornerRadius="10" />
+			<s:TileGroup id="optionalsGroup" width="204" height="48" horizontalGap="2" verticalGap="2">
+				<s:ToggleButton width="48" height="48" name="{OptionalParameters.BURNING}" toolTip="Горящий" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" name="{OptionalParameters.FLACKY}" icon="@Embed(source='/../assets/burning.png')" toolTip="Слоёный" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" name="{OptionalParameters.WITH_ICE}" icon="@Embed(source='/../assets/burning.png')" toolTip="Со льдом" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" name="{OptionalParameters.CHECKED}" icon="@Embed(source='/../assets/burning.png')" toolTip="Проверен администрацией" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" name="{OptionalParameters.IBA}" icon="@Embed(source='/../assets/burning.png')" toolTip="Утвержден IBA" cornerRadius="10" />
 			</s:TileGroup>
 		</s:VGroup>
 		<s:Line height="100%" xFrom="0" xTo="0">
