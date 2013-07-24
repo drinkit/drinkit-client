@@ -13,4 +13,6 @@ import java.util.List;
 public interface IngredientService {
 
     public List<Ingredient> getAllIngredients();
+
+    Ingredient getById(int id);
 }

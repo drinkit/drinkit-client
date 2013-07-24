@@ -2,7 +2,9 @@ package ua.kiev.naiv.drinkit.cocktail.service.impl;
 
 import org.springframework.stereotype.Service;
 import ua.kiev.naiv.drinkit.cocktail.model.Cocktail;
+import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
 import ua.kiev.naiv.drinkit.cocktail.repository.CocktailRepository;
+import ua.kiev.naiv.drinkit.cocktail.repository.CocktailTypeRepository;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 
 import javax.annotation.Resource;
@@ -15,10 +17,13 @@ import java.util.List;
  * Time: 21:56
  */
 @Service
-public class CocktailServiceImpl implements CocktailService{
+public class CocktailServiceImpl implements CocktailService {
 
     @Resource
     CocktailRepository cocktailRepository;
+
+    @Resource
+    CocktailTypeRepository cocktailTypeRepository;
 
     @Override
     public Cocktail create(Cocktail cocktail) {
@@ -43,5 +48,15 @@ public class CocktailServiceImpl implements CocktailService{
     @Override
     public Cocktail findById(int id) {
         return cocktailRepository.findOne(id);
+    }
+
+    @Override
+    public CocktailType getCocktailType(int id) {
+        return cocktailTypeRepository.findOne(id);
+    }
+
+    @Override
+    public Iterable<CocktailType> getAllCocktailType() {
+        return cocktailTypeRepository.findAll();
     }
 }

@@ -1,11 +1,14 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,8 +18,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "cocktales_types")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-public class CocktailType implements Serializable{
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class CocktailType implements Serializable {
 
     private Integer id;
     private String name;

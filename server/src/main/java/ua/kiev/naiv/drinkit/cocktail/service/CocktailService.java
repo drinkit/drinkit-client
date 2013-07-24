@@ -1,6 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.service;
 
 import ua.kiev.naiv.drinkit.cocktail.model.Cocktail;
+import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
 
 import java.util.List;
 
@@ -21,4 +22,8 @@ public interface CocktailService {
     Cocktail update(Cocktail cocktail);
 
     Cocktail findById(int id);
+
+    CocktailType getCocktailType(int id);
+
+    Iterable<CocktailType> getAllCocktailType();
 }

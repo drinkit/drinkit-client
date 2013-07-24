@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="drinkit-server:war" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="7b96e647-5a63-424f-8e08-41372d00b4b4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/CocktailController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/IngredientRepository.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/IngredientService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/IngredientServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/IngredientsController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/IngredientsTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_2_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_2_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_2_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/springconfig/TestConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/Cocktail.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/Cocktail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailIngredient.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailIngredient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailIngredientId.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailIngredientId.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/CocktailTypeRepository.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/search/CriteriaPOJO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/EnumRepository.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/SearchController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/SearchTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/CocktailService.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/CocktailService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/CocktailServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/CocktailServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailTest.java" afterPath="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailType.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/Ingredient.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/Ingredient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/springconfig/WebConfig.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/springconfig/WebConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/drinkit-server.iml" afterPath="$PROJECT_DIR$/drinkit-server.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/drinkit_server_war.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/drinkit_server_war.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/drinkit_server_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/drinkit_server_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/IngredientRepository.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/IngredientRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/IngredientService.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/IngredientService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/IngredientServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/IngredientServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/IngredientsTest.java" afterPath="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/IngredientsTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="drinkit.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374422023114" ignored="false" />
+    <file path="/Dummy.txt" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374666578830" ignored="false" />
     <file path="/fragment.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374406818633" ignored="false" />
     <file path="/web.xml" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374327577755" ignored="false" />
     <file path="/Cocktail.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374424344896" ignored="false" />
@@ -41,18 +39,25 @@
     <file path="/a.dummy" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374348318798" ignored="false" />
     <file path="/CocktailIngredient.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374425067675" ignored="false" />
     <file path="/CoctailTest.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374345406366" ignored="false" />
-    <file path="/CocktailRepository.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374346136966" ignored="false" />
-    <file path="/CocktailTest.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374407145513" ignored="false" />
-    <file path="/CocktailService.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374346535768" ignored="false" />
-    <file path="/CocktailServiceImpl.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374350529982" ignored="false" />
+    <file path="/CocktailRepository.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374519103558" ignored="false" />
+    <file path="/CocktailTest.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374524500111" ignored="false" />
+    <file path="/CocktailService.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374524309061" ignored="false" />
+    <file path="/CocktailServiceImpl.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374524538972" ignored="false" />
     <file path="/Implemented Method Body.txt.ft" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374350561743" ignored="false" />
     <file path="/CocktailController.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374404793104" ignored="false" />
     <file path="/CocktailIngredientId.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374423444190" ignored="false" />
-    <file path="/IngredientService.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374427452637" ignored="false" />
-    <file path="/IngredientServiceImpl.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374427446483" ignored="false" />
-    <file path="/IngredientRepository.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374427418437" ignored="false" />
+    <file path="/IngredientService.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374522431507" ignored="false" />
+    <file path="/IngredientServiceImpl.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374522448040" ignored="false" />
+    <file path="/IngredientRepository.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374518794997" ignored="false" />
     <file path="/IngredientsTest.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374427407829" ignored="false" />
     <file path="/IngredientsController.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374428957829" ignored="false" />
+    <file path="/CriteriaPOJO.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374604544061" ignored="false" />
+    <file path="/SeachTest.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374520866099" ignored="false" />
+    <file path="/SearchTest.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374524666666" ignored="false" />
+    <file path="/CocktailRepositoryImpl.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374520542599" ignored="false" />
+    <file path="/CocktailTypeRepository.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374524596853" ignored="false" />
+    <file path="/EnumRepository.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374521447636" ignored="false" />
+    <file path="/SearchController.java" changelist="7b96e647-5a63-424f-8e08-41372d00b4b4" time="1374607311780" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +130,52 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/IngredientsTest.java" line="30" class="ua.kiev.naiv.drinkit.cocktail.model.IngredientsTest" package="ua.kiev.naiv.drinkit.cocktail.model">
+      <breakpoint url="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/IngredientsTest.java" line="29" class="ua.kiev.naiv.drinkit.cocktail.model.IngredientsTest" package="ua.kiev.naiv.drinkit.cocktail.model">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/SearchTest.java" line="58" class="ua.kiev.naiv.drinkit.cocktail.model.SearchTest" package="ua.kiev.naiv.drinkit.cocktail.model">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailTest.java" line="37" class="ua.kiev.naiv.drinkit.cocktail.model.CocktailTest" package="ua.kiev.naiv.drinkit.cocktail.model">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/SearchController.java" line="29" class="ua.kiev.naiv.drinkit.cocktail.controller.SearchController" package="ua.kiev.naiv.drinkit.cocktail.controller">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -150,70 +200,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CocktailService.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/CocktailService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="17" selection-start="239" selection-end="239" vertical-scroll-proportion="0.3374778">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CocktailController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/CocktailController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="12" selection-start="671" selection-end="671" vertical-scroll-proportion="0.0">
+            <state line="26" column="31" selection-start="826" selection-end="826" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IngredientsTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/IngredientsTest.java">
+      <file leaf-file-name="CocktailTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="0" selection-start="901" selection-end="901" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IngredientsController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/IngredientsController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="36" selection-start="607" selection-end="607" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IngredientRepository.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/IngredientRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="15" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CocktailServiceImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/CocktailServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="29" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0">
+            <state line="24" column="11" selection-start="710" selection-end="710" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IngredientServiceImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/IngredientServiceImpl.java">
+      <file leaf-file-name="SearchController.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/SearchController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="15" selection-start="662" selection-end="662" vertical-scroll-proportion="0.0">
+            <state line="15" column="39" selection-start="607" selection-end="607" vertical-scroll-proportion="0.32130778">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -221,21 +229,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IngredientService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/IngredientService.java">
+      <file leaf-file-name="Ingredient.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/Ingredient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="15" selection-start="277" selection-end="277" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="20" column="13" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CocktailRepository.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/CocktailRepository.java">
+      <file leaf-file-name="SearchTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/SearchTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="18" selection-start="344" selection-end="344" vertical-scroll-proportion="0.0">
+            <state line="59" column="43" selection-start="2043" selection-end="2043" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CriteriaPOJO.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/search/CriteriaPOJO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="14" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JsonIdentityReference.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.2.2/jackson-annotations-2.2.2-sources.jar!/com/fasterxml/jackson/annotation/JsonIdentityReference.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="18" selection-start="1133" selection-end="1158" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestConfig.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/springconfig/TestConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="13" selection-start="857" selection-end="857" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Cocktail.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/Cocktail.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="64" column="26" selection-start="1489" selection-end="1510" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -259,22 +301,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$USER_HOME$/AppData/Local/Temp/tmpRestClientResponse2926468090707777706.json" />
-        <option value="$USER_HOME$/AppData/Local/Temp/tmpRestClientResponse4493296226258924928.json" />
-        <option value="$USER_HOME$/AppData/Local/Temp/tmpRestClientResponse4177048518417380654.json" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/Cocktail.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailType.java" />
-        <option value="$USER_HOME$/AppData/Local/Temp/tmpRestClientResponse2035303354856368235.json" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/Ingredient.java" />
-        <option value="$USER_HOME$/AppData/Local/Temp/tmpRestClientResponse9042442823993712004.json" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailIngredient.java" />
-        <option value="$USER_HOME$/AppData/Local/Temp/tmpRestClientResponse3103352264642865306.json" />
-        <option value="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/IngredientsTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/IngredientRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/IngredientServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/IngredientService.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/IngredientsController.java" />
         <option value="$USER_HOME$/AppData/Local/Temp/tmpRestClientResponse3635336882184318229.json" />
+        <option value="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/SeachTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/IngredientRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/CocktailRepositoryImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/CocktailRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/EnumRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/IngredientService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/IngredientServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/CocktailService.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/CocktailServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/CocktailTypeRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/search/CriteriaPOJO.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/SearchTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/SearchController.java" />
       </list>
     </option>
   </component>
@@ -310,7 +352,7 @@
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="height" value="1068" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -664,6 +706,52 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="search" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drinkit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ua" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kiev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="naiv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drinkit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cocktail" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="repository" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -797,14 +885,14 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="fileTemplates" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -838,35 +926,7 @@
   <component name="RestClientSettings">
     <option name="LAST_HOST" value="http://localhost:8080/" />
   </component>
-  <component name="RunManager" selected="JUnit.IngredientsTest.getIngredientsList">
-    <configuration default="false" name="CocktailTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="ua.kiev.naiv.drinkit.cocktail.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="drinkit-server" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="ua.kiev.naiv.drinkit.cocktail.model" />
-      <option name="MAIN_CLASS_NAME" value="ua.kiev.naiv.drinkit.cocktail.model.CocktailTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Jetty Server.Jetty 9.0.4.v20130625">
     <configuration default="false" name="CocktailTest.wannaCubaLibre" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -932,6 +992,102 @@
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="SearchTest.jsonTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="ua.kiev.naiv.drinkit.cocktail.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="drinkit-server" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ua.kiev.naiv.drinkit.cocktail.model" />
+      <option name="MAIN_CLASS_NAME" value="ua.kiev.naiv.drinkit.cocktail.model.SearchTest" />
+      <option name="METHOD_NAME" value="jsonTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="CocktailTest.cocktailTypeTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="ua.kiev.naiv.drinkit.cocktail.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="drinkit-server" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ua.kiev.naiv.drinkit.cocktail.model" />
+      <option name="MAIN_CLASS_NAME" value="ua.kiev.naiv.drinkit.cocktail.model.CocktailTest" />
+      <option name="METHOD_NAME" value="cocktailTypeTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ua.kiev.naiv.drinkit.cocktail.model in drinkit-server" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="ua.kiev.naiv.drinkit.cocktail.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="drinkit-server" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ua.kiev.naiv.drinkit.cocktail.model" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -1175,18 +1331,21 @@
         </option>
       </method>
     </configuration>
-    <list size="4">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Jetty Server.Jetty 9.0.4.v20130625" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.CocktailTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.CocktailTest.wannaCubaLibre" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.IngredientsTest.getIngredientsList" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.CocktailTest.wannaCubaLibre" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.IngredientsTest.getIngredientsList" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.SearchTest.jsonTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.CocktailTest.cocktailTypeTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.ua.kiev.naiv.drinkit.cocktail.model in drinkit-server" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.IngredientsTest.getIngredientsList" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.CocktailTest.wannaCubaLibre" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.CocktailTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.CocktailTest.wannaCubaLibre" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.SearchTest.jsonTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ua.kiev.naiv.drinkit.cocktail.model in drinkit-server" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.CocktailTest.cocktailTypeTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.IngredientsTest.getIngredientsList" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CocktailTest.wannaCubaLibre" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1231,18 +1390,21 @@
       <created>1374350624281</created>
       <updated>1374350624281</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="implemented next rest-services: getCocktailById, getAllIngredients">
+      <created>1374429760409</created>
+      <updated>1374429760409</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1068" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.4268427" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.6710671" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933994" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1251,20 +1413,21 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32893288" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.6710671" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930845" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2497332" sideWeight="0.6710671" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2497332" sideWeight="0.6006601" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1310,7 +1473,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="unnecessary fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented next rest-services: getCocktailById, getAllIngredients" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1327,6 +1490,7 @@
     <MESSAGE value="added entities (not tested)" />
     <MESSAGE value="created repository, service for Cocktail.java (not finished)" />
     <MESSAGE value="unnecessary fix" />
+    <MESSAGE value="implemented next rest-services: getCocktailById, getAllIngredients" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1336,127 +1500,113 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/springconfig/TestConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="13" selection-start="857" selection-end="857" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-jpa/1.2.0.RELEASE/spring-data-jpa-1.2.0.RELEASE.jar!/org/springframework/data/jpa/repository/JpaRepository.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="127" selection-start="296" selection-end="296" vertical-scroll-proportion="-3.8">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons-core/1.4.0.RELEASE/spring-data-commons-core-1.4.0.RELEASE.jar!/org/springframework/data/repository/PagingAndSortingRepository.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="132" selection-start="351" selection-end="351" vertical-scroll-proportion="-4.56">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons-core/1.4.0.RELEASE/spring-data-commons-core-1.4.0.RELEASE.jar!/org/springframework/data/repository/Repository.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="182" selection-end="182" vertical-scroll-proportion="-3.8">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons-core/1.4.0.RELEASE/spring-data-commons-core-1.4.0.RELEASE.jar!/org/springframework/data/repository/CrudRepository.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="118" selection-start="337" selection-end="337" vertical-scroll-proportion="-4.56">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="10" selection-start="761" selection-end="761" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/CocktailRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="18" selection-start="344" selection-end="344" vertical-scroll-proportion="0.0">
+        <state line="11" column="26" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/IngredientRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/repository/CocktailTypeRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="15" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/CocktailServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="29" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0">
+        <state line="10" column="47" selection-start="326" selection-end="326" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/IngredientService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="15" selection-start="277" selection-end="277" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/IngredientServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="15" selection-start="662" selection-end="662" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/IngredientsTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="901" selection-end="901" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="21" column="13" selection-start="677" selection-end="677" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/tmpRestClientResponse3635336882184318229.json">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/impl/CocktailServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="48" selection-start="341" selection-end="341" vertical-scroll-proportion="0.67476636">
+        <state line="54" column="38" selection-start="1574" selection-end="1574" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/IngredientsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="36" selection-start="607" selection-end="607" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="19" column="13" selection-start="584" selection-end="584" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/CocktailTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="11" selection-start="710" selection-end="710" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/Cocktail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="26" selection-start="1489" selection-end="1510" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/springconfig/TestConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="13" selection-start="857" selection-end="857" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.8.2/junit-4.8.2.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="40" selection-start="388" selection-end="388" vertical-scroll-proportion="0.4008439" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/model/Ingredient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="13" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/search/CriteriaPOJO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="14" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.2.2/jackson-annotations-2.2.2-sources.jar!/com/fasterxml/jackson/annotation/JsonIdentityReference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="18" selection-start="1133" selection-end="1158" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/CocktailController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="12" selection-start="671" selection-end="671" vertical-scroll-proportion="0.0">
+        <state line="26" column="31" selection-start="826" selection-end="826" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/service/CocktailService.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/ua/kiev/naiv/drinkit/cocktail/model/SearchTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="17" selection-start="239" selection-end="239" vertical-scroll-proportion="0.3374778">
+        <state line="59" column="43" selection-start="2043" selection-end="2043" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/3.2.0.RELEASE/spring-web-3.2.0.RELEASE-sources.jar!/org/springframework/web/bind/annotation/RequestMapping.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="260" column="18" selection-start="15767" selection-end="15767" vertical-scroll-proportion="0.6753507" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/kiev/naiv/drinkit/cocktail/controller/SearchController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="39" selection-start="607" selection-end="607" vertical-scroll-proportion="0.32130778">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

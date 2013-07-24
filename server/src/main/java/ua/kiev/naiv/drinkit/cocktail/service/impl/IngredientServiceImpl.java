@@ -7,7 +7,6 @@ import ua.kiev.naiv.drinkit.cocktail.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,7 +15,7 @@ import java.util.Set;
  * Time: 20:08
  */
 @Service
-public class IngredientServiceImpl implements IngredientService{
+public class IngredientServiceImpl implements IngredientService {
 
     @Autowired
     IngredientRepository ingredientRepository;
@@ -24,5 +23,10 @@ public class IngredientServiceImpl implements IngredientService{
     @Override
     public List<Ingredient> getAllIngredients() {
         return ingredientRepository.findAll();
+    }
+
+    @Override
+    public Ingredient getById(int id) {
+        return ingredientRepository.findOne(id);
     }
 }

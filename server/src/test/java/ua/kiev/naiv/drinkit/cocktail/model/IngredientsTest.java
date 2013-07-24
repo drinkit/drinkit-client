@@ -10,7 +10,6 @@ import ua.kiev.naiv.drinkit.cocktail.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.springconfig.TestConfig;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.

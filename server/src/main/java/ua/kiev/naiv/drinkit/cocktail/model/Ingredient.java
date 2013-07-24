@@ -3,8 +3,10 @@ package ua.kiev.naiv.drinkit.cocktail.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,7 +17,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ingredients")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Ingredient {
 
     private Integer id;
