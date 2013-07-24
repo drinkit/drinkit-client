@@ -10,7 +10,7 @@ package utils
 	{
 		public static var serviceAddress:String = "http://naiv.kiev.ua:8080/";
 		
-		public static function requestData(functionName:String, params:URLVariables, handler:Function):void
+		public static function requestData(functionName:String, params:Object, handler:Function):void
 		{
 			var request:URLRequest = new URLRequest(serviceAddress + functionName);
 			request.method = URLRequestMethod.GET;
