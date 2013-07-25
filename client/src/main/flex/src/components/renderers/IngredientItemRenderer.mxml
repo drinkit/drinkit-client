@@ -16,9 +16,12 @@
 			import flash.filters.BitmapFilterQuality;
 			import flash.filters.BitmapFilterType;
 			
+			import models.supportClasses.Ingredient;
+			
 			import spark.components.List;
 			
 			private const cornerRadius:uint = 5;
+			private var ingredientData:Ingredient;
 			
 			override public function set data(value:Object):void
 			{
@@ -26,6 +29,7 @@
 				
 				if (data)
 				{
+					ingredientData = Ingredient(data);
 					labelDisplay.text = label;
 					width = labelDisplay.measureText(label).width + 10;
 				}

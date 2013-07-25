@@ -2,8 +2,26 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				autoDrawBackground="true">
+				autoDrawBackground="false" opaqueBackground="{DesignModel.SAND_BEACH}" height="74">
+	<s:layout>
+		<s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="5" />
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import design.DesignModel;
+			
+			override public function set data(value:Object):void
+			{
+				//
+			}
+		]]>
+	</fx:Script>
 	
-	<s:Label text="{data}"/>
+	<s:BitmapImage id="cocktailThumb" width="64" height="64" />
+	<s:VGroup>
+		<s:Label id="coctailName" />
+		<s:Label id="recipe" />
+		<s:HGroup id="tagsGroup" gap="2" />
+	</s:VGroup>
 	
 </s:ItemRenderer>
