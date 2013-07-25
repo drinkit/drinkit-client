@@ -7,10 +7,12 @@ package controllers
 	import flash.net.URLVariables;
 	
 	import models.CocktailBuilderModel;
+	import models.supportClasses.Ingredient;
 	import models.supportClasses.OptionalParameters;
 	
 	import mx.collections.ArrayCollection;
 	
+	import utils.JSONInstantiator;
 	import utils.ServiceUtil;
 
 	public class CoctailBuilderController
@@ -56,7 +58,7 @@ package controllers
 		
 		private function onIngredientsLoad(event:Event):void
 		{
-			_model.ingredientsList = new ArrayCollection((JSON.parse(event.target.data) as Array));
+			_model.ingredientsList = new ArrayCollection(JSONInstantiator.createInstance(event.target.data, Ingredient) as Array);
 		}
 		
 		public function performSearch():void

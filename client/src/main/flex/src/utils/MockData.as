@@ -1,5 +1,7 @@
 package utils
 {
+	import models.supportClasses.Ingredient;
+	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;
 
@@ -7,13 +9,13 @@ package utils
 	{
 		public static function fakeIngredients():ArrayCollection
 		{
-			var source:Array = [{id:"1", name:"Водка"},
-				{id:"2", name:"Ананасовый сок"},
-				{id:"3", name:"Джин"},
-				{id:"4", name:"Текила"},
-				{id:"5", name:"Кока-кола"},
-				{id:"6", name:"Виски"},
-				{id:"7", name:"Трипл сек"}];
+			var source:Array = [new Ingredient(1, "Ананасовый сок", 40),
+				new Ingredient(2, "Джин", 40),
+				new Ingredient(3, "Текила", 40),
+				new Ingredient(4, "Кока-кола", 40),
+				new Ingredient(5, "Виски", 40),
+				new Ingredient(6, "Водка", 40),
+				new Ingredient(7, "Трипл сек", 40)];
 			
 			return new ArrayCollection(source);
 		}
