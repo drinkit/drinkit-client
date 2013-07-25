@@ -1,12 +1,11 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,10 +23,11 @@ public class Ingredient {
     private String name;
     private Integer vol;
     private String description;
-//    private Set<CocktailIngredient> cocktailIngredients;
+    @JsonIgnore
+    private Set<CocktailIngredient> cocktailIngredients;
 
     @Id
-    @Column(name = "ningredientkey")
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }
@@ -36,7 +36,7 @@ public class Ingredient {
         this.id = id;
     }
 
-    @Column(name = "cname")
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -45,7 +45,7 @@ public class Ingredient {
         this.name = name;
     }
 
-    @Column(name = "nvol")
+    @Column(name = "vol")
     public Integer getVol() {
         return vol;
     }
@@ -54,7 +54,7 @@ public class Ingredient {
         this.vol = vol;
     }
 
-    @Column(name = "cdescription")
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -63,12 +63,12 @@ public class Ingredient {
         this.description = description;
     }
 
-//    @OneToMany(mappedBy = "id.ingredient")
-//    public Set<CocktailIngredient> getCocktailIngredients() {
-//        return cocktailIngredients;
-//    }
+    @OneToMany(mappedBy = "id.ingredient")
+    public Set<CocktailIngredient> getCocktailIngredients() {
+        return cocktailIngredients;
+    }
 
-//    public void setCocktailIngredients(Set<CocktailIngredient> cocktailIngredients) {
-//        this.cocktailIngredients = cocktailIngredients;
-//    }
+    public void setCocktailIngredients(Set<CocktailIngredient> cocktailIngredients) {
+        this.cocktailIngredients = cocktailIngredients;
+    }
 }

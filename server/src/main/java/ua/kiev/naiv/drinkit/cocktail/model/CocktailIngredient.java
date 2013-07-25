@@ -1,6 +1,5 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -15,16 +14,15 @@ import java.io.Serializable;
 @Entity
 @Table(name = "recipes_has_ingredients")
 @AssociationOverrides({
-        @AssociationOverride(name = "id.cocktail",
-                joinColumns = @JoinColumn(name = "cocktails_ncocktailkey")),
+        @AssociationOverride(name = "id.recipe",
+                joinColumns = @JoinColumn(name = "recipe_id")),
         @AssociationOverride(name = "id.ingredient",
-                joinColumns = @JoinColumn(name = "ingredients_ningredientkey")) })
+                joinColumns = @JoinColumn(name = "ingredient_id")) })
 public class CocktailIngredient implements Serializable{
 
     private Integer quantity;
     private CocktailIngredientId id;
 
-    @JsonIgnore
     @EmbeddedId
     public CocktailIngredientId getId() {
         return id;
@@ -34,7 +32,7 @@ public class CocktailIngredient implements Serializable{
         this.id = id;
     }
 
-    @Column(name = "nquantity")
+    @Column(name = "quantity")
     public Integer getQuantity() {
         return quantity;
     }
@@ -44,7 +42,6 @@ public class CocktailIngredient implements Serializable{
     }
 
     @Transient
-    @JsonIdentityReference(alwaysAsId = true)
     public Ingredient getIngredient(){
         return getId().getIngredient();
     }
@@ -53,14 +50,15 @@ public class CocktailIngredient implements Serializable{
         getId().setIngredient(ingredient);
     }
 
-//    @Transient
-//    public Cocktail getCocktail(){
-//        return getId().getCocktail();
-//    }
-//
-//    public void setCocktail(Cocktail cocktail){
-//        getId().setCocktail(cocktail);
-//    }
+    @Transient
+    @JsonIgnore
+    public Recipe getRecipe(){
+        return getId().getRecipe();
+    }
+
+    public void setRecipe(Recipe recipe){
+        getId().setRecipe(recipe);
+    }
 
 
 

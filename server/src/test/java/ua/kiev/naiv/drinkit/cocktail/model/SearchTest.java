@@ -2,6 +2,7 @@ package ua.kiev.naiv.drinkit.cocktail.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import junit.framework.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -40,6 +41,7 @@ public class SearchTest {
         return criteria;
     }
 
+    @Ignore
     @Test
     public void jsonTest() throws IOException {
         File tmpFile = new File("d:\\tmp\\json.json");

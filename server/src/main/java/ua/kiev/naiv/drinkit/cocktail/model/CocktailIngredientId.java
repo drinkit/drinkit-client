@@ -18,17 +18,17 @@ import java.io.Serializable;
 @Embeddable
 public class CocktailIngredientId implements Serializable {
 
-    private Cocktail cocktail;
+    @JsonIgnore
+    private Recipe recipe;
     private Ingredient ingredient;
 
-    @JsonIgnore
     @ManyToOne
-    public Cocktail getCocktail() {
-        return cocktail;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
-    public void setCocktail(Cocktail cocktail) {
-        this.cocktail = cocktail;
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @ManyToOne(fetch = FetchType.EAGER)

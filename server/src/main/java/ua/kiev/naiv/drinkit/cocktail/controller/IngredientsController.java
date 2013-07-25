@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
-import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
+import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 
 import java.util.List;
 
@@ -20,11 +20,11 @@ import java.util.List;
 public class IngredientsController {
 
     @Autowired
-    IngredientService ingredientService;
+    CocktailService cocktailService;
 
     @RequestMapping("/findAll")
     @ResponseBody
     public List<Ingredient> findAll(){
-        return ingredientService.getAllIngredients();
+        return cocktailService.findAllIngredients();
     }
 }

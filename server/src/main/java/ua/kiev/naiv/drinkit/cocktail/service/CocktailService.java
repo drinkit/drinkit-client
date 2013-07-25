@@ -1,9 +1,11 @@
 package ua.kiev.naiv.drinkit.cocktail.service;
 
-import ua.kiev.naiv.drinkit.cocktail.model.Cocktail;
+import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
+import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,17 +15,21 @@ import java.util.List;
  */
 public interface CocktailService {
 
-    Cocktail create(Cocktail cocktail);
+    Recipe create(Recipe recipe);
 
-    Cocktail delete(int id);
+    Recipe delete(int id);
 
-    List<Cocktail> findAll();
+    List<Recipe> findAll();
 
-    Cocktail update(Cocktail cocktail);
+    Recipe update(Recipe recipe);
 
-    Cocktail findById(int id);
+    Recipe findById(int id);
 
-    CocktailType getCocktailType(int id);
+    CocktailType findCocktailTypeById(int id);
 
-    Iterable<CocktailType> getAllCocktailType();
+    List<CocktailType> findAllCocktailType();
+
+    List<Ingredient> findAllIngredients();
+
+    Ingredient findIngredientById(int id);
 }

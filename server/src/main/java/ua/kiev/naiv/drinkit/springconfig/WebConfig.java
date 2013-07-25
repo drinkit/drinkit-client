@@ -38,7 +38,7 @@ public class WebConfig {
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/cocktail");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/recipe");
         dataSource.setUsername("drinkit");
         dataSource.setPassword("drinkit");
         return dataSource;
@@ -48,7 +48,7 @@ public class WebConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean sessionFactory = new LocalContainerEntityManagerFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("ua.kiev.naiv.drinkit.cocktail.model");
+        sessionFactory.setPackagesToScan("ua.kiev.naiv.drinkit.recipe.model");
         sessionFactory.setPersistenceProviderClass(HibernatePersistence.class);
         sessionFactory.setJpaProperties(hibProperties());
         return sessionFactory;

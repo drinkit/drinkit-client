@@ -57,4 +57,9 @@ public class TestConfig {
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
     }
+
+    @Bean
+    public TestHelper testHelper(){
+        return new TestHelper();
+    }
 }

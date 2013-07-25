@@ -4,11 +4,9 @@ package ua.kiev.naiv.drinkit.cocktail.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,16 +15,16 @@ import java.io.Serializable;
  * Time: 17:32
  */
 @Entity
-@Table(name = "cocktales_types")
+@Table(name = "recipe_types")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CocktailType implements Serializable {
 
     private Integer id;
     private String name;
-//    private Set<Cocktail> cocktails;
+    private Set<Recipe> recipes;
 
     @Id
-    @Column(name = "ncocktaletypekey")
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }
@@ -35,7 +33,7 @@ public class CocktailType implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "cname")
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -44,12 +42,12 @@ public class CocktailType implements Serializable {
         this.name = name;
     }
 
-//    @OneToMany(mappedBy = "cocktailType")
-//    public Set<Cocktail> getCocktails() {
-//        return cocktails;
-//    }
-//
-//    public void setCocktails(Set<Cocktail> cocktails) {
-//        this.cocktails = cocktails;
-//    }
+    @OneToMany(mappedBy = "cocktailType")
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
+    }
 }

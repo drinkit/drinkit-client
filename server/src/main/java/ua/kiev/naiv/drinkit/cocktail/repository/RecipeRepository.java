@@ -1,7 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ua.kiev.naiv.drinkit.cocktail.model.Cocktail;
+import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,5 +9,5 @@ import ua.kiev.naiv.drinkit.cocktail.model.Cocktail;
  * Date: 20.07.13
  * Time: 21:47
  */
-public interface CocktailRepository extends JpaRepository<Cocktail, Integer> {
+public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 }

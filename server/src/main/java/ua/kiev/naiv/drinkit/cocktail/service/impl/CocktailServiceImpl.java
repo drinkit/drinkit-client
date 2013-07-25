@@ -1,14 +1,18 @@
 package ua.kiev.naiv.drinkit.cocktail.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.kiev.naiv.drinkit.cocktail.model.Cocktail;
+import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
-import ua.kiev.naiv.drinkit.cocktail.repository.CocktailRepository;
+import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
+import ua.kiev.naiv.drinkit.cocktail.repository.RecipeRepository;
 import ua.kiev.naiv.drinkit.cocktail.repository.CocktailTypeRepository;
+import ua.kiev.naiv.drinkit.cocktail.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,43 +24,56 @@ import java.util.List;
 public class CocktailServiceImpl implements CocktailService {
 
     @Resource
-    CocktailRepository cocktailRepository;
+    RecipeRepository recipeRepository;
 
     @Resource
     CocktailTypeRepository cocktailTypeRepository;
 
     @Override
-    public Cocktail create(Cocktail cocktail) {
+    public Recipe create(Recipe recipe) {
         throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
     }
 
     @Override
-    public Cocktail delete(int id) {
+    public Recipe delete(int id) {
         throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
     }
 
     @Override
-    public List<Cocktail> findAll() {
+    public List<Recipe> findAll() {
         throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
     }
 
     @Override
-    public Cocktail update(Cocktail cocktail) {
+    public Recipe update(Recipe recipe) {
         throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
     }
 
     @Override
-    public Cocktail findById(int id) {
-        return cocktailRepository.findOne(id);
+    public Recipe findById(int id) {
+        return recipeRepository.findOne(id);
     }
 
     @Override
-    public CocktailType getCocktailType(int id) {
+    public CocktailType findCocktailTypeById(int id) {
         return cocktailTypeRepository.findOne(id);
     }
 
     @Override
-    public Iterable<CocktailType> getAllCocktailType() {
+    public List<CocktailType> findAllCocktailType() {
         return cocktailTypeRepository.findAll();
+    }
+
+    @Autowired
+    IngredientRepository ingredientRepository;
+
+    @Override
+    public List<Ingredient> findAllIngredients() {
+        return ingredientRepository.findAll();
+    }
+
+    @Override
+    public Ingredient findIngredientById(int id) {
+        return ingredientRepository.findOne(id);
     }
 }
