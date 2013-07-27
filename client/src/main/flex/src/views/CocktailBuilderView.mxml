@@ -9,24 +9,30 @@
     <fx:Script>
 		<![CDATA[
         import controllers.CoctailBuilderController;
-
+        
         import design.DesignModel;
-
+        
         import models.CocktailBuilderModel;
         import models.supportClasses.CocktailTypes;
         import models.supportClasses.Ingredient;
         import models.supportClasses.OptionalParameters;
-
+        
         import mx.collections.ArrayCollection;
         import mx.core.UIComponent;
         import mx.events.FlexEvent;
-
+        
         import spark.events.IndexChangeEvent;
-
+        
         import utils.MockData;
 
         [Bindable]
         private var _model:CocktailBuilderModel;
+		
+		public function get model():CocktailBuilderModel
+		{
+			return _model;
+		}
+		
         private var _controller:CoctailBuilderController;
 
         protected function combobox1_changeHandler(event:IndexChangeEvent):void
@@ -70,6 +76,8 @@
         {
             _controller.toggleOptional(uint(event.currentTarget.name), event.currentTarget.selected);
         }
+			
+			
         ]]>
 	</fx:Script>
     <fx:Declarations>
@@ -117,7 +125,7 @@
                                                dataProvider="{_model.ingredientsList}"
                                                change="combobox1_changeHandler(event)" filterFunction="filterCBList"/>
             <s:List minWidth="200" width="100%" height="100%" borderVisible="false" labelField="name"
-                    itemRenderer="components.renderers.IngredientItemRenderer"
+                    itemRenderer="views.renderers.IngredientItemRenderer"
                     dataProvider="{_model.selectedIngredientsList}">
                 <s:layout>
                     <components:FlowLayout clipAndEnableScrolling="false"/>
@@ -131,7 +139,7 @@
         </s:stroke>
     </s:Line>
     <s:List id="recipesList" borderVisible="false" width="100%" height="100%"
-            itemRenderer="components.renderers.CocktailItemRenderer" dataProvider="{_model.cocktailsList}">
+            itemRenderer="views.renderers.CocktailItemRenderer" dataProvider="{_model.cocktailsList}">
         <s:layout>
             <s:VerticalLayout variableRowHeight="false" paddingBottom="5" paddingLeft="5" paddingRight="5"
                               paddingTop="5"/>

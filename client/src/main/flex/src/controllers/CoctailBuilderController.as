@@ -66,12 +66,7 @@ package controllers
 			var criteria:SearchParameters = new SearchParameters();
 			criteria.cocktailTypes = _model.selectedCocktailTypes;
 			criteria.ingredients = _model.selectedIngredients;
-			//
-			criteria.isBurning = _model.selectedOptionals.indexOf(OptionalParameters.BURNING) != -1;
-			criteria.isChecked = _model.selectedOptionals.indexOf(OptionalParameters.CHECKED) != -1;
-			criteria.isFlacky = _model.selectedOptionals.indexOf(OptionalParameters.FLACKY) != -1;
-			criteria.isIBA = _model.selectedOptionals.indexOf(OptionalParameters.IBA) != -1;
-			criteria.isWithIce = _model.selectedOptionals.indexOf(OptionalParameters.WITH_ICE) != -1;
+			criteria.optionals = _model.selectedOptionals;
 			//
 			var vars:URLVariables = new URLVariables();
 			vars.criteria = criteria.toString();
