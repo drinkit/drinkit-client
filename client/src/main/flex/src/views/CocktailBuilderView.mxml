@@ -70,11 +70,13 @@
         protected function cocktailTypeChangeHandler(event:Event):void
         {
             _controller.toggleCocktailType(uint(event.currentTarget.name), event.currentTarget.selected);
+			_controller.performSearch();
         }
 
         protected function optionalChangeHandler(event:Event):void
         {
             _controller.toggleOptional(uint(event.currentTarget.name), event.currentTarget.selected);
+			_controller.performSearch();
         }
 			
 			

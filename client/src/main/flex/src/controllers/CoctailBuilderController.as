@@ -7,6 +7,7 @@ package controllers
 	import flash.net.URLVariables;
 	
 	import models.CocktailBuilderModel;
+	import models.supportClasses.Cocktail;
 	import models.supportClasses.Ingredient;
 	import models.supportClasses.OptionalParameters;
 	
@@ -76,7 +77,7 @@ package controllers
 		
 		private function onSearchComplete(event:Event):void
 		{
-			trace(event.target.data);
+			_model.cocktailsList = new ArrayCollection(JSONInstantiator.createInstance(event.target.data, Cocktail, false) as Array);
 		}
 	}
 }
