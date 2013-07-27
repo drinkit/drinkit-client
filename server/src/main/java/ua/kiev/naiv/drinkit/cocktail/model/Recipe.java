@@ -29,6 +29,7 @@ public class Recipe implements Serializable {
     private Set<CocktailIngredient> ingredients;
     @JsonIdentityReference(alwaysAsId = true)
     private Set<Option> options;
+    private byte[] image;
 
     @Id
     @GeneratedValue()
@@ -88,5 +89,14 @@ public class Recipe implements Serializable {
 
     public void setOptions(Set<Option> options) {
         this.options = options;
+    }
+
+    @Column(name = "image")
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
