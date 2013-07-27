@@ -13,10 +13,14 @@ package models
 		public function CocktailBuilderModel()
 		{
 			ingredientsList = MockData.fakeIngredients();
+			cocktailsList = MockData.fakeCoctails();
 			selectedIngredientsList = new ArrayList();
 			//
 			selectedIngredientsList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
 		}
+		
+		[Bindable]
+		public var cocktailsList:ArrayCollection;
 		
 		[Bindable]
 		public var ingredientsList:ArrayCollection;

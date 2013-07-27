@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
-				xmlns:s="library://ns.adobe.com/flex/spark" 
-				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				autoDrawBackground="false" opaqueBackground="{DesignModel.SAND_BEACH}" height="74">
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				xmlns:s="library://ns.adobe.com/flex/spark"
+				xmlns:mx="library://ns.adobe.com/flex/mx"
+				height="74" width="100%" autoDrawBackground="true"
+				opaqueBackground="{DesignModel.ORANGE_BEACH}">
 	<s:layout>
-		<s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="5" />
+		<s:HorizontalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="5" />
 	</s:layout>
 	<fx:Script>
 		<![CDATA[
 			import design.DesignModel;
 			
+			import models.supportClasses.Cocktail;
+			
+			private var _cocktail:Cocktail;
+			
 			override public function set data(value:Object):void
 			{
-				//
+				if (value)
+				{
+					_cocktail = Cocktail(value);
+					cocktailName.text = _cocktail.name;
+				}
 			}
 		]]>
 	</fx:Script>
 	
 	<s:BitmapImage id="cocktailThumb" width="64" height="64" />
 	<s:VGroup>
-		<s:Label id="coctailName" />
+		<s:Label id="cocktailName" />
 		<s:Label id="recipe" />
 		<s:HGroup id="tagsGroup" gap="2" />
 	</s:VGroup>
