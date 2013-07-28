@@ -25,20 +25,11 @@ import java.util.Properties;
 @EnableJpaRepositories("ua.kiev.naiv.drinkit.cocktail.repository")
 public class WebConfig {
 
-//    @Bean
-//    public InternalResourceViewResolver viewResolver() {
-//        InternalResourceViewResolver resolver =
-//                new InternalResourceViewResolver();
-//        resolver.setPrefix("/WEB-INF/view/");
-//        resolver.setSuffix(".jsp");
-//        return resolver;
-//    }
-
     @Bean
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/recipe");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/cocktail");
         dataSource.setUsername("drinkit");
         dataSource.setPassword("drinkit");
         return dataSource;
@@ -48,7 +39,7 @@ public class WebConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean sessionFactory = new LocalContainerEntityManagerFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("ua.kiev.naiv.drinkit.recipe.model");
+        sessionFactory.setPackagesToScan("ua.kiev.naiv.drinkit.cocktail.model");
         sessionFactory.setPersistenceProviderClass(HibernatePersistence.class);
         sessionFactory.setJpaProperties(hibProperties());
         return sessionFactory;
