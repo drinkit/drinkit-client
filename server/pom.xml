@@ -19,6 +19,16 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
@@ -31,9 +41,10 @@
 
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -93,6 +104,24 @@
             <version>2.2.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -102,18 +131,37 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
+
             <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
                 <configuration>
-                    <includes>
-                        <include>**/*Tests.java</include>
-                    </includes>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.0.4.v20130625</version>
+                <configuration>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                </configuration>
+            </plugin>
+
+            <!--<plugin>-->
+            <!--<artifactId>maven-surefire-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<includes>-->
+            <!--<include>**/*Tests.java</include>-->
+            <!--</includes>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>

@@ -5,6 +5,7 @@ import org.hibernate.ejb.HibernatePersistence;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -21,6 +22,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan("ua.kiev.naiv.drinkit.cocktail")
 @EnableJpaRepositories("ua.kiev.naiv.drinkit.cocktail.repository")
+@EnableAspectJAutoProxy
 public class TestConfig {
 
 
@@ -59,7 +61,7 @@ public class TestConfig {
     }
 
     @Bean
-    public TestHelper testHelper(){
+    public TestHelper testHelper() {
         return new TestHelper();
     }
 }

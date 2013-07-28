@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ua.kiev.naiv.drinkit.cocktail.common.JsonMixin;
 import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.search.CriteriaPOJO;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 
 import java.util.Arrays;
@@ -32,6 +34,7 @@ public class CocktailController {
         return cocktailService.findById(id);
     }
 
+    @JsonMixin(CriteriaPOJO.class)
     @RequestMapping("/ingredients")
     @ResponseBody
     public List<Ingredient> findIngredients() {
