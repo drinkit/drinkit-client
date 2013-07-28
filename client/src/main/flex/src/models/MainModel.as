@@ -5,8 +5,11 @@ package models
 	
 	public class MainModel extends EventDispatcher
 	{
-		public static const SEARCH_VIEW:String = "searchView";
-		public static const COCKTAIL_VIEW:String = "cocktailView";
+		public static const BUILDER_VIEW:int = 0;
+		public static const COCKTAIL_VIEW:int = 2;
+		
+		[Bindable]
+		public var currentView:int = BUILDER_VIEW; 
 		
 		public function MainModel()
 		{

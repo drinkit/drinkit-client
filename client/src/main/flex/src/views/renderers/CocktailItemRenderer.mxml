@@ -3,12 +3,14 @@
 				xmlns:s="library://ns.adobe.com/flex/spark"
 				xmlns:mx="library://ns.adobe.com/flex/mx"
 				height="74" width="100%" autoDrawBackground="true"
-				opaqueBackground="{DesignModel.ORANGE_BEACH}" creationComplete="itemrenderer1_creationCompleteHandler(event)">
+				opaqueBackground="{DesignModel.ORANGE_BEACH}" creationComplete="itemrenderer1_creationCompleteHandler(event)" click="itemrenderer1_clickHandler(event)">
 	<s:layout>
 		<s:HorizontalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="5" />
 	</s:layout>
 	<fx:Script>
 		<![CDATA[
+			import controllers.CoctailBuilderController;
+			
 			import design.DesignModel;
 			
 			import models.CocktailBuilderModel;
@@ -22,6 +24,7 @@
 			import views.CocktailBuilderView;
 			
 			private var _model:CocktailBuilderModel;
+//			private var _controller:CoctailBuilderController;
 			
 			[Bindable]
 			private var _cocktail:Cocktail;
@@ -30,8 +33,7 @@
 			{
 				if (value)
 				{
-					if (!_model)
-						_model = CocktailBuilderView(List(owner).owner).model;
+					init();
 					//
 					_cocktail = Cocktail(value);
 					cocktailName.text = _cocktail.name;
@@ -39,10 +41,17 @@
 				}
 			}
 			
-			protected function itemrenderer1_creationCompleteHandler(event:FlexEvent):void
+			private function init():void
 			{
 				if (!_model)
 					_model = CocktailBuilderView(List(owner).owner).model;
+//				if (!_controller)
+//					_controller = CocktailBuilderView(List(owner).owner).controller;
+			}
+			
+			protected function itemrenderer1_creationCompleteHandler(event:FlexEvent):void
+			{
+				init();
 			}
 			
 			private function buildRecipe(ingredients:Array):String
@@ -66,6 +75,12 @@
 				cocktailStructure = cocktailStructure.substr(0, cocktailStructure.length - 2);
 				
 				return cocktailStructure;
+			}
+			
+			protected function itemrenderer1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
 			}
 			
 		]]>

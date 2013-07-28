@@ -2,16 +2,20 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
-			   xmlns:views="views.*" applicationComplete="application1_applicationCompleteHandler(event)" xmlns:components="components.*">
+			   xmlns:views="views.*" creationPolicy="all" applicationComplete="application1_applicationCompleteHandler(event)" xmlns:components="components.*">
 	<s:layout>
 		<s:VerticalLayout gap="0" />
 	</s:layout>
+	<fx:Style source="/design/main_style.css" />
 	<fx:Script>
 		<![CDATA[
+			import controllers.MainController;
+			
 			import design.DesignModel;
 			
 			import models.MainModel;
 			
+			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
 			
 			public const darkGreen:uint = DesignModel.DARK_GREEN;
@@ -26,6 +30,20 @@
 			protected function application1_applicationCompleteHandler(event:FlexEvent):void
 			{
 				_model = new MainModel();
+				MainController.instance.model = _model;
+				//
+				callLater(hideCocktailTab);
+					
+			}
+			
+			private function hideCocktailTab():void
+			{
+				var theTab:UIComponent = menu.dataGroup.getElementAt(2) as UIComponent;
+				if (theTab)
+				{
+					theTab.visible = false;
+					theTab.includeInLayout = false;
+				}
 			}
 			
 		]]>
@@ -33,18 +51,20 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<fx:Style source="/design/main_style.css" />
+
 	
 	<components:Logo />
-	<s:TabBar width="100%" height="30" dataProvider="{viewstack1}">
-	</s:TabBar>
+	<s:TabBar id="menu" width="100%" height="30" dataProvider="{viewstack1}" selectedIndex="{_model.currentView}" />
 	<mx:ViewStack id="viewstack1" width="100%" height="100%">
 		<s:NavigatorContent width="100%" height="100%" label="Конструктор коктейлей">
 			<views:CocktailBuilderView width="100%" height="100%" />
 		</s:NavigatorContent>
 		<s:NavigatorContent width="100%" height="100%" label="Поиск по названию">
 		</s:NavigatorContent>
+		<s:NavigatorContent width="100%" height="100%" label="Коктейль">
+			<views:CocktailView width="100%" height="100%" />
+		</s:NavigatorContent>
 	</mx:ViewStack>
-	<!--<views:MainSearchView includeIn="searchView" width="100%" height="100%" />-->
+	
 	
 </s:Application>

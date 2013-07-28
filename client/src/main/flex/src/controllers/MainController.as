@@ -28,6 +28,11 @@ package controllers
 			_model = value;
 		}
 		
+		public function changeView(view:int):void
+		{
+			_model.currentView = view;
+		}
+		
 	}
 }
 class PrivateConstructor {}
