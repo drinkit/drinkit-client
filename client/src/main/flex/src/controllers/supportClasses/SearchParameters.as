@@ -5,12 +5,6 @@ package controllers.supportClasses
 		public var cocktailTypes:Array;
 		public var ingredients:Array;
 		public var optionals:Array;
-		//
-		public var isBurning:Boolean;
-		public var isWithIce:Boolean;
-		public var isChecked:Boolean;
-		public var isIBA:Boolean;
-		public var isFlacky:Boolean;
 		
 		public function SearchParameters()
 		{

@@ -5,7 +5,7 @@ package utils
 
 	public class JSONInstantiator
 	{
-		public static function createInstance(json:String, classType:Class):Object
+		public static function createInstance(json:String, classType:Class, strict:Boolean = true):Object
 		{
 			var jsonObject:Object = JSON.parse(json);
 			var returnObject:Object;
@@ -16,16 +16,16 @@ package utils
 				
 				for (var i:uint = 0; i < jsonObject.length; i++)
 				{
-					returnObject.push(createSingleObject(jsonObject[i], classType));
+					returnObject.push(createSingleObject(jsonObject[i], classType, strict));
 				}
 			}
 			else
-				returnObject = createSingleObject(jsonObject, classType);
+				returnObject = createSingleObject(jsonObject, classType, strict);
 			
 			return returnObject;
 		}
 		
-		private static function createSingleObject(singleJSONObject:Object, classType:Class):Object
+		private static function createSingleObject(singleJSONObject:Object, classType:Class, strict:Boolean):Object
 		{
 			var returnObject:Object = new classType();
 			var propertyMap:XML = describeType(returnObject);
@@ -45,7 +45,11 @@ package utils
 						throw new Error("Property '" + property.@name + "' must be '" +  property.@type + "'");
 				}
 				else
-					throw new Error("Property '" + property.@name + "' is not exist in json-string!");
+				{
+					if (strict)
+						throw new Error("Property '" + property.@name + "' is not exist in json-string!");
+				}
+
 			}
 			
 			return returnObject;

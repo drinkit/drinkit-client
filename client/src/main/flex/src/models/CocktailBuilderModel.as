@@ -2,6 +2,8 @@ package models
 {
 	import flash.events.EventDispatcher;
 	
+	import models.supportClasses.Ingredient;
+	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;
 	import mx.events.CollectionEvent;
@@ -13,7 +15,7 @@ package models
 		public function CocktailBuilderModel()
 		{
 			ingredientsList = MockData.fakeIngredients();
-			cocktailsList = MockData.fakeCoctails();
+			cocktailsList = MockData.fakeCocktails();
 			selectedIngredientsList = new ArrayList();
 			//
 			selectedIngredientsList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
@@ -28,6 +30,10 @@ package models
 		[Bindable]
 		public var selectedIngredientsList:ArrayList;
 		
+		public var selectedIngredients:Array = [];
+		public var selectedCocktailTypes:Array = [];
+		public var selectedOptionals:Array = [];
+		
 		private function onIngredientsQueryListChange(event:CollectionEvent):void
 		{
 			ingredientsList.refresh();
@@ -39,8 +45,30 @@ package models
 			return item.id;
 		}
 		
-		public var selectedIngredients:Array = [];
-		public var selectedCocktailTypes:Array = [];
-		public var selectedOptionals:Array = [];
+		public function getIngredientNameById(id:Number):String
+		{
+			if (ingredientsList)
+			{
+				for (var i:uint = 0; i < ingredientsList.source.length; i++)
+				{
+					if (Ingredient(ingredientsList.source[i]).id == id)
+						return Ingredient(ingredientsList.source[i]).name;
+				}
+			}
+			
+			return null;
+		}
+		
+		public function isIngredientSelected(id:Number):Boolean
+		{
+			for (var i:uint = 0; i < selectedIngredients.length; i++)
+			{
+				if (selectedIngredients[i] == id)
+					return true;
+			}
+			
+			return false;
+		}
+
 	}
 }
