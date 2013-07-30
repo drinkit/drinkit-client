@@ -11,3 +11,8 @@ The server component uses Java, MySQL, Rest services.
 * AspectJ
 * Jackson (json lib for rest services)
 * JUnit (for unit testing)
+
+##Client side technology stack:
+* Flex 4.6
+* Flextras
+* FlexUnit
