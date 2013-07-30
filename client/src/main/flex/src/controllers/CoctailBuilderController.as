@@ -9,7 +9,7 @@ package controllers
 	import models.CocktailBuilderModel;
 	import models.supportClasses.Cocktail;
 	import models.supportClasses.Ingredient;
-	import models.supportClasses.OptionalParameters;
+	import models.supportClasses.OptionParameters;
 	
 	import mx.collections.ArrayCollection;
 	
@@ -41,14 +41,14 @@ package controllers
 			}
 		}
 		
-		public function toggleOptional(id:uint, selected:Boolean):void
+		public function toggleoption(id:uint, selected:Boolean):void
 		{
 			if (selected)
-				_model.selectedOptionals.push(id);
+				_model.selectedoptions.push(id);
 			else
 			{
-				var index:uint = _model.selectedOptionals.indexOf(id);
-				_model.selectedOptionals.splice(index, 1);
+				var index:uint = _model.selectedoptions.indexOf(id);
+				_model.selectedoptions.splice(index, 1);
 			}
 		}
 		
@@ -67,7 +67,7 @@ package controllers
 			var criteria:SearchParameters = new SearchParameters();
 			criteria.cocktailTypes = _model.selectedCocktailTypes;
 			criteria.ingredients = _model.selectedIngredients;
-			criteria.optionals = _model.selectedOptionals;
+			criteria.options = _model.selectedoptions;
 			//
 			var vars:URLVariables = new URLVariables();
 			vars.criteria = criteria.toString();

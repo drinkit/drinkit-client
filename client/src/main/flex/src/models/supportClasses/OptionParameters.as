@@ -1,6 +1,6 @@
 package models.supportClasses
 {
-	public class OptionalParameters
+	public class OptionParameters
 	{
 		public static const BURNING:uint = 1;
 		public static const WITH_ICE:uint = 2;

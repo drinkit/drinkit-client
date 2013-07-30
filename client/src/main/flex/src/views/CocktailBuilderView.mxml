@@ -17,7 +17,7 @@
 			import models.MainModel;
 			import models.supportClasses.CocktailTypes;
 			import models.supportClasses.Ingredient;
-			import models.supportClasses.OptionalParameters;
+			import models.supportClasses.OptionParameters;
 			
 			import mx.collections.ArrayCollection;
 			import mx.core.UIComponent;
@@ -81,9 +81,9 @@
 				_controller.performSearch();
 	        }
 	
-	        protected function optionalChangeHandler(event:Event):void
+	        protected function optionChangeHandler(event:Event):void
 	        {
-	            _controller.toggleOptional(uint(event.currentTarget.name), event.currentTarget.selected);
+	            _controller.toggleoption(uint(event.currentTarget.name), event.currentTarget.selected);
 				_controller.performSearch();
 	        }
 				
@@ -112,20 +112,20 @@
                                 icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Shooter"
                                 cornerRadius="10"/>
             </s:HGroup>
-            <s:TileGroup id="optionalsGroup" width="204" height="48" horizontalGap="2" verticalGap="2">
-                <s:ToggleButton width="48" height="48" name="{OptionalParameters.BURNING}"
-                                change="optionalChangeHandler(event)" toolTip="Горящий" cornerRadius="10"/>
-                <s:ToggleButton width="48" height="48" name="{OptionalParameters.FLACKY}"
-                                change="optionalChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
+            <s:TileGroup id="optionsGroup" width="204" height="48" horizontalGap="2" verticalGap="2">
+                <s:ToggleButton width="48" height="48" name="{OptionParameters.BURNING}"
+                                change="optionChangeHandler(event)" toolTip="Горящий" cornerRadius="10"/>
+                <s:ToggleButton width="48" height="48" name="{OptionParameters.FLACKY}"
+                                change="optionChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
                                 toolTip="Слоёный" cornerRadius="10"/>
-                <s:ToggleButton width="48" height="48" name="{OptionalParameters.WITH_ICE}"
-                                change="optionalChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
+                <s:ToggleButton width="48" height="48" name="{OptionParameters.WITH_ICE}"
+                                change="optionChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
                                 toolTip="Со льдом" cornerRadius="10"/>
-                <s:ToggleButton width="48" height="48" name="{OptionalParameters.CHECKED}"
-                                change="optionalChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
+                <s:ToggleButton width="48" height="48" name="{OptionParameters.CHECKED}"
+                                change="optionChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
                                 toolTip="Проверен администрацией" cornerRadius="10"/>
-                <s:ToggleButton width="48" height="48" name="{OptionalParameters.IBA}"
-                                change="optionalChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
+                <s:ToggleButton width="48" height="48" name="{OptionParameters.IBA}"
+                                change="optionChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
                                 toolTip="Утвержден IBA" cornerRadius="10"/>
             </s:TileGroup>
         </s:VGroup>

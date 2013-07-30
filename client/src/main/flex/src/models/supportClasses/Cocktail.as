@@ -14,7 +14,7 @@ package models.supportClasses
 		public var id:Number;
 		public var name:String;
 		public var ingredients:Array; // of ingredient's ids
-		public var optionals:Array;
+		public var options:Array;
 		
 		[Bindable]
 		public var image:Bitmap;
