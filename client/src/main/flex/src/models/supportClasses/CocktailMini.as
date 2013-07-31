@@ -9,28 +9,28 @@ package models.supportClasses
 	
 	import utils.ParserUtil;
 
-	public class Cocktail
+	public class CocktailMini
 	{
 		public var id:Number;
 		public var name:String;
 		public var ingredients:Array; // of ingredient's ids
-		public var optionals:Array;
+		public var options:Array;
 		
 		[Bindable]
 		public var image:Bitmap;
 
-		private var _image64:String;
+		private var _thumbnail:String;
 		
-		public function get image64():String
+		public function get thumbnail():String
 		{
-			return _image64;
+			return _thumbnail;
 		}
 		
-		public function set image64(value:String):void
+		public function set thumbnail(value:String):void
 		{
 			if (value)
 			{
-				_image64 = value;
+				thumbnail = value;
 				var decoder:Base64Decoder = new Base64Decoder();
 				decoder.decode(value);
 				var imageBA:ByteArray = decoder.toByteArray();
@@ -41,11 +41,11 @@ package models.supportClasses
 			}
 		}
 
-		public function Cocktail(aId:Number = -1, aName:String = "", aImage64:String = null, aIngredients:Array = null)
+		public function CocktailMini(aId:Number = -1, aName:String = "", aThumbnail:String = null, aIngredients:Array = null)
 		{
 			id = aId;
 			name = aName;
-			image64 = aImage64;
+			thumbnail = aThumbnail;
 			ingredients = aIngredients;
 		}
 

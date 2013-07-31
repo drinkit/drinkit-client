@@ -14,7 +14,7 @@
 			import design.DesignModel;
 			
 			import models.CocktailBuilderModel;
-			import models.supportClasses.Cocktail;
+			import models.supportClasses.CocktailMini;
 			
 			import mx.events.FlexEvent;
 			
@@ -27,7 +27,7 @@
 //			private var _controller:CoctailBuilderController;
 			
 			[Bindable]
-			private var _cocktail:Cocktail;
+			private var _cocktail:CocktailMini;
 			
 			override public function set data(value:Object):void
 			{
@@ -35,7 +35,7 @@
 				{
 					init();
 					//
-					_cocktail = Cocktail(value);
+					_cocktail = CocktailMini(value);
 					cocktailName.text = _cocktail.name;
 					cocktailStructure.textFlow = TextFlowUtil.importFromString(buildRecipe(_cocktail.ingredients));
 				}
@@ -86,7 +86,7 @@
 		]]>
 	</fx:Script>
 	
-	<s:BitmapImage id="cocktailThumb" width="64" height="64" source="{_cocktail.image}" />
+	<s:BitmapImage id="cocktailThumb" width="48" height="64" source="{_cocktail.image}" />
 	<s:VGroup gap="1">
 		<s:Label id="cocktailName" fontWeight="bold" height="20" verticalAlign="middle" />
 		<s:RichText id="cocktailStructure" height="20" verticalAlign="middle" />

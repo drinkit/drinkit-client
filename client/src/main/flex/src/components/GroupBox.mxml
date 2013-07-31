@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx"
+					  skinClass="design.skins.GroupBoxSkin">
+	<fx:Declarations>
+		<!-- Разместить невизуальные элементы (например, службы или объекты значений) -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import spark.components.Label;
+			
+			[SkinPart(required="true")]
+			public var titleRenderer:Label;
+			
+			[Bindable][Inspectable(defaultValue="title")]
+			public var title:String = "title";
+			
+		]]>
+	</fx:Script>
+</s:SkinnableContainer>

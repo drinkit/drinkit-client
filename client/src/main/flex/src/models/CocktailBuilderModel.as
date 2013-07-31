@@ -32,7 +32,7 @@ package models
 		
 		public var selectedIngredients:Array = [];
 		public var selectedCocktailTypes:Array = [];
-		public var selectedOptionals:Array = [];
+		public var selectedoptions:Array = [];
 		
 		private function onIngredientsQueryListChange(event:CollectionEvent):void
 		{
