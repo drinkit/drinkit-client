@@ -2,6 +2,9 @@ package ua.kiev.naiv.drinkit.cocktail.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.search.CriteriaPOJO;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,4 +13,5 @@ import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
  * Time: 21:47
  */
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
+    List<Recipe> findByCriteria(CriteriaPOJO criteria);
 }

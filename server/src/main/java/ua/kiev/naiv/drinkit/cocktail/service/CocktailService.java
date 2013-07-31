@@ -1,11 +1,11 @@
 package ua.kiev.naiv.drinkit.cocktail.service;
 
-import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
 import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
+import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.search.CriteriaPOJO;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,6 +20,8 @@ public interface CocktailService {
     Recipe delete(int id);
 
     List<Recipe> findAll();
+
+    List<Recipe> findByCriteria(CriteriaPOJO criteria);
 
     Recipe update(Recipe recipe);
 

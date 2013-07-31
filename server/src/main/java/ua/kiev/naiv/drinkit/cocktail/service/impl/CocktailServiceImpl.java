@@ -2,17 +2,17 @@ package ua.kiev.naiv.drinkit.cocktail.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
 import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
-import ua.kiev.naiv.drinkit.cocktail.repository.RecipeRepository;
+import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.repository.CocktailTypeRepository;
 import ua.kiev.naiv.drinkit.cocktail.repository.IngredientRepository;
+import ua.kiev.naiv.drinkit.cocktail.repository.RecipeRepository;
+import ua.kiev.naiv.drinkit.cocktail.search.CriteriaPOJO;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -42,6 +42,11 @@ public class CocktailServiceImpl implements CocktailService {
     @Override
     public List<Recipe> findAll() {
         throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
+    }
+
+    @Override
+    public List<Recipe> findByCriteria(CriteriaPOJO criteria) {
+        return recipeRepository.findByCriteria(criteria);
     }
 
     @Override
