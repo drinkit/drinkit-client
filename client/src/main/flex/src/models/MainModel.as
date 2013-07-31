@@ -9,7 +9,9 @@ package models
 		public static const COCKTAIL_VIEW:int = 2;
 		
 		[Bindable]
-		public var currentView:int = BUILDER_VIEW; 
+		public var currentView:int = BUILDER_VIEW;
+		
+		public var viewData:Object;
 		
 		public function MainModel()
 		{
