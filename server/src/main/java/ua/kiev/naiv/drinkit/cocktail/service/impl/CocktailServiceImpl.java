@@ -8,7 +8,8 @@ import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.repository.CocktailTypeRepository;
 import ua.kiev.naiv.drinkit.cocktail.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.repository.RecipeRepository;
-import ua.kiev.naiv.drinkit.cocktail.search.CriteriaPOJO;
+import ua.kiev.naiv.drinkit.cocktail.search.Criteria;
+import ua.kiev.naiv.drinkit.cocktail.search.SearchSpecification;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 
 import javax.annotation.Resource;
@@ -45,9 +46,8 @@ public class CocktailServiceImpl implements CocktailService {
     }
 
     @Override
-    public List<Recipe> findByCriteria(CriteriaPOJO criteria) {
-//        return recipeRepository.findByCriteria(criteria);
-        return null;
+    public List<Recipe> findByCriteria(Criteria criteria) {
+        return recipeRepository.findAll(SearchSpecification.byCriteria(criteria));
     }
 
     @Override

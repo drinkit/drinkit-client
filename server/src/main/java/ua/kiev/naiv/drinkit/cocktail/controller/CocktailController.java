@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ua.kiev.naiv.drinkit.cocktail.common.JsonMixin;
 import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
-import ua.kiev.naiv.drinkit.cocktail.search.CriteriaPOJO;
+import ua.kiev.naiv.drinkit.cocktail.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 
 import java.util.Arrays;
@@ -34,7 +34,7 @@ public class CocktailController {
         return cocktailService.findById(id);
     }
 
-    @JsonMixin(CriteriaPOJO.class)
+    @JsonMixin(Criteria.class)
     @RequestMapping("/ingredients")
     @ResponseBody
     public List<Ingredient> findIngredients() {

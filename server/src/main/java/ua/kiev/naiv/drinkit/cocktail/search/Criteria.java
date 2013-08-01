@@ -8,13 +8,13 @@ import java.util.Set;
  * Date: 22.07.13
  * Time: 21:39
  */
-public class CriteriaPOJO {
+public class Criteria {
 
     private Set<Integer> cocktailTypes;
     private Set<Integer> ingredients;
     private Set<Integer> options;
 
-    public CriteriaPOJO() {
+    public Criteria() {
     }
 
     //    @JsonIdentityReference(alwaysAsId = true)
