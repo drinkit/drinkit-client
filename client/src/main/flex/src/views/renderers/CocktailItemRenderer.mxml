@@ -3,7 +3,7 @@
 				xmlns:s="library://ns.adobe.com/flex/spark"
 				xmlns:mx="library://ns.adobe.com/flex/mx"
 				height="74" width="100%" autoDrawBackground="true"
-				opaqueBackground="{DesignModel.ORANGE_BEACH}" creationComplete="itemrenderer1_creationCompleteHandler(event)" click="itemrenderer1_clickHandler(event)">
+				opaqueBackground="{DesignModel.ORANGE_BEACH}" creationComplete="itemrenderer1_creationCompleteHandler(event)">
 	<s:layout>
 		<s:HorizontalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="5" />
 	</s:layout>
@@ -77,11 +77,6 @@
 				return cocktailStructure;
 			}
 			
-			protected function itemrenderer1_clickHandler(event:MouseEvent):void
-			{
-				// TODO Auto-generated method stub
-				
-			}
 			
 		]]>
 	</fx:Script>
