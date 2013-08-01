@@ -25,13 +25,13 @@ public interface CocktailService {
 
     Recipe update(Recipe recipe);
 
-    Recipe findById(int id);
+    Recipe getById(int id);
 
     CocktailType findCocktailTypeById(int id);
 
     List<CocktailType> findAllCocktailType();
 
-    List<Ingredient> findAllIngredients();
+    List<Ingredient> getIngredients();
 
     Ingredient findIngredientById(int id);
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.kiev.naiv.drinkit.cocktail.TestHelper;
+import ua.kiev.naiv.drinkit.cocktail.mixin.RecipeInfoResult;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 import ua.kiev.naiv.drinkit.springconfig.AppConfig;
 
@@ -28,10 +29,12 @@ public class CocktailTest {
 
     @Test
     public void wannaCubaLibre() throws IOException {
-        Recipe cubaLibre = cocktailService.findById(1);
+        Recipe cubaLibre = cocktailService.getById(1);
         Assert.assertNotNull(cubaLibre);
         Assert.assertEquals("Куба Либре", cubaLibre.getName());
-        new ObjectMapper().writeValue(TestHelper.createIfNotExistJsonFileResponse("cubaLibre"), cubaLibre);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.addMixInAnnotations(Recipe.class, RecipeInfoResult.class);
+        objectMapper.writeValue(TestHelper.createIfNotExistJsonFileResponse("cubaLibre"), cubaLibre);
     }
 
     @Test

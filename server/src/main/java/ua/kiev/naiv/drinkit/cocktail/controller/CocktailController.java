@@ -1,18 +1,19 @@
 package ua.kiev.naiv.drinkit.cocktail.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.kiev.naiv.drinkit.cocktail.common.JsonMixin;
+import ua.kiev.naiv.drinkit.cocktail.mixin.RecipeInfoResult;
 import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -28,25 +29,32 @@ public class CocktailController {
     @Autowired
     CocktailService cocktailService;
 
-    @RequestMapping("/findById/{id}")
+    @RequestMapping("/getById")
     @ResponseBody
-    public Recipe getById(@PathVariable int id) {
-        return cocktailService.findById(id);
+    @JsonMixin(RecipeInfoResult.class)
+    public Recipe getById(@RequestParam int id) {
+        return cocktailService.getById(id);
     }
 
     @JsonMixin(Criteria.class)
-    @RequestMapping("/ingredients")
+    @RequestMapping("/getIngredients")
     @ResponseBody
-    public List<Ingredient> findIngredients() {
-        return cocktailService.findAllIngredients();
+    public List<Ingredient> getIngredients() {
+        return cocktailService.getIngredients();
     }
 
-    @RequestMapping("/search/")
+    @RequestMapping("/search")
     @ResponseBody
-    public List<Recipe> searchCocktails(@RequestParam(value = "criteria") String json) {
+    public List<Recipe> searchRecipes(@RequestParam(value = "criteria") String json) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Criteria criteria = null;
+        try {
+            criteria = objectMapper.readValue(json, Criteria.class);
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
 
-        System.out.println(json);
-        return Arrays.asList(cocktailService.findById(1));
+        return cocktailService.findByCriteria(criteria);
     }
 
 }

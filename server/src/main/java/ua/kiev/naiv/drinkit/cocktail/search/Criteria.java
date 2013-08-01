@@ -17,6 +17,12 @@ public class Criteria {
     public Criteria() {
     }
 
+    public Criteria(Set<Integer> cocktailTypes, Set<Integer> ingredients, Set<Integer> options) {
+        this.cocktailTypes = cocktailTypes;
+        this.ingredients = ingredients;
+        this.options = options;
+    }
+
     //    @JsonIdentityReference(alwaysAsId = true)
     public Set<Integer> getCocktailTypes() {
         return cocktailTypes;

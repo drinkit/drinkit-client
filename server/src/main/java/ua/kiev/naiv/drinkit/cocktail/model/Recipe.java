@@ -70,7 +70,7 @@ public class Recipe implements Serializable {
         this.cocktailType = cocktailType;
     }
 
-    @OneToMany(mappedBy = "id.recipe", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cocktailIngredientId.recipe", fetch = FetchType.EAGER)
     public Set<CocktailIngredient> getIngredients() {
         return ingredients;
     }

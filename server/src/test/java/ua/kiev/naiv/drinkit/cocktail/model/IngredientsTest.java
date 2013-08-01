@@ -29,7 +29,7 @@ public class IngredientsTest {
 
     @Test
     public void getIngredientsList() throws IOException {
-        List<Ingredient> ingredients = cocktailService.findAllIngredients();
+        List<Ingredient> ingredients = cocktailService.getIngredients();
         Assert.assertNotNull(ingredients);
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(TestHelper.createIfNotExistJsonFileResponse("allIngredients"), ingredients);

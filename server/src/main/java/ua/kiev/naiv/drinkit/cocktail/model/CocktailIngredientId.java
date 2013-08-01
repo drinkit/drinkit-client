@@ -1,11 +1,14 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -16,6 +19,7 @@ import java.io.Serializable;
  */
 
 @Embeddable
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CocktailIngredientId implements Serializable {
 
     @JsonIgnore
@@ -38,5 +42,15 @@ public class CocktailIngredientId implements Serializable {
 
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
+    }
+
+    @Transient
+    private int getId() {
+        return ingredient.getId();
+    }
+
+    @Transient
+    private void setId(int id) {
+
     }
 }

@@ -56,7 +56,7 @@ public class CocktailServiceImpl implements CocktailService {
     }
 
     @Override
-    public Recipe findById(int id) {
+    public Recipe getById(int id) {
         return recipeRepository.findOne(id);
     }
 
@@ -74,7 +74,7 @@ public class CocktailServiceImpl implements CocktailService {
     IngredientRepository ingredientRepository;
 
     @Override
-    public List<Ingredient> findAllIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredientRepository.findAll();
     }
 

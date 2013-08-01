@@ -155,9 +155,9 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.0.4.v20130625</version>
-                <!--<configuration>-->
-                <!--<scanIntervalSeconds>1</scanIntervalSeconds>-->
-                <!--</configuration>-->
+                <configuration>
+                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                </configuration>
             </plugin>
 
             <!--<plugin>-->

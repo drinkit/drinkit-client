@@ -1,5 +1,6 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -14,22 +15,23 @@ import java.io.Serializable;
 @Entity
 @Table(name = "recipes_has_ingredients")
 @AssociationOverrides({
-        @AssociationOverride(name = "id.recipe",
+        @AssociationOverride(name = "cocktailIngredientId.recipe",
                 joinColumns = @JoinColumn(name = "recipe_id")),
-        @AssociationOverride(name = "id.ingredient",
-                joinColumns = @JoinColumn(name = "ingredient_id")) })
-public class CocktailIngredient implements Serializable{
+        @AssociationOverride(name = "cocktailIngredientId.ingredient",
+                joinColumns = @JoinColumn(name = "ingredient_id"))})
+public class CocktailIngredient implements Serializable {
 
     private Integer quantity;
-    private CocktailIngredientId id;
+    @JsonIdentityReference
+    private CocktailIngredientId cocktailIngredientId;
 
     @EmbeddedId
-    public CocktailIngredientId getId() {
-        return id;
+    public CocktailIngredientId getCocktailIngredientId() {
+        return cocktailIngredientId;
     }
 
-    public void setId(CocktailIngredientId id) {
-        this.id = id;
+    public void setCocktailIngredientId(CocktailIngredientId cocktailIngredientId) {
+        this.cocktailIngredientId = cocktailIngredientId;
     }
 
     @Column(name = "quantity")
@@ -42,24 +44,24 @@ public class CocktailIngredient implements Serializable{
     }
 
     @Transient
-    public Ingredient getIngredient(){
-        return getId().getIngredient();
+    @JsonIdentityReference
+    public Ingredient getIngredient() {
+        return getCocktailIngredientId().getIngredient();
     }
 
-    public void setIngredient(Ingredient ingredient){
-        getId().setIngredient(ingredient);
+    public void setIngredient(Ingredient ingredient) {
+        getCocktailIngredientId().setIngredient(ingredient);
     }
 
     @Transient
     @JsonIgnore
-    public Recipe getRecipe(){
-        return getId().getRecipe();
+    public Recipe getRecipe() {
+        return getCocktailIngredientId().getRecipe();
     }
 
-    public void setRecipe(Recipe recipe){
-        getId().setRecipe(recipe);
+    public void setRecipe(Recipe recipe) {
+        getCocktailIngredientId().setRecipe(recipe);
     }
-
 
 
 }

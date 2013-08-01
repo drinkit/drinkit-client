@@ -38,4 +38,9 @@ public class SearchTest {
         List<Recipe> recipes = cocktailService.findByCriteria(criteria);
         Assert.assertNotNull(recipes);
     }
+
+//    @Test
+//    public void findCubaLibreByCriteria(){
+//        Criteria criteria = new Criteria(new Int {1}, [1], [1]);
+//    }
 }
