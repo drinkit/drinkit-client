@@ -83,7 +83,7 @@
 	
 	        protected function optionChangeHandler(event:Event):void
 	        {
-	            _controller.toggleoption(uint(event.currentTarget.name), event.currentTarget.selected);
+	            _controller.toggleOption(uint(event.currentTarget.name), event.currentTarget.selected);
 				_controller.performSearch();
 	        }
 				

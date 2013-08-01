@@ -41,7 +41,7 @@ package controllers
 			}
 		}
 		
-		public function toggleoption(id:uint, selected:Boolean):void
+		public function toggleOption(id:uint, selected:Boolean):void
 		{
 			if (selected)
 				_model.selectedoptions.push(id);

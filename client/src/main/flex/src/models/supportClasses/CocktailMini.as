@@ -3,41 +3,37 @@ package models.supportClasses
 	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	import flash.utils.ByteArray;
 	
 	import mx.utils.Base64Decoder;
 	
 	import utils.ParserUtil;
 
-	public class CocktailMini
+	public class CocktailMini extends EventDispatcher
 	{
 		public var id:Number;
 		public var name:String;
 		public var ingredients:Array; // of ingredient's ids
 		public var options:Array;
 		
-		[Bindable]
-		public var image:Bitmap;
-
-		private var _thumbnail:String;
+		private var _image:Bitmap;
 		
-		public function get thumbnail():String
+		[Bindable("imageDecoded")]
+		public function get image():Bitmap
 		{
-			return _thumbnail;
+			return _image;
 		}
-		
+
 		public function set thumbnail(value:String):void
 		{
 			if (value)
 			{
-				_thumbnail = value;
 				var decoder:Base64Decoder = new Base64Decoder();
 				decoder.decode(value);
-				var imageBA:ByteArray = decoder.toByteArray();
 				var loader:Loader = new Loader();
-				loader.contentLoaderInfo.
-					loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoad);
-				loader.loadBytes(imageBA);
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoad);
+				loader.loadBytes(decoder.toByteArray());
 			}
 		}
 
@@ -51,7 +47,8 @@ package models.supportClasses
 
 		private function onImageLoad(event:Event):void
 		{
-			image = event.target.content;
+			_image = event.target.content;
+			dispatchEvent(new Event("imageDecoded"));
 		}
 
 
