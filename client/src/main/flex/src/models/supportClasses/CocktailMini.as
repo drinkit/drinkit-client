@@ -30,7 +30,7 @@ package models.supportClasses
 		{
 			if (value)
 			{
-				thumbnail = value;
+				_thumbnail = value;
 				var decoder:Base64Decoder = new Base64Decoder();
 				decoder.decode(value);
 				var imageBA:ByteArray = decoder.toByteArray();

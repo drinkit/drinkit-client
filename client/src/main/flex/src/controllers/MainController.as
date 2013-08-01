@@ -28,9 +28,23 @@ package controllers
 			_model = value;
 		}
 		
-		public function changeView(view:int):void
+		public function changeView(view:int, data:Object):void
 		{
 			_model.currentView = view;
+			_model.viewData = data;
+		}
+		
+		public function get viewData():Object
+		{
+			if (_model)
+			{
+				var data:Object = _model.viewData;
+				_model.viewData = null;
+				return data;
+			}
+			
+			return null;
+			
 		}
 		
 	}

@@ -88,9 +88,15 @@
 	        }
 				
 				
-			protected function recipesList_clickHandler(event:MouseEvent):void
+			protected function selectCocktailHandler(event:IndexChangeEvent):void
 			{
-				MainController.instance.changeView(MainModel.COCKTAIL_VIEW);
+				if (recipesList.selectedItem)
+				{
+					var cocktailId:Number = recipesList.selectedItem.id;
+					recipesList.selectedIndex = -1;
+					recipesList.validateProperties();
+					MainController.instance.changeView(MainModel.COCKTAIL_VIEW, cocktailId);					
+				}					
 			}
 			
 		]]>
@@ -152,7 +158,7 @@
             <s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}"/>
         </s:stroke>
     </s:Line>
-    <s:List id="recipesList" borderVisible="false" width="100%" height="100%" click="recipesList_clickHandler(event)"
+    <s:List id="recipesList" borderVisible="false" width="100%" height="100%" change="selectCocktailHandler(event)"
             itemRenderer="views.renderers.CocktailItemRenderer" dataProvider="{_model.cocktailsList}">
         <s:layout>
             <s:VerticalLayout variableRowHeight="false" paddingBottom="5" paddingLeft="5" paddingRight="5"
