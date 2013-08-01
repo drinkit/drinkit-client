@@ -46,7 +46,8 @@ public class CocktailServiceImpl implements CocktailService {
 
     @Override
     public List<Recipe> findByCriteria(CriteriaPOJO criteria) {
-        return recipeRepository.findByCriteria(criteria);
+//        return recipeRepository.findByCriteria(criteria);
+        return null;
     }
 
     @Override

@@ -1,39 +1,43 @@
 package ua.kiev.naiv.drinkit.springconfig;
 
-import org.hibernate.dialect.MySQL5Dialect;
+/**
+ * @author pkolmykov
+ */
+
 import org.hibernate.ejb.HibernatePersistence;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.annotation.Resource;
 import java.util.Properties;
 
+
 /**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 18.07.13
- * Time: 22:27
+ * @author pkolmykov
  */
 @Configuration
-@ComponentScan("ua.kiev.naiv.drinkit.cocktail")
-@EnableWebMvc
 @EnableJpaRepositories("ua.kiev.naiv.drinkit.cocktail.repository")
-@EnableAspectJAutoProxy
-public class WebConfig {
+@ComponentScan("ua.kiev.naiv.drinkit.cocktail.service")
+@PropertySource("classpath:application.properties")
+public class AppConfig {
+
+    @Resource
+    Environment env;
 
     @Bean
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/cocktail");
-        dataSource.setUsername("drinkit");
-        dataSource.setPassword("drinkit");
+        dataSource.setDriverClassName(env.getRequiredProperty("db.driver"));
+        dataSource.setUrl(env.getRequiredProperty("db.url"));
+        dataSource.setUsername(env.getRequiredProperty("db.username"));
+        dataSource.setPassword(env.getRequiredProperty("db.password"));
         return dataSource;
     }
 
@@ -49,8 +53,8 @@ public class WebConfig {
 
     private Properties hibProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.dialect", MySQL5Dialect.class.getCanonicalName());
-        hibernateProperties.setProperty("hibernate.show_sql", Boolean.TRUE.toString());
+        hibernateProperties.setProperty("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
+        hibernateProperties.setProperty("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
         return hibernateProperties;
     }
 
