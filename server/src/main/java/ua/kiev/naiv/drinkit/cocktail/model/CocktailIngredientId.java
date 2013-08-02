@@ -1,9 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
@@ -19,7 +17,6 @@ import java.io.Serializable;
  */
 
 @Embeddable
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CocktailIngredientId implements Serializable {
 
     @JsonIgnore

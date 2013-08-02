@@ -24,7 +24,7 @@ public class Ingredient {
     private Integer vol;
     private String description;
     @JsonIgnore
-    private Set<CocktailIngredient> cocktailIngredients;
+    private Set<IngredientWithQuantity> cocktailIngredients;
 
     @Id
     @Column(name = "id")
@@ -64,11 +64,11 @@ public class Ingredient {
     }
 
     @OneToMany(mappedBy = "cocktailIngredientId.ingredient")
-    public Set<CocktailIngredient> getCocktailIngredients() {
+    public Set<IngredientWithQuantity> getCocktailIngredients() {
         return cocktailIngredients;
     }
 
-    public void setCocktailIngredients(Set<CocktailIngredient> cocktailIngredients) {
-        this.cocktailIngredients = cocktailIngredients;
+    public void setCocktailIngredients(Set<IngredientWithQuantity> ingredientWithQuantities) {
+        this.cocktailIngredients = ingredientWithQuantities;
     }
 }

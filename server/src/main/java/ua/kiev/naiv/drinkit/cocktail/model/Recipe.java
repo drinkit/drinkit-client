@@ -26,7 +26,7 @@ public class Recipe implements Serializable {
     @JsonIdentityReference(alwaysAsId = true)
     private CocktailType cocktailType;
     @JsonIdentityReference(alwaysAsId = true)
-    private Set<CocktailIngredient> ingredients;
+    private Set<IngredientWithQuantity> ingredients;
     @JsonIdentityReference(alwaysAsId = true)
     private Set<Option> options;
     private byte[] image;
@@ -71,11 +71,11 @@ public class Recipe implements Serializable {
     }
 
     @OneToMany(mappedBy = "cocktailIngredientId.recipe", fetch = FetchType.EAGER)
-    public Set<CocktailIngredient> getIngredients() {
+    public Set<IngredientWithQuantity> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<CocktailIngredient> ingredients) {
+    public void setIngredients(Set<IngredientWithQuantity> ingredients) {
         this.ingredients = ingredients;
     }
 

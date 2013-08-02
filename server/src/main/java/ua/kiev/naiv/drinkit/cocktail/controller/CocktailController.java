@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.kiev.naiv.drinkit.cocktail.common.JsonMixin;
 import ua.kiev.naiv.drinkit.cocktail.mixin.RecipeInfoResult;
+import ua.kiev.naiv.drinkit.cocktail.mixin.RecipeSearchResult;
 import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.search.Criteria;
@@ -45,6 +46,7 @@ public class CocktailController {
 
     @RequestMapping("/search")
     @ResponseBody
+    @JsonMixin(RecipeSearchResult.class)
     public List<Recipe> searchRecipes(@RequestParam(value = "criteria") String json) {
         ObjectMapper objectMapper = new ObjectMapper();
         Criteria criteria = null;

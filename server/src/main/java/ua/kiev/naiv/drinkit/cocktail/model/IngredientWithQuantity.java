@@ -19,10 +19,10 @@ import java.io.Serializable;
                 joinColumns = @JoinColumn(name = "recipe_id")),
         @AssociationOverride(name = "cocktailIngredientId.ingredient",
                 joinColumns = @JoinColumn(name = "ingredient_id"))})
-public class CocktailIngredient implements Serializable {
+public class IngredientWithQuantity implements Serializable {
 
     private Integer quantity;
-    @JsonIdentityReference
+    @JsonIgnore
     private CocktailIngredientId cocktailIngredientId;
 
     @EmbeddedId
@@ -44,7 +44,7 @@ public class CocktailIngredient implements Serializable {
     }
 
     @Transient
-    @JsonIdentityReference
+    @JsonIdentityReference(alwaysAsId = true)
     public Ingredient getIngredient() {
         return getCocktailIngredientId().getIngredient();
     }

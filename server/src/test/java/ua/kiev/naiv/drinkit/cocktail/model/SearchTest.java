@@ -7,12 +7,15 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import ua.kiev.naiv.drinkit.cocktail.TestHelper;
+import ua.kiev.naiv.drinkit.cocktail.mixin.RecipeSearchResult;
 import ua.kiev.naiv.drinkit.cocktail.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 import ua.kiev.naiv.drinkit.springconfig.AppConfig;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,8 +42,14 @@ public class SearchTest {
         Assert.assertNotNull(recipes);
     }
 
-//    @Test
-//    public void findCubaLibreByCriteria(){
-//        Criteria criteria = new Criteria(new Int {1}, [1], [1]);
-//    }
+    @Test
+    public void findCubaLibreByCriteria() throws IOException {
+        Criteria criteria = new Criteria(Collections.singleton(1), Collections.singleton(2), Collections.singleton(2));
+        List<Recipe> recipes = cocktailService.findByCriteria(criteria);
+        Assert.assertNotNull(recipes);
+        Assert.assertTrue(recipes.size() > 0);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.addMixInAnnotations(Recipe.class, RecipeSearchResult.class);
+        objectMapper.writeValue(TestHelper.createIfNotExistJsonFileResponse("searchResult"), recipes);
+    }
 }
