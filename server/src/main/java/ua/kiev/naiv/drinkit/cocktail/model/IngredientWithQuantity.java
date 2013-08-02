@@ -2,6 +2,7 @@ package ua.kiev.naiv.drinkit.cocktail.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -44,6 +45,7 @@ public class IngredientWithQuantity implements Serializable {
     }
 
     @Transient
+    @JsonProperty("ingredientId")
     @JsonIdentityReference(alwaysAsId = true)
     public Ingredient getIngredient() {
         return getCocktailIngredientId().getIngredient();

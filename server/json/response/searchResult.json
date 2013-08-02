@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "name": "Куба Либре",
+        "description": "Сам рецепт приготовления",
+        "thumbnail": null,
+        "ingredientIds": [2, 3, 4],
+        "cocktailTypeId": 1,
+        "optionIds": [4, 2]
+    }
+]

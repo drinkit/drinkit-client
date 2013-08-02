@@ -31,7 +31,7 @@ public class SearchSpecification {
                 }
 
                 if (criteria.getIngredients().size() > 0) {
-                    Join<Recipe, IngredientWithQuantity> ingredientJoin = root.join(Recipe_.ingredients);
+                    Join<Recipe, IngredientWithQuantity> ingredientJoin = root.join(Recipe_.ingredientWithQuantities);
                     Predicate orPredicate = cb.disjunction();
                     for (int id : criteria.getIngredients()) {
                         orPredicate = cb.or(orPredicate, cb.equal(ingredientJoin.get(IngredientWithQuantity_.cocktailIngredientId)

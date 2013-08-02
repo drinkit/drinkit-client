@@ -1,9 +1,11 @@
 package ua.kiev.naiv.drinkit.cocktail.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -23,13 +25,24 @@ public class Recipe implements Serializable {
     private Integer id;
     private String name;
     private String description;
+    @JsonProperty("cocktailTypeId")
     @JsonIdentityReference(alwaysAsId = true)
     private CocktailType cocktailType;
-    @JsonIdentityReference(alwaysAsId = true)
-    private Set<IngredientWithQuantity> ingredients;
+    private Set<IngredientWithQuantity> ingredientWithQuantities;
+    @JsonProperty("optionIds")
     @JsonIdentityReference(alwaysAsId = true)
     private Set<Option> options;
     private byte[] image;
+    private byte[] thumbnail;
+
+    @Transient
+    public Set<Integer> getIngredientIds() {
+        Set<Integer> result = new HashSet<>();
+        for (IngredientWithQuantity ingredientWithQuantity : getIngredientWithQuantities()) {
+            result.add(ingredientWithQuantity.getIngredient().getId());
+        }
+        return result;
+    }
 
     @Id
     @GeneratedValue()
@@ -71,12 +84,12 @@ public class Recipe implements Serializable {
     }
 
     @OneToMany(mappedBy = "cocktailIngredientId.recipe", fetch = FetchType.EAGER)
-    public Set<IngredientWithQuantity> getIngredients() {
-        return ingredients;
+    public Set<IngredientWithQuantity> getIngredientWithQuantities() {
+        return ingredientWithQuantities;
     }
 
-    public void setIngredients(Set<IngredientWithQuantity> ingredients) {
-        this.ingredients = ingredients;
+    public void setIngredientWithQuantities(Set<IngredientWithQuantity> ingredientWithQuantities) {
+        this.ingredientWithQuantities = ingredientWithQuantities;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -98,5 +111,14 @@ public class Recipe implements Serializable {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    @Column()
+    public byte[] getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(byte[] thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }
