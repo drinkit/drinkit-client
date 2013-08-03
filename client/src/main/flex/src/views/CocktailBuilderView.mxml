@@ -8,7 +8,7 @@
     </s:layout>
     <fx:Script>
 		<![CDATA[
-			import controllers.CoctailBuilderController;
+			import controllers.CocktailBuilderController;
 			import controllers.MainController;
 			
 			import design.DesignModel;
@@ -36,9 +36,9 @@
 			}
 			
 			[Bindable]
-	        private var _controller:CoctailBuilderController;
+	        private var _controller:CocktailBuilderController;
 			
-			public function get controller():CoctailBuilderController
+			public function get controller():CocktailBuilderController
 			{
 				return _controller;
 			}
@@ -70,9 +70,9 @@
 	        protected function creationCompleteHandler(event:FlexEvent):void
 	        {
 	            _model = new CocktailBuilderModel();
-	            _controller = new CoctailBuilderController(_model);
+	            _controller = new CocktailBuilderController(_model);
 	            //
-	            _controller.requestIngredients();
+	            MainController.instance.requestIngredients();
 	        }
 	
 	        protected function cocktailTypeChangeHandler(event:Event):void

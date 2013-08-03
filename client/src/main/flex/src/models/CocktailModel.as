@@ -14,8 +14,8 @@ package models
 		public var name:String;
 		[Bindable]
 		public var description:String;
-		public var cocktailType:int;
-		public var ingredients:Array;
+		public var cocktailTypeId:int;
+		public var ingredientWithQuantities:Array;
 		public var options:Array;
 		
 		private var _image:Bitmap;

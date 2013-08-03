@@ -4,6 +4,7 @@ package models
 	
 	import models.supportClasses.Ingredient;
 	
+	import mx.binding.utils.BindingUtils;
 	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;
 	import mx.events.CollectionEvent;
@@ -14,7 +15,7 @@ package models
 	{		
 		public function CocktailBuilderModel()
 		{
-			ingredientsList = MockData.fakeIngredients();
+			BindingUtils.bindProperty(this, "ingredientsList", IngredientsModel.instance, "ingredientsList");
 			cocktailsList = MockData.fakeCocktails();
 			selectedIngredientsList = new ArrayList();
 			//
@@ -25,7 +26,7 @@ package models
 		public var cocktailsList:ArrayCollection;
 		
 		[Bindable]
-		public var ingredientsList:ArrayCollection;
+		public var ingredientsList:ArrayCollection = IngredientsModel.instance.ingredientsList;
 		
 		[Bindable]
 		public var selectedIngredientsList:ArrayList;
@@ -43,20 +44,6 @@ package models
 		private function itemToId(item:*, index:int, array:Array):uint
 		{
 			return item.id;
-		}
-		
-		public function getIngredientNameById(id:Number):String
-		{
-			if (ingredientsList)
-			{
-				for (var i:uint = 0; i < ingredientsList.source.length; i++)
-				{
-					if (Ingredient(ingredientsList.source[i]).id == id)
-						return Ingredient(ingredientsList.source[i]).name;
-				}
-			}
-			
-			return null;
 		}
 		
 		public function isIngredientSelected(id:Number):Boolean

@@ -9,11 +9,12 @@
 	</s:layout>
 	<fx:Script>
 		<![CDATA[
-			import controllers.CoctailBuilderController;
+			import controllers.CocktailBuilderController;
 			
 			import design.DesignModel;
 			
 			import models.CocktailBuilderModel;
+			import models.IngredientsModel;
 			import models.supportClasses.CocktailMini;
 			
 			import mx.events.FlexEvent;
@@ -37,7 +38,7 @@
 					//
 					_cocktail = CocktailMini(value);
 					cocktailName.text = _cocktail.name;
-					cocktailStructure.textFlow = TextFlowUtil.importFromString(buildRecipe(_cocktail.ingredients));
+					cocktailStructure.textFlow = TextFlowUtil.importFromString(buildRecipe(_cocktail.ingredientIds));
 				}
 			}
 			
@@ -64,7 +65,7 @@
 				
 				for (var i:uint = 0; i < ingredients.length; i++)
 				{
-					curIngredient = _model.getIngredientNameById(ingredients[i]).toLowerCase();
+					curIngredient = IngredientsModel.instance.getIngredientNameById(ingredients[i]).toLowerCase();
 					
 					if (!_model.isIngredientSelected(ingredients[i]))
 						curIngredient = '<span fontStyle="italic">' + curIngredient + "</span>";

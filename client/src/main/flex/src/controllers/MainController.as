@@ -1,6 +1,17 @@
 package controllers
 {
+	import controllers.supportClasses.Services;
+	
+	import flash.events.Event;
+	
+	import models.IngredientsModel;
 	import models.MainModel;
+	import models.supportClasses.Ingredient;
+	
+	import mx.collections.ArrayCollection;
+	
+	import utils.JSONInstantiator;
+	import utils.ServiceUtil;
 
 	public class MainController
 	{
@@ -45,6 +56,17 @@ package controllers
 			
 			return null;
 			
+		}
+		
+		public function requestIngredients():void
+		{
+			ServiceUtil.requestData(Services.GET_INGREDIENTS, null, onIngredientsLoad);
+		}
+		
+		
+		private function onIngredientsLoad(event:Event):void
+		{
+			IngredientsModel.instance.ingredientsList = new ArrayCollection(JSONInstantiator.createInstance(event.target.data, Ingredient) as Array);
 		}
 		
 	}

@@ -48,9 +48,9 @@
 		<s:Label width="100%" text="{_model.name}" fontSize="18" textAlign="center" />
 		<s:TextArea text="{_model.description}" width="100%" height="100%" editable="false" />
 	</s:VGroup>
-	<s:VGroup width="300" height="100%">
-		<components:GroupBox title="Ингридиенты" width="100%" height="300">
-			<s:Label text="test" />	
+	<s:VGroup>
+		<components:GroupBox title="Ингридиенты">
+			<s:List itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" width="100%" height="100%" />
 		</components:GroupBox>
 		<s:TileGroup id="tagsContainer">
 		</s:TileGroup>

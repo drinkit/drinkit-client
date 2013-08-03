@@ -16,11 +16,11 @@ package controllers
 	import utils.JSONInstantiator;
 	import utils.ServiceUtil;
 
-	public class CoctailBuilderController
+	public class CocktailBuilderController
 	{
 		private var _model:CocktailBuilderModel;
 		
-		public function CoctailBuilderController(model:CocktailBuilderModel)
+		public function CocktailBuilderController(model:CocktailBuilderModel)
 		{
 			_model = model;
 		}
@@ -52,15 +52,6 @@ package controllers
 			}
 		}
 		
-		public function requestIngredients():void
-		{
-			ServiceUtil.requestData(Services.GET_INGREDIENTS, null, onIngredientsLoad);
-		}
-		
-		private function onIngredientsLoad(event:Event):void
-		{
-			_model.ingredientsList = new ArrayCollection(JSONInstantiator.createInstance(event.target.data, Ingredient) as Array);
-		}
 		
 		public function performSearch():void
 		{
