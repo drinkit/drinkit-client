@@ -38,12 +38,13 @@ package models.supportClasses
 			}
 		}
 
-		public function CocktailMini(aId:Number = -1, aName:String = "", aThumbnail:String = null, aIngredients:Array = null)
+		public function CocktailMini(aId:Number = -1, aName:String = "", aCocktailTypeId:int = -1, aThumbnail:String = null, aIngredients:Array = null)
 		{
 			id = aId;
 			name = aName;
 			thumbnail = aThumbnail;
 			ingredientIds = aIngredients;
+			cocktailTypeId = aCocktailTypeId;
 		}
 
 		private function onImageLoad(event:Event):void

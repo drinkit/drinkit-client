@@ -50,7 +50,7 @@
 	</s:VGroup>
 	<s:VGroup>
 		<components:GroupBox title="Ингридиенты">
-			<s:List itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" width="100%" height="100%" />
+			<s:List itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" dataProvider="{_model.ingredientWithQuantities}" width="100%" height="100%" />
 		</components:GroupBox>
 		<s:TileGroup id="tagsContainer">
 		</s:TileGroup>
