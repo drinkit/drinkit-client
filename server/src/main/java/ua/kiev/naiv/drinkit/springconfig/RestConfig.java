@@ -9,7 +9,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * @author pkolmykov
  */
 @Configuration
-@ComponentScan("ua.kiev.naiv.drinkit.cocktail.controller")
+@ComponentScan({
+        "ua.kiev.naiv.drinkit.cocktail.controller",
+        "ua.kiev.naiv.drinkit.cocktail.common"
+})
 @EnableWebMvc
 @EnableAspectJAutoProxy
 public class RestConfig {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,7 +20,8 @@ public class MixinAspect {
     public Object test(final ProceedingJoinPoint joinPoint, final JsonMixin annotation) {
         Class<?> mixin = annotation.value();
         ObjectMapper mapper = new ObjectMapper();
-//        mapper.addMixInAnnotations(msig.getMethod().getReturnType(), mixin);
+        MethodSignature msig = (MethodSignature) joinPoint.getSignature();
+        mapper.addMixInAnnotations(msig.getMethod().getReturnType(), mixin);
         System.out.println("added mixin: " + mixin.getName());
         try {
             mapper.writeValue(WebContext.getInstance().getResponse().getOutputStream(), joinPoint.proceed());
