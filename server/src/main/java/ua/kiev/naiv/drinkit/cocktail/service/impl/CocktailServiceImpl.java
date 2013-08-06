@@ -42,7 +42,7 @@ public class CocktailServiceImpl implements CocktailService {
 
     @Override
     public List<Recipe> findAll() {
-        throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
+        return recipeRepository.findAll();
     }
 
     @Override
