@@ -28,7 +28,7 @@ public class Recipe implements Serializable {
     @JsonProperty("cocktailTypeId")
     @JsonIdentityReference(alwaysAsId = true)
     private CocktailType cocktailType;
-    private Set<IngredientWithQuantity> ingredientWithQuantities;
+    private Set<IngredientWithQuantity> ingredientsWithQuantities;
     @JsonProperty("optionIds")
     @JsonIdentityReference(alwaysAsId = true)
     private Set<Option> options;
@@ -38,7 +38,7 @@ public class Recipe implements Serializable {
     @Transient
     public Set<Integer> getIngredientIds() {
         Set<Integer> result = new HashSet<>();
-        for (IngredientWithQuantity ingredientWithQuantity : getIngredientWithQuantities()) {
+        for (IngredientWithQuantity ingredientWithQuantity : getIngredientsWithQuantities()) {
             result.add(ingredientWithQuantity.getIngredient().getId());
         }
         return result;
@@ -84,12 +84,12 @@ public class Recipe implements Serializable {
     }
 
     @OneToMany(mappedBy = "cocktailIngredientId.recipe", fetch = FetchType.EAGER)
-    public Set<IngredientWithQuantity> getIngredientWithQuantities() {
-        return ingredientWithQuantities;
+    public Set<IngredientWithQuantity> getIngredientsWithQuantities() {
+        return ingredientsWithQuantities;
     }
 
-    public void setIngredientWithQuantities(Set<IngredientWithQuantity> ingredientWithQuantities) {
-        this.ingredientWithQuantities = ingredientWithQuantities;
+    public void setIngredientsWithQuantities(Set<IngredientWithQuantity> ingredientsWithQuantities) {
+        this.ingredientsWithQuantities = ingredientsWithQuantities;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
