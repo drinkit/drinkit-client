@@ -82,4 +82,9 @@ public class CocktailServiceImpl implements CocktailService {
     public Ingredient findIngredientById(int id) {
         return ingredientRepository.findOne(id);
     }
+
+    @Override
+    public List<CocktailType> getCocktailTypes() {
+        return cocktailTypeRepository.findAll();
+    }
 }

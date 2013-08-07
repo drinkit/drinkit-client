@@ -34,4 +34,6 @@ public interface CocktailService {
     List<Ingredient> getIngredients();
 
     Ingredient findIngredientById(int id);
+
+    List<CocktailType> getCocktailTypes();
 }
