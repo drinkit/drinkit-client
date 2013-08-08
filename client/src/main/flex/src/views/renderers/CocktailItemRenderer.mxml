@@ -59,6 +59,7 @@
 			
 			private function buildTags(cocktailType:int, options:Array):void
 			{
+				tagsGroup.removeAllElements();
 				tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(cocktailType, TagsModel.COCKTAIL_TYPE_TAG, 24));
 				
 				if (options)

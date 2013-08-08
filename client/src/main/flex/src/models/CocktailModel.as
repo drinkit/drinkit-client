@@ -11,13 +11,11 @@ package models
 	public class CocktailModel extends EventDispatcher
 	{
 		public var id:Number;
-		[Bindable]
 		public var name:String;
-		[Bindable]
 		public var description:String;
 		public var cocktailTypeId:int;
 		public var ingredientWithQuantities:Array;
-		public var options:Array;
+		public var optionIds:Array;
 		
 		public function get ingredientWithQuantitiesProvider():ArrayCollection
 		{

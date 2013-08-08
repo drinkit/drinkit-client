@@ -49,7 +49,35 @@ package utils
 					if (strict)
 						throw new Error("Property '" + property.@name + "' is not exist in json-string!");
 				}
-
+			}
+			
+			for each (var accessor:XML in propertyMap.accessor)
+			{
+				if (accessor.access == "readonly")
+					continue;
+				
+				if (singleJSONObject.hasOwnProperty(accessor.@name)) 
+				{
+					propertyTypeClass = getDefinitionByName(accessor.@type) as Class;
+					
+					if (singleJSONObject[accessor.@name] == null)
+					{
+						returnObject[accessor.@name] = null;
+						continue;
+					}
+					
+					if (singleJSONObject[accessor.@name] is (propertyTypeClass)) 
+					{
+						returnObject[accessor.@name] = singleJSONObject[accessor.@name];
+					}
+					else
+						throw new Error("Accessor '" + accessor.@name + "' must be '" +  accessor.@type + "'");
+				}
+				else
+				{
+					if (strict)
+						throw new Error("Accessor '" + accessor.@name + "' is not exist in json-string!");
+				}
 			}
 			
 			return returnObject;

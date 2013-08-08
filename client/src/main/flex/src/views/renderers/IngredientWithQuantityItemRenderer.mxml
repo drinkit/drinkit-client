@@ -2,8 +2,10 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				autoDrawBackground="true" height="30">
-	
+				autoDrawBackground="true" width="100%" height="30">
+	<s:layout>
+		<s:HorizontalLayout paddingLeft="5" paddingRight="5" gap="5" />
+	</s:layout>
 	<fx:Script>
 		<![CDATA[
 			import models.IngredientsModel;
@@ -14,14 +16,15 @@
 				
 				if (data)
 				{
-					ingrName.text = IngredientsModel.instance.getIngredientNameById(data.id);
+					ingrName.text = IngredientsModel.instance.getIngredientNameById(data.ingredientId);
 					ingrQuantity.text = data.quantity + " мл";
 				}
 			}
 			
+			
 		]]>
 	</fx:Script>
 	
-	<s:Label id="ingrName" left="5" height="100%" verticalAlign="middle" />
-	<s:Label id="ingrQuantity" right="5" height="100%" verticalAlign="middle" />
+	<s:Label id="ingrName" left="5" width="70%" textAlign="left" height="100%" verticalAlign="middle"/>
+	<s:Label id="ingrQuantity" right="5" width="30%" textAlign="right" height="100%" verticalAlign="middle"/>
 </s:ItemRenderer>

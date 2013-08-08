@@ -41,11 +41,14 @@
 			{
 				_model = _controller.model;
 				//
-				buildTags(_model.cocktailTypeId, _model.options);
+				cocktailName.text = _model.name;
+				cocktailDescription.text = _model.description;
+				buildTags(_model.cocktailTypeId, _model.optionIds);
 			}
 			
 			private function buildTags(cocktailType:int, options:Array):void
 			{
+				tagsContainer.removeAllElements();
 				tagsContainer.addElement(TagsModel.instance.getTagByIdAndType(cocktailType, TagsModel.COCKTAIL_TYPE_TAG, 64));
 				
 				if (options)
@@ -66,14 +69,18 @@
 
 	<s:BitmapImage width="384" height="512" source="{_model.bigImage}" />
 	<s:VGroup width="100%">
-		<s:Label width="100%" text="{_model.name}" fontSize="18" textAlign="center" />
-		<s:TextArea text="{_model.description}" width="100%" height="100%" editable="false" />
+		<s:Label id="cocktailName" width="100%" fontSize="18" textAlign="center" />
+		<s:TextArea id="cocktailDescription" width="100%" height="100%" editable="false" />
 	</s:VGroup>
-	<s:VGroup>
-		<components:GroupBox title="Ингридиенты">
-			<s:List itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" dataProvider="{_model.ingredientWithQuantitiesProvider}" width="100%" height="100%" />
+	<s:VGroup width="200">
+		<components:GroupBox title="Ингридиенты" width="100%" >
+			<s:List itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" width="100%" dataProvider="{_model.ingredientWithQuantitiesProvider}">
+				<s:layout>
+					<s:VerticalLayout requestedMinRowCount="1" />
+				</s:layout>
+			</s:List>
 		</components:GroupBox>
-		<s:TileGroup id="tagsContainer">
+		<s:TileGroup id="tagsContainer" width="100%" horizontalGap="2" paddingLeft="0" paddingRight="0">
 		</s:TileGroup>
 	</s:VGroup>
 </s:Group>
