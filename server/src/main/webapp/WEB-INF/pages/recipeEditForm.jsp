@@ -9,7 +9,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/kendo.web.min.js"></script>
     <title>Add/Edit Recipe</title>
 
-<body>
+<body class="k-content">
 <div id="main">
     <%--<form:form action="manager/saveRecipe">--%>
 
@@ -19,24 +19,36 @@
 
     <%--</form:form>--%>
 
-    <form>
-        <li><label>Name:<input type="text" value="${recipe.name}"/></label></li>
-        <li><label>Description:<textarea>${recipe.description}</textarea></label></li>
-        <li><label>CocktailType:
-            <select id="cocktailType">
-                <c:forEach items="${cocktailTypes}" var="type">
-                    <option>${type.name}</option>
-                </c:forEach>
-            </select>
-        </label></li>
-
+    <form:form action="saveRecipe.html" method="POST">
+        <ul class="forms">
+            <li><label>Name: </label></li>
+            <li><form:input path="name" type="text" class="k-textbox"/></li>
+            <li><label>Description:</label></li>
+            <li><form:textarea path="description" class="k-textbox"/></li>
+            <li><label>CocktailType:</label></li>
+            <li><form:select id="cocktailType" path="cocktailType" items="${cocktailTypes}" itemLabel="name"/></li>
+            <li><input type="submit" name="Save"/></li>
         </ul>
+    </form:form>
+    <style scoped>
+        .forms {
+            float: left;
+        }
 
-    </form>
+        .forms li {
+            margin-bottom: 5px;
+            list-style: none;
+        }
+
+        .forms li > * {
+            width: 200px;
+        }
+    </style>
 </div>
 
 <script>
     $("#cocktailType").kendoDropDownList();
 </script>
+
 </body>
 </html>
