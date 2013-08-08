@@ -13,9 +13,11 @@
 			
 			import models.CocktailModel;
 			import models.MainModel;
+			import models.TagsModel;
 			
 			import mx.events.FlexEvent;
 			
+			import spark.components.Image;
 			import spark.components.NavigatorContent;
 
 			[Bindable]
@@ -27,6 +29,7 @@
 			protected function group1_showHandler(event:FlexEvent):void
 			{
 				_controller = new CocktailController(Number(MainController.instance.viewData));
+				_controller.addEventListener(CocktailController.COCKTAIL_DATA_LOADED, onDataLoaded);
 			}
 			
 			protected function group1_addHandler(event:FlexEvent):void
@@ -34,10 +37,28 @@
 				NavigatorContent(owner).addEventListener(FlexEvent.SHOW, group1_showHandler);
 			}
 			
+			private function onDataLoaded(event:Event):void
+			{
+				_model = _controller.model;
+				//
+				buildTags(_model.cocktailTypeId, _model.options);
+			}
+			
+			private function buildTags(cocktailType:int, options:Array):void
+			{
+				tagsContainer.addElement(TagsModel.instance.getTagByIdAndType(cocktailType, TagsModel.COCKTAIL_TYPE_TAG, 64));
+				
+				if (options)
+				{
+					for (var i:uint = 0; i < options.length; i++)
+					{
+						tagsContainer.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG, 64));
+					}
+				}				
+			}
+			
 		]]>
 	</fx:Script>
-	
-	<fx:Binding source="_controller.model" destination="_model" />
 	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
@@ -50,7 +71,7 @@
 	</s:VGroup>
 	<s:VGroup>
 		<components:GroupBox title="Ингридиенты">
-			<s:List itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" dataProvider="{_model.ingredientWithQuantities}" width="100%" height="100%" />
+			<s:List itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" dataProvider="{_model.ingredientWithQuantitiesProvider}" width="100%" height="100%" />
 		</components:GroupBox>
 		<s:TileGroup id="tagsContainer">
 		</s:TileGroup>

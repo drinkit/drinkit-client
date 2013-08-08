@@ -3,6 +3,7 @@ package controllers
 	import controllers.supportClasses.Services;
 	
 	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	import flash.net.URLVariables;
 	
 	import models.CocktailModel;
@@ -12,8 +13,14 @@ package controllers
 	import utils.JSONInstantiator;
 	import utils.ServiceUtil;
 
-	public class CocktailController
+	/**
+	 * @eventType controllers.CocktailController.COCKTAIL_DATA_LOADED
+	 */
+	[Event(name="cocktailDataLoaded", type="flash.events.Event")]
+	public class CocktailController extends EventDispatcher
 	{
+		public static const COCKTAIL_DATA_LOADED:String = "cocktailDataLoaded";
+		
 		[Bindable]
 		public var model:CocktailModel;
 		
@@ -32,6 +39,7 @@ package controllers
 		private function onCocktailInfoLoad(event:Event):void
 		{
 			model = JSONInstantiator.createInstance(event.target.data, CocktailModel, false) as CocktailModel;
+			dispatchEvent(new Event(COCKTAIL_DATA_LOADED));
 		}
 	}
 }
