@@ -10,4 +10,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface JsonMixin {
     Class<?> value();
+
+    Class<?> targetClass() default Object.class;
 }

@@ -25,8 +25,11 @@ public class MixinAspect {
         Class<?> mixin = annotation.value();
         ObjectMapper mapper = new ObjectMapper();
         MethodSignature msig = (MethodSignature) joinPoint.getSignature();
-        mapper.addMixInAnnotations(msig.getMethod().getReturnType(), mixin);
-        LOGGER.info("Added mixin {} into {}", mixin.getName(), msig.getMethod());
+        Class<?> targetClass = annotation.targetClass().equals(Object.class) ? msig.getMethod().getReturnType() :
+                annotation.targetClass();
+        mapper.addMixInAnnotations(targetClass, mixin);
+        LOGGER.info("Added mixin: '{}', targetClass: '{}', method: '{}'", mixin.getSimpleName(), targetClass.getSimpleName(),
+                msig.getMethod().getName());
         try {
             mapper.writeValue(WebContext.getInstance().getResponse().getOutputStream(), joinPoint.proceed());
         } catch (Throwable ex) {

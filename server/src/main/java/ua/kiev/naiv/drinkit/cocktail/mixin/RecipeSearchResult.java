@@ -16,7 +16,7 @@ public abstract class RecipeSearchResult {
     @JsonIgnore
     private byte[] image;
     @JsonIgnore
-    private Set<IngredientWithQuantity> ingredientWithQuantities;
+    private Set<IngredientWithQuantity> ingredientsWithQuantities;
     @JsonIgnore
     private String description;
 
