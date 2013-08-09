@@ -1,5 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +16,8 @@ import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 @Controller
 @RequestMapping("manager")
 public class ManagerController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ManagerController.class);
 
     @Autowired
     CocktailService cocktailService;
@@ -33,6 +37,7 @@ public class ManagerController {
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("command", cocktailService.getById(1));
         modelMap.addAttribute("cocktailTypes", cocktailService.getCocktailTypes());
+        LOGGER.info("recipeEditForm opened");
         return new ModelAndView("recipeEditForm", modelMap);
     }
 

@@ -50,4 +50,24 @@ public class CocktailIngredientId implements Serializable {
     private void setId(int id) {
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CocktailIngredientId that = (CocktailIngredientId) o;
+
+        if (!ingredient.equals(that.ingredient)) return false;
+        if (!recipe.equals(that.recipe)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = recipe.hashCode();
+        result = 31 * result + ingredient.hashCode();
+        return result;
+    }
 }
