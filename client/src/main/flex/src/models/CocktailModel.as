@@ -5,18 +5,22 @@ package models
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	
+	import mx.collections.ArrayCollection;
 	import mx.utils.Base64Decoder;
 
 	public class CocktailModel extends EventDispatcher
 	{
 		public var id:Number;
-		[Bindable]
 		public var name:String;
-		[Bindable]
 		public var description:String;
 		public var cocktailTypeId:int;
 		public var ingredientWithQuantities:Array;
-		public var options:Array;
+		public var optionIds:Array;
+		
+		public function get ingredientWithQuantitiesProvider():ArrayCollection
+		{
+			return new ArrayCollection(ingredientWithQuantities);
+		}
 		
 		private var _image:Bitmap;
 		
