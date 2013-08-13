@@ -2,8 +2,11 @@ package controllers
 {
 	import controllers.supportClasses.Services;
 	
+	import flash.desktop.Clipboard;
+	import flash.desktop.ClipboardFormats;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import flash.external.ExternalInterface;
 	import flash.net.URLVariables;
 	
 	import models.CocktailModel;
@@ -40,6 +43,17 @@ package controllers
 		{
 			model = JSONInstantiator.createInstance(event.target.data, CocktailModel, false) as CocktailModel;
 			dispatchEvent(new Event(COCKTAIL_DATA_LOADED));
+		}
+		
+		private function getCocktailURL():String
+		{
+			var startURL:String = ExternalInterface.call("window.location.origin + window.location.pathname");
+			return startURL + "?id=" + model.id; 
+		}
+		
+		public function saveCocktailURLtoClipboard():void
+		{
+			Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT, getCocktailURL());
 		}
 	}
 }

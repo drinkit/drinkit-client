@@ -8,6 +8,16 @@
 	
 	<fx:Script>
 		<![CDATA[
+			protected function onCreateLinkClick(event:MouseEvent):void
+			{
+				_controller.saveCocktailURLtoClipboard();
+			}
+		]]>
+	</fx:Script>
+	
+	
+	<fx:Script>
+		<![CDATA[
 			import controllers.CocktailController;
 			import controllers.MainController;
 			
@@ -41,6 +51,7 @@
 			{
 				_model = _controller.model;
 				//
+				photo.source = _model.bigImage;
 				cocktailName.text = _model.name;
 				cocktailDescription.text = _model.description;
 				buildTags(_model.cocktailTypeId, _model.optionIds);
@@ -67,14 +78,15 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 
-	<s:BitmapImage width="384" height="512" source="{_model.bigImage}" />
+	<s:BitmapImage id="photo" width="384" height="512" />
 	<s:VGroup width="100%">
 		<s:Label id="cocktailName" width="100%" fontSize="18" textAlign="center" />
 		<s:TextArea id="cocktailDescription" width="100%" height="100%" editable="false" />
 	</s:VGroup>
 	<s:VGroup width="200">
-		<components:GroupBox title="Ингридиенты" width="100%" >
-			<s:List itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" width="100%" dataProvider="{_model.ingredientWithQuantitiesProvider}">
+		<components:GroupBox title="Ингридиенты" width="100%">
+			<s:List width="100%"
+					itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" dataProvider="{_model.ingredientWithQuantitiesProvider}">
 				<s:layout>
 					<s:VerticalLayout requestedMinRowCount="1" />
 				</s:layout>
