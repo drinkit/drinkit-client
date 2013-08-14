@@ -44,8 +44,6 @@ package models
 		private function addTagToCache(image:Bitmap, title:String, id:Number, type:String):Image
 		{
 			var newTag:Image = new Image();
-			newTag.smooth = true;
-			newTag.cacheAsBitmap = true;
 			newTag.source = image;
 			newTag.toolTip = title;
 			tagCache[type + id] = newTag;
@@ -54,7 +52,12 @@ package models
 		
 		public function getTagByIdAndType(id:Number, type:String, size:Number):Image
 		{
-			var tag:Image = tagCache[type + id];
+			var cachedTag:Image = tagCache[type + id];
+			var tag:Image = new Image();
+			tag.toolTip = cachedTag.toolTip;
+			tag.source = cachedTag.source;
+			tag.smooth = true;
+			tag.cacheAsBitmap = true;
 			
 			if (tag)
 			{

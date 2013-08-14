@@ -4,7 +4,7 @@
          xmlns:mx="library://ns.adobe.com/flex/mx" width="1024" height="768" xmlns:components="components.*"
          creationComplete="creationCompleteHandler(event)">
     <s:layout>
-        <s:VerticalLayout/>
+        <s:HorizontalLayout/>
     </s:layout>
     <fx:Script>
 		<![CDATA[
@@ -103,8 +103,8 @@
 	</fx:Script>
     <fx:Declarations>        
     </fx:Declarations>
-    <s:HGroup id="searchPanel" width="100%" height="200">
-        <s:VGroup width="210" height="100%" paddingLeft="5" paddingRight="5">
+    <s:VGroup id="searchPanel" width="210" height="100%">
+        <s:VGroup width="100%" height="100%" paddingLeft="5" paddingRight="5">
             <s:HGroup id="cocktailTypesGroup" width="192" height="64" gap="3">
                 <s:ToggleButton width="64" height="64" name="{CocktailTypes.LONG_DRINK}"
                                 change="cocktailTypeChangeHandler(event)" toolTip="Long drink" cornerRadius="10"/>
@@ -117,7 +117,7 @@
                                 icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Shooter"
                                 cornerRadius="10"/>
             </s:HGroup>
-            <s:TileGroup id="optionsGroup" width="204" height="48" horizontalGap="2" verticalGap="2">
+            <s:TileGroup id="optionsGroup" width="204" horizontalGap="2" verticalGap="2">
                 <s:ToggleButton width="48" height="48" name="{OptionParameters.BURNING}"
                                 change="optionChangeHandler(event)" toolTip="Горящий" cornerRadius="10"/>
                 <s:ToggleButton width="48" height="48" name="{OptionParameters.FLACKY}"
@@ -133,36 +133,37 @@
                                 change="optionChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
                                 toolTip="Утвержден IBA" cornerRadius="10"/>
             </s:TileGroup>
+			<s:Line width="100%" yFrom="0" yTo="0">
+				<s:stroke>
+					<s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}"/>
+				</s:stroke>
+			</s:Line>
+			<s:VGroup width="100%" height="100%">
+				<flextras:AutoCompleteComboBoxLite id="ingrChoose" itemRenderer="components.renderers.AutoCompleteRenderer"
+												   prompt="Добавить ингредиент..." width="200" labelField="name"
+												   dataProvider="{_model.ingredientsList}"
+												   change="combobox1_changeHandler(event)" filterFunction="filterCBList"/>
+				<s:List minWidth="200" width="100%" height="100%" borderVisible="false" labelField="name"
+						itemRenderer="views.renderers.IngredientItemRenderer"
+						dataProvider="{_model.selectedIngredientsList}">
+					<s:layout>
+						<components:FlowLayout clipAndEnableScrolling="false" paddingLeft="5" paddingBottom="5" paddingRight="5" paddingTop="5"/>
+					</s:layout>
+				</s:List>
+			</s:VGroup>
         </s:VGroup>
-        <s:Line height="100%" xFrom="0" xTo="0">
-            <s:stroke>
-                <s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}"/>
-            </s:stroke>
-        </s:Line>
-        <s:VGroup width="100%" height="100%">
-            <flextras:AutoCompleteComboBoxLite id="ingrChoose" itemRenderer="components.renderers.AutoCompleteRenderer"
-                                               prompt="Добавить ингредиент..." width="200" labelField="name"
-                                               dataProvider="{_model.ingredientsList}"
-                                               change="combobox1_changeHandler(event)" filterFunction="filterCBList"/>
-            <s:List minWidth="200" width="100%" height="100%" borderVisible="false" labelField="name"
-                    itemRenderer="views.renderers.IngredientItemRenderer"
-                    dataProvider="{_model.selectedIngredientsList}">
-                <s:layout>
-                    <components:FlowLayout clipAndEnableScrolling="false"/>
-                </s:layout>
-            </s:List>
-        </s:VGroup>
-    </s:HGroup>
-    <s:Line width="100%" yFrom="0" yTo="0">
-        <s:stroke>
-            <s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}"/>
-        </s:stroke>
-    </s:Line>
-    <s:List id="recipesList" borderVisible="false" width="100%" height="100%" change="selectCocktailHandler(event)"
-            itemRenderer="views.renderers.CocktailItemRenderer" dataProvider="{_model.cocktailsList}">
-        <s:layout>
-            <s:VerticalLayout variableRowHeight="false" paddingBottom="5" paddingLeft="5" paddingRight="5"
-                              paddingTop="5"/>
-        </s:layout>
-    </s:List>
+        
+    </s:VGroup>
+	<s:Line height="100%" xFrom="0" xTo="0">
+		<s:stroke>
+			<s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}"/>
+		</s:stroke>
+	</s:Line>
+	<s:List id="recipesList" borderVisible="false" width="100%" height="100%" change="selectCocktailHandler(event)"
+			itemRenderer="views.renderers.CocktailItemRenderer" dataProvider="{_model.cocktailsList}">
+		<s:layout>
+			<s:VerticalLayout variableRowHeight="false" paddingBottom="5" paddingLeft="5" paddingRight="5"
+							  paddingTop="5"/>
+		</s:layout>
+	</s:List>
 </s:Group>

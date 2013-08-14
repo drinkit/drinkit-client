@@ -13,6 +13,64 @@ public class FlowLayout extends LayoutBase
     //
     //---------------------------------------------------------------
     
+	
+	private var _paddingLeft:Number = 0;
+
+	public function set paddingLeft(value:Number):void
+	{
+		_paddingLeft = value;
+		// We must invalidate the layout
+		var layoutTarget:GroupBase = target;
+		if (layoutTarget)
+		{
+			layoutTarget.invalidateSize();
+			layoutTarget.invalidateDisplayList();
+		}
+	}
+
+	private var _paddingRight:Number = 0;
+
+	public function set paddingRight(value:Number):void
+	{
+		_paddingRight = value;
+		// We must invalidate the layout
+		var layoutTarget:GroupBase = target;
+		if (layoutTarget)
+		{
+			layoutTarget.invalidateSize();
+			layoutTarget.invalidateDisplayList();
+		}
+	}
+
+	private var _paddingTop:Number = 0;
+
+	public function set paddingTop(value:Number):void
+	{
+		_paddingTop = value;
+		// We must invalidate the layout
+		var layoutTarget:GroupBase = target;
+		if (layoutTarget)
+		{
+			layoutTarget.invalidateSize();
+			layoutTarget.invalidateDisplayList();
+		}		
+	}
+
+	private var _paddingBottom:Number = 0;
+
+	public function set paddingBottom(value:Number):void
+	{
+		_paddingBottom = value;
+		// We must invalidate the layout
+		var layoutTarget:GroupBase = target;
+		if (layoutTarget)
+		{
+			layoutTarget.invalidateSize();
+			layoutTarget.invalidateDisplayList();
+		}
+	}
+
+	
     //---------------------------------------------------------------
     //  horizontalGap
     //---------------------------------------------------------------
@@ -58,8 +116,8 @@ public class FlowLayout extends LayoutBase
     
     override public function measure():void
     {
-        var totalWidth:Number = 0;
-        var totalHeight:Number = 0;
+        var totalWidth:Number = _paddingLeft + _paddingRight;
+        var totalHeight:Number = _paddingBottom + _paddingTop;
 
         // loop through the elements
         var layoutTarget:GroupBase = target;
@@ -104,8 +162,8 @@ public class FlowLayout extends LayoutBase
                                                containerHeight:Number):void
     {
         // The position for the current element
-        var x:Number = 0;
-        var y:Number = 0;
+        var x:Number = _paddingLeft;
+        var y:Number = _paddingTop;
         var maxWidth:Number = 0;
         var maxHeight:Number = 0;
         
@@ -132,10 +190,10 @@ public class FlowLayout extends LayoutBase
             
             // Would the element fit on this line, or should we move
             // to the next line?
-            if (x + elementWidth > containerWidth)
+            if (x + elementWidth > containerWidth - _paddingRight)
             {
                 // Start from the left side
-                x = 0;
+                x = _paddingLeft;
                 
                 // Move down by elementHeight, we're assuming all 
                 // elements are of equal height
