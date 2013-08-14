@@ -1,4 +1,4 @@
-Drinkit(my-cocktails)
+Drinkit
 ============
 This project is being developed for providing the opportunity "smart" cocktail recipe search.  
 The client part is developed on the Flash, Flex SDK.  
@@ -15,4 +15,4 @@ The server component uses Java, MySQL, Rest services.
 ##Client side technology stack:
 * Flex 4.6
 * Flextras
-* FlexUnit
+* FlexUnit4
