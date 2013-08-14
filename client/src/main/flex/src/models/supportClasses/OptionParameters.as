@@ -7,5 +7,7 @@ package models.supportClasses
 		public static const CHECKED:uint = 3;
 		public static const IBA:uint = 4;
 		public static const FLACKY:uint = 5;
+		
+		public static const AVAILABLE_OPTIONS:Array = [BURNING, WITH_ICE, CHECKED, IBA, FLACKY];
 	}
 }

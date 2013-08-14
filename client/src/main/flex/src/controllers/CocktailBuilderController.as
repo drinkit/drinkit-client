@@ -8,6 +8,7 @@ package controllers
 	
 	import models.CocktailBuilderModel;
 	import models.supportClasses.CocktailMini;
+	import models.supportClasses.CocktailTypes;
 	import models.supportClasses.Ingredient;
 	import models.supportClasses.OptionParameters;
 	
@@ -32,23 +33,37 @@ package controllers
 		
 		public function toggleCocktailType(id:uint, selected:Boolean):void
 		{
+			if (CocktailTypes.AVAILABLE_TYPES.indexOf(id) == -1)
+				return;
+			
 			if (selected)
-				_model.selectedCocktailTypes.push(id);
+			{
+				if (_model.selectedCocktailTypes.indexOf(id) == -1)
+					_model.selectedCocktailTypes.push(id);
+			}				
 			else
 			{
 				var index:uint = _model.selectedCocktailTypes.indexOf(id);
-				_model.selectedCocktailTypes.splice(index, 1);
+				if (index >= 0)
+					_model.selectedCocktailTypes.splice(index, 1);
 			}
 		}
 		
 		public function toggleOption(id:uint, selected:Boolean):void
 		{
+			if (OptionParameters.AVAILABLE_OPTIONS.indexOf(id) == -1)
+				return;
+			
 			if (selected)
-				_model.selectedoptions.push(id);
+			{
+				if (_model.selectedOptions.indexOf(id) == -1)
+					_model.selectedOptions.push(id);
+			}				
 			else
 			{
-				var index:uint = _model.selectedoptions.indexOf(id);
-				_model.selectedoptions.splice(index, 1);
+				var index:uint = _model.selectedOptions.indexOf(id);
+				if (index >= 0)
+					_model.selectedOptions.splice(index, 1);
 			}
 		}
 		
@@ -58,7 +73,7 @@ package controllers
 			var criteria:SearchParameters = new SearchParameters();
 			criteria.cocktailTypes = _model.selectedCocktailTypes;
 			criteria.ingredients = _model.selectedIngredients;
-			criteria.options = _model.selectedoptions;
+			criteria.options = _model.selectedOptions;
 			//
 			var vars:URLVariables = new URLVariables();
 			vars.criteria = criteria.toString();

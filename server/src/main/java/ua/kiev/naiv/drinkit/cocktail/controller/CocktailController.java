@@ -37,7 +37,6 @@ public class CocktailController {
         return cocktailService.getById(id);
     }
 
-    @JsonMixin(Criteria.class)
     @RequestMapping("/getIngredients")
     @ResponseBody
     public List<Ingredient> getIngredients() {
@@ -46,7 +45,7 @@ public class CocktailController {
 
     @RequestMapping("/search")
     @ResponseBody
-    @JsonMixin(RecipeSearchResult.class)
+    @JsonMixin(value = RecipeSearchResult.class, targetClass = Recipe.class)
     public List<Recipe> searchRecipes(@RequestParam(value = "criteria") String json) {
         ObjectMapper objectMapper = new ObjectMapper();
         Criteria criteria = null;
