@@ -54,6 +54,9 @@ package models
 		
 		public function getTagByIdAndType(id:Number, type:String, size:Number):Image
 		{
+			if (size < 1)
+				return null;
+			
 			var tag:Image = tagCache[type + id];
 			
 			if (tag)
