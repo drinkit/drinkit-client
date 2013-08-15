@@ -9,12 +9,9 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 	<fx:Script>
 		<![CDATA[
 			import tests.CocktailBuilderControllerTest;
-			import tests.DrinkItTests;
 			import tests.TagsModelTest;
 			
 			private var tests_TagsModelTest_obj:tests.TagsModelTest;
-			
-			private var tests_DrinkItTests_obj:tests.DrinkItTests;
 			
 			private var tests_CocktailBuilderControllerTest_obj:tests.CocktailBuilderControllerTest;
 		]]>

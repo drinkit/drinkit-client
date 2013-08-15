@@ -7,6 +7,7 @@ package controllers
 	import models.IngredientsModel;
 	import models.MainModel;
 	import models.supportClasses.Ingredient;
+	import models.supportClasses.ViewInformation;
 	
 	import mx.collections.ArrayCollection;
 	import mx.events.BrowserChangeEvent;
@@ -42,20 +43,23 @@ package controllers
 			_model = value;
 		}
 		
-		public function changeView(view:int, data:Object, manual:Boolean = true):void
+		public function changeView(view:ViewInformation, data:Object, manual:Boolean = true):void
 		{
-			if (manual)
-			{
-				_model.currentView = view;
-				_model.viewData = data;
-			}
+			_model.currentView = view;
+			_model.viewData = data;
 			
-			var fragments:String = "panel=" + view;
+			var fragments:String = "panel=" + view.id;
 			
 			if (view == MainModel.COCKTAIL_VIEW)
-				fragments += "&id=" + data;
+				fragments += ";id=" + data;
 			
 			BrowserManager.getInstance().setFragment(fragments);
+			setTitle(view.title);
+		}
+		
+		public function setTitle(value:String):void
+		{
+			BrowserManager.getInstance().setTitle("drinkIt - " + value);
 		}
 		
 		public function get viewData():Object
@@ -89,14 +93,34 @@ package controllers
 		{
 			var fragments:Object = URLUtil.stringToObject(BrowserManager.getInstance().fragment);
 			
-			if (fragments.hasOwnProperty("panel") && fragments.panel == MainModel.COCKTAIL_VIEW)
-				MainController.instance.changeView(MainModel.COCKTAIL_VIEW, fragments.id);
+			if (!fragments.hasOwnProperty("panel"))
+			{
+				return;
+			}
+			
+			switch (fragments.panel)
+			{
+				case MainModel.BUILDER_VIEW:
+				{
+					MainController.instance.changeView(fragments.panel, null, true);
+					break;
+				}
+				case MainModel.COCKTAIL_VIEW:
+				{
+					if (fragments.hasOwnProperty("id"))
+						MainController.instance.changeView(fragments.panel, fragments.id, true);
+					else
+						MainController.instance.changeView(MainModel.BUILDER_VIEW, null, true);
+					
+					break;
+				}
+			}
 		}
 		
 		public function initBrowserEngine():void
 		{
 			BrowserManager.getInstance().addEventListener(BrowserChangeEvent.BROWSER_URL_CHANGE, onURLChange);
-			BrowserManager.getInstance().init("", "drinkit");
+			BrowserManager.getInstance().init("", "drinkIt - " + MainModel.BUILDER_VIEW.title);
 			checkFragments();			
 		}
 		

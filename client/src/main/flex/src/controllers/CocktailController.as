@@ -44,16 +44,5 @@ package controllers
 			model = JSONInstantiator.createInstance(event.target.data, CocktailModel, false) as CocktailModel;
 			dispatchEvent(new Event(COCKTAIL_DATA_LOADED));
 		}
-		
-		private function getCocktailURL():String
-		{
-			var startURL:String = ExternalInterface.call("window.location.origin + window.location.pathname");
-			return startURL + "?id=" + model.id; 
-		}
-		
-		public function saveCocktailURLtoClipboard():void
-		{
-			Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT, getCocktailURL());
-		}
 	}
 }

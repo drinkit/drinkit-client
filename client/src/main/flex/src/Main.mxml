@@ -52,21 +52,23 @@
 				}
 			}
 			
-			protected function viewstack1_changeHandler(event:IndexChangedEvent):void
+			protected function menu_changeHandler(event:IndexChangeEvent):void
 			{
-				MainController.instance.changeView(event.newIndex, null, false);
+				MainController.instance.changeView(MainModel.VIEWS[event.newIndex], null, false);
 			}
+
 			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		
 	</fx:Declarations>
-	<fx:Binding twoWay="true" source="_model.currentView" destination="menu.selectedIndex" />
+	
+	<fx:Binding twoWay="false" source="_model.currentView.id" destination="menu.selectedIndex" />	
 	
 	<components:Logo />
-	<s:TabBar id="menu" width="100%" height="30" dataProvider="{viewstack1}" />
-	<mx:ViewStack id="viewstack1" width="100%" height="100%" change="viewstack1_changeHandler(event)">
+	<s:TabBar id="menu" width="100%" height="30" dataProvider="{viewstack1}" change="menu_changeHandler(event)" />
+	<mx:ViewStack id="viewstack1" width="100%" height="100%" >
 		<s:NavigatorContent width="100%" height="100%" label="Конструктор коктейлей">
 			<views:CocktailBuilderView width="100%" height="100%" />
 		</s:NavigatorContent>

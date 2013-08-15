@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testrun name="" >
 <testsuite  name="Default Test Suite" project="drinkIt">
-<testsuite name="tests:DrinkItTests" type="testsuiteclass"/>
+<testsuite name="tests:CocktailBuilderControllerTest" type="testsuiteclass"/>
+<testsuite name="tests:TagsModelTest" type="testsuiteclass"/>
 </testsuite>
-<portNumber value="49486" />
+<portNumber value="50586" />
 </testrun>

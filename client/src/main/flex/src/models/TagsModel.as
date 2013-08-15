@@ -52,15 +52,20 @@ package models
 		
 		public function getTagByIdAndType(id:Number, type:String, size:Number):Image
 		{
-			var cachedTag:Image = tagCache[type + id];
-			var tag:Image = new Image();
-			tag.toolTip = cachedTag.toolTip;
-			tag.source = cachedTag.source;
-			tag.smooth = true;
-			tag.cacheAsBitmap = true;
+			var tag:Image;
 			
-			if (tag)
+			if (size <= 0)
+				return tag;
+			
+			var cachedTag:Image = tagCache[type + id];			
+			
+			if (cachedTag)
 			{
+				tag = new Image();
+				tag.toolTip = cachedTag.toolTip;
+				tag.source = cachedTag.source;
+				tag.smooth = true;
+				tag.cacheAsBitmap = true;
 				tag.width = size;
 				tag.height = size;
 			}
