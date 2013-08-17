@@ -100,12 +100,12 @@ package controllers
 			
 			switch (fragments.panel)
 			{
-				case MainModel.BUILDER_VIEW:
+				case MainModel.BUILDER_VIEW.id:
 				{
 					MainController.instance.changeView(fragments.panel, null, true);
 					break;
 				}
-				case MainModel.COCKTAIL_VIEW:
+				case MainModel.COCKTAIL_VIEW.id:
 				{
 					if (fragments.hasOwnProperty("id"))
 						MainController.instance.changeView(fragments.panel, fragments.id, true);

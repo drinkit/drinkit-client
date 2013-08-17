@@ -8,12 +8,15 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
 	<fx:Script>
 		<![CDATA[
+			import tests.MainControllerTest;
 			import tests.CocktailBuilderControllerTest;
 			import tests.TagsModelTest;
 			
 			private var tests_TagsModelTest_obj:tests.TagsModelTest;
 			
 			private var tests_CocktailBuilderControllerTest_obj:tests.CocktailBuilderControllerTest;
+			
+			private var tests_MainControllerTest_obj:tests.MainControllerTest;
 		]]>
 	</fx:Script>
 	<fx:Declarations>

@@ -9,6 +9,7 @@
 			   minWidth="955" minHeight="600" creationComplete="onCreationComplete()">
 	<fx:Script>
 		<![CDATA[
+			import tests.MainControllerTest;
 			import tests.TagsModelTest;
 			import tests.CocktailBuilderControllerTest;
 			
@@ -17,6 +18,7 @@
 				var testsToRun:Array = new Array();
 				testsToRun.push(tests.CocktailBuilderControllerTest);
 				testsToRun.push(tests.TagsModelTest);
+				testsToRun.push(tests.MainControllerTest);
 				return testsToRun;
 			}
 			
@@ -31,6 +33,6 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<flexui:FlexUnitTestRunnerUI id="testRunner" portNumber="50586">
+	<flexui:FlexUnitTestRunnerUI id="testRunner" portNumber="8765">
 	</flexui:FlexUnitTestRunnerUI>
 </s:Application>

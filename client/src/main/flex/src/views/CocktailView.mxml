@@ -11,6 +11,8 @@
 			import controllers.CocktailController;
 			import controllers.MainController;
 			
+			import design.DesignModel;
+			
 			import models.CocktailModel;
 			import models.MainModel;
 			import models.TagsModel;
@@ -71,10 +73,10 @@
 	<s:BitmapImage id="photo" width="384" height="512" />
 	<s:VGroup width="100%">
 		<s:Label id="cocktailName" width="100%" fontSize="22" textAlign="center" />
-		<s:TextArea id="cocktailDescription" width="100%" height="100%" editable="false" />
+		<s:TextArea id="cocktailDescription" contentBackgroundAlpha="0" borderColor="{DesignModel.ORANGE_BEACH}" width="100%" height="100%" editable="false" />
 	</s:VGroup>
 	<s:VGroup width="384">
-		<components:GroupBox title="Ингридиенты" width="100%" >
+		<components:GroupBox title="Ингридиенты" width="100%" borderColor="{DesignModel.ORANGE_BEACH}">
 			<s:List borderVisible="false" itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" width="100%" dataProvider="{_model.ingredientWithQuantitiesProvider}">
 				<s:layout>
 					<s:VerticalLayout requestedMinRowCount="1" />
