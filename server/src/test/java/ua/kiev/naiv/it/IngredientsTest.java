@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.model;
+package ua.kiev.naiv.it;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import junit.framework.Assert;
@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ua.kiev.naiv.drinkit.cocktail.TestHelper;
+import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 import ua.kiev.naiv.drinkit.springconfig.AppConfig;
 

@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail;
+package ua.kiev.naiv.it;
 
 import java.io.File;
 import java.io.IOException;
