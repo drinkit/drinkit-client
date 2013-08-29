@@ -14,6 +14,7 @@ public class SearchSpecification {
         return new Specification<Recipe>() {
             @Override
             public Predicate toPredicate(Root<Recipe> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				query.distinct(true);
                 Predicate predicate = cb.conjunction();
 
                 if (criteria.getCocktailTypes().size() > 0) {

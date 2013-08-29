@@ -1,6 +1,8 @@
 package ua.kiev.naiv.drinkit.cocktail.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,35 +29,38 @@ import java.util.List;
 @RequestMapping(value = "cocktail")
 public class CocktailController {
 
-    @Autowired
-    CocktailService cocktailService;
+	private static final Logger LOGGER = LoggerFactory.getLogger(CocktailController.class);
 
-    @RequestMapping("/getById")
-    @ResponseBody
-    @JsonMixin(RecipeInfoResult.class)
-    public Recipe getById(@RequestParam int id) {
-        return cocktailService.getById(id);
-    }
+	@Autowired
+	CocktailService cocktailService;
 
-    @RequestMapping("/getIngredients")
-    @ResponseBody
-    public List<Ingredient> getIngredients() {
-        return cocktailService.getIngredients();
-    }
+	@RequestMapping("/getById")
+	@ResponseBody
+	@JsonMixin(RecipeInfoResult.class)
+	public Recipe getById(@RequestParam int id) {
+		return cocktailService.getById(id);
+	}
 
-    @RequestMapping("/search")
-    @ResponseBody
-    @JsonMixin(value = RecipeSearchResult.class, targetClass = Recipe.class)
-    public List<Recipe> searchRecipes(@RequestParam(value = "criteria") String json) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Criteria criteria = null;
-        try {
-            criteria = objectMapper.readValue(json, Criteria.class);
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+	@RequestMapping("/getIngredients")
+	@ResponseBody
+	public List<Ingredient> getIngredients() {
+		return cocktailService.getIngredients();
+	}
 
-        return cocktailService.findByCriteria(criteria);
-    }
+	@RequestMapping("/search")
+	@ResponseBody
+	@JsonMixin(value = RecipeSearchResult.class, targetClass = Recipe.class)
+	public List<Recipe> searchRecipes(@RequestParam(value = "criteria") String json) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		Criteria criteria = null;
+		try {
+			criteria = objectMapper.readValue(json, Criteria.class);
+		} catch (IOException e) {
+			LOGGER.error("Bad criteria", e);
+			return null;
+		}
+
+		return cocktailService.findByCriteria(criteria);
+	}
 
 }
