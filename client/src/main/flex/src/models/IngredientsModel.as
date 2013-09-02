@@ -3,7 +3,7 @@ package models
 	import models.supportClasses.Ingredient;
 	import utils.MockData;
 	import mx.collections.ArrayCollection;
-
+	
 	public class IngredientsModel
 	{
 		private static var _instance:IngredientsModel;

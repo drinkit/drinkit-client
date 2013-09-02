@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
-         xmlns:s="library://ns.adobe.com/flex/spark" xmlns:flextras="spark.flextras.autoCompleteComboBox.*"
-         xmlns:mx="library://ns.adobe.com/flex/mx" width="1024" height="768" xmlns:components="components.*"
-         creationComplete="creationCompleteHandler(event)">
-    <s:layout>
-        <s:HorizontalLayout/>
-    </s:layout>
-    <fx:Script>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:flextras="spark.flextras.autoCompleteComboBox.*"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1024" height="768" xmlns:components="components.*"
+		 creationComplete="creationCompleteHandler(event)">
+	<s:layout>
+		<s:HorizontalLayout />
+	</s:layout>
+	<fx:Script>
 		<![CDATA[
+
 			import controllers.CocktailBuilderController;
 			import controllers.MainController;
 			
@@ -19,16 +19,12 @@
 			import models.supportClasses.Ingredient;
 			import models.supportClasses.OptionParameters;
 			
-			import mx.collections.ArrayCollection;
-			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
 			
 			import spark.events.IndexChangeEvent;
 			
-			import utils.MockData;
-	
-	        [Bindable]
-	        private var _model:CocktailBuilderModel;
+			[Bindable]
+			private var _model:CocktailBuilderModel;
 			
 			public function get model():CocktailBuilderModel
 			{
@@ -36,58 +32,63 @@
 			}
 			
 			[Bindable]
-	        private var _controller:CocktailBuilderController;
+			private var _controller:CocktailBuilderController;
 			
 			public function get controller():CocktailBuilderController
 			{
 				return _controller;
 			}
-	
-	        protected function combobox1_changeHandler(event:IndexChangeEvent):void
-	        {
-	            if (event.newIndex >= 0)
-	            {
-	                _controller.addIngredientToQuery(ingrChoose.selectedItem);
-	                _controller.performSearch();
-	            }
-	
-	            ingrChoose.selectedIndex = -1;
-	            ingrChoose.validateProperties();
-	        }
-	
-	
-	        private function filterCBList(item:Object):Boolean
-	        {
-	            var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
-	            var ingr:Ingredient = Ingredient(item);
-	
-	            if (String(ingr.name).toLowerCase().search(inputValue) > -1 && (_model.selectedIngredientsList.getItemIndex(item) == -1))
-	                return true;
-	
-	            return false;
-	        }
-	
-	        protected function creationCompleteHandler(event:FlexEvent):void
-	        {
-	            _model = new CocktailBuilderModel();
-	            _controller = new CocktailBuilderController(_model);
-	            //
-	            MainController.instance.requestIngredients();
-	        }
-	
-	        protected function cocktailTypeChangeHandler(event:Event):void
-	        {
-	            _controller.toggleCocktailType(uint(event.currentTarget.name), event.currentTarget.selected);
-				_controller.performSearch();
-	        }
-	
-	        protected function optionChangeHandler(event:Event):void
-	        {
-	            _controller.toggleOption(uint(event.currentTarget.name), event.currentTarget.selected);
-				_controller.performSearch();
-	        }
+			
+			protected function combobox1_changeHandler(event:IndexChangeEvent):void
+			{
+				if (event.newIndex >= 0)
+				{
+					_controller.addIngredientToQuery(ingrChoose.selectedItem);
+				}
 				
+				ingrChoose.selectedIndex = -1;
+				ingrChoose.validateProperties();
+			}
+			
+			
+			private function filterCBList(item:Object):Boolean
+			{
+				var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
+				var ingr:Ingredient = Ingredient(item);
 				
+				if (String(ingr.name).toLowerCase().search(inputValue) > -1 && (_model.selectedIngredientsList.getItemIndex(item) == -1))
+					return true;
+				
+				return false;
+			}
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				_model = new CocktailBuilderModel();
+				_model.addEventListener(CocktailBuilderModel.SELECTED_INGREDIENTS_CHANGED, selectedIngredientsChangeHandler);
+				_controller = new CocktailBuilderController(_model);
+				//
+				MainController.instance.requestIngredients();
+			}
+			
+			private function selectedIngredientsChangeHandler(event:Event):void
+			{
+				_controller.performSearch();
+			}
+			
+			protected function cocktailTypeChangeHandler(event:Event):void
+			{
+				_controller.toggleCocktailType(uint(event.currentTarget.name), event.currentTarget.selected);
+				_controller.performSearch();
+			}
+			
+			protected function optionChangeHandler(event:Event):void
+			{
+				_controller.toggleOption(uint(event.currentTarget.name), event.currentTarget.selected);
+				_controller.performSearch();
+			}
+			
+			
 			protected function selectCocktailHandler(event:IndexChangeEvent):void
 			{
 				if (recipesList.selectedItem)
@@ -95,75 +96,65 @@
 					var cocktailId:Number = recipesList.selectedItem.id;
 					recipesList.selectedIndex = -1;
 					recipesList.validateProperties();
-					MainController.instance.changeView(MainModel.COCKTAIL_VIEW, cocktailId);					
-				}					
+					MainController.instance.changeView(MainModel.COCKTAIL_VIEW, cocktailId);
+				}
 			}
-			
+
 		]]>
 	</fx:Script>
-    <fx:Declarations>        
-    </fx:Declarations>
-    <s:VGroup id="searchPanel" width="210" height="100%">
-        <s:VGroup width="100%" height="100%" paddingLeft="5" paddingRight="5">
-            <s:HGroup id="cocktailTypesGroup" width="192" height="64" gap="3">
-                <s:ToggleButton width="64" height="64" name="{CocktailTypes.LONG_DRINK}"
-                                change="cocktailTypeChangeHandler(event)" toolTip="Long drink" cornerRadius="10"/>
-                <s:ToggleButton width="64" height="64" name="{CocktailTypes.SHORT_DRINK}"
-                                change="cocktailTypeChangeHandler(event)"
-                                icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Short drink"
-                                cornerRadius="10"/>
-                <s:ToggleButton width="64" height="64" name="{CocktailTypes.SHOOTER}"
-                                change="cocktailTypeChangeHandler(event)"
-                                icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Shooter"
-                                cornerRadius="10"/>
-            </s:HGroup>
-            <s:TileGroup id="optionsGroup" width="204" horizontalGap="2" verticalGap="2">
-                <s:ToggleButton width="48" height="48" name="{OptionParameters.BURNING}"
-                                change="optionChangeHandler(event)" toolTip="Горящий" cornerRadius="10"/>
-                <s:ToggleButton width="48" height="48" name="{OptionParameters.FLACKY}"
-                                change="optionChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
-                                toolTip="Слоёный" cornerRadius="10"/>
-                <s:ToggleButton width="48" height="48" name="{OptionParameters.WITH_ICE}"
-                                change="optionChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
-                                toolTip="Со льдом" cornerRadius="10"/>
-                <s:ToggleButton width="48" height="48" name="{OptionParameters.CHECKED}"
-                                change="optionChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
-                                toolTip="Проверен администрацией" cornerRadius="10"/>
-                <s:ToggleButton width="48" height="48" name="{OptionParameters.IBA}"
-                                change="optionChangeHandler(event)" icon="@Embed(source='/../assets/burning.png')"
-                                toolTip="Утвержден IBA" cornerRadius="10"/>
-            </s:TileGroup>
+	<fx:Declarations>
+	</fx:Declarations>
+	<s:VGroup id="searchPanel" width="210" height="100%">
+		<s:VGroup width="100%" height="100%" paddingLeft="5" paddingRight="5">
+			<s:HGroup id="cocktailTypesGroup" width="192" height="64" gap="3">
+				<s:ToggleButton width="64" height="64" name="{CocktailTypes.LONG_DRINK}" change="cocktailTypeChangeHandler(event)"
+								icon="@Embed(source='/../assets/long_cocktail.png')" toolTip="Long drink" cornerRadius="10" />
+				<s:ToggleButton width="64" height="64" name="{CocktailTypes.SHORT_DRINK}" change="cocktailTypeChangeHandler(event)"
+								icon="@Embed(source='/../assets/short_cocktail.png')" toolTip="Short drink" cornerRadius="10" />
+				<s:ToggleButton width="64" height="64" name="{CocktailTypes.SHOOTER}" change="cocktailTypeChangeHandler(event)"
+								icon="@Embed(source='/../assets/shooter_cocktail.png')" toolTip="Shooter" cornerRadius="10" />
+			</s:HGroup>
+			<s:TileGroup id="optionsGroup" width="204" horizontalGap="2" verticalGap="2">
+				<s:ToggleButton width="48" height="48" name="{OptionParameters.BURNING}" change="optionChangeHandler(event)" toolTip="Горящий"
+								cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" name="{OptionParameters.FLACKY}" change="optionChangeHandler(event)"
+								icon="@Embed(source='/../assets/burning.png')" toolTip="Слоёный" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" name="{OptionParameters.WITH_ICE}" change="optionChangeHandler(event)"
+								icon="@Embed(source='/../assets/burning.png')" toolTip="Со льдом" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" name="{OptionParameters.CHECKED}" change="optionChangeHandler(event)"
+								icon="@Embed(source='/../assets/burning.png')" toolTip="Проверен администрацией" cornerRadius="10" />
+				<s:ToggleButton width="48" height="48" name="{OptionParameters.IBA}" change="optionChangeHandler(event)"
+								icon="@Embed(source='/../assets/burning.png')" toolTip="Утвержден IBA" cornerRadius="10" />
+			</s:TileGroup>
 			<s:Line width="100%" yFrom="0" yTo="0">
 				<s:stroke>
-					<s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}"/>
+					<s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}" />
 				</s:stroke>
 			</s:Line>
 			<s:VGroup width="100%" height="100%">
 				<flextras:AutoCompleteComboBoxLite id="ingrChoose" itemRenderer="components.renderers.AutoCompleteRenderer"
 												   prompt="Добавить ингредиент..." width="200" labelField="name"
-												   dataProvider="{_model.ingredientsList}"
-												   change="combobox1_changeHandler(event)" filterFunction="filterCBList"/>
+												   dataProvider="{_model.ingredientsList}" change="combobox1_changeHandler(event)"
+												   filterFunction="filterCBList" />
 				<s:List minWidth="200" width="100%" height="100%" borderVisible="false" labelField="name"
-						itemRenderer="views.renderers.IngredientItemRenderer"
-						dataProvider="{_model.selectedIngredientsList}">
+						itemRenderer="views.renderers.IngredientItemRenderer" dataProvider="{_model.selectedIngredientsList}">
 					<s:layout>
-						<components:FlowLayout clipAndEnableScrolling="false" paddingLeft="5" paddingBottom="5" paddingRight="5" paddingTop="5"/>
+						<components:FlowLayout clipAndEnableScrolling="false" paddingLeft="5" paddingBottom="5" paddingRight="5" paddingTop="5" />
 					</s:layout>
 				</s:List>
 			</s:VGroup>
-        </s:VGroup>
-        
-    </s:VGroup>
+		</s:VGroup>
+
+	</s:VGroup>
 	<s:Line height="100%" xFrom="0" xTo="0">
 		<s:stroke>
-			<s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}"/>
+			<s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}" />
 		</s:stroke>
 	</s:Line>
 	<s:List id="recipesList" borderVisible="false" width="100%" height="100%" change="selectCocktailHandler(event)"
 			itemRenderer="views.renderers.CocktailItemRenderer" dataProvider="{_model.cocktailsList}">
 		<s:layout>
-			<s:VerticalLayout variableRowHeight="false" paddingBottom="5" paddingLeft="5" paddingRight="5"
-							  paddingTop="5"/>
+			<s:VerticalLayout variableRowHeight="false" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" />
 		</s:layout>
 	</s:List>
 </s:Group>

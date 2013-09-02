@@ -7,7 +7,8 @@ package tests
 	import mx.managers.BrowserManager;
 	
 	public class MainControllerTest
-	{		
+	{
+		
 		[Before]
 		public function setUp():void
 		{

@@ -16,7 +16,7 @@ package controllers
 	
 	import utils.JSONInstantiator;
 	import utils.ServiceUtil;
-
+	
 	public class MainController
 	{
 		private static var _instance:MainController;
@@ -72,17 +72,17 @@ package controllers
 			}
 			
 			return null;
-			
+		
 		}
 		
 		/**
-		 *Request and load ingredients. 
-		 * 
+		 * Request and load ingredients.
+		 *
 		 */
 		public function requestIngredients():void
 		{
 			ServiceUtil.requestData(Services.GET_INGREDIENTS, null, onIngredientsLoad);
-		}		
+		}
 		
 		private function onIngredientsLoad(event:Event):void
 		{
@@ -94,9 +94,7 @@ package controllers
 			var fragments:Object = URLUtil.stringToObject(BrowserManager.getInstance().fragment);
 			
 			if (!fragments.hasOwnProperty("panel"))
-			{
 				return;
-			}
 			
 			switch (fragments.panel)
 			{
@@ -121,14 +119,17 @@ package controllers
 		{
 			BrowserManager.getInstance().addEventListener(BrowserChangeEvent.BROWSER_URL_CHANGE, onURLChange);
 			BrowserManager.getInstance().init("", "drinkIt - " + MainModel.BUILDER_VIEW.title);
-			checkFragments();			
+			checkFragments();
 		}
 		
 		private function onURLChange(event:BrowserChangeEvent):void
 		{
 			checkFragments();
 		}
-		
+	
 	}
 }
-class PrivateConstructor {}
+
+class PrivateConstructor
+{
+}

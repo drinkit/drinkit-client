@@ -11,7 +11,7 @@ package models
 		public static const SEARCH_VIEW:ViewInformation = new ViewInformation(1, "Поиск по названию");
 		public static const COCKTAIL_VIEW:ViewInformation = new ViewInformation(2, "Коктейль");
 		
-		public static const VIEWS:Object = {0:BUILDER_VIEW, 1:SEARCH_VIEW, 2:COCKTAIL_VIEW};
+		public static const VIEWS:Object = {0: BUILDER_VIEW, 1: SEARCH_VIEW, 2: COCKTAIL_VIEW};
 		
 		[Bindable]
 		public var currentView:ViewInformation = BUILDER_VIEW;

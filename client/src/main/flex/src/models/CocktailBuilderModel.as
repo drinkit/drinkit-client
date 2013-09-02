@@ -1,5 +1,6 @@
 package models
 {
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	
 	import models.supportClasses.Ingredient;
@@ -11,8 +12,14 @@ package models
 	
 	import utils.MockData;
 
+	/**
+	 * @eventType controllers.CocktailController.COCKTAIL_DATA_LOADED
+	 */
+	[Event(name="selectedIngredientsChanged", type="flash.events.Event")]
 	public class CocktailBuilderModel extends EventDispatcher
 	{		
+		public static const SELECTED_INGREDIENTS_CHANGED:String = "selectedIngredientsChanged";
+		
 		public function CocktailBuilderModel()
 		{
 			BindingUtils.bindProperty(this, "ingredientsList", IngredientsModel.instance, "ingredientsList");
@@ -39,6 +46,7 @@ package models
 		{
 			ingredientsList.refresh();
 			selectedIngredients = selectedIngredientsList.source.map(itemToId);
+			dispatchEvent(new Event(SELECTED_INGREDIENTS_CHANGED));
 		}
 		
 		private function itemToId(item:*, index:int, array:Array):uint

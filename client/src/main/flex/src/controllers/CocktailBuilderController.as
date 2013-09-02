@@ -9,7 +9,6 @@ package controllers
 	import models.CocktailBuilderModel;
 	import models.supportClasses.CocktailMini;
 	import models.supportClasses.CocktailTypes;
-	import models.supportClasses.Ingredient;
 	import models.supportClasses.OptionParameters;
 	
 	import mx.collections.ArrayCollection;

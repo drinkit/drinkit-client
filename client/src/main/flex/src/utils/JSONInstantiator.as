@@ -2,7 +2,7 @@ package utils
 {
 	import flash.utils.describeType;
 	import flash.utils.getDefinitionByName;
-
+	
 	public class JSONInstantiator
 	{
 		public static function createInstance(json:String, classType:Class, strict:Boolean = true):Object
@@ -31,18 +31,16 @@ package utils
 			var propertyMap:XML = describeType(returnObject);
 			var propertyTypeClass:Class;
 			
-			for each (var property:XML in propertyMap.variable) 
+			for each (var property:XML in propertyMap.variable)
 			{
-				if (singleJSONObject.hasOwnProperty(property.@name)) 
+				if (singleJSONObject.hasOwnProperty(property.@name))
 				{
 					propertyTypeClass = getDefinitionByName(property.@type) as Class;
 					
-					if (singleJSONObject[property.@name] is (propertyTypeClass)) 
-					{
+					if (singleJSONObject[property.@name] is (propertyTypeClass))
 						returnObject[property.@name] = singleJSONObject[property.@name];
-					}
 					else
-						throw new Error("Property '" + property.@name + "' must be '" +  property.@type + "'");
+						throw new Error("Property '" + property.@name + "' must be '" + property.@type + "'");
 				}
 				else
 				{
@@ -56,7 +54,7 @@ package utils
 				if (accessor.access == "readonly")
 					continue;
 				
-				if (singleJSONObject.hasOwnProperty(accessor.@name)) 
+				if (singleJSONObject.hasOwnProperty(accessor.@name))
 				{
 					propertyTypeClass = getDefinitionByName(accessor.@type) as Class;
 					
@@ -66,12 +64,10 @@ package utils
 						continue;
 					}
 					
-					if (singleJSONObject[accessor.@name] is (propertyTypeClass)) 
-					{
+					if (singleJSONObject[accessor.@name] is (propertyTypeClass))
 						returnObject[accessor.@name] = singleJSONObject[accessor.@name];
-					}
 					else
-						throw new Error("Accessor '" + accessor.@name + "' must be '" +  accessor.@type + "'");
+						throw new Error("Accessor '" + accessor.@name + "' must be '" + accessor.@type + "'");
 				}
 				else
 				{
