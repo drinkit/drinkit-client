@@ -34,7 +34,7 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>src</testSourceDirectory>
+        <!--<testSourceDirectory>src</testSourceDirectory>-->
         <plugins>
             <plugin>
                 <groupId>org.sonatype.flexmojos</groupId>
@@ -52,21 +52,21 @@
                     </dependency>
                 </dependencies>
 
-                <!--  configuration for the Flex compilation -->
-                <configuration>
-                    <targetPlayer>11.1.0</targetPlayer>  <!-- compiler option specifying the target flash player version -->
-                    <incremental>false</incremental>
-                    <debug>false</debug>
-                    <locale>en_US</locale>
-                    <optimize>true</optimize>
-                    <showWarnings>true</showWarnings>
-                    <strict>true</strict>
-                    <useNetwork>true</useNetwork>
-                    <allowSourcePathOverlap>true</allowSourcePathOverlap>
-                    <sourcePaths>
-                        <path>/src</path>
-                    </sourcePaths>
-                </configuration>
+                <!--&lt;!&ndash;  configuration for the Flex compilation &ndash;&gt;-->
+                <!--<configuration>-->
+                    <!--<targetPlayer>11.1.0</targetPlayer>  &lt;!&ndash; compiler option specifying the target flash player version &ndash;&gt;-->
+                    <!--<incremental>false</incremental>-->
+                    <!--<debug>false</debug>-->
+                    <!--<locale>en_US</locale>-->
+                    <!--<optimize>true</optimize>-->
+                    <!--<showWarnings>true</showWarnings>-->
+                    <!--<strict>true</strict>-->
+                    <!--<useNetwork>true</useNetwork>-->
+                    <!--<allowSourcePathOverlap>true</allowSourcePathOverlap>-->
+                    <!--<sourcePaths>-->
+                        <!--<path>/src</path>-->
+                    <!--</sourcePaths>-->
+                <!--</configuration>-->
             </plugin>
         </plugins>
     </build>
@@ -93,12 +93,12 @@
             <type>swc</type>
         </dependency>
 
-        <dependency>
-            <groupId>com.adobe.flexunit</groupId>
-            <artifactId>flexunit</artifactId>
-            <version>4.0-rc-1</version>
-            <type>swc</type>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.adobe.flexunit</groupId>-->
+            <!--<artifactId>flexunit</artifactId>-->
+            <!--<version>4.0-rc-1</version>-->
+            <!--<type>swc</type>-->
+        <!--</dependency>-->
     </dependencies>
 
 

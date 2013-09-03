@@ -9,9 +9,36 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>drinkit-client</module>
         <module>client</module>
+        <module>server</module>
+
     </modules>
+    <properties>
+        <maven.test.skip>true</maven.test.skip>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.8</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>drinkit</groupId>
+                <artifactId>client</artifactId>
+                <type>swf</type>
+                <version>${version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 
 </project>

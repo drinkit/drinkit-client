@@ -186,18 +186,20 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.16</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.1.1</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.sonatype.flexmojos</groupId>
-                <artifactId>flexmojos-maven-plugin</artifactId>
-                <version>4.0-RC2</version>
-                <extensions>true</extensions>
             </plugin>
 
             <plugin>
@@ -207,6 +209,33 @@
                 <configuration>
                     <scanIntervalSeconds>2</scanIntervalSeconds>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-flex-resources</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>drinkit</groupId>
+                                    <artifactId>client</artifactId>
+                                    <version>${version}</version>
+                                    <type>swf</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${basedir}/src/main/webapp</outputDirectory>
+                                    <destFileName>main.swf</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
