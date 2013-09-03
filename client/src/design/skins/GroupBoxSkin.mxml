@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+    ADOBE SYSTEMS INCORPORATED
+    Copyright 2008 Adobe Systems Incorporated
+    All Rights Reserved.
+
+    NOTICE: Adobe permits you to use, modify, and distribute this file
+    in accordance with the terms of the license agreement accompanying it.
+
+-->
+
+<!--- The default skin class for a Spark SkinnableContainer container.  
+
+     @see spark.components.SkinnableContainer
+        
+      @langversion 3.0
+      @playerversion Flash 10
+      @playerversion AIR 1.5
+      @productversion Flex 4
+-->
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+		alpha.disabled="0.5">
+	<fx:Metadata>[HostComponent("components.GroupBox")]</fx:Metadata>
+
+    <fx:Script fb:purpose="styling">
+        <![CDATA[         
+            /**
+             *  @private
+             */
+			
+			private var topOffset:Number;
+			private var bottomOffset:Number;
+			private var leftOffest:Number;
+			private var rightOffset:Number;
+			private var rightLabelOffset:Number;
+			
+            override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number) : void
+            {
+                // Push backgroundColor and backgroundAlpha directly.
+                // Handle undefined backgroundColor by hiding the background object.
+                if (isNaN(getStyle("backgroundColor")))
+                {
+                    background.visible = false;
+                }
+                else
+                {
+                    background.visible = true;
+                    bgFill.color = getStyle("backgroundColor");
+                    bgFill.alpha = getStyle("backgroundAlpha");
+					titleRenderer.setStyle("backgroundColor", bgFill.color);
+					titleRenderer.setStyle("backgroundAlpha", bgFill.alpha);
+                }
+				
+				if (!isNaN(getStyle("borderColor")))
+					borderStroke.color = getStyle("borderColor");
+				
+				topOffset = topLineLevel;
+				bottomOffset = hostComponent.height;
+				leftOffest = 0;
+				rightOffset = hostComponent.width;
+				rightLabelOffset = hostComponent.width - (titleRenderer.width  + titleLeftOffset + 10 + titleRightOffset);
+				
+				if (groupBorder)
+				{
+					var leftLabelBorder:Number = 5*(100/hostComponent.width);
+					var rigthLabelBorder:Number = rightLabelOffset*(100/hostComponent.width)
+					groupBorder.data="M " + leftLabelBorder + " 0 H 0 v 95 h 100 v -95 h -" + rigthLabelBorder; 
+				}
+				
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+            }
+			
+			private const topLineLevel:Number = 5;
+			private const titleLeftOffset:Number = 5;
+			private const titleRightOffset:Number = 5;
+        ]]>        
+    </fx:Script>
+    
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+    </s:states>
+    
+	<s:Label id="titleRenderer" fontSize="14" left="{titleLeftOffset + 10}" text="{hostComponent.title}" />
+	
+    <!--- Defines the appearance of the SkinnableContainer class's background. -->
+    <s:Rect id="background" left="0" right="0" top="0" bottom="0">
+        <s:fill>
+            <!--- @private -->
+            <s:SolidColor id="bgFill" color="#FFFFFF"/>
+        </s:fill>
+    </s:Rect>
+	
+	<s:Path id="groupBorder" data="M 5 0 H 0 v 95 h 100 v -95 h -50" left="0" right="0" top="5" bottom="0">
+		<s:stroke>
+			<s:SolidColorStroke id="borderStroke" color="0xacacac" weight="1" />
+		</s:stroke>
+	</s:Path>
+	
+
+    <!--
+        Note: setting the minimum size to 0 here so that changes to the host component's
+        size will not be thwarted by this skin part's minimum size.   This is a compromise,
+        more about it here: http://bugs.adobe.com/jira/browse/SDK-21143
+    -->
+    <!--- @copy spark.components.SkinnableContainer#contentGroup -->
+    <s:Group id="contentGroup" left="5" right="5" top="15" bottom="5" minWidth="0" minHeight="0">
+        <s:layout>
+            <s:BasicLayout/>
+        </s:layout>
+    </s:Group>
+
+</s:Skin>

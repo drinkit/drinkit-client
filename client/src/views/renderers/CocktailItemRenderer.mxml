@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx"
+				height="74" width="100%" autoDrawBackground="true" opaqueBackground="{DesignModel.ORANGE_BEACH}"
+				creationComplete="itemrenderer1_creationCompleteHandler(event)">
+	<s:layout>
+		<s:HorizontalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="5" />
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+
+			import design.DesignModel;
+			
+			import models.CocktailBuilderModel;
+			import models.IngredientsModel;
+			import models.TagsModel;
+			import models.supportClasses.CocktailMini;
+			
+			import mx.events.FlexEvent;
+			
+			import spark.components.List;
+			import spark.utils.TextFlowUtil;
+			
+			import views.CocktailBuilderView;
+			
+			private var _model:CocktailBuilderModel;
+			//			private var _controller:CoctailBuilderController;
+			
+			[Bindable]
+			private var _cocktail:CocktailMini;
+			
+			override public function set data(value:Object):void
+			{
+				if (value)
+				{
+					init();
+					//
+					_cocktail = CocktailMini(value);
+					cocktailName.text = _cocktail.name;
+					cocktailStructure.textFlow = TextFlowUtil.importFromString(buildRecipe(_cocktail.ingredientIds));
+					buildTags(_cocktail.cocktailTypeId, _cocktail.optionIds);
+				}
+			}
+			
+			private function init():void
+			{
+				if (!_model)
+					_model = CocktailBuilderView(List(owner).owner).model;
+				//				if (!_controller)
+				//					_controller = CocktailBuilderView(List(owner).owner).controller;
+			}
+			
+			protected function itemrenderer1_creationCompleteHandler(event:FlexEvent):void
+			{
+				init();
+			}
+			
+			private function buildTags(cocktailType:int, options:Array):void
+			{
+				tagsGroup.removeAllElements();
+				tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(cocktailType, TagsModel.COCKTAIL_TYPE_TAG, 24));
+				
+				if (options)
+				{
+					for (var i:uint = 0; i < options.length; i++)
+					{
+						tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG, 24));
+					}
+				}
+			
+			
+			}
+			
+			private function buildRecipe(ingredients:Array):String
+			{
+				if (!ingredients || ingredients.length == 0)
+					return "";
+				
+				var cocktailStructure:String = "Состав: ";
+				var curIngredient:String;
+				
+				for (var i:uint = 0; i < ingredients.length; i++)
+				{
+					curIngredient = IngredientsModel.instance.getIngredientNameById(ingredients[i]).toLowerCase();
+					
+					if (!_model.isIngredientSelected(ingredients[i]))
+						curIngredient = '<span fontStyle="italic">' + curIngredient + "</span>";
+					
+					cocktailStructure += curIngredient + ", ";
+				}
+				
+				cocktailStructure = cocktailStructure.substr(0, cocktailStructure.length - 2);
+				
+				return cocktailStructure;
+			}
+
+		]]>
+	</fx:Script>
+
+	<s:BitmapImage id="cocktailThumb" width="48" height="64" source="{_cocktail.image}" />
+	<s:VGroup gap="0">
+		<s:Label id="cocktailName" fontWeight="bold" height="20" verticalAlign="middle" />
+		<s:RichText id="cocktailStructure" height="20" verticalAlign="middle" />
+		<s:HGroup id="tagsGroup" gap="2" height="24" />
+	</s:VGroup>
+
+</s:ItemRenderer>

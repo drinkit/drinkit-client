@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx"
+				autoDrawBackground="false" height="24" minWidth="24" click="itemrenderer1_clickHandler(event)">
+
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="hovered" />
+		<s:State name="selected" />
+	</s:states>
+	<fx:Script>
+		<![CDATA[
+
+			import design.DesignModel;
+			
+			import models.supportClasses.Ingredient;
+			
+			import spark.components.List;
+			import flash.filters.BitmapFilterQuality;
+			
+			private const cornerRadius:uint = 5;
+			private var ingredientData:Ingredient;
+			
+			override public function set data(value:Object):void
+			{
+				super.data = value;
+				
+				if (data)
+				{
+					ingredientData = Ingredient(data);
+					labelDisplay.text = label;
+					width = labelDisplay.measureText(label).width + 10;
+				}
+			}
+			
+			protected function itemrenderer1_clickHandler(event:MouseEvent):void
+			{
+				var parentList:List = owner as List;
+				parentList.dataProvider.removeItemAt(parentList.dataProvider.getItemIndex(data))
+			}
+
+		]]>
+	</fx:Script>
+
+	<s:Rect width="100%" height="100%" bottomLeftRadiusX="{cornerRadius}" bottomLeftRadiusY="{cornerRadius}" bottomRightRadiusX="{cornerRadius}"
+			bottomRightRadiusY="{cornerRadius}" topLeftRadiusX="{cornerRadius}" topLeftRadiusY="{cornerRadius}" topRightRadiusX="{cornerRadius}"
+			topRightRadiusY="{cornerRadius}">
+		<s:fill>
+			<s:SolidColor color="{DesignModel.LIGHT_GREEN}" />
+		</s:fill>
+		<s:filters>
+			<s:GlowFilter includeIn="hovered" blurX="32" blurY="32" color="{DesignModel.LIGHT_PINK}" inner="true" strength="128"
+						  quality="{BitmapFilterQuality.LOW}" />
+			<s:DropShadowFilter angle="0" blurX="4" blurY="4" color="0x333333" distance="1" />
+		</s:filters>
+	</s:Rect>
+	<s:Label height="100%" horizontalCenter="0" verticalAlign="middle" id="labelDisplay" mouseEnabled="false">
+	</s:Label>
+	<!--<s:Group height="100%" width="24" right="0">
+		<s:Rect>
+			<s:fill>
+				<s:SolidColor alpha="0.0" />
+			</s:fill>
+		</s:Rect>
+		<s:Line xFrom="4" xTo="20" yFrom="4" yTo="20">
+			<s:stroke>
+				<s:SolidColorStroke color="{DesignModel.LIGHT_PINK}" />
+			</s:stroke>
+		</s:Line>
+		<s:Line xFrom="20" xTo="4" yFrom="4" yTo="20">
+			<s:stroke>
+				<s:SolidColorStroke color="{DesignModel.LIGHT_PINK}" />
+			</s:stroke>
+		</s:Line>
+	</s:Group>-->
+
+</s:ItemRenderer>

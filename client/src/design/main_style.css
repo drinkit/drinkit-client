@@ -1,0 +1,41 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace components "components.*";
+
+.darkGreen
+{
+	color: PropertyReference("darkGreen");
+}
+
+s|Application
+{
+	backgroundColor: PropertyReference("sandBeach");
+}
+
+s|List
+{
+	contentBackgroundColor: PropertyReference("sandBeach");
+}
+
+s|TextInput
+{
+	contentBackgroundColor: PropertyReference("sandBeach");
+}
+
+s|ToggleButton
+{
+	skinClass: ClassReference("design.skins.FlatToggleButtonSkin");
+}
+
+s|TabBar
+{
+	cornerRadius: 0;
+	skinClass: ClassReference("design.skins.FlatTabBarSkin");
+}
+
+components|IconRadioButton
+{
+	selectedColor: #00ff00;
+	chromeColor: #aaaaaa;
+}
