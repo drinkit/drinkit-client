@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" 
-			   xmlns:views="views.*" creationPolicy="all" applicationComplete="application1_applicationCompleteHandler(event)" xmlns:components="components.*">
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="views.*" creationPolicy="all"
+			   applicationComplete="application1_applicationCompleteHandler(event)"
+			   xmlns:components="components.*">
 	<s:layout>
 		<s:VerticalLayout gap="0" />
 	</s:layout>
@@ -23,9 +23,13 @@
 			import spark.events.IndexChangeEvent;
 			
 			public const darkGreen:uint = DesignModel.DARK_GREEN;
+			
 			public const sandBeach:uint = DesignModel.SAND_BEACH;
+			
 			public const lightPink:uint = DesignModel.LIGHT_PINK;
+			
 			public const orangeBeach:uint = DesignModel.ORANGE_BEACH;
+			
 			public const lightGreen:uint = DesignModel.LIGHT_GREEN;
 			
 			[Bindable]
@@ -37,7 +41,7 @@
 				MainController.instance.model = _model;
 				MainController.instance.initBrowserEngine();
 				//
-				callLater(hideCocktailTab);					
+				callLater(hideCocktailTab);
 			}
 			
 			
@@ -45,6 +49,7 @@
 			private function hideCocktailTab():void
 			{
 				var theTab:UIComponent = menu.dataGroup.getElementAt(2) as UIComponent;
+				
 				if (theTab)
 				{
 					theTab.visible = false;
@@ -56,19 +61,18 @@
 			{
 				MainController.instance.changeView(MainModel.VIEWS[event.newIndex], null, false);
 			}
-
-			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
-		
+
 	</fx:Declarations>
-	
-	<fx:Binding twoWay="false" source="_model.currentView.id" destination="menu.selectedIndex" />	
-	
+
+	<fx:Binding twoWay="false" source="_model.currentView.id" destination="menu.selectedIndex" />
+
 	<components:Logo />
-	<s:TabBar id="menu" width="100%" height="30" dataProvider="{viewstack1}" change="menu_changeHandler(event)" />
-	<mx:ViewStack id="viewstack1" width="100%" height="100%" >
+	<s:TabBar id="menu" width="100%" height="30" dataProvider="{viewstack1}"
+			  change="menu_changeHandler(event)" />
+	<mx:ViewStack id="viewstack1" width="100%" height="100%">
 		<s:NavigatorContent width="100%" height="100%" label="Конструктор коктейлей">
 			<views:CocktailBuilderView width="100%" height="100%" />
 		</s:NavigatorContent>
@@ -78,6 +82,6 @@
 			<views:CocktailView width="100%" height="100%" />
 		</s:NavigatorContent>
 	</mx:ViewStack>
-	
-	
+
+
 </s:Application>

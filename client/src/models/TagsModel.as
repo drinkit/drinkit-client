@@ -1,14 +1,15 @@
 package models
 {
 	import flash.display.Bitmap;
-	
 	import models.supportClasses.CocktailTypes;
 	import models.supportClasses.OptionParameters;
-	
 	import spark.components.Image;
-
+	
 	public class TagsModel
 	{
+		public static const COCKTAIL_OPTION_TAG:String = "cocktailOptionTag";
+		public static const COCKTAIL_TYPE_TAG:String = "cocktailTypeTag";
+		
 		private static var _instance:TagsModel;
 		
 		public static function get instance():TagsModel
@@ -18,12 +19,6 @@ package models
 			
 			return _instance;
 		}
-		
-		public static const COCKTAIL_TYPE_TAG:String = "cocktailTypeTag";
-		public static const COCKTAIL_OPTION_TAG:String = "cocktailOptionTag";
-		
-		[Embed(source="/../assets/tag_example.png")]
-		private var tagExampleBitmap:Class;
 		
 		public function TagsModel()
 		{
@@ -41,14 +36,8 @@ package models
 		
 		private var tagCache:Object;
 		
-		private function addTagToCache(image:Bitmap, title:String, id:Number, type:String):Image
-		{
-			var newTag:Image = new Image();
-			newTag.source = image;
-			newTag.toolTip = title;
-			tagCache[type + id] = newTag;
-			return newTag;
-		}
+		[Embed(source="/../assets/tag_example.png")]
+		private var tagExampleBitmap:Class;
 		
 		public function getTagByIdAndType(id:Number, type:String, size:Number):Image
 		{
@@ -57,7 +46,7 @@ package models
 			if (size <= 0)
 				return tag;
 			
-			var cachedTag:Image = tagCache[type + id];			
+			var cachedTag:Image = tagCache[type + id];
 			
 			if (cachedTag)
 			{
@@ -71,6 +60,15 @@ package models
 			}
 			
 			return tag;
+		}
+		
+		private function addTagToCache(image:Bitmap, title:String, id:Number, type:String):Image
+		{
+			var newTag:Image = new Image();
+			newTag.source = image;
+			newTag.toolTip = title;
+			tagCache[type + id] = newTag;
+			return newTag;
 		}
 	}
 }

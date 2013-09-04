@@ -8,7 +8,7 @@ package utils
 
 	public class ServiceUtil
 	{
-		public static var serviceAddress:String = "http://naiv.kiev.ua:8080/";
+		public static var serviceAddress:String = "";
 		
 		public static function requestData(functionName:String, params:Object, handler:Function):void
 		{
