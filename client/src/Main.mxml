@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="views.*" creationPolicy="all"
-			   applicationComplete="application1_applicationCompleteHandler(event)"
+			   applicationComplete="application1_applicationCompleteHandler(event)" initialize="application1_initializeHandler(event)"
 			   xmlns:components="components.*">
 	<s:layout>
 		<s:VerticalLayout gap="0" />
@@ -21,6 +21,8 @@
 			import mx.managers.BrowserManager;
 			
 			import spark.events.IndexChangeEvent;
+			
+			import utils.ServiceUtil;
 			
 			public const darkGreen:uint = DesignModel.DARK_GREEN;
 			
@@ -44,6 +46,11 @@
 				callLater(hideCocktailTab);
 			}
 			
+			private function readFlashVars():void
+			{
+				if (parameters.serviceAddress)
+					ServiceUtil.serviceAddress = parameters.serviceAddress;
+			}
 			
 			
 			private function hideCocktailTab():void
@@ -61,6 +68,13 @@
 			{
 				MainController.instance.changeView(MainModel.VIEWS[event.newIndex], null, false);
 			}
+			
+			protected function application1_initializeHandler(event:FlexEvent):void
+			{
+				readFlashVars();
+				//
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>

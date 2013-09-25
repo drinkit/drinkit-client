@@ -83,7 +83,7 @@
 					curIngredient = IngredientsModel.instance.getIngredientNameById(ingredients[i]).toLowerCase();
 					
 					if (!_model.isIngredientSelected(ingredients[i]))
-						curIngredient = '<span fontStyle="italic">' + curIngredient + "</span>";
+						curIngredient = '<span fontStyle="italic" color="#333333">' + curIngredient + "</span>";
 					
 					cocktailStructure += curIngredient + ", ";
 				}
