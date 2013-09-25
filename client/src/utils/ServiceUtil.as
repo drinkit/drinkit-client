@@ -8,15 +8,17 @@ package utils
 
 	public class ServiceUtil
 	{
-		public static var serviceAddress:String = "";
+		public static var serviceAddress:String = "http://drinkit.jelastic.neohost.net/";
 		
-		public static function requestData(functionName:String, params:Object, handler:Function):void
+		public static function requestData(functionName:String, params:Object, handler:Function):URLLoader
 		{
 			var request:URLRequest = new URLRequest(serviceAddress + functionName);
 			request.method = URLRequestMethod.GET;
 			request.data = params;
-			var query:URLLoader = new URLLoader(request);
+			var query:URLLoader = new URLLoader();
 			query.addEventListener(Event.COMPLETE, handler);
+			query.load(request);
+			return query;
 		}
 	}
 }

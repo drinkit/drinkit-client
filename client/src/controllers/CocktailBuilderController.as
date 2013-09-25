@@ -12,8 +12,12 @@ package controllers
 	import models.supportClasses.OptionParameters;
 	
 	import mx.collections.ArrayCollection;
+	import mx.core.IVisualElement;
+	import mx.core.IVisualElementContainer;
+	import mx.core.UIComponent;
 	
 	import utils.JSONInstantiator;
+	import utils.LoadProgressUtil;
 	import utils.ServiceUtil;
 
 	public class CocktailBuilderController
@@ -82,7 +86,9 @@ package controllers
 		
 		private function onSearchComplete(event:Event):void
 		{
-			_model.cocktailsList = new ArrayCollection(JSONInstantiator.createInstance(event.target.data, CocktailMini, false) as Array);
+			var res:Array = JSONInstantiator.createInstance(event.target.data, CocktailMini, false) as Array;
+			_model.isNoCocktailsFound = !res || res.length == 0
+			_model.cocktailsList = new ArrayCollection(res);
 		}
 	}
 }

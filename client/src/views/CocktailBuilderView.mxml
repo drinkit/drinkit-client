@@ -151,10 +151,14 @@
 			<s:SolidColorStroke weight="2" color="{DesignModel.ORANGE_BEACH}" />
 		</s:stroke>
 	</s:Line>
-	<s:List id="recipesList" borderVisible="false" width="100%" height="100%" change="selectCocktailHandler(event)"
-			itemRenderer="views.renderers.CocktailItemRenderer" dataProvider="{_model.cocktailsList}">
-		<s:layout>
-			<s:VerticalLayout variableRowHeight="false" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" />
-		</s:layout>
-	</s:List>
+	<s:Group width="100%" height="100%">
+		<s:Label text="Коктейлей по заданным критериям не найдено... Нам очень жаль :(" fontSize="24" verticalCenter="0" horizontalCenter="0" visible="{_model.isNoCocktailsFound}" />
+		<s:List id="recipesList" borderVisible="false" width="100%" height="100%" change="selectCocktailHandler(event)"
+				itemRenderer="views.renderers.CocktailItemRenderer" dataProvider="{_model.cocktailsList}"  visible="{!_model.isNoCocktailsFound}">
+			<s:layout>
+				<s:VerticalLayout variableRowHeight="false" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" />
+			</s:layout>
+		</s:List>
+	</s:Group>
+
 </s:Group>

@@ -23,11 +23,13 @@ package models
 		public function CocktailBuilderModel()
 		{
 			BindingUtils.bindProperty(this, "ingredientsList", IngredientsModel.instance, "ingredientsList");
-			cocktailsList = MockData.fakeCocktails();
 			selectedIngredientsList = new ArrayList();
 			//
 			selectedIngredientsList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
 		}
+		
+		[Bindable]
+		public var isNoCocktailsFound:Boolean;
 		
 		[Bindable]
 		public var cocktailsList:ArrayCollection;
