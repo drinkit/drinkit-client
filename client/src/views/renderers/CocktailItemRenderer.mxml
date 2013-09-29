@@ -44,9 +44,7 @@
 			private function init():void
 			{
 				if (!_model)
-					_model = CocktailBuilderView(List(owner).owner).model;
-				//				if (!_controller)
-				//					_controller = CocktailBuilderView(List(owner).owner).controller;
+					_model = CocktailBuilderView(List(owner).document).model;
 			}
 			
 			protected function itemrenderer1_creationCompleteHandler(event:FlexEvent):void
