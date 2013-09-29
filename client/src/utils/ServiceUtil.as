@@ -8,7 +8,7 @@ package utils
 
 	public class ServiceUtil
 	{
-		public static var serviceAddress:String = "http://drinkit.jelastic.neohost.net/";
+		public static var serviceAddress:String = "";
 		
 		public static function requestData(functionName:String, params:Object, handler:Function):URLLoader
 		{
