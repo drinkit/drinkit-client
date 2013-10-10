@@ -65,5 +65,8 @@ public class IngredientWithQuantity implements Serializable {
         getCocktailIngredientId().setRecipe(recipe);
     }
 
-
+    @Override
+    public String toString() {
+        return getIngredient().getName() + ":" + quantity;
+    }
 }
