@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx"
-				height="74" width="100%" autoDrawBackground="true" opaqueBackground="{DesignModel.ORANGE_BEACH}"
-				creationComplete="itemrenderer1_creationCompleteHandler(event)">
+				height="80" width="100%" autoDrawBackground="false" buttonMode="true" creationComplete="itemrenderer1_creationCompleteHandler(event)">
 	<s:layout>
-		<s:HorizontalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" gap="5" />
+		<s:BasicLayout />
 	</s:layout>
+	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="hovered" />
+	</s:states>
+	
 	<fx:Script>
 		<![CDATA[
 
@@ -23,7 +28,6 @@
 			import views.CocktailBuilderView;
 			
 			private var _model:CocktailBuilderModel;
-			//			private var _controller:CoctailBuilderController;
 			
 			[Bindable]
 			private var _cocktail:CocktailMini;
@@ -63,8 +67,7 @@
 					{
 						tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG, 24));
 					}
-				}
-			
+				}			
 			
 			}
 			
@@ -93,12 +96,24 @@
 
 		]]>
 	</fx:Script>
+	
+	<s:Rect width="100%" height="100%" bottomLeftRadiusX="10" bottomLeftRadiusY="10" bottomRightRadiusX="10" bottomRightRadiusY="10"
+			topLeftRadiusX="10" topLeftRadiusY="10" topRightRadiusX="10" topRightRadiusY="10">
+		<s:fill>
+			<s:SolidColor color="{DesignModel.ORANGE_BEACH}" />
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="3" alpha="0" alpha.hovered="1" />
+		</s:stroke>
+	</s:Rect>
+	<s:HGroup x="0" y="0" width="100%" height="100%" paddingLeft="10" paddingBottom="5" paddingRight="5" paddingTop="5" gap="5">
+		<s:BitmapImage id="cocktailThumb" width="48" height="64" source="{_cocktail.image}" />
+		<s:VGroup gap="0">
+			<s:Label id="cocktailName" fontWeight="bold" height="20" verticalAlign="middle" />
+			<s:RichText id="cocktailStructure" height="20" verticalAlign="middle" />
+			<s:HGroup id="tagsGroup" gap="2" height="24" />
+		</s:VGroup>
+	</s:HGroup>
 
-	<s:BitmapImage id="cocktailThumb" width="48" height="64" source="{_cocktail.image}" />
-	<s:VGroup gap="0">
-		<s:Label id="cocktailName" fontWeight="bold" height="20" verticalAlign="middle" />
-		<s:RichText id="cocktailStructure" height="20" verticalAlign="middle" />
-		<s:HGroup id="tagsGroup" gap="2" height="24" />
-	</s:VGroup>
 
 </s:ItemRenderer>

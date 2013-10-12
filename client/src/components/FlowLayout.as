@@ -138,12 +138,13 @@ public class FlowLayout extends LayoutBase
             // Find the preferred sizes    
             var elementWidth:Number = element.getPreferredBoundsWidth();
             var elementHeight:Number = element.getPreferredBoundsHeight();
+			
+			var elementX:Number = Math.max(element.getBoundsXAtSize(NaN, NaN), _paddingLeft);
+			var elementY:Number = Math.max(element.getBoundsYAtSize(NaN, NaN), _paddingTop);
             
-            totalWidth += elementWidth;
-            totalHeight = Math.max(totalHeight, elementHeight);
+            totalWidth = Math.max(totalWidth, elementX + elementWidth + _paddingRight);
+            totalHeight = Math.max(totalHeight, elementY + elementHeight + _paddingBottom);
         }
-        if (count > 0)
-            totalWidth += (count - 1) * _horizontalGap;
         
         layoutTarget.measuredWidth = totalWidth;
         layoutTarget.measuredHeight = totalHeight;
@@ -155,7 +156,7 @@ public class FlowLayout extends LayoutBase
         // ignore these limits and will still be able to 
         // shrink below them.
         layoutTarget.measuredMinWidth = totalWidth;
-        layoutTarget.measuredMinHeight = totalHeight; 
+        layoutTarget.measuredMinHeight = totalHeight;			
     }
 
     override public function updateDisplayList(containerWidth:Number,
@@ -205,8 +206,8 @@ public class FlowLayout extends LayoutBase
             
             // Find maximum element extents. This is needed for
             // the scrolling support.
-            maxWidth = Math.max(maxWidth, x + elementWidth);
-            maxHeight = Math.max(maxHeight, y + elementHeight);
+            maxWidth = Math.max(maxWidth, x + elementWidth + _paddingRight);
+            maxHeight = Math.max(maxHeight, y + elementHeight + _paddingBottom);
             
             // Update the current position, add the gap
             x += elementWidth + _horizontalGap;
@@ -214,6 +215,7 @@ public class FlowLayout extends LayoutBase
         
         // Scrolling support - update the content size
         layoutTarget.setContentSize(maxWidth, maxHeight);
+		measure();
     }
 }
 }

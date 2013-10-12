@@ -38,6 +38,7 @@
 	<fx:Script>
 		<![CDATA[
 			import design.DesignModel;
+			
 			import flash.filters.BitmapFilterType;
 		]]>
 	</fx:Script>
@@ -58,8 +59,13 @@
         override protected function initializationComplete():void
         {
             useChromeColor = true;
+			autoIconManagement = false;
             super.initializationComplete();
+			
         }
+		
+//		private var _savedIconWidth:Number;
+//		private var _savedIconHeight:Number;
         
         /**
          * @private
@@ -72,7 +78,13 @@
             {
                 cornerRadius = cr;
 				body.radiusX = cornerRadius;
-            }            
+			}
+			
+//			if (iconDisplay)
+//			{
+//				_savedIconWidth = iconDisplay.width;
+//				_savedIconHeight = iconDisplay.height;
+//			}
             
             super.updateDisplayList(unscaledWidth, unscaledHeight);
         }
@@ -111,6 +123,7 @@
 						   shadowColor="0x111111" shadowAlpha="0.1" type="{BitmapFilterType.INNER}" distance="2" strength="1" />
 			<s:GlowFilter includeIn="selectedStates" alpha="0.1" blurX="64" blurY="64" color="0x111111" inner="true" strength="24" />
 		</s:filters>
-	</s:Rect>
+	</s:Rect>	
+	<s:BitmapImage id="iconDisplay" bottom="0" left="0" top="0" right="0" smooth="true" smoothingQuality="high" bottom.selectedStates="2" left.selectedStates="2" top.selectedStates="2" right.selectedStates="2" />
     
 </s:SparkButtonSkin>
