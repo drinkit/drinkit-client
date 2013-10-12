@@ -9,10 +9,12 @@ import ua.kiev.naiv.drinkit.cocktail.repository.CocktailTypeRepository;
 import ua.kiev.naiv.drinkit.cocktail.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.repository.RecipeRepository;
 import ua.kiev.naiv.drinkit.cocktail.search.Criteria;
+import ua.kiev.naiv.drinkit.cocktail.search.RecipeComparatorByCriteria;
 import ua.kiev.naiv.drinkit.cocktail.search.SearchSpecification;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,7 +49,11 @@ public class CocktailServiceImpl implements CocktailService {
 
     @Override
     public List<Recipe> findByCriteria(Criteria criteria) {
-        return recipeRepository.findAll(SearchSpecification.byCriteria(criteria));
+        List<Recipe> recipes = recipeRepository.findAll(SearchSpecification.byCriteria(criteria));
+        if (criteria.getIngredients().size() > 0) {
+            Collections.sort(recipes, new RecipeComparatorByCriteria(criteria));
+        }
+        return recipes;
     }
 
     @Override

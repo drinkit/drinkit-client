@@ -83,7 +83,7 @@ public class Recipe implements Serializable {
         this.cocktailType = cocktailType;
     }
 
-    @OneToMany(mappedBy = "cocktailIngredientId.recipe", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cocktailIngredientId.recipe")
     public Set<IngredientWithQuantity> getIngredientsWithQuantities() {
         return ingredientsWithQuantities;
     }
@@ -92,7 +92,7 @@ public class Recipe implements Serializable {
         this.ingredientsWithQuantities = ingredientsWithQuantities;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany()
     @JoinTable(name = "recipes_has_options",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "option_id"))

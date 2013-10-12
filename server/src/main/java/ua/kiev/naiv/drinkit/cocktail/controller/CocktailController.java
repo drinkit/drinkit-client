@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,6 +38,7 @@ public class CocktailController {
 	@RequestMapping("/getById")
 	@ResponseBody
 	@JsonMixin(RecipeInfoResult.class)
+    @Transactional(readOnly = true)
 	public Recipe getById(@RequestParam int id) {
 		return cocktailService.getById(id);
 	}
@@ -50,6 +52,7 @@ public class CocktailController {
 	@RequestMapping("/search")
 	@ResponseBody
 	@JsonMixin(value = RecipeSearchResult.class, targetClass = Recipe.class)
+    @Transactional(readOnly = true)
 	public List<Recipe> searchRecipes(@RequestParam(value = "criteria") String json) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Criteria criteria = null;
