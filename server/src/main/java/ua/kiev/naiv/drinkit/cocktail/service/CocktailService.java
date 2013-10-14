@@ -29,11 +29,11 @@ public interface CocktailService {
 
     CocktailType findCocktailTypeById(int id);
 
-    List<CocktailType> findAllCocktailType();
+//    List<CocktailType> findAllCocktailType();
 
     List<Ingredient> getIngredients();
 
     Ingredient findIngredientById(int id);
 
-    List<CocktailType> getCocktailTypes();
+//    List<CocktailType> getCocktailTypes();
 }

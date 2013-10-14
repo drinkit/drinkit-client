@@ -28,7 +28,7 @@ public class MixinAspect {
         Class<?> targetClass = annotation.targetClass().equals(Object.class) ? msig.getMethod().getReturnType() :
                 annotation.targetClass();
         mapper.addMixInAnnotations(targetClass, mixin);
-        LOGGER.info("Added mixin: '{}', targetClass: '{}', method: '{}'", mixin.getSimpleName(), targetClass.getSimpleName(),
+        LOGGER.debug("Added mixin: '{}', targetClass: '{}', method: '{}'", mixin.getSimpleName(), targetClass.getSimpleName(),
                 msig.getMethod().getName());
         try {
             mapper.writeValue(WebContext.getInstance().getResponse().getOutputStream(), joinPoint.proceed());

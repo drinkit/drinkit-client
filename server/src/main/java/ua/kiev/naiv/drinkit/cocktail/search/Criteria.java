@@ -48,4 +48,13 @@ public class Criteria {
     public void setOptions(Set<Integer> options) {
         this.options = options;
     }
+
+    @Override
+    public String toString() {
+        return "Criteria{" +
+                "cocktailTypes=" + cocktailTypes +
+                ", ingredients=" + ingredients +
+                ", options=" + options +
+                '}';
+    }
 }

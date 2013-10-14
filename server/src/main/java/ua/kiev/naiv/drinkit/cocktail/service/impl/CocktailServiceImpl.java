@@ -1,5 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
@@ -25,6 +27,8 @@ import java.util.List;
  */
 @Service
 public class CocktailServiceImpl implements CocktailService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CocktailService.class);
 
     @Resource
     RecipeRepository recipeRepository;
@@ -53,6 +57,7 @@ public class CocktailServiceImpl implements CocktailService {
         if (criteria.getIngredients().size() > 0) {
             Collections.sort(recipes, new RecipeComparatorByCriteria(criteria));
         }
+        LOGGER.info("findByCriteria({}): found {} records", criteria, recipes.size());
         return recipes;
     }
 
@@ -71,17 +76,19 @@ public class CocktailServiceImpl implements CocktailService {
         return cocktailTypeRepository.findOne(id);
     }
 
-    @Override
-    public List<CocktailType> findAllCocktailType() {
-        return cocktailTypeRepository.findAll();
-    }
+//    @Override
+//    public List<CocktailType> findAllCocktailType() {
+//        return cocktailTypeRepository.findAll();
+//    }
 
     @Autowired
     IngredientRepository ingredientRepository;
 
     @Override
     public List<Ingredient> getIngredients() {
-        return ingredientRepository.findAll();
+        List<Ingredient> ingredients = ingredientRepository.findAll();
+        LOGGER.info("getIngredients: found {} records", ingredients.size());
+        return ingredients;
     }
 
     @Override
@@ -89,8 +96,10 @@ public class CocktailServiceImpl implements CocktailService {
         return ingredientRepository.findOne(id);
     }
 
-    @Override
-    public List<CocktailType> getCocktailTypes() {
-        return cocktailTypeRepository.findAll();
-    }
+//    @Override
+//    public List<CocktailType> getCocktailTypes() {
+//        List<CocktailType> cocktailTypes = cocktailTypeRepository.findAll();
+//        LOGGER.info("getCocktailTypes: found {} records", cocktailTypes.size());
+//        return cocktailTypes;
+//    }
 }
