@@ -35,7 +35,7 @@
                 <groupId>drinkit</groupId>
                 <artifactId>client</artifactId>
                 <type>swf</type>
-                <version>${version}</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

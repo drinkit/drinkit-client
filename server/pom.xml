@@ -223,11 +223,11 @@
                                 <artifactItem>
                                     <groupId>drinkit</groupId>
                                     <artifactId>client</artifactId>
-                                    <version>${version}</version>
+                                    <version>${project.version}</version>
                                     <type>swf</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${basedir}/src/main/webapp</outputDirectory>
-                                    <destFileName>main.swf</destFileName>
+                                    <destFileName>Main.swf</destFileName>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>

@@ -1,5 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.search;
 
+import org.hibernate.ejb.criteria.CriteriaBuilderImpl;
+import org.hibernate.ejb.criteria.predicate.InPredicate;
 import org.springframework.data.jpa.domain.Specification;
 import ua.kiev.naiv.drinkit.cocktail.model.*;
 
@@ -14,33 +16,27 @@ public class SearchSpecification {
         return new Specification<Recipe>() {
             @Override
             public Predicate toPredicate(Root<Recipe> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				query.distinct(true);
+                query.groupBy(root.get(Recipe_.id));
                 Predicate predicate = cb.conjunction();
 
                 if (criteria.getCocktailTypes().size() > 0) {
-                    Predicate typePredicate = cb.disjunction();
                     Join<Recipe, CocktailType> cocktailTypeJoin = root.join(Recipe_.cocktailType);
-                    for (int id : criteria.getCocktailTypes()) {
-                        typePredicate = cb.or(typePredicate, cb.equal(cocktailTypeJoin.get(CocktailType_.id), id));
-                    }
-                    predicate = cb.and(predicate, typePredicate);
+                    predicate = cb.and(predicate, new InPredicate<>(
+                            (CriteriaBuilderImpl) cb, cocktailTypeJoin.get(CocktailType_.id), criteria.getCocktailTypes()));
                 }
 
                 if (criteria.getOptions().size() > 0) {
                     Join<Recipe, Option> optionJoin = root.join(Recipe_.options);
-                    for (int id : criteria.getOptions()) {
-                        predicate = cb.and(predicate, cb.equal(optionJoin.get(Option_.id), id));
-                    }
+                    predicate = cb.and(predicate, new InPredicate<>(
+                            (CriteriaBuilderImpl) cb, optionJoin.get(Option_.id), criteria.getOptions()));
+                    query.having(cb.greaterThanOrEqualTo(cb.count(optionJoin), (long) criteria.getOptions().size()));
                 }
 
                 if (criteria.getIngredients().size() > 0) {
                     Join<Recipe, IngredientWithQuantity> ingredientJoin = root.join(Recipe_.ingredientsWithQuantities);
-                    Predicate ingredientPredicate = cb.disjunction();
-                    for (int id : criteria.getIngredients()) {
-                        ingredientPredicate = cb.or(ingredientPredicate, cb.equal(ingredientJoin.get(IngredientWithQuantity_.cocktailIngredientId)
-                                .get(CocktailIngredientId_.ingredient).get(Ingredient_.id), id));
-                    }
-                    predicate = cb.and(predicate, ingredientPredicate);
+                    predicate = cb.and(predicate, new InPredicate<>(
+                            (CriteriaBuilderImpl) cb, ingredientJoin.get(IngredientWithQuantity_.cocktailIngredientId)
+                            .get(CocktailIngredientId_.ingredient).get(Ingredient_.id), criteria.getIngredients()));
                 }
 
                 return predicate;
