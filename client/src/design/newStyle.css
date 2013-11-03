@@ -1,0 +1,40 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+@font-face
+{
+	src: url("/../assets/fonts/GOTHIC.TTF");
+	fontFamily: "CenturyGothic";
+	embed-as-cff: true;
+}
+
+@font-face
+{
+	src: url("/../assets/fonts/GEORGIAZ.TTF");
+	fontFamily: "Georgia";
+	embed-as-cff: true;
+}
+
+.regularText
+{
+	fontFamily: "CenturyGothic";
+	color: #222222;
+	advancedAntiAliasing: true;
+}
+
+.headerPinkText
+{
+	fontFamily: "Georgia";
+	color: #FF6F69;
+	fontSize: 14;
+	advancedAntiAliasing: true;
+}
+
+.headerGreenText
+{
+	fontFamily: "Georgia";
+	color: #78A590;
+	fontSize: 18;
+	advancedAntiAliasing: true;
+}

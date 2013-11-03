@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="80">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="92">
+	
+	<fx:Style source="/design/newStyle.css" />
+	
 	<fx:Script>
 		<![CDATA[
+			import controllers.MainController;
+			
 			import design.DesignModel;
+			
+			import models.MainModel;
+			
+			protected function image1_clickHandler(event:MouseEvent):void
+			{
+				MainController.instance.changeView(MainModel.BUILDER_VIEW, null);
+			}
+			
+			protected function label1_clickHandler(event:MouseEvent):void
+			{
+				LoginWindow.show();
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -12,8 +30,9 @@
 	</fx:Declarations>
 	<s:Rect width="100%" height="100%">
 		<s:fill>
-			<s:SolidColor color="{DesignModel.DARK_GREEN}" />
+			<s:BitmapFill source="@Embed(source='/../assets/pattern-top.png')" fillMode="repeat" />
 		</s:fill>
 	</s:Rect>
-	<s:BitmapImage width="200" height="80" verticalCenter="0" horizontalCenter="0" source="@Embed(source='/../assets/work-logo.png')" blendMode="normal" />
+	<s:Image width="240" height="80" left="5" verticalCenter="0" source="@Embed(source='/../assets/logo-main.png')" blendMode="normal" buttonMode="true" click="image1_clickHandler(event)" />
+	<s:Label text="Войти" fontSize="16" top="5" right="15" textDecoration="underline" color="0xffffff" fontFamily="CenturyGothic" buttonMode="true" click="label1_clickHandler(event)" />
 </s:Group>

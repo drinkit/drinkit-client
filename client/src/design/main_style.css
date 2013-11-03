@@ -8,21 +8,6 @@
 	color: PropertyReference("darkGreen");
 }
 
-s|Application
-{
-	backgroundColor: PropertyReference("sandBeach");
-}
-
-s|List
-{
-	contentBackgroundColor: PropertyReference("sandBeach");
-}
-
-s|TextInput
-{
-	contentBackgroundColor: PropertyReference("sandBeach");
-}
-
 s|ToggleButton
 {
 	skinClass: ClassReference("design.skins.FlatToggleButtonSkin");
@@ -34,8 +19,3 @@ s|TabBar
 	skinClass: ClassReference("design.skins.FlatTabBarSkin");
 }
 
-components|IconRadioButton
-{
-	selectedColor: #00ff00;
-	chromeColor: #aaaaaa;
-}

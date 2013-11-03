@@ -5,6 +5,8 @@
 		<s:BasicLayout />
 	</s:layout>
 	
+	<fx:Style source="/design/newStyle.css" />
+	
 	<s:states>
 		<s:State name="normal" />
 		<s:State name="hovered" />
@@ -40,7 +42,7 @@
 					//
 					_cocktail = CocktailMini(value);
 					cocktailName.text = _cocktail.name;
-					cocktailStructure.textFlow = TextFlowUtil.importFromString(buildRecipe(_cocktail.ingredientIds));
+					cocktailStructure.text = buildRecipe(_cocktail.ingredientIds);
 					buildTags(_cocktail.cocktailTypeId, _cocktail.optionIds);
 				}
 			}
@@ -83,8 +85,8 @@
 				{
 					curIngredient = IngredientsModel.instance.getIngredientNameById(ingredients[i]).toLowerCase();
 					
-					if (!_model.isIngredientSelected(ingredients[i]))
-						curIngredient = '<span fontStyle="italic" color="#333333">' + curIngredient + "</span>";
+//					if (!_model.isIngredientSelected(ingredients[i]))
+//						curIngredient = '<span color="#333333">' + curIngredient + "</span>";
 					
 					cocktailStructure += curIngredient + ", ";
 				}
@@ -100,7 +102,7 @@
 	<s:Rect width="100%" height="100%" bottomLeftRadiusX="10" bottomLeftRadiusY="10" bottomRightRadiusX="10" bottomRightRadiusY="10"
 			topLeftRadiusX="10" topLeftRadiusY="10" topRightRadiusX="10" topRightRadiusY="10">
 		<s:fill>
-			<s:SolidColor color="{DesignModel.ORANGE_BEACH}" />
+			<s:SolidColor color="{DesignModel.SAND_BEACH}" />
 		</s:fill>
 		<s:stroke>
 			<s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="3" alpha="0" alpha.hovered="1" />
@@ -109,8 +111,8 @@
 	<s:HGroup x="0" y="0" width="100%" height="100%" paddingLeft="10" paddingBottom="5" paddingRight="5" paddingTop="5" gap="5">
 		<s:BitmapImage id="cocktailThumb" width="48" height="64" source="{_cocktail.image}" />
 		<s:VGroup gap="0">
-			<s:Label id="cocktailName" fontWeight="bold" height="20" verticalAlign="middle" />
-			<s:RichText id="cocktailStructure" height="20" verticalAlign="middle" />
+			<s:Label id="cocktailName" styleName="headerPinkText" height="20" verticalAlign="middle" />
+			<s:Label id="cocktailStructure" height="20" styleName="regularText" verticalAlign="middle"/>
 			<s:HGroup id="tagsGroup" gap="2" height="24" />
 		</s:VGroup>
 	</s:HGroup>

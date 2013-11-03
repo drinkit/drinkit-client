@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+	ADOBE SYSTEMS INCORPORATED
+	Copyright 2008 Adobe Systems Incorporated
+	All Rights Reserved.
+
+	NOTICE: Adobe permits you to use, modify, and distribute this file
+	in accordance with the terms of the license agreement accompanying it.
+
+-->
+
+<!--- The default skin class for the Spark Button component.
+
+	   @see spark.components.Button
+
+	  @langversion 3.0
+	  @playerversion Flash 10
+	  @playerversion AIR 1.5
+	  @productversion Flex 4
+-->
+<s:SparkButtonSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled="0.5">
+
+	<fx:Metadata>
+		<![CDATA[ 
+        /** 
+         * @copy spark.skins.spark.ApplicationSkin#hostComponent
+         */
+        [HostComponent("spark.components.ToggleButton")]
+        ]]>
+	</fx:Metadata>
+
+	<fx:Script fb:purpose="styling">
+		<![CDATA[
+
+			import design.DesignModel;
+			
+			import spark.components.Group;
+			/* Define the skin elements that should not be colorized.
+			   For button, the graphics are colorized but the label is not. */
+			static private const exclusions:Array = ["labelDisplay"];
+			
+			/**
+			 * @private
+			 */
+			override public function get colorizeExclusions():Array  { return exclusions; }
+			
+			/**
+			 * @private
+			 */
+			override protected function initializationComplete():void
+			{
+				useChromeColor = true;
+				super.initializationComplete();
+			}
+			
+			/**
+			 * @private
+			 */
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				if (Label(labelDisplay).measuredWidth)
+				{
+					container.width = Label(labelDisplay).measuredWidth;
+//					drawUnderdash(Label(labelDisplay).measuredHeight + 3, container.width);
+				}				
+				
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+			}
+			
+			private function drawUnderdash(y:Number, width:Number):void
+			{
+				graphics.clear();
+				
+				var curWidth:Number = 0;
+				var curX:Number = 0;
+				
+				while (curWidth < width)
+				{
+					graphics.moveTo(curX, y);
+					curX += 3;
+					
+					if (curX > width)
+						curX = width;
+					graphics.lineTo(curX, y);
+					curX += 2;
+				}
+			
+			}
+
+		]]>
+	</fx:Script>
+
+	<!-- states -->
+	<s:states>
+		<s:State name="up" />
+		<s:State name="over" stateGroups="overStates" />
+		<s:State name="down" stateGroups="downStates" />
+		<s:State name="disabled" stateGroups="disabledStates" />
+		<s:State name="upAndSelected" stateGroups="selectedStates, selectedUpStates" />
+		<s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
+		<s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
+		<s:State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates" />
+	</s:states>
+
+
+	<s:Rect left="-5" right="-5" top="-3" bottom="-3" includeIn="selectedStates" bottomLeftRadiusY="10" topLeftRadiusY="10" bottomLeftRadiusX="10"
+			topLeftRadiusX="10" bottomRightRadiusY="10" topRightRadiusY="10" bottomRightRadiusX="10" topRightRadiusX="10">
+		<s:fill>
+			<s:SolidColor color="{DesignModel.LIGHT_GREEN}" />
+		</s:fill>
+	</s:Rect>
+	<s:VGroup id="container" gap="1" clipAndEnableScrolling="true">
+		<s:Label id="labelDisplay" fontSize="14" fontFamily="Georgia" color.up="{DesignModel.ORANGE_BEACH}" color.over="{DesignModel.BRICK_RED}"
+				 color.selectedStates="0xffffff" color.down="{DesignModel.BRICK_RED}" maxDisplayedLines="1" />
+		<s:Path height="2"
+				data="l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0"
+				visible.selectedStates="false" includeInLayout="true">
+
+			<s:stroke>
+				<s:SolidColorStroke weight="1" color="{DesignModel.ORANGE_BEACH}" color.down="{DesignModel.BRICK_RED}"
+									color.over="{DesignModel.BRICK_RED}" />
+			</s:stroke>
+		</s:Path>
+
+	</s:VGroup>
+
+
+
+</s:SparkButtonSkin>

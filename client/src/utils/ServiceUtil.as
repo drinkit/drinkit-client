@@ -1,10 +1,13 @@
 package utils
 {
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
+	
+	import mx.controls.Alert;
 
 	public class ServiceUtil
 	{
@@ -17,8 +20,26 @@ package utils
 			request.data = params;
 			var query:URLLoader = new URLLoader();
 			query.addEventListener(Event.COMPLETE, handler);
+			query.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			query.load(request);
 			return query;
+		}
+		
+		public static function sendData(functionName:String, params:Object, handler:Function):URLLoader
+		{
+			var request:URLRequest = new URLRequest(serviceAddress + functionName);
+			request.method = URLRequestMethod.POST;
+			request.data = params;
+			var query:URLLoader = new URLLoader();
+			query.addEventListener(Event.COMPLETE, handler);
+			query.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			query.load(request);
+			return query;
+		}
+		
+		private static function onIOError(event:IOErrorEvent):void
+		{
+			Alert.show("Ошибка соединения с сервером!");
 		}
 	}
 }
