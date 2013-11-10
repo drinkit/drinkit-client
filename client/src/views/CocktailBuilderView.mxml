@@ -147,12 +147,14 @@
 			</s:Line>
 			<s:Spacer width="100%" height="5" />
 			<s:Label text="Выбор ингредиентов" styleName="headerGreenText" />
-			<s:VGroup width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" paddingLeft="-5">
 				<flextras:AutoCompleteComboBoxLite id="ingrChoose" width="100%"
 												   change="combobox1_changeHandler(event)"
 												   dataProvider="{_model.ingredientsList}"
 												   filterFunction="filterCBList"
+												   styleName="regularText"
 												   itemRenderer="components.renderers.AutoCompleteRenderer"
+												   skinClass="design.skins.LiveSearchComboBoxSkin"
 												   labelField="name" paddingLeft="0"
 												   prompt="Напишите ингредиент..."/>
 				<s:List width="100%" minWidth="200" dataProvider="{_model.selectedIngredientsList}"
