@@ -103,7 +103,7 @@
                 if (promptDisplay)
                 {
                     promptDisplay.setLayoutBoundsSize(unscaledWidth - 2, unscaledHeight - 2);
-                    promptDisplay.setLayoutBoundsPosition(6, 1);
+                    promptDisplay.setLayoutBoundsPosition(11, 1);
                 }
             }
             else
@@ -114,7 +114,7 @@
                 if (promptDisplay)
                 {
                     promptDisplay.setLayoutBoundsSize(unscaledWidth, unscaledHeight);
-                    promptDisplay.setLayoutBoundsPosition(5, 0);
+                    promptDisplay.setLayoutBoundsPosition(10, 0);
                 }
             }
             
@@ -233,11 +233,11 @@
     
     <!-- text -->
     <!--- @copy spark.components.supportClasses.SkinnableTextBase#textDisplay -->
-    <s:RichEditableText id="textDisplay" left="5" right="5" top="2" bottom="2"
-						verticalAlign="middle" widthInChars="10"/>
+    <s:RichEditableText id="textDisplay" left="10" right="5" top="2" bottom="2"
+						verticalAlign="middle" widthInChars="10" />
     <!--- Defines the Label that is used for prompt text. The includeInLayout property is false so the prompt text does not affect measurement. -->
-    <s:Label id="promptDisplay" maxDisplayedLines="1" left="5"
-                verticalAlign="middle"
+    <s:Label id="promptDisplay" maxDisplayedLines="1" left="10"
+                verticalAlign="middle" fontSize="14" alpha="0.5"
                 mouseEnabled="false" mouseChildren="false"
                 includeIn="normalWithPrompt,disabledWithPrompt" 
                 includeInLayout="false"

@@ -48,8 +48,6 @@
 				_model = new MainModel();
 				MainController.instance.model = _model;
 				MainController.instance.initBrowserEngine();
-				//
-				callLater(hideCocktailTab);
 			}
 			
 			private function readFlashVars():void
@@ -59,20 +57,9 @@
 			}
 			
 			
-			private function hideCocktailTab():void
-			{
-				var theTab:UIComponent = menu.dataGroup.getElementAt(2) as UIComponent;
-				
-				if (theTab)
-				{
-					theTab.visible = false;
-					theTab.includeInLayout = false;
-				}
-			}
-			
 			protected function menu_changeHandler(event:IndexChangeEvent):void
 			{
-				MainController.instance.changeView(MainModel.VIEWS[event.newIndex], null, false);
+				MainController.instance.changeView(MainModel.VIEWS[event.newIndex], null);
 			}
 			
 			protected function application1_initializeHandler(event:FlexEvent):void
@@ -91,7 +78,7 @@
 
 	<s:Rect width="100%" height="100%">
 		<s:fill>
-			<s:BitmapFill scaleX="0.2" scaleY="0.2" fillMode="repeat" alpha="0.5" source="@Embed(source='/../assets/cocktail-pattern.jpg')" />
+			<s:BitmapFill scaleX="0.2" scaleY="0.2" fillMode="repeat" alpha="0.2" source="@Embed(source='/../assets/cocktail-pattern.jpg')" />
 		</s:fill>
 	</s:Rect>
 	<s:VGroup gap="0" top="20" bottom="20" width="1024" height="100%" horizontalCenter="0">
@@ -101,8 +88,6 @@
 		<mx:ViewStack id="viewstack1" width="100%" height="100%">
 			<s:NavigatorContent width="100%" height="100%" label="Конструктор коктейлей">
 				<views:CocktailBuilderView width="100%" height="100%" />
-			</s:NavigatorContent>
-			<s:NavigatorContent width="100%" height="100%" label="Поиск по названию">
 			</s:NavigatorContent>
 			<s:NavigatorContent width="100%" height="100%" label="Коктейль">
 				<views:CocktailView width="100%" height="100%" />

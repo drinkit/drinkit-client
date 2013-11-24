@@ -43,7 +43,7 @@ package controllers
 			_model = value;
 		}
 		
-		public function changeView(view:ViewInformation, data:Object, manual:Boolean = true):void
+		public function changeView(view:ViewInformation, data:Object):void
 		{
 			_model.currentView = view;
 			_model.viewData = data;
@@ -94,21 +94,25 @@ package controllers
 			var fragments:Object = URLUtil.stringToObject(BrowserManager.getInstance().fragment);
 			
 			if (!fragments.hasOwnProperty("panel"))
+			{
+				MainController.instance.changeView(MainModel.BUILDER_VIEW, null);
 				return;
+			}
+				
 			
 			switch (fragments.panel)
 			{
 				case MainModel.BUILDER_VIEW.id:
 				{
-					MainController.instance.changeView(MainModel.BUILDER_VIEW, null, true);
+					MainController.instance.changeView(MainModel.BUILDER_VIEW, null);
 					break;
 				}
 				case MainModel.COCKTAIL_VIEW.id:
 				{
 					if (fragments.hasOwnProperty("id"))
-						MainController.instance.changeView(MainModel.COCKTAIL_VIEW, fragments.id, true);
+						MainController.instance.changeView(MainModel.COCKTAIL_VIEW, fragments.id);
 					else
-						MainController.instance.changeView(MainModel.BUILDER_VIEW, null, true);
+						MainController.instance.changeView(MainModel.BUILDER_VIEW, null);
 					
 					break;
 				}

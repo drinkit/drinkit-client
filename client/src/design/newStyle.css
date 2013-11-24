@@ -38,3 +38,16 @@
 	fontSize: 18;
 	advancedAntiAliasing: true;
 }
+
+.pageTitleText
+{
+	fontFamily: "Georgia";
+	color: #FFB000;
+	fontSize: 30;
+	advancedAntiAliasing: true;
+}
+
+global
+{
+	vertical-align: middle;
+}

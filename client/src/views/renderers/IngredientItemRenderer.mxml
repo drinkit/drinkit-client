@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx"
-				autoDrawBackground="false" height="24" minWidth="24" buttonMode="true">
+				autoDrawBackground="false" height="25" minWidth="25" buttonMode="true">
 
 
 	
@@ -16,7 +16,7 @@
 			
 			import spark.components.List;
 			
-			private const cornerRadius:uint = 5;
+			private const cornerRadius:uint = 10;
 			private var ingredientData:Ingredient;
 			
 			override public function set data(value:Object):void
@@ -28,7 +28,7 @@
 					ingredientData = Ingredient(data);
 					labelDisplay.text = label;
 					labelDisplay.validateSize();
-					width = labelDisplay.getExplicitOrMeasuredWidth() + 30;
+					width = labelDisplay.getExplicitOrMeasuredWidth() + 35;
 				}
 			}
 			
@@ -58,20 +58,21 @@
 			<s:SolidColor color="{DesignModel.ORANGE_BEACH}" />
 		</s:fill>
 	</s:Rect>
-	<s:HGroup paddingLeft="5" height="100%" verticalAlign="middle">
-		<s:Label height="100%" horizontalCenter="0" verticalAlign="middle" id="labelDisplay" mouseEnabled="true" styleName="regularText"/>
-		<s:Group click="itemrenderer1_clickHandler(event)" rollOver="group1_rollOverHandler(event)" rollOut="group1_rollOutHandler(event)">
-			<s:Ellipse width="16" height="16">
+	<s:HGroup paddingLeft="10" height="100%" verticalAlign="middle" paddingTop="0">
+		<s:Label id="labelDisplay" color="0xffffff" horizontalCenter="0" mouseEnabled="true" paddingBottom="-1"
+				 styleName="regularText" text="Анана"/>
+		<s:Group width="15" height="15" click="itemrenderer1_clickHandler(event)" rollOver="group1_rollOverHandler(event)" rollOut="group1_rollOutHandler(event)">
+			<s:Ellipse width="15" height="15">
 				<s:fill>
 					<s:SolidColor id="closeButtonColor" color="{DesignModel.ORANGE_BEACH}" />
 				</s:fill>
 			</s:Ellipse>
-			<s:Line horizontalCenter="0" verticalCenter="0" yFrom="0" yTo="10" width="8" height="8">
+			<s:Line x="0" y="0" yFrom="4" xFrom="4" xTo="11" yTo="11">
 				<s:stroke>
 					<s:SolidColorStroke color="0xffffff" weight="2" />
 				</s:stroke>
 			</s:Line>
-			<s:Line horizontalCenter="0" verticalCenter="0" yFrom="10" yTo="0" width="8" height="8">
+			<s:Line x="0" y="0" yFrom="11" yTo="4" xFrom="4" xTo="11">
 				<s:stroke>
 					<s:SolidColorStroke color="0xffffff" weight="2" />
 				</s:stroke>
