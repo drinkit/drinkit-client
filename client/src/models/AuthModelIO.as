@@ -32,7 +32,7 @@ package models
 			ExternalInterface.addCallback("onSocialLogin", onSocialLogin);
 		}
 		
-		private function onSocialLogin(error:String, result:String):void
+		private function onSocialLogin(result:String):void
 		{
 			Alert.show(result);
 		}
