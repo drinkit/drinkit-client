@@ -15,6 +15,7 @@
 			import design.DesignModel;
 			
 			import models.AuthModel;
+			import models.HelloAuthModel;
 			import models.MainModel;
 			
 			import mx.core.UIComponent;
@@ -43,7 +44,8 @@
 			protected function application1_applicationCompleteHandler(event:FlexEvent):void
 			{
 				ToolTipManager.showDelay = 300;
-				AuthModel.instance.initGigyaAPI(stage);
+				AuthModel.instance.init(stage);
+				HelloAuthModel.instance.init(stage);
 				//
 				_model = new MainModel();
 				MainController.instance.model = _model;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" close="titlewindow1_closeHandler(event)">
+			   xmlns:mx="library://ns.adobe.com/flex/mx" close="titlewindow1_closeHandler(event)" creationComplete="titlewindow1_creationCompleteHandler(event)">
 	<s:layout>
 		<s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center" />
 	</s:layout>
@@ -9,14 +9,21 @@
 	<fx:Script>
 		<![CDATA[
 			import models.AuthModel;
+			import models.AuthModelIO;
+			import models.FlexOAuthIOModel;
+			import models.HelloAuthModel;
+			import models.IAuthModel;
 			
 			import mx.core.FlexGlobals;
 			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
 			import mx.managers.PopUpManager;
 			
 			import spark.components.Application;
 			
 			private static var _loginWindow:LoginWindow = new LoginWindow();
+			
+			private var authModel:IAuthModel;
 			
 			public static function show():void
 			{
@@ -31,12 +38,18 @@
 			
 			protected function onSocialLoginClick(event:MouseEvent):void
 			{
-				AuthModel.instance.socialLogin(event.currentTarget.name);
+				authModel.login(event.currentTarget.name, AuthModelIO.LOGIN_URLS[event.currentTarget.name]);
 			}
 			
 			protected function titlewindow1_closeHandler(event:CloseEvent):void
 			{
 				PopUpManager.removePopUp(this);
+			}
+			
+			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				authModel = AuthModelIO.instance;
+				authModel.init(stage);
 			}
 			
 		]]>
@@ -45,7 +58,7 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<s:TextInput borderVisible="true" horizontalCenter="0" prompt="логин..." textAlign="left"/>
+	<s:TextInput id="userLogin" borderVisible="true" horizontalCenter="0" prompt="логин..." textAlign="left"/>
 	<s:TextInput prompt="пароль..." displayAsPassword="true" />
 	<s:Line width="100%">
 		<s:stroke>

@@ -10,7 +10,7 @@ package models
 	
 	import utils.ServiceUtil;
 
-	public class AuthModel
+	public class AuthModel implements IAuthModel
 	{
 		private static const API_KEY:String = "3_yXNSDzZrmilfB2yLAa4e-OeZw_99JcdxU0tYMMYP4ZhYWobv8SvHLg1-faJoyaWl";
 		
@@ -30,7 +30,7 @@ package models
 		
 		private var gsAPI:GSAPI;
 		
-		public function initGigyaAPI(stage:Stage):void
+		public function init(stage:Stage):void
 		{
 			gsAPI = new GSAPI(API_KEY, stage);
 		}
@@ -48,7 +48,7 @@ package models
 			trace(event.target.data);
 		}
 		
-		public function socialLogin(provider:String):void
+		public function login(provider:String, action:String):void
 		{
 			var loginParams:Object = {provider: provider};
 			gsAPI.login(loginParams, loginCallback);
