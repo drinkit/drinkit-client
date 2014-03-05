@@ -151,11 +151,11 @@
 						<components:FlowLayout clipAndEnableScrolling="false" horizontalGap="13" verticalGap="10" paddingBottom="5" paddingRight="5" paddingTop="5" />
 					</s:layout>
 					
-					<s:ToggleButton label="горящий" buttonMode="true" skinClass="design.skins.OptionLabelSkin" click="optionChangeHandler(event)" />
-					<s:ToggleButton label="слоёный" buttonMode="true" skinClass="design.skins.OptionLabelSkin" click="optionChangeHandler(event)" />
-					<s:ToggleButton label="со льдом" buttonMode="true" skinClass="design.skins.OptionLabelSkin" click="optionChangeHandler(event)" />
-					<s:ToggleButton label="официальный" buttonMode="true" skinClass="design.skins.OptionLabelSkin" click="optionChangeHandler(event)" toolTip="утвержденый международной ассоациацией барменов (IBA)" />
-					<s:ToggleButton label="проверенный" buttonMode="true" skinClass="design.skins.OptionLabelSkin" click="optionChangeHandler(event)" toolTip="проверенный администрацией собственоручно" />
+					<s:ToggleButton label="горящий" name="{OptionParameters.BURNING}" buttonMode="true" skinClass="design.skins.OptionLabelSkin" click="optionChangeHandler(event)" />
+					<s:ToggleButton label="слоёный" name="{OptionParameters.FLACKY}" buttonMode="true" skinClass="design.skins.OptionLabelSkin" click="optionChangeHandler(event)" />
+					<s:ToggleButton label="со льдом" name="{OptionParameters.WITH_ICE}" buttonMode="true" skinClass="design.skins.OptionLabelSkin" click="optionChangeHandler(event)" />
+					<s:ToggleButton label="официальный" name="{OptionParameters.IBA}" buttonMode="true" skinClass="design.skins.OptionLabelSkin" click="optionChangeHandler(event)" toolTip="утвержденый международной ассоациацией барменов (IBA)" />
+					<s:ToggleButton label="проверенный" name="{OptionParameters.CHECKED}" buttonMode="true" skinClass="design.skins.OptionLabelSkin" click="optionChangeHandler(event)" toolTip="проверенный администрацией собственоручно" />
 				</s:Group>
 				<s:Line yFrom="0" yTo="0" width="100%">
 					<s:stroke>
@@ -186,10 +186,10 @@
 			
 		</s:VGroup>
 		<s:Group width="100%" height="100%">
-			<s:Label visible="{_model.isNoCocktailsFound}" width="100%" fontSize="24"
+			<s:Label visible="{_model.isNoCocktailsFound}" width="70%" fontSize="24" textAlign="center" styleName="regularText"
 					 horizontalCenter="0" maxDisplayedLines="2" paddingLeft="5" paddingRight="5"
 					 text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
-					 verticalCenter="0"/>
+					 top="20"/>
 			<s:List id="recipesList" borderVisible="false" width="100%" change="selectCocktailHandler(event)" contentBackgroundAlpha="0"
 					itemRenderer="views.renderers.CocktailItemRenderer" dataProvider="{_model.cocktailsList}" visible="{!_model.isNoCocktailsFound}">
 				<s:layout>

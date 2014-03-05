@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="views.*" creationPolicy="all"
-			   applicationComplete="application1_applicationCompleteHandler(event)" initialize="application1_initializeHandler(event)"
-			   xmlns:components="components.*" minWidth="1024">
+			   applicationComplete="onApplicationCreationComplete(event)"
+			   xmlns:components="components.*" minWidth="1024" preinitialize="application1_preinitializeHandler(event)" >
 	<s:layout>
 		<s:BasicLayout />
 	</s:layout>
@@ -41,8 +41,9 @@
 			[Bindable]
 			private var _model:MainModel;
 			
-			protected function application1_applicationCompleteHandler(event:FlexEvent):void
-			{
+			protected function onApplicationCreationComplete(event:FlexEvent):void
+			{				
+				
 				ToolTipManager.showDelay = 300;
 				AuthModel.instance.init(stage);
 				HelloAuthModel.instance.init(stage);
@@ -50,6 +51,7 @@
 				_model = new MainModel();
 				MainController.instance.model = _model;
 				MainController.instance.initBrowserEngine();
+				readFlashVars();
 			}
 			
 			private function readFlashVars():void
@@ -63,11 +65,10 @@
 			{
 				MainController.instance.changeView(MainModel.VIEWS[event.newIndex], null);
 			}
-			
-			protected function application1_initializeHandler(event:FlexEvent):void
+
+			protected function application1_preinitializeHandler(event:FlexEvent):void
 			{
 				readFlashVars();
-				//
 			}
 			
 		]]>
@@ -96,7 +97,4 @@
 			</s:NavigatorContent>
 		</mx:ViewStack>
 	</s:VGroup>
-	
-
-
 </s:Application>
