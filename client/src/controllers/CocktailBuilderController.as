@@ -84,9 +84,9 @@ package controllers
 			ServiceUtil.requestData(Services.SEARCH_BY_BUILDER, vars, onSearchComplete);
 		}
 		
-		private function onSearchComplete(event:Event):void
+		private function onSearchComplete(response:String):void
 		{
-			var res:Array = JSONInstantiator.createInstance(event.target.data, CocktailMini, false) as Array;
+			var res:Array = JSONInstantiator.createInstance(response, CocktailMini, false) as Array;
 			_model.isNoCocktailsFound = !res || res.length == 0
 			_model.cocktailsList = new ArrayCollection(res);
 		}

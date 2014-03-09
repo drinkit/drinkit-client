@@ -32,7 +32,7 @@
 				}
 			}
 			
-			protected function itemrenderer1_clickHandler(event:MouseEvent):void
+			protected function onCloseButtonClick(event:MouseEvent):void
 			{
 				var parentList:List = owner as List;
 				parentList.dataProvider.removeItemAt(parentList.dataProvider.getItemIndex(data))
@@ -60,8 +60,8 @@
 	</s:Rect>
 	<s:HGroup paddingLeft="10" height="100%" verticalAlign="middle" paddingTop="0">
 		<s:Label id="labelDisplay" color="0xffffff" horizontalCenter="0" mouseEnabled="true" paddingBottom="-1"
-				 styleName="regularText" text="Анана"/>
-		<s:Group width="15" height="15" click="itemrenderer1_clickHandler(event)" rollOver="group1_rollOverHandler(event)" rollOut="group1_rollOutHandler(event)">
+				 styleName="regularText" />
+		<s:Group width="15" height="15" click="onCloseButtonClick(event)" rollOver="group1_rollOverHandler(event)" rollOut="group1_rollOutHandler(event)">
 			<s:Ellipse width="15" height="15">
 				<s:fill>
 					<s:SolidColor id="closeButtonColor" color="{DesignModel.ORANGE_BEACH}" />

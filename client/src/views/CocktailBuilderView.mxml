@@ -191,7 +191,7 @@
 					 text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
 					 top="20"/>
 			<s:List id="recipesList" borderVisible="false" width="100%" change="selectCocktailHandler(event)" contentBackgroundAlpha="0"
-					itemRenderer="views.renderers.CocktailItemRenderer" dataProvider="{_model.cocktailsList}" visible="{!_model.isNoCocktailsFound}">
+					itemRenderer="views.renderers.CocktailItemRenderer2" dataProvider="{_model.cocktailsList}" visible="{!_model.isNoCocktailsFound}">
 				<s:layout>
 					<s:VerticalLayout variableRowHeight="false" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" />
 				</s:layout>

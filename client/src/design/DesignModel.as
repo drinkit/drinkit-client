@@ -1,6 +1,8 @@
 package design
 {
-	public class DesignModel
+	import flash.events.EventDispatcher;
+
+	public class DesignModel extends EventDispatcher
 	{
 		public static const BRICK_RED:uint = 0xE85F1B;
 		public static const VIOLET:uint = 0x464077;

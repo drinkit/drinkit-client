@@ -6,6 +6,15 @@
 {
 	src: url("/../assets/fonts/GOTHIC.TTF");
 	fontFamily: "CenturyGothic";
+	fontStyle: normal;
+	embed-as-cff: true;
+}
+
+@font-face
+{
+	src: url("/../assets/fonts/GOTHICI.TTF");
+	fontFamily: "CenturyGothic";
+	fontStyle: italic;
 	embed-as-cff: true;
 }
 

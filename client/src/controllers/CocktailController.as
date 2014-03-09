@@ -39,9 +39,9 @@ package controllers
 			ServiceUtil.requestData(Services.GET_COCKTAIL_INFO, params, onCocktailInfoLoad);
 		}
 		
-		private function onCocktailInfoLoad(event:Event):void
+		private function onCocktailInfoLoad(response:String):void
 		{
-			model = JSONInstantiator.createInstance(event.target.data, CocktailModel, false) as CocktailModel;
+			model = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
 			MainController.instance.setTitle(model.name);
 			dispatchEvent(new Event(COCKTAIL_DATA_LOADED));
 		}
