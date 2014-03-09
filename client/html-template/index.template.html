@@ -62,8 +62,51 @@
          {
          	result.get(_action).done(onSuccessGetProfile);
          }
-        
          
+        
+        function sendRequest(method, address, params, handlerName, headers)
+        {
+			var xmlhttp = new XMLHttpRequest();
+			var target;
+			
+			if (params != "")
+				target = address + '?' + params;
+			else
+				target = address;
+			 
+			xmlhttp.open(method, target, true);
+			
+			if (headers != null)
+			{
+				for (var i = 0; i < headers.length; i++)
+				{
+					if (headers[i] != null)
+						xmlhttp.setRequestHeader(headers[i].name, headers[i].value);
+				}
+			}
+			
+			xmlhttp.onreadystatechange = function() 
+			{
+			  if (xmlhttp.readyState == 4) 
+			  {
+			     if (xmlhttp.status == 200) 
+			     {
+			     	document.Main.onRequestComplete(xmlhttp.responseText, address, params, handlerName);
+			     } else			     
+			     if (xmlhttp.status == 401)
+			     {
+			     	document.Main.processAuth(xmlhttp.getResponseHeader('WWW-Authenticate'), address, params, handlerName);
+			     } 
+			     else
+			     {
+			     	document.Main.onError(xmlhttp.responseText);
+			     }
+			  }
+			};
+			
+			xmlhttp.send(params);
+        }
+
 
          
         </script>
@@ -74,7 +117,7 @@
             var swfVersionStr = "${version_major}.${version_minor}.${version_revision}";
             // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
             var xiSwfUrlStr = "${expressInstallSwf}";
-            var flashvars = {"serviceAddress":"http://naiv.kiev.ua:8081/"};
+            var flashvars = {"serviceAddress":"http://naiv.kiev.ua:8080/"};
             var params = {};
             params.quality = "high";
             params.bgcolor = "${bgcolor}";
