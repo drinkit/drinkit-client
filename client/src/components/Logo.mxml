@@ -23,6 +23,11 @@
 				LoginWindow.show();
 			}
 			
+			protected function label2_clickHandler(event:MouseEvent):void
+			{
+				SignupWindow.show();
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -35,4 +40,5 @@
 	</s:Rect>
 	<s:Image width="240" height="80" left="5" verticalCenter="0" source="@Embed(source='/../assets/logo-main.png')" blendMode="normal" buttonMode="true" click="image1_clickHandler(event)" />
 	<s:Label text="Войти" fontSize="16" top="10" right="15" textDecoration="underline" color="0xffffff" fontFamily="CenturyGothic" buttonMode="true" click="label1_clickHandler(event)" />
+	<s:Label text="Нет аккаунта?" fontSize="12" top="30" right="15" color="0xffffff" fontFamily="CenturyGothic" buttonMode="true" click="label2_clickHandler(event)" />
 </s:Group>

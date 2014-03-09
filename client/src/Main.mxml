@@ -13,9 +13,7 @@
 			import controllers.MainController;
 			
 			import design.DesignModel;
-			
-			import models.AuthModel;
-			import models.HelloAuthModel;
+
 			import models.MainModel;
 			
 			import mx.core.UIComponent;
@@ -45,8 +43,6 @@
 			{				
 				
 				ToolTipManager.showDelay = 300;
-				AuthModel.instance.init(stage);
-				HelloAuthModel.instance.init(stage);
 				//
 				_model = new MainModel();
 				MainController.instance.model = _model;
@@ -57,7 +53,7 @@
 			private function readFlashVars():void
 			{
 				if (parameters.serviceAddress)
-					ServiceUtil.serviceAddress = parameters.serviceAddress;
+					ServiceUtil.init(parameters.serviceAddress);
 			}
 			
 			

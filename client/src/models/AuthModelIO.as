@@ -3,9 +3,6 @@ package models
 	import flash.display.Stage;
 	import flash.external.ExternalInterface;
 	
-	import io.oauth.OAuth;
-	import io.oauth.OAuthEvent;
-	
 	import mx.controls.Alert;
 	
 	public class AuthModelIO implements IAuthModel

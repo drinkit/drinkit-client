@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" close="titlewindow1_closeHandler(event)" creationComplete="titlewindow1_creationCompleteHandler(event)">
+			   xmlns:mx="library://ns.adobe.com/flex/mx" close="titlewindow1_closeHandler(event)" creationComplete="titlewindow1_creationCompleteHandler(event)" title="Вход">
 	<s:layout>
 		<s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center" />
 	</s:layout>
 	
 	<fx:Script>
 		<![CDATA[
-			import models.AuthModel;
+
 			import models.AuthModelIO;
-			import models.FlexOAuthIOModel;
-			import models.HelloAuthModel;
 			import models.IAuthModel;
 			
 			import mx.core.FlexGlobals;
@@ -20,6 +18,8 @@
 			import mx.managers.PopUpManager;
 			
 			import spark.components.Application;
+			
+			import utils.ServiceUtil;
 			
 			private static var _loginWindow:LoginWindow = new LoginWindow();
 			
@@ -52,14 +52,30 @@
 				authModel.init(stage);
 			}
 			
+			protected function onBasicLoginClick(event:MouseEvent):void
+			{
+				ServiceUtil.setUserCredentials(userLogin.text, userPassword.text);
+			}
+			
+			protected function label1_clickHandler(event:MouseEvent):void
+			{
+				close();
+				SignupWindow.show();
+			}
+			
 		]]>
 	</fx:Script>
 	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<s:TextInput id="userLogin" borderVisible="true" horizontalCenter="0" prompt="логин..." textAlign="left"/>
-	<s:TextInput prompt="пароль..." displayAsPassword="true" />
+	<s:TextInput width="100%" id="userLogin" borderVisible="true" horizontalCenter="0" prompt="e-mail..." textAlign="left"/>
+	<s:TextInput width="100%" id="userPassword" prompt="пароль..." displayAsPassword="true" />
+	<s:HGroup verticalAlign="middle">
+		<s:Button label="Войти" click="onBasicLoginClick(event)" />
+		<s:Label text="Зарегестрироваться!" click="label1_clickHandler(event)" buttonMode="true" />
+	</s:HGroup>
+
 	<s:Line width="100%">
 		<s:stroke>
 			<s:SolidColorStroke color="0" weight="2" />
