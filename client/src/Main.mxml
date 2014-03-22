@@ -53,7 +53,7 @@
 			private function readFlashVars():void
 			{
 				if (parameters.serviceAddress)
-					ServiceUtil.init(parameters.serviceAddress);
+					ServiceUtil.instance.init(parameters.serviceAddress);
 			}
 			
 			
@@ -77,20 +77,43 @@
 
 	<s:Rect width="100%" height="100%">
 		<s:fill>
-			<s:BitmapFill scaleX="0.2" scaleY="0.2" fillMode="repeat" alpha="0.2" source="@Embed(source='/../assets/cocktail-pattern.jpg')" />
+			<s:BitmapFill scaleX="1" scaleY="1" fillMode="repeat" alpha="0.7" source="@Embed(source='/../assets/new-pattern.png')" />
 		</s:fill>
 	</s:Rect>
 	<s:VGroup gap="0" top="20" bottom="20" width="1024" height="100%" horizontalCenter="0">
 		<components:Logo />
-		<s:TabBar id="menu" width="100%" height="30" dataProvider="{viewstack1}"
-				  change="menu_changeHandler(event)" visible="false" includeInLayout="false" />
-		<mx:ViewStack id="viewstack1" width="100%" height="100%">
-			<s:NavigatorContent width="100%" height="100%" label="Конструктор коктейлей">
-				<views:CocktailBuilderView width="100%" height="100%" />
-			</s:NavigatorContent>
-			<s:NavigatorContent width="100%" height="100%" label="Коктейль">
-				<views:CocktailView width="100%" height="100%" />
-			</s:NavigatorContent>
-		</mx:ViewStack>
+		<s:BorderContainer backgroundColor="0xffffff" width="100%" height="100%" borderVisible="false">
+			<s:layout>
+				<s:VerticalLayout paddingLeft="20" paddingTop="10" gap="5" />
+			</s:layout>
+			<s:TabBar id="menu" height="50" dataProvider="{viewstack1}"
+					  change="menu_changeHandler(event)" skinClass="design.skins.tabbar.SimpleTabBarSkin"/>
+			<s:Group width="100%" height="10">
+				<s:Line top="0" left="0" right="20" yFrom="0" yTo="0">
+					<s:stroke>
+						<s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7" />
+					</s:stroke>
+				</s:Line>
+				<s:Line top="3" left="0" right="20" yFrom="0" yTo="0" >
+					<s:stroke>
+						<s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7" />
+					</s:stroke>
+				</s:Line>
+			</s:Group>
+			<mx:ViewStack id="viewstack1" width="100%" height="100%">
+				<components:ExtNavigationContent width="100%" height="100%" label="Конструктор">
+					<views:CocktailBuilderView width="100%" height="100%" />
+				</components:ExtNavigationContent>
+				<components:ExtNavigationContent width="100%" height="100%" label="Коктейль" includeInBar="false">
+					<views:CocktailView width="100%" height="100%" />
+				</components:ExtNavigationContent>
+				<components:ExtNavigationContent width="100%" height="100%" label="Мой бар">
+				</components:ExtNavigationContent>
+				<components:ExtNavigationContent width="100%" height="100%" label="Админ-панель">
+					
+				</components:ExtNavigationContent>
+			</mx:ViewStack>
+		</s:BorderContainer>
+		
 	</s:VGroup>
 </s:Application>

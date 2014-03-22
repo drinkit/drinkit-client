@@ -81,7 +81,7 @@ package controllers
 		 */
 		public function requestIngredients():void
 		{
-			ServiceUtil.requestData(Services.GET_INGREDIENTS, null, onIngredientsLoad);
+			ServiceUtil.instance.requestData(Services.GET_INGREDIENTS, null, onIngredientsLoad);
 		}
 		
 		private function onIngredientsLoad(response:String):void

@@ -36,7 +36,7 @@ package controllers
 		{
 			var params:URLVariables = new URLVariables();
 			params.id = key;
-			ServiceUtil.requestData(Services.GET_COCKTAIL_INFO, params, onCocktailInfoLoad);
+			ServiceUtil.instance.requestData(Services.GET_COCKTAIL_INFO, params, onCocktailInfoLoad);
 		}
 		
 		private function onCocktailInfoLoad(response:String):void

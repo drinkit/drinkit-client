@@ -20,8 +20,18 @@
 
 @font-face
 {
+	src: url("/../assets/fonts/GOTHICB.TTF");
+	fontFamily: "CenturyGothic";
+	fontWeight: bold;
+	embed-as-cff: true;
+}
+
+@font-face
+{
 	src: url("/../assets/fonts/GEORGIAZ.TTF");
 	fontFamily: "Georgia";
+	fontStyle: italic;
+	fontWeight: bold;
 	embed-as-cff: true;
 }
 
@@ -35,6 +45,8 @@
 .headerPinkText
 {
 	fontFamily: "Georgia";
+	fontWeight: bold;
+	fontStyle: italic;
 	color: #FF6F69;
 	fontSize: 14;
 	advancedAntiAliasing: true;
@@ -43,14 +55,26 @@
 .headerGreenText
 {
 	fontFamily: "Georgia";
+	fontWeight: bold;
+	fontStyle: italic;
 	color: #78A590;
 	fontSize: 18;
 	advancedAntiAliasing: true;
 }
 
+s|ButtonBarButton
+{
+	fontFamily: "Georgia";
+	fontWeight: bold;
+	fontStyle: italic;
+	fontSize: 24;
+}
+
 .pageTitleText
 {
 	fontFamily: "Georgia";
+	fontWeight: bold;
+	fontStyle: italic;
 	color: #FFB000;
 	fontSize: 30;
 	advancedAntiAliasing: true;

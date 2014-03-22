@@ -64,7 +64,7 @@
          }
          
         
-        function sendRequest(method, address, params, handlerName, headers)
+        function sendRequest(method, address, params, headers, requestID)
         {
 			var xmlhttp = new XMLHttpRequest();
 			var target;
@@ -91,11 +91,11 @@
 			  {
 			     if (xmlhttp.status == 200) 
 			     {
-			     	document.Main.onRequestComplete(xmlhttp.responseText, address, params, handlerName);
-			     } else			     
-			     if (xmlhttp.status == 401)
+			     	document.Main.onRequestComplete(xmlhttp.responseText, requestID);
+			     }
+			     else if (xmlhttp.status == 401)
 			     {
-			     	document.Main.processAuth(xmlhttp.getResponseHeader('WWW-Authenticate'), address, params, handlerName);
+			     	document.Main.processAuth(xmlhttp.getResponseHeader('WWW-Authenticate'), method, address, params, requestID);
 			     } 
 			     else
 			     {

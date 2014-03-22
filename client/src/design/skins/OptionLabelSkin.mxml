@@ -113,7 +113,7 @@
 		</s:fill>
 	</s:Rect>
 	<s:VGroup id="container" gap="1" clipAndEnableScrolling="true">
-		<s:Label id="labelDisplay" fontSize="14" fontFamily="Georgia" color.up="{DesignModel.ORANGE_BEACH}" color.over="{DesignModel.BRICK_RED}"
+		<s:Label id="labelDisplay" fontSize="14" fontFamily="Georgia" fontStyle="italic" fontWeight="bold" color.up="{DesignModel.ORANGE_BEACH}" color.over="{DesignModel.BRICK_RED}"
 				 color.selectedStates="0xffffff" color.down="{DesignModel.BRICK_RED}" maxDisplayedLines="1" />
 		<s:Path height="2"
 				data="l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0 l 3 0 m 2 0"

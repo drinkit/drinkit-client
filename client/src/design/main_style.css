@@ -11,11 +11,25 @@
 s|ToggleButton
 {
 	skinClass: ClassReference("design.skins.FlatToggleButtonSkin");
+	cornerRadius: 3;
 }
 
 s|TabBar
 {
 	cornerRadius: 0;
 	skinClass: ClassReference("design.skins.FlatTabBarSkin");
+}
+
+s|Button
+{
+	cornerRadius: 3;
+	skinClass: ClassReference("design.skins.FlatButtonSkin");
+}
+
+s|TextInput
+{
+	fontSize: 14;
+	fontFamily: "CenturyGothic";
+	paddingLeft: 5;
 }
 

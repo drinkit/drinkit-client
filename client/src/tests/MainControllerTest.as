@@ -4,6 +4,8 @@ package tests
 	
 	import flexunit.framework.Assert;
 	
+	import models.MainModel;
+	
 	import mx.managers.BrowserManager;
 	
 	public class MainControllerTest
@@ -12,6 +14,8 @@ package tests
 		[Before]
 		public function setUp():void
 		{
+			var model:MainModel = new MainModel();
+			MainController.instance.model = model;
 			MainController.instance.initBrowserEngine();
 		}
 		

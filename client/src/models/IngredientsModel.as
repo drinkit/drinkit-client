@@ -34,7 +34,7 @@ package models
 				}
 			}
 			
-			return null;
+			return "ХЗ";
 		}
 	}
 }
