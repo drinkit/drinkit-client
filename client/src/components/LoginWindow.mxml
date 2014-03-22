@@ -8,10 +8,12 @@
 	
 	<fx:Script>
 		<![CDATA[
-
 			import models.AuthModelIO;
 			import models.IAuthModel;
+			import models.UserInfoModel;
+			import models.events.AuthEvent;
 			
+			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
 			import mx.events.CloseEvent;
 			import mx.events.FlexEvent;
@@ -34,6 +36,7 @@
 			public static function close():void
 			{
 				PopUpManager.removePopUp(_loginWindow);
+				_loginWindow.clear();
 			}
 			
 			protected function onSocialLoginClick(event:MouseEvent):void
@@ -43,21 +46,41 @@
 			
 			protected function titlewindow1_closeHandler(event:CloseEvent):void
 			{
-				PopUpManager.removePopUp(this);
+				close();
 			}
 			
 			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
 			{
 				authModel = AuthModelIO.instance;
 				authModel.init(stage);
+				//
+				UserInfoModel.instance.addEventListener(AuthEvent.AUTH_ERROR, onAuthError);
+				UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onAuthSuccess);
+			}
+			
+			private function onAuthSuccess(event:AuthEvent):void
+			{
+				close();
+			}
+			
+			public function clear():void
+			{
+				userLogin.text = "";
+				userPassword.text = "";
+				errorMessage.includeInLayout = errorMessage.visible = false;
+			}
+			
+			private function onAuthError(event:AuthEvent):void
+			{
+				errorMessage.includeInLayout = errorMessage.visible = true;
 			}
 			
 			protected function onBasicLoginClick(event:MouseEvent):void
 			{
-				ServiceUtil.setUserCredentials(userLogin.text, userPassword.text);
+				UserInfoModel.instance.setUserCredentials(userLogin.text, userPassword.text);
 			}
 			
-			protected function label1_clickHandler(event:MouseEvent):void
+			protected function onSignUpButtonClick(event:MouseEvent):void
 			{
 				close();
 				SignupWindow.show();
@@ -69,22 +92,16 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<s:TextInput width="100%" id="userLogin" borderVisible="true" horizontalCenter="0" prompt="e-mail..." textAlign="left"/>
-	<s:TextInput width="100%" id="userPassword" prompt="пароль..." displayAsPassword="true" />
-	<s:HGroup verticalAlign="middle">
-		<s:Button label="Войти" click="onBasicLoginClick(event)" />
-		<s:Label text="Зарегестрироваться!" click="label1_clickHandler(event)" buttonMode="true" />
-	</s:HGroup>
-
-	<s:Line width="100%">
-		<s:stroke>
-			<s:SolidColorStroke color="0" weight="2" />
-		</s:stroke>
-	</s:Line>
+	<s:TextInput id="userLogin" width="100%" height="36" borderVisible="true" horizontalCenter="0"
+				 prompt="Электронный адрес..." textAlign="left" />
+	<s:TextInput id="userPassword" width="100%" height="36" displayAsPassword="true"
+				 prompt="Пароль..."/>
+	<s:Button width="100%" label="Войти" click="onBasicLoginClick(event)"/>
+	<s:Label id="errorMessage" text="Неправильный электронный адрес или пароль!" color="0xff0000" includeInLayout="false" visible="false" />
 	<s:HGroup width="100%">
 		<s:Button width="32" height="32" label="V" name="vkontakte" click="onSocialLoginClick(event)" />
 		<s:Button width="32" height="32" label="F" name="facebook" click="onSocialLoginClick(event)" />
 		<s:Button width="32" height="32" label="G" name="google" click="onSocialLoginClick(event)" />
 	</s:HGroup>
-	
+	<s:Button width="100%" label="Зарегистрироваться" click="onSignUpButtonClick(event)" />
 </s:TitleWindow>
