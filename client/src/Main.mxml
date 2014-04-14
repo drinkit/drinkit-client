@@ -13,8 +13,10 @@
 			import controllers.MainController;
 			
 			import design.DesignModel;
-
+			
 			import models.MainModel;
+			import models.UserInfoModel;
+			import models.UserRoles;
 			
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
@@ -108,8 +110,9 @@
 					<views:CocktailView width="100%" height="100%" />
 				</components:ExtNavigationContent>
 				<components:ExtNavigationContent width="100%" height="100%" label="Мой бар">
+					<views:MyBar width="100%" height="100%" />
 				</components:ExtNavigationContent>
-				<components:ExtNavigationContent width="100%" height="100%" label="Админ-панель">
+				<components:ExtNavigationContent width="100%" height="100%" label="Админ-панель" includeInBar="{UserInfoModel.instance.role == UserRoles.ADMIN}">
 					
 				</components:ExtNavigationContent>
 			</mx:ViewStack>

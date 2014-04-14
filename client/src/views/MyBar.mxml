@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" show="group1_showHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import models.UserInfoModel;
+			import models.UserRoles;
+			
+			import mx.events.FlexEvent;
+			
+			protected function group1_showHandler(event:FlexEvent):void
+			{
+				switch (UserInfoModel.instance.role)
+				{
+					case UserRoles.ANONYMOUS:
+					{
+						currentState = "anonymous";
+						break;
+					}						
+					default:
+					{
+						currentState = "authorised";
+						break;
+					}
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="anonymous" />
+		<s:State name="authorised" />
+	</s:states>
+	<s:Label includeIn="anonymous" text='Функция "Мой бар" доступна только для зарегистрированых пользователей.' />
+</s:Group>

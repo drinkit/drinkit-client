@@ -22,6 +22,11 @@ package models
 			return _email;
 		}
 		
+		public function get role():uint
+		{
+			return _userRole;
+		}
+		
 		public static function get instance():UserInfoModel
 		{
 			if (!_instance)
