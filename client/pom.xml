@@ -19,7 +19,7 @@
 
 
     <repositories>
-        <repository>
+		<repository>
             <id>flex-mojos-repository</id>
             <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
         </repository>
@@ -92,6 +92,13 @@
             <classifier>11.1</classifier>  <!-- the classifier specifies the target flash player major version  -->
             <type>swc</type>
         </dependency>
+		
+		<dependency>
+			<groupId>com.adobe</groupId>
+			<artifactId>as3corelib</artifactId>
+			<version>0.93</version>
+			<type>swc</type>
+		</dependency>
 
         <!--<dependency>-->
             <!--<groupId>com.adobe.flexunit</groupId>-->
