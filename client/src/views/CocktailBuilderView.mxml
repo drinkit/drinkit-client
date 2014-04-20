@@ -110,7 +110,7 @@
 	</fx:Declarations>
 	<!-- <s:Label id="pageTitle" width="100%" height="50" styleName="pageTitleText" text="Конструктор коктейлей" textAlign="center" verticalAlign="middle" /> -->
 	<s:HGroup width="100%" height="100%">
-		<s:VGroup id="searchPanel" paddingTop="5" width="280" height="100%">
+		<s:VGroup id="searchPanel" paddingTop="5" width="250" height="100%">
 			<s:BorderContainer width="100%" height="100%" borderVisible="false">
 				<s:layout>
 					<s:VerticalLayout paddingLeft="0" paddingRight="5" paddingTop="5" />
@@ -118,12 +118,12 @@
 
 				<s:Label text="Формат коктейля" styleName="headerGreenText" />
 				<s:Spacer width="100%" height="5" />
-				<s:HGroup id="cocktailTypesGroup" horizontalAlign="left" width="100%" gap="5">
-					<s:ToggleButton width="48" height="48" name="{CocktailTypes.LONG_DRINK}" change="cocktailTypeChangeHandler(event)"
+				<s:HGroup id="cocktailTypesGroup" width="100%" gap="15" horizontalAlign="center">
+					<s:ToggleButton width="64" height="64" name="{CocktailTypes.LONG_DRINK}" change="cocktailTypeChangeHandler(event)"
 									icon="@Embed(source='/../assets/long-64.png')" toolTip="Long drink" />
-					<s:ToggleButton width="48" height="48" name="{CocktailTypes.SHORT_DRINK}" change="cocktailTypeChangeHandler(event)"
+					<s:ToggleButton width="64" height="64" name="{CocktailTypes.SHORT_DRINK}" change="cocktailTypeChangeHandler(event)"
 									icon="@Embed(source='/../assets/short-64.png')" toolTip="Short drink" />
-					<s:ToggleButton width="48" height="48" name="{CocktailTypes.SHOOTER}" change="cocktailTypeChangeHandler(event)"
+					<s:ToggleButton width="64" height="64" name="{CocktailTypes.SHOOTER}" change="cocktailTypeChangeHandler(event)"
 									icon="@Embed(source='/../assets/shooter-64.png')" toolTip="Shooter" />
 				</s:HGroup>
 				<s:Line yFrom="0" yTo="0" width="100%">
@@ -131,7 +131,7 @@
 						<s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7" />
 					</s:stroke>
 				</s:Line>
-				<s:Spacer width="100%" height="5" />
+				<s:Spacer width="100%" height="10" />
 				<s:Label text="Дополнительные опции" styleName="headerGreenText" />
 				<s:Group id="optionsGroup" width="100%">
 					<s:layout>
