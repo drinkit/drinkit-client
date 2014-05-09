@@ -6,6 +6,7 @@ package models.events
 	{
 		public static const AUTH_SUCCESS:String = "authSuccess";
 		public static const AUTH_ERROR:String = "authError";
+		public static const LOGOUT:String = "logout";
 		
 		public function AuthEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{

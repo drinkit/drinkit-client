@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" show="group1_showHandler(event)">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="onCreationComplete(event)">
 	<fx:Script>
 		<![CDATA[
 			import models.UserInfoModel;
 			import models.UserRoles;
+			import models.events.AuthEvent;
 			
-			import mx.events.FlexEvent;
+			import mx.events.FlexEvent;			
 			
-			protected function group1_showHandler(event:FlexEvent):void
+			protected function onCreationComplete(event:FlexEvent):void
 			{
-				switch (UserInfoModel.instance.role)
-				{
-					case UserRoles.ANONYMOUS:
-					{
-						currentState = "anonymous";
-						break;
-					}						
-					default:
-					{
-						currentState = "authorised";
-						break;
-					}
-				}
+				UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onSuccessAuth);
+				UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onLogout);
+			}
+			
+			private function onSuccessAuth(event:AuthEvent):void
+			{
+				currentState = "authorised";
+			}
+			
+			private function onLogout(event:AuthEvent):void
+			{
+				currentState = "anonymous";
 			}
 			
 		]]>
