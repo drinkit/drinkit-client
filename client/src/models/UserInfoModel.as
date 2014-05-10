@@ -1,9 +1,13 @@
 package models
-{
+{	
+	import controllers.supportClasses.Services;
+	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	
 	import models.events.AuthEvent;
+	
+	import mx.messaging.config.ServerConfig;
 	
 	import utils.ServiceUtil;
 	
@@ -14,6 +18,8 @@ package models
 	{
 		private static var _instance:UserInfoModel;
 		
+		[Bindable(event="logout")]
+		[Bindable(event="authSuccess")]
 		public function get displayName():String
 		{
 			return _displayName;
@@ -30,6 +36,7 @@ package models
 		}
 		
 		[Bindable(event="logout")]
+		[Bindable(event="authSuccess")]
 		public function get role():uint
 		{
 			return _userRole;
@@ -61,7 +68,9 @@ package models
 			_email = "";
 			_password = "";
 			_displayName = "";
+			ServiceUtil.instance.clearDigest();
 			_userRole = UserRoles.ANONYMOUS;
+			//
 			dispatchEvent(new AuthEvent(AuthEvent.LOGOUT));
 		}
 		
@@ -73,12 +82,32 @@ package models
 		
 		public function requestUserInfo():void
 		{
-			ServiceUtil.instance.requestData("", null, onGetUserInfo);
+			ServiceUtil.instance.requestData(Services.GET_USER_INFO, null, onGetUserInfo);
+		}
+		
+		private function getHighestRole(roles:Array):uint
+		{
+			var curRole:uint = UserRoles.ANONYMOUS;
+			
+			for each (var role:Object in roles)
+			{
+				if (curRole < UserRoles.USER && role.authority == "ROLE_USER")
+					curRole = UserRoles.USER;
+				
+				if (curRole < UserRoles.ADMIN && role.authority == "ROLE_ADMIN")
+					curRole = UserRoles.ADMIN;
+			}
+			
+			return curRole;
 		}
 		
 		private function onGetUserInfo(response:String):void
 		{
 			// parse response and save user info
+			var responseJSON:Object = JSON.parse(response);
+			_displayName = responseJSON.displayName;
+			_userRole = getHighestRole(responseJSON.authorities);
+			//
 			dispatchEvent(new AuthEvent(AuthEvent.AUTH_SUCCESS));
 		}
 		

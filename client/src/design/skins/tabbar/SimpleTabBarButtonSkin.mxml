@@ -24,7 +24,7 @@ The default skin class for Spark TabBar buttons.
 -->
 
 <s:SparkButtonSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-				   xmlns:fb="http://ns.adobe.com/flashbuilder/2009" minWidth="21" minHeight="21" alpha.disabled="0.5">
+				   xmlns:fb="http://ns.adobe.com/flashbuilder/2009" minWidth="21" minHeight="21" alpha.disabled="0.5" show="sparkbuttonskin1_showHandler(event)">
 
 	<!-- host component -->
 	<fx:Metadata>
@@ -42,10 +42,10 @@ The default skin class for Spark TabBar buttons.
 
 
 		<![CDATA[
-
-			import mx.core.IVisualElement;
-			
 			import design.DesignModel;
+			
+			import mx.core.IVisualElement;
+			import mx.events.FlexEvent;
 			
 			import spark.components.TabBar;
 			
@@ -90,6 +90,16 @@ The default skin class for Spark TabBar buttons.
 				return null;
 			}
 
+			protected function sparkbuttonskin1_showHandler(event:FlexEvent):void
+			{
+				var tabbar:TabBar = TabBar(hostComponent.owner);
+				
+				if (getLastVisibleTab(tabbar) === hostComponent)
+					separator.visible = false;
+				else
+					separator.visible = true;
+			}
+			
 		]]>
 
 	</fx:Script>

@@ -36,6 +36,11 @@ package utils
 			ExternalInterface.addCallback("onError", onError);
 		}
 		
+		public function clearDigest():void
+		{
+			_currentAuthHeader = null;
+		}
+		
 		public function onRequestComplete(response:String, requestID:String):void
 		{
 			var handler:Function = (_waitingHandlers[requestID] as Function);

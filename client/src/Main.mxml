@@ -17,6 +17,7 @@
 			import models.MainModel;
 			import models.UserInfoModel;
 			import models.UserRoles;
+			import models.events.AuthEvent;
 			
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
@@ -50,6 +51,13 @@
 				MainController.instance.model = _model;
 				MainController.instance.initBrowserEngine();
 				readFlashVars();
+				UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onAuthChange);
+				UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onAuthChange);
+			}
+			
+			private function onAuthChange(event:AuthEvent):void
+			{
+				menu.validateNow();
 			}
 			
 			private function readFlashVars():void
