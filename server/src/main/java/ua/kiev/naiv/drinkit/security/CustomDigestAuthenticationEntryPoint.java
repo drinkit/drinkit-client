@@ -41,7 +41,7 @@ public class CustomDigestAuthenticationEntryPoint extends DigestAuthenticationEn
         // qop is quality of protection, as defined by RFC 2617.
         // we do not use opaque due to IE violation of RFC 2617 in not
         // representing opaque on subsequent requests in same session.
-        String authenticateHeader = "Digest realm=\"" + getRealmName() + "\", " + "qop=\"auth\", nonce=\""
+        String authenticateHeader = "_Digest realm=\"" + getRealmName() + "\", " + "qop=\"auth\", nonce=\""
                 + nonceValueBase64 + "\"";
 
         if (authException instanceof NonceExpiredException) {

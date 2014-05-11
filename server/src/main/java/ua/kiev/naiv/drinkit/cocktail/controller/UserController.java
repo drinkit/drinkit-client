@@ -1,7 +1,9 @@
 package ua.kiev.naiv.drinkit.cocktail.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,5 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("user")
 public class UserController {
 
+    @RequestMapping("/getInfo")
+    @ResponseBody
+    public Object getCurrentUserInfo() {
+        return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 
 }
