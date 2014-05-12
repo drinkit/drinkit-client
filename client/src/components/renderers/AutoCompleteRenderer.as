@@ -27,7 +27,7 @@ package components.renderers
 					var len:int = typeAheadText.length;
 					var matchedPart:String = this.autoCompleteComboBox.itemToLabel(data).substr(startIndex, len);
 					
-					labelAsRichText.textFlow = TextFlowUtil.importFromString(this.autoCompleteComboBox.itemToLabel(data).replace(matchedPart, '<span fontWeight="bold">' + matchedPart + '</span>'));
+					labelAsRichText.textFlow = TextFlowUtil.importFromString(this.autoCompleteComboBox.itemToLabel(data).replace(matchedPart, '<span textDecoration="underline">' + matchedPart + '</span>'));
 					return;
 				}
 			} 

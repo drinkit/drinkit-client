@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="400" title="Регистрация" creationPolicy="all" show="onShow(event)" close="titlewindow1_closeHandler(event)"
+			   xmlns:ns="http://hamcrest.org/2009/mxml" xmlns:utils="utils.*">
+
+	<s:layout>
+		<s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center" />
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+
+			import design.DesignModel;
+			
+			import mx.core.FlexGlobals;
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			import spark.components.Application;
+			import spark.events.TextOperationEvent;
+			
+			import utils.ServiceUtil;
+			
+			private static var _signupWindow:SignupWindow;
+			
+
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				ServiceUtil.instance.sendData("", {}, onSignUp);
+			}
+			
+			private function onSignUp(responseText:String):void
+			{
+				//
+			}
+			
+			
+			public static function show():void
+			{
+				if (!_signupWindow)
+					_signupWindow = new SignupWindow();
+				
+				_signupWindow.clearData();
+				PopUpManager.addPopUp(_signupWindow, Application(FlexGlobals.topLevelApplication), true);
+				PopUpManager.centerPopUp(_signupWindow);
+			}
+			
+			public static function close():void
+			{
+				PopUpManager.removePopUp(_signupWindow);
+			}
+			
+			private function clearData():void
+			{
+				if (displayNameInput)
+				{
+					displayNameInput.text = "";
+					emailInput.text = "";
+					repeatEmailInput.text = "";
+					passwordInput.text = "";
+					repeatPasswordInput.text = "";
+				}
+			
+			}
+			
+			protected function onShow(event:FlexEvent):void
+			{
+				clearData();
+			}
+			
+			protected function titlewindow1_closeHandler(event:CloseEvent):void
+			{
+				PopUpManager.removePopUp(_signupWindow);
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<mx:EmailValidator required="true" source="{emailInput}" property="text" />
+		<utils:MatchValidator required="true" source="{repeatEmailInput}" property="text" matchSource="{emailInput}" matchProperty="text"
+							  noMatchError="E-mail не совпадает с предыдущим." triggerEvent="{TextOperationEvent.CHANGE}" />
+		<utils:MatchValidator required="true" source="{repeatPasswordInput}" property="text" matchSource="{passwordInput}" matchProperty="text"
+							  noMatchError="Пароли должны совпадать." triggerEvent="{TextOperationEvent.CHANGE}" />
+	</fx:Declarations>
+
+	<s:Group width="100%">
+		<s:Label left="0" text="Отображаемое имя:" verticalCenter="0" />
+		<s:TextInput id="displayNameInput" right="0" width="200" />
+	</s:Group>
+	<s:Line yFrom="0" yTo="0" width="100%">
+		<s:stroke>
+			<s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7" />
+		</s:stroke>
+	</s:Line>
+	<s:Group width="100%">
+		<s:Label left="0" text="Электронный адрес (e-mail):" verticalCenter="0" />
+		<s:TextInput id="emailInput" right="0" width="200" />
+	</s:Group>
+	<s:Group width="100%">
+		<s:Label left="0" text="Повторите электронный адрес:" verticalCenter="0" />
+		<s:TextInput id="repeatEmailInput" right="0" width="200" />
+	</s:Group>
+	<s:Line yFrom="0" yTo="0" width="100%">
+		<s:stroke>
+			<s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7" />
+		</s:stroke>
+	</s:Line>
+	<s:Group width="100%">
+		<s:Label left="0" text="Пароль:" verticalCenter="0" />
+		<s:TextInput id="passwordInput" right="0" width="200" displayAsPassword="true" />
+	</s:Group>
+	<s:Group width="100%">
+		<s:Label left="0" text="Повторите пароль:" verticalCenter="0" />
+		<s:TextInput id="repeatPasswordInput" right="0" width="200" displayAsPassword="true" />
+	</s:Group>
+	<s:Button label="Зарегистрироваться" click="button1_clickHandler(event)" />
+</s:TitleWindow>

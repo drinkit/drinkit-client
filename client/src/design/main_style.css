@@ -8,24 +8,10 @@
 	color: PropertyReference("darkGreen");
 }
 
-s|Application
-{
-	backgroundColor: PropertyReference("sandBeach");
-}
-
-s|List
-{
-	contentBackgroundColor: PropertyReference("sandBeach");
-}
-
-s|TextInput
-{
-	contentBackgroundColor: PropertyReference("sandBeach");
-}
-
 s|ToggleButton
 {
 	skinClass: ClassReference("design.skins.FlatToggleButtonSkin");
+	cornerRadius: 3;
 }
 
 s|TabBar
@@ -34,8 +20,16 @@ s|TabBar
 	skinClass: ClassReference("design.skins.FlatTabBarSkin");
 }
 
-components|IconRadioButton
+s|Button
 {
-	selectedColor: #00ff00;
-	chromeColor: #aaaaaa;
+	cornerRadius: 3;
+	skinClass: ClassReference("design.skins.FlatButtonSkin");
 }
+
+s|TextInput
+{
+	fontSize: 14;
+	fontFamily: "CenturyGothic";
+	paddingLeft: 5;
+}
+

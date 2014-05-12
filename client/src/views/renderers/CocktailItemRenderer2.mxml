@@ -14,7 +14,6 @@
 	
 	<fx:Script>
 		<![CDATA[
-
 			import design.DesignModel;
 			
 			import models.CocktailBuilderModel;
@@ -22,9 +21,11 @@
 			import models.TagsModel;
 			import models.supportClasses.CocktailMini;
 			
+			import mx.collections.ArrayList;
 			import mx.events.FlexEvent;
 			
 			import spark.components.List;
+			import spark.skins.spark.DefaultItemRenderer;
 			import spark.utils.TextFlowUtil;
 			
 			import views.CocktailBuilderView;
@@ -34,6 +35,9 @@
 			[Bindable]
 			private var _cocktail:CocktailMini;
 			
+			[Bindable]
+			private var _ingredients:ArrayList;
+			
 			override public function set data(value:Object):void
 			{
 				if (value)
@@ -42,8 +46,7 @@
 					//
 					_cocktail = CocktailMini(value);
 					cocktailName.text = _cocktail.name;
-					cocktailStructure.text = buildRecipe(_cocktail.ingredientIds);
-					lostIngresdients.text = buildLostIngredients(_cocktail.ingredientIds);
+					buildRecipe(_cocktail.ingredientIds);
 					buildTags(_cocktail.cocktailTypeId, _cocktail.optionIds);
 				}
 			}
@@ -74,45 +77,31 @@
 			
 			}
 			
-			private function buildRecipe(ingredients:Array):String
+			private function buildRecipe(ingredients:Array):void
 			{
-				if (!ingredients || ingredients.length == 0)
-					return "";
+				_ingredients = new ArrayList();
 				
-				var cocktailStructure:String = "Состав: ";
-				var curIngredient:String;
+				if (!ingredients || ingredients.length == 0)
+					return;
+					
+				var item:Object;
+				
 				
 				for (var i:uint = 0; i < ingredients.length; i++)
 				{
-					curIngredient = IngredientsModel.instance.getIngredientNameById(ingredients[i]).toLowerCase();					
-					cocktailStructure += curIngredient + ", ";
+					item = {id: ingredients[i], label: IngredientsModel.instance.getIngredientNameById(ingredients[i]).toLowerCase()};					
+					_ingredients.addItem(item);
 				}
-				
-				cocktailStructure = cocktailStructure.substr(0, cocktailStructure.length - 2);
-				
-				return cocktailStructure;
 			}
 			
-			private function buildLostIngredients(ingredients:Array):String
+			private function cocktailStructureItemRendererFunction(item:Object):IFactory
 			{
-				if (!ingredients || ingredients.length == 0)
-					return "";
+				if (_model.isIngredientSelected(item.id))
+					return new ClassFactory(SimpleIngredientItemRenderer);
 				
-				var lostIngredients:String = "Не хватает: ";
-				var curIngredient:String;
-				
-				for (var i:uint = 0; i < ingredients.length; i++)
-				{
-					curIngredient = IngredientsModel.instance.getIngredientNameById(ingredients[i]).toLowerCase();
-					
-					if (!_model.isIngredientSelected(ingredients[i]))
-						lostIngredients += curIngredient + ", ";
-				}
-				
-				lostIngredients = lostIngredients.substr(0, lostIngredients.length - 2);
-				
-				return lostIngredients;
+				return new ClassFactory(DefaultItemRenderer);
 			}
+
 
 		]]>
 	</fx:Script>
@@ -130,10 +119,11 @@
 		<s:BitmapImage id="cocktailThumb" width="48" height="64" source="{_cocktail.image}" />
 		<s:VGroup gap="0">
 			<s:Label id="cocktailName" styleName="headerPinkText" height="20" verticalAlign="middle" />
-			<s:HGroup gap="10">
-				<s:Label id="cocktailStructure" height="20" styleName="regularText" verticalAlign="middle"/>
-				<s:Label id="lostIngresdients" height="20" styleName="regularText" verticalAlign="middle" fontStyle="italic"/>
-			</s:HGroup>
+			<s:List id="cocktailStructure" labelField="label" height="20" borderVisible="false" itemRendererFunction="cocktailStructureItemRendererFunction" dataProvider="{_ingredients}">
+				<s:layout>
+					<s:HorizontalLayout gap="1" />
+				</s:layout>
+			</s:List>
 			<s:HGroup id="tagsGroup" gap="2" height="24" />
 		</s:VGroup>
 	</s:HGroup>

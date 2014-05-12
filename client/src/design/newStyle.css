@@ -1,0 +1,86 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+@font-face
+{
+	src: url("/../assets/fonts/GOTHIC.TTF");
+	fontFamily: "CenturyGothic";
+	fontStyle: normal;
+	embed-as-cff: true;
+}
+
+@font-face
+{
+	src: url("/../assets/fonts/GOTHICI.TTF");
+	fontFamily: "CenturyGothic";
+	fontStyle: italic;
+	embed-as-cff: true;
+}
+
+@font-face
+{
+	src: url("/../assets/fonts/GOTHICB.TTF");
+	fontFamily: "CenturyGothic";
+	fontWeight: bold;
+	embed-as-cff: true;
+}
+
+@font-face
+{
+	src: url("/../assets/fonts/GEORGIAZ.TTF");
+	fontFamily: "Georgia";
+	fontStyle: italic;
+	fontWeight: bold;
+	embed-as-cff: true;
+}
+
+.regularText
+{
+	fontFamily: "CenturyGothic";
+	color: #222222;
+	advancedAntiAliasing: true;
+}
+
+.headerPinkText
+{
+	fontFamily: "Georgia";
+	fontWeight: bold;
+	fontStyle: italic;
+	color: #FF6F69;
+	fontSize: 14;
+	advancedAntiAliasing: true;
+}
+
+.headerGreenText
+{
+	fontFamily: "Georgia";
+	fontWeight: bold;
+	fontStyle: italic;
+	color: #78A590;
+	fontSize: 18;
+	advancedAntiAliasing: true;
+}
+
+s|ButtonBarButton
+{
+	fontFamily: "Georgia";
+	fontWeight: bold;
+	fontStyle: italic;
+	fontSize: 24;
+}
+
+.pageTitleText
+{
+	fontFamily: "Georgia";
+	fontWeight: bold;
+	fontStyle: italic;
+	color: #FFB000;
+	fontSize: 30;
+	advancedAntiAliasing: true;
+}
+
+global
+{
+	vertical-align: middle;
+}

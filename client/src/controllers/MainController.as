@@ -43,7 +43,7 @@ package controllers
 			_model = value;
 		}
 		
-		public function changeView(view:ViewInformation, data:Object, manual:Boolean = true):void
+		public function changeView(view:ViewInformation, data:Object):void
 		{
 			_model.currentView = view;
 			_model.viewData = data;
@@ -81,12 +81,12 @@ package controllers
 		 */
 		public function requestIngredients():void
 		{
-			ServiceUtil.requestData(Services.GET_INGREDIENTS, null, onIngredientsLoad);
+			ServiceUtil.instance.requestData(Services.GET_INGREDIENTS, null, onIngredientsLoad);
 		}
 		
-		private function onIngredientsLoad(event:Event):void
+		private function onIngredientsLoad(response:String):void
 		{
-			IngredientsModel.instance.ingredientsList = new ArrayCollection(JSONInstantiator.createInstance(event.target.data, Ingredient) as Array);
+			IngredientsModel.instance.ingredientsList = new ArrayCollection(JSONInstantiator.createInstance(response, Ingredient) as Array);
 		}
 		
 		private function checkFragments():void
@@ -94,21 +94,25 @@ package controllers
 			var fragments:Object = URLUtil.stringToObject(BrowserManager.getInstance().fragment);
 			
 			if (!fragments.hasOwnProperty("panel"))
+			{
+				changeView(MainModel.BUILDER_VIEW, null);
 				return;
+			}
+				
 			
 			switch (fragments.panel)
 			{
 				case MainModel.BUILDER_VIEW.id:
 				{
-					MainController.instance.changeView(MainModel.BUILDER_VIEW, null, true);
+					changeView(MainModel.BUILDER_VIEW, null);
 					break;
 				}
 				case MainModel.COCKTAIL_VIEW.id:
 				{
 					if (fragments.hasOwnProperty("id"))
-						MainController.instance.changeView(MainModel.COCKTAIL_VIEW, fragments.id, true);
+						changeView(MainModel.COCKTAIL_VIEW, fragments.id);
 					else
-						MainController.instance.changeView(MainModel.BUILDER_VIEW, null, true);
+						changeView(MainModel.BUILDER_VIEW, null);
 					
 					break;
 				}

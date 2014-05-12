@@ -16,13 +16,17 @@
 
     <packaging>swf</packaging>
 
-
-
+	<!-- <copy file="J:/_PROGRAMMING/my-cocktails/client/bin-debug/Main.swf" tofile="J:/_PROGRAMMING/my-cocktails/Main.swf"/> -->
+	
     <repositories>
         <repository>
             <id>flex-mojos-repository</id>
             <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
         </repository>
+		<repository>
+			<id>my-internal-site</id>
+			<url>file://C:/Users/Crabar/.m2/repository/com/google/code/as3corelib/1.3</url>
+    </repository>
     </repositories>
 
     <pluginRepositories>
@@ -50,6 +54,7 @@
                         <version>4.6.b.23201</version>
                         <type>pom</type>
                     </dependency>
+                
                 </dependencies>
 
                 <!--&lt;!&ndash;  configuration for the Flex compilation &ndash;&gt;-->
@@ -92,7 +97,14 @@
             <classifier>11.1</classifier>  <!-- the classifier specifies the target flash player major version  -->
             <type>swc</type>
         </dependency>
-
+		
+		<dependency>
+			<groupId>com.google.code</groupId>
+			<artifactId>as3corelib</artifactId>
+			<version>1.3</version>
+			<type>swc</type>
+		</dependency>
+		
         <!--<dependency>-->
             <!--<groupId>com.adobe.flexunit</groupId>-->
             <!--<artifactId>flexunit</artifactId>-->
