@@ -29,8 +29,11 @@
 			
 			public static function show():void
 			{
-				PopUpManager.addPopUp(_loginWindow, Application(FlexGlobals.topLevelApplication), true);
-				PopUpManager.centerPopUp(_loginWindow);
+				if (!_loginWindow.isPopUp)
+				{
+					PopUpManager.addPopUp(_loginWindow, Application(FlexGlobals.topLevelApplication), true);
+					PopUpManager.centerPopUp(_loginWindow);
+				}				
 			}
 			
 			public static function close():void
