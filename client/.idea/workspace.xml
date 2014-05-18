@@ -2,21 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38801fdb-5661-4c85-99c0-140cdf9f878b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin-debug/Main.swf" afterPath="$PROJECT_DIR$/bin-debug/Main.swf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/supportClasses/Cocktail.as" afterPath="$PROJECT_DIR$/src/models/supportClasses/Cocktail.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/CocktailBuilderView.mxml" afterPath="$PROJECT_DIR$/src/views/CocktailBuilderView.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Crabar.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Crabar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/JSONInstantiator.as" afterPath="$PROJECT_DIR$/src/utils/JSONInstantiator.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/MockData.as" afterPath="$PROJECT_DIR$/src/utils/MockData.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MOVED" beforePath="J:\_PROGRAMMING\my-cocktails\client\src\main\flex\src\components\renderers\CocktailItemRenderer.mxml" afterPath="$PROJECT_DIR$/src/views/renderers/CocktailItemRenderer.mxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Crabar.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Crabar.xml" />
+      <change type="MODIFICATION" beforePath="J:\_PROGRAMMING\my-cocktails\client\src\models\supportClasses\Cocktail.as" afterPath="J:\_PROGRAMMING\my-cocktails\client\src\models\supportClasses\Cocktail.as" />
       <change type="MOVED" beforePath="J:\_PROGRAMMING\my-cocktails\client\src\main\flex\src\components\renderers\IngredientItemRenderer.mxml" afterPath="$PROJECT_DIR$/src/views/renderers/IngredientItemRenderer.mxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/CocktailBuilderView.mxml" afterPath="$PROJECT_DIR$/src/views/CocktailBuilderView.mxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin-debug/Main.swf" afterPath="$PROJECT_DIR$/bin-debug/Main.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/JSONInstantiator.as" afterPath="$PROJECT_DIR$/src/utils/JSONInstantiator.as" />
     </list>
     <ignored path="drinkIt.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1374922271829" ignored="false" />
+    <ignored path="$PROJECT_DIR$/.idea/flexmojos/" />
+    <file path="/Dummy.txt" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1400318084040" ignored="false" />
     <file path="/a.as" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1374919478443" ignored="false" />
-    <file path="/fragment.js2" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1374921289502" ignored="false" />
+    <file path="/fragment.js2" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1400318070769" ignored="false" />
     <file path="/fragment.java" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1374914604362" ignored="false" />
     <file path="/SearchParameters.as" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1374915231341" ignored="false" />
     <file path="/test.as" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1374916609713" ignored="false" />
@@ -26,6 +27,8 @@
     <file path="/ParserUtil.as" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1374920411350" ignored="false" />
     <file path="/MockData.as" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1374920841089" ignored="false" />
     <file path="/fragment.js" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1374922308114" ignored="false" />
+    <file path="/pom.xml" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1400318629111" ignored="false" />
+    <file path="/Digest.as" changelist="38801fdb-5661-4c85-99c0-140cdf9f878b" time="1400315710364" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,28 +94,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SearchParameters.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controllers/supportClasses/SearchParameters.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="35" selection-start="166" selection-end="166" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CocktailBuilderView.mxml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/CocktailBuilderView.mxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="18" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1374918468372" expanded="false" signature="468:943" placeholder="..." />
-                <marker date="1374918468372" expanded="true" signature="1160:1445" placeholder="{...}" />
-                <marker date="1374918468372" expanded="true" signature="1211:1346" placeholder="{...}" />
-                <marker date="1374918468372" expanded="true" signature="1515:1845" placeholder="{...}" />
-                <marker date="1374918468372" expanded="true" signature="1928:2113" placeholder="{...}" />
-                <marker date="1374918468372" expanded="true" signature="2194:2311" placeholder="{...}" />
-                <marker date="1374918468372" expanded="true" signature="2388:2501" placeholder="{...}" />
-              </folding>
+            <state line="76" column="12" selection-start="2393" selection-end="2393" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,23 +106,8 @@
       <file leaf-file-name="CocktailItemRenderer.mxml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/renderers/CocktailItemRenderer.mxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="38" selection-start="669" selection-end="669" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1374778961785" expanded="false" signature="455:520" placeholder="..." />
-                <marker date="1374778961785" expanded="true" signature="623:731" placeholder="{...}" />
-                <marker date="1374778961785" expanded="true" signature="644:726" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Cocktail.as" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/models/supportClasses/Cocktail.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="40" selection-start="803" selection-end="803" vertical-scroll-proportion="0.626943">
-              <folding>
-                <element signature="e#33#61#0" expanded="true" />
-              </folding>
+            <state line="21" column="36" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -144,7 +115,7 @@
       <file leaf-file-name="ParserUtil.as" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utils/ParserUtil.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="0" selection-start="385" selection-end="385" vertical-scroll-proportion="0.0">
+            <state line="15" column="0" selection-start="280" selection-end="280" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -153,7 +124,7 @@
       <file leaf-file-name="MockData.as" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utils/MockData.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="45" selection-start="973" selection-end="973" vertical-scroll-proportion="0.0">
+            <state line="29" column="45" selection-start="75210" selection-end="75210" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -162,25 +133,25 @@
       <file leaf-file-name="JSONInstantiator.as" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utils/JSONInstantiator.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="36" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
+            <state line="30" column="139" selection-start="842" selection-end="842" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainController.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controllers/MainController.as">
+      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="9" selection-start="299" selection-end="299" vertical-scroll-proportion="0.0">
+            <state line="50" column="54" selection-start="1786" selection-end="1786" vertical-scroll-proportion="0.3130755">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DesignModel.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/design/DesignModel.as">
+      <file leaf-file-name="Digest.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/Digest.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="28" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
+            <state line="13" column="36" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -194,7 +165,7 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="J:/.." />
   </component>
   <component name="GitLogSettings">
     <option name="myDateState">
@@ -211,8 +182,40 @@
         <option value="$PROJECT_DIR$/src/utils/ParserUtil.as" />
         <option value="$PROJECT_DIR$/src/utils/MockData.as" />
         <option value="$PROJECT_DIR$/src/models/supportClasses/Cocktail.as" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="client" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="client" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="#JAVA_HOME" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
@@ -262,235 +265,48 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
+              <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
+              <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renderers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="supportClasses" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="design" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drinkIt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flex" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renderers" />
+              <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="SDKs" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.lastSelected" value="reference.settings.ide.settings.web.browsers" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="preferences.sourceCode.ActionScript" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/html-template" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CreateActionScriptClassDialog.DESTINATION_PACKAGE_RECENT_KEY">
@@ -501,7 +317,29 @@
       <recent name="J:\_PROGRAMMING\my-cocktails\client\src\main\flex\src\views\renderers" />
     </key>
   </component>
-  <component name="RunManager" selected="Flash App.Main (drinkIt)">
+  <component name="RunManager" selected="Flash App.client">
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -590,8 +428,8 @@
       <option name="usbDebugPort" value="7936" />
       <method />
     </configuration>
-    <configuration default="false" name="Main (drinkIt)" type="FlashRunConfigurationType" factoryName="Flash App">
-      <option name="BCName" value="Main" />
+    <configuration default="false" name="client" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="client" />
       <option name="IOSSimulatorSdkPath" value="" />
       <option name="adlOptions" value="" />
       <option name="airProgramParameters" value="" />
@@ -606,13 +444,13 @@
       <option name="launchUrl" value="false" />
       <option name="launcherParameters">
         <LauncherParameters>
-          <option name="browserFamily" value="EXPLORER" />
-          <option name="launcherType" value="Browser" />
+          <option name="browserFamily" value="FIREFOX" />
+          <option name="launcherType" value="OSDefault" />
           <option name="playerPath" value="FlashPlayerDebugger.exe" />
         </LauncherParameters>
       </option>
       <option name="mobileRunTarget" value="Emulator" />
-      <option name="moduleName" value="drinkIt" />
+      <option name="moduleName" value="client" />
       <option name="overriddenMainClass" value="" />
       <option name="overriddenOutputFileName" value="" />
       <option name="overrideMainClass" value="false" />
@@ -626,10 +464,14 @@
       <RunnerSettings RunnerId="FlexRunner" />
       <ConfigurationWrapper RunnerId="FlexDebugRunner" />
       <ConfigurationWrapper RunnerId="FlexRunner" />
-      <method />
+      <method>
+        <option name="Make" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="clean" />
+        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="compile" />
+      </method>
     </configuration>
     <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Flash App.Main (drinkIt)" />
+      <item index="0" class="java.lang.String" itemvalue="Flash App.client" />
     </list>
     <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
       <option name="MAIN_CLASS_NAME" />
@@ -701,19 +543,20 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32703003" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26574174" sideWeight="0.67296994" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39822024" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703003" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703003" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34098187" sideWeight="0.67074525" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27214515" sideWeight="0.67074525" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="856" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32959402" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -806,110 +649,72 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/utils/JSONInstantiator.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="12" selection-start="598" selection-end="598" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/CocktailBuilderView.mxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="18" selection-start="2393" selection-end="2393" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/renderers/CocktailItemRenderer.mxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="38" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/ParserUtil.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="280" selection-end="280" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/MockData.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="45" selection-start="75210" selection-end="75210" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/JSONInstantiator.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="36" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/CocktailBuilderView.mxml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="9" selection-start="196" selection-end="196" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1374918468372" expanded="false" signature="468:943" placeholder="..." />
-            <marker date="1374918468372" expanded="true" signature="1160:1445" placeholder="{...}" />
-            <marker date="1374918468372" expanded="true" signature="1211:1346" placeholder="{...}" />
-            <marker date="1374918468372" expanded="true" signature="1515:1845" placeholder="{...}" />
-            <marker date="1374918468372" expanded="true" signature="1928:2113" placeholder="{...}" />
-            <marker date="1374918468372" expanded="true" signature="2194:2311" placeholder="{...}" />
-            <marker date="1374918468372" expanded="true" signature="2388:2501" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/renderers/CocktailItemRenderer.mxml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="79" selection-start="645" selection-end="645" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1374778961785" expanded="false" signature="455:520" placeholder="..." />
-            <marker date="1374778961785" expanded="true" signature="623:731" placeholder="{...}" />
-            <marker date="1374778961785" expanded="true" signature="644:726" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/MainController.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="20" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/design/DesignModel.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="28" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/CocktailBuilderView.mxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="18" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1374918468372" expanded="false" signature="468:943" placeholder="..." />
-            <marker date="1374918468372" expanded="true" signature="1160:1445" placeholder="{...}" />
-            <marker date="1374918468372" expanded="true" signature="1211:1346" placeholder="{...}" />
-            <marker date="1374918468372" expanded="true" signature="1515:1845" placeholder="{...}" />
-            <marker date="1374918468372" expanded="true" signature="1928:2113" placeholder="{...}" />
-            <marker date="1374918468372" expanded="true" signature="2194:2311" placeholder="{...}" />
-            <marker date="1374918468372" expanded="true" signature="2388:2501" placeholder="{...}" />
-          </folding>
+        <state line="76" column="12" selection-start="2393" selection-end="2393" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/renderers/CocktailItemRenderer.mxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="38" selection-start="669" selection-end="669" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1374778961785" expanded="false" signature="455:520" placeholder="..." />
-            <marker date="1374778961785" expanded="true" signature="623:731" placeholder="{...}" />
-            <marker date="1374778961785" expanded="true" signature="644:726" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/JSONInstantiator.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="36" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.mxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="47" selection-start="546" selection-end="546" vertical-scroll-proportion="-6.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/design/DesignModel.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="28" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/MainController.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="9" selection-start="299" selection-end="299" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/CoctailBuilderController.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="52" selection-start="1662" selection-end="1662" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/supportClasses/SearchParameters.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="35" selection-start="166" selection-end="166" vertical-scroll-proportion="0.0">
+        <state line="21" column="36" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -921,24 +726,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/ParserUtil.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="385" selection-end="385" vertical-scroll-proportion="0.0">
+        <state line="15" column="0" selection-start="280" selection-end="280" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/MockData.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="45" selection-start="973" selection-end="973" vertical-scroll-proportion="0.0">
+        <state line="29" column="45" selection-start="75210" selection-end="75210" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/supportClasses/Cocktail.as">
+    <entry file="file://$PROJECT_DIR$/src/utils/JSONInstantiator.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="40" selection-start="803" selection-end="803" vertical-scroll-proportion="0.626943">
-          <folding>
-            <element signature="e#33#61#0" expanded="true" />
-          </folding>
+        <state line="30" column="139" selection-start="842" selection-end="842" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/Digest.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="36" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="54" selection-start="1786" selection-end="1786" vertical-scroll-proportion="0.3130755">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -982,7 +799,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Main|drinkIt</last-edited>
+          <last-edited>client|client</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -994,6 +811,7 @@
       </state>
       <state key="ProjectJDKs.UI">
         <settings>
+          <last-edited>Flexmojos SDK 4.6.b.23201</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1005,17 +823,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
+          <last-edited>Maven: com.adobe.flex.framework:advancedgrids:rb.swc:4.6.b.23201</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
