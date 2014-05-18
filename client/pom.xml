@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<<<<<<< Updated upstream
-=======
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <properties>
         <flex.version>4.6.b.23201</flex.version>
     </properties>
->>>>>>> Stashed changes
+
     <parent>
         <artifactId>drinkit</artifactId>
         <groupId>drinkit</groupId>
@@ -18,9 +15,6 @@
     <artifactId>client</artifactId>
     <packaging>swf</packaging>
 
-<<<<<<< Updated upstream
-	<!-- <copy file="J:/_PROGRAMMING/my-cocktails/client/bin-debug/Main.swf" tofile="J:/_PROGRAMMING/my-cocktails/Main.swf"/> -->
-=======
 	 <repositories>
         <repository>
              <id>flex-mojos-plugin-repository</id>
@@ -39,24 +33,18 @@
             <url>http://repository.sonatype.org/content/groups/flexgroup</url>
         </pluginRepository>
     </pluginRepositories>
->>>>>>> Stashed changes
 
     <build>
         <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>tests</testSourceDirectory>
         <plugins>
             <plugin>
-<<<<<<< Updated upstream
-                <groupId>net.flexmojos.oss</groupId>
-				<artifactId>flexmojos-maven-plugin</artifactId>
-				<version>6.0.1</version>
-				<extensions>true</extensions>
-=======
                 <groupId>org.sonatype.flexmojos</groupId>
                 <artifactId>flexmojos-maven-plugin</artifactId>
                 <version>4.2-beta</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <storepass></storepass>
                     <coverage>true</coverage>
                     <templateURI>folder:/html-template</templateURI>
                     <sourceFile>Main.mxml</sourceFile>
@@ -74,18 +62,13 @@
                     </execution>
                 </executions>
                 <!--  explicitly define the Flex SDK compiler version to use -->
->>>>>>> Stashed changes
                 <dependencies>
                     <dependency>
                         <groupId>com.adobe.flex</groupId>
                         <artifactId>compiler</artifactId>
                         <version>${flex.version}</version>
                         <type>pom</type>
-<<<<<<< Updated upstream
-                    </dependency>                
-=======
                     </dependency>
->>>>>>> Stashed changes
                 </dependencies>
             </plugin>
         </plugins>
@@ -99,35 +82,35 @@
             <scope>test</scope>
             <type>swc</type>
         </dependency>
+
         <dependency>
             <groupId>com.adobe.flex.framework</groupId>
             <artifactId>flex-framework</artifactId>
             <version>${flex.version}</version>
             <type>pom</type>
+            <exclusions>
+                <!-- make sure to exclude the default 'playerglobal' transitive dependency -->
+                <exclusion>
+                    <groupId>com.adobe.flex.framework</groupId>
+                    <artifactId>playerglobal</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
-            <groupId>com.adobe.flash.framework</groupId>
+            <groupId>com.adobe.flex.framework</groupId>
             <artifactId>playerglobal</artifactId>
-<<<<<<< Updated upstream
-            <version>11.1</version>  <!-- this artifact version must match the flex SDK version used in this project -->
-            <type>swc</type>
-        </dependency>
-
-=======
             <version>${flex.version}</version>  <!-- this artifact version must match the flex SDK version used in this project -->
             <classifier>11.1</classifier>  <!-- the classifier specifies the target flash player major version  -->
             <type>swc</type>
         </dependency>
-		
+
 		<dependency>
 			<groupId>com.google.code</groupId>
 			<artifactId>as3corelib</artifactId>
 			<version>1.3</version>
 			<type>swc</type>
 		</dependency>
->>>>>>> Stashed changes
     </dependencies>
-
 
 </project>
