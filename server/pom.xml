@@ -298,6 +298,24 @@
                 </executions>
             </plugin>
 
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-resources-plugin</artifactId>-->
+                <!--<version>2.6</version>-->
+                <!--<configuration>-->
+                    <!--<resources>-->
+                        <!--<resource>-->
+                            <!--<directory>../client/target</directory>-->
+                            <!--<includes>-->
+                                <!--<include>oauth.js</include>-->
+                                <!--<include>swfobject.js</include>-->
+                                <!--<include>client-1.0-SNAPSHOT.html</include>-->
+                                <!--<include>history</include>-->
+                            <!--</includes>-->
+                        <!--</resource>-->
+                    <!--</resources>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>
