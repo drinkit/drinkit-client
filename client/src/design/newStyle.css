@@ -7,7 +7,8 @@
 	src: url("/../assets/fonts/GOTHIC.TTF");
 	fontFamily: "CenturyGothic";
 	fontStyle: normal;
-	embed-as-cff: true;
+    advancedAntiAliasing: true;
+	embedAsCFF: true;
 }
 
 @font-face
@@ -15,7 +16,8 @@
 	src: url("/../assets/fonts/GOTHICI.TTF");
 	fontFamily: "CenturyGothic";
 	fontStyle: italic;
-	embed-as-cff: true;
+    advancedAntiAliasing: true;
+    embedAsCFF: true;
 }
 
 @font-face
@@ -23,7 +25,8 @@
 	src: url("/../assets/fonts/GOTHICB.TTF");
 	fontFamily: "CenturyGothic";
 	fontWeight: bold;
-	embed-as-cff: true;
+    advancedAntiAliasing: true;
+    embedAsCFF: true;
 }
 
 @font-face
@@ -32,7 +35,8 @@
 	fontFamily: "Georgia";
 	fontStyle: italic;
 	fontWeight: bold;
-	embed-as-cff: true;
+    advancedAntiAliasing: true;
+    embedAsCFF: true;
 }
 
 .regularText
