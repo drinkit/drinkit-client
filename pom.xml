@@ -11,10 +11,9 @@
     <modules>
         <module>client</module>
         <module>server</module>
-
     </modules>
     <properties>
-        <maven.test.skip>true</maven.test.skip>
+
     </properties>
 
     <build>
