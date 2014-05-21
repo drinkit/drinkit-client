@@ -44,6 +44,7 @@
                 <version>4.2-beta</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <updateSecuritySandbox>false</updateSecuritySandbox>
                     <storepass></storepass>
                     <coverage>true</coverage>
                     <templateURI>folder:${basedir}/html-template</templateURI>
