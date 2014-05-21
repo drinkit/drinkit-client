@@ -1,95 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" close="titlewindow1_closeHandler(event)" creationComplete="titlewindow1_creationCompleteHandler(event)" title="Вход">
+			   xmlns:mx="library://ns.adobe.com/flex/mx" close="onClose(event)" creationComplete="onCreationComplete(event)" title="Вход">
 	<s:layout>
 		<s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center" />
 	</s:layout>
 	
 	<fx:Script>
 		<![CDATA[
-			import models.AuthModelIO;
-			import models.IAuthModel;
-			import models.UserInfoModel;
-			import models.events.AuthEvent;
-			
-			import mx.controls.Alert;
-			import mx.core.FlexGlobals;
-			import mx.events.CloseEvent;
-			import mx.events.FlexEvent;
-			import mx.managers.PopUpManager;
-			
-			import spark.components.Application;
-			
-			import utils.ServiceUtil;
-			
-			private static var _loginWindow:LoginWindow = new LoginWindow();
-			
-			private var authModel:IAuthModel;
-			
-			public static function show():void
-			{
-				if (!_loginWindow.isPopUp)
-				{
-					PopUpManager.addPopUp(_loginWindow, Application(FlexGlobals.topLevelApplication), true);
-					PopUpManager.centerPopUp(_loginWindow);
-				}				
-			}
-			
-			public static function close():void
-			{
-				PopUpManager.removePopUp(_loginWindow);
-				_loginWindow.clear();
-			}
-			
-			protected function onSocialLoginClick(event:MouseEvent):void
-			{
-				authModel.login(event.currentTarget.name, AuthModelIO.LOGIN_URLS[event.currentTarget.name]);
-			}
-			
-			protected function titlewindow1_closeHandler(event:CloseEvent):void
-			{
-				close();
-			}
-			
-			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
-			{
-				authModel = AuthModelIO.instance;
-				authModel.init(stage);
-				//
-				UserInfoModel.instance.addEventListener(AuthEvent.AUTH_ERROR, onAuthError);
-				UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onAuthSuccess);
-			}
-			
-			private function onAuthSuccess(event:AuthEvent):void
-			{
-				close();
-			}
-			
-			public function clear():void
-			{
-				userLogin.text = "";
-				userPassword.text = "";
-				errorMessage.includeInLayout = errorMessage.visible = false;
-			}
-			
-			private function onAuthError(event:AuthEvent):void
-			{
-				errorMessage.includeInLayout = errorMessage.visible = true;
-			}
-			
-			protected function onBasicLoginClick(event:MouseEvent):void
-			{
-				UserInfoModel.instance.setUserCredentials(userLogin.text, userPassword.text);
-			}
-			
-			protected function onSignUpButtonClick(event:MouseEvent):void
-			{
-				close();
-				SignupWindow.show();
-			}
-			
-		]]>
+        import controllers.AuthController;
+
+        import models.AuthModelIO;
+        import models.IAuthModel;
+        import models.UserInfoModel;
+        import models.events.AuthEvent;
+
+        import mx.core.FlexGlobals;
+        import mx.events.CloseEvent;
+        import mx.events.FlexEvent;
+        import mx.managers.PopUpManager;
+
+        import spark.components.Application;
+
+        private static var _loginWindow:LoginWindow = new LoginWindow();
+
+        private var _authModel:IAuthModel;
+        private var _authController:AuthController;
+
+        public static function show():void {
+            if (!_loginWindow.isPopUp) {
+                PopUpManager.addPopUp(_loginWindow, Application(FlexGlobals.topLevelApplication), true);
+                PopUpManager.centerPopUp(_loginWindow);
+            }
+        }
+
+        public static function close():void {
+            PopUpManager.removePopUp(_loginWindow);
+            _loginWindow.clear();
+        }
+
+        protected function onSocialLoginClick(event:MouseEvent):void {
+            _authModel.login(event.currentTarget.name, AuthModelIO.LOGIN_URLS[event.currentTarget.name]);
+        }
+
+        protected function onClose(event:CloseEvent):void {
+            close();
+        }
+
+        protected function onCreationComplete(event:FlexEvent):void {
+            _authModel = AuthModelIO.instance;
+            _authModel.init(stage);
+            _authController = new AuthController();
+            //
+            UserInfoModel.instance.addEventListener(AuthEvent.AUTH_ERROR, onAuthError);
+            UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onAuthSuccess);
+        }
+
+        private function onAuthSuccess(event:AuthEvent):void {
+            close();
+        }
+
+        public function clear():void {
+            userLogin.text = "";
+            userPassword.text = "";
+            errorMessage.includeInLayout = errorMessage.visible = false;
+        }
+
+        private function onAuthError(event:AuthEvent):void {
+            errorMessage.includeInLayout = errorMessage.visible = true;
+        }
+
+        protected function onBasicLoginClick(event:MouseEvent):void {
+            _authController.login(userLogin.text, userPassword.text);
+        }
+
+        protected function onSignUpButtonClick(event:MouseEvent):void {
+            close();
+            SignupWindow.show();
+        }
+        ]]>
 	</fx:Script>
 	
 	<fx:Declarations>
