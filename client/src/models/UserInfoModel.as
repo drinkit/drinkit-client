@@ -17,14 +17,13 @@ package models
 	public class UserInfoModel extends EventDispatcher
 	{
 		private static var _instance:UserInfoModel;
-		
-		[Bindable(event="logout")]
-		[Bindable(event="authSuccess")]
-		public function get displayName():String
-		{
-			return _displayName;
-		}
-		
+
+        [Bindable]
+        public var displayName:String;
+
+        [Bindable]
+        public var role:uint = UserRoles.ANONYMOUS;
+
 		public function get password():String
 		{
 			return _password;
@@ -33,13 +32,6 @@ package models
 		public function get email():String
 		{
 			return _email;
-		}
-		
-		[Bindable(event="logout")]
-		[Bindable(event="authSuccess")]
-		public function get role():uint
-		{
-			return _userRole;
 		}
 		
 		public static function get instance():UserInfoModel
@@ -59,57 +51,18 @@ package models
 		{
 			_email = email;
 			_password = password;
-			//
-			requestUserInfo();
 		}
 		
-		public function logOut():void
+		public function clear():void
 		{
 			_email = "";
 			_password = "";
-			_displayName = "";
-			ServiceUtil.instance.clearDigest();
-			_userRole = UserRoles.ANONYMOUS;
-			//
-			dispatchEvent(new AuthEvent(AuthEvent.LOGOUT));
+			displayName = "";
+			role = UserRoles.ANONYMOUS;
 		}
 		
 		private var _email:String = "";
 		private var _password:String = "";
-		private var _userRole:uint = UserRoles.ANONYMOUS;
-		//
-		private var _displayName:String;
-		
-		public function requestUserInfo():void
-		{
-			ServiceUtil.instance.requestData(Services.GET_USER_INFO, null, onGetUserInfo);
-		}
-		
-		private function getHighestRole(roles:Array):uint
-		{
-			var curRole:uint = UserRoles.ANONYMOUS;
-			
-			for each (var role:Object in roles)
-			{
-				if (curRole < UserRoles.USER && role.authority == "ROLE_USER")
-					curRole = UserRoles.USER;
-				
-				if (curRole < UserRoles.ADMIN && role.authority == "ROLE_ADMIN")
-					curRole = UserRoles.ADMIN;
-			}
-			
-			return curRole;
-		}
-		
-		private function onGetUserInfo(response:String):void
-		{
-			// parse response and save user info
-			var responseJSON:Object = JSON.parse(response);
-			_displayName = responseJSON.displayName;
-			_userRole = getHighestRole(responseJSON.authorities);
-			//
-			dispatchEvent(new AuthEvent(AuthEvent.AUTH_SUCCESS));
-		}
 		
 		private function onAuthError(event:AuthEvent):void
 		{

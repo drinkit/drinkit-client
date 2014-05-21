@@ -12,53 +12,49 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import controllers.MainController;
-			
-			import design.DesignModel;
-			
-			import models.MainModel;
-			import models.UserInfoModel;
-			import models.events.AuthEvent;
-			
-			import mx.events.FlexEvent;
-			
-			protected function onLogoClick(event:MouseEvent):void
-			{
-				MainController.instance.changeView(MainModel.BUILDER_VIEW, null);
-			}
-			
-			protected function onSignInClick(event:MouseEvent):void
-			{
-				LoginWindow.show();
-			}
-			
-			protected function onSignUpClick(event:MouseEvent):void
-			{
-				SignupWindow.show();
-			}
-			
-			protected function onCreationComplete(event:FlexEvent):void
-			{
-				UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onSuccessAuth);
-				UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onLogout);
-			}
-			
-			private function onSuccessAuth(event:AuthEvent):void
-			{
-				currentState = "authorised";
-			}
-			
-			private function onLogout(event:AuthEvent):void
-			{
-				currentState = "anonymous";
-			}
-			
-			protected function onLogoutClick(event:MouseEvent):void
-			{
-				UserInfoModel.instance.logOut();
-			}
-			
-		]]>
+        import controllers.AuthController;
+        import controllers.MainController;
+
+        import design.DesignModel;
+
+        import models.MainModel;
+        import models.UserInfoModel;
+        import models.events.AuthEvent;
+
+        import mx.events.FlexEvent;
+
+        private var _authController:AuthController;
+
+        protected function onLogoClick(event:MouseEvent):void {
+            MainController.instance.changeView(MainModel.BUILDER_VIEW, null);
+        }
+
+        protected function onSignInClick(event:MouseEvent):void {
+            LoginWindow.show();
+        }
+
+        protected function onSignUpClick(event:MouseEvent):void {
+            SignupWindow.show();
+        }
+
+        protected function onCreationComplete(event:FlexEvent):void {
+            _authController = new AuthController();
+            UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onSuccessAuth);
+            UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onLogout);
+        }
+
+        private function onSuccessAuth(event:AuthEvent):void {
+            currentState = "authorised";
+        }
+
+        private function onLogout(event:AuthEvent):void {
+            currentState = "anonymous";
+        }
+
+        protected function onLogoutClick(event:MouseEvent):void {
+            _authController.logout();
+        }
+        ]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
