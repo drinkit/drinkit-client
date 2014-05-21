@@ -46,7 +46,7 @@
                 <configuration>
                     <storepass></storepass>
                     <coverage>true</coverage>
-                    <templateURI>folder:/html-template</templateURI>
+                    <templateURI>folder:${basedir}/html-template</templateURI>
                     <sourceFile>Main.mxml</sourceFile>
                     <fonts>
                         <managers>
