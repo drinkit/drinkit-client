@@ -290,7 +290,7 @@
                                     <type>swf</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${basedir}/src/main/webapp</outputDirectory>
-                                    <destFileName>Main.swf</destFileName>
+                                    <!--<destFileName>Main.swf</destFileName>-->
                                 </artifactItem>
                             </artifactItems>
                         </configuration>

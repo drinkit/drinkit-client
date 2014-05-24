@@ -36,7 +36,7 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>tests</testSourceDirectory>
+        <!--<testSourceDirectory>tests</testSourceDirectory>-->
         <plugins>
             <plugin>
                 <groupId>org.sonatype.flexmojos</groupId>
@@ -60,7 +60,6 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>generate-resources</phase>
                         <goals>
                             <goal>wrapper</goal>
                         </goals>
@@ -83,6 +82,12 @@
     </build>
 
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>com.adobe.flexunit</groupId>-->
+            <!--<artifactId>flexunit</artifactId>-->
+            <!--<version>4.0-rc-2</version>-->
+            <!--<type>swc</type>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.sonatype.flexmojos</groupId>
