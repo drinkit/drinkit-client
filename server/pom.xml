@@ -276,7 +276,7 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>copy-flex-resources</id>
+                        <id>copy-swf</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>copy</goal>
@@ -298,24 +298,53 @@
                 </executions>
             </plugin>
 
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-resources-plugin</artifactId>-->
-                <!--<version>2.6</version>-->
-                <!--<configuration>-->
-                    <!--<resources>-->
-                        <!--<resource>-->
-                            <!--<directory>../client/target</directory>-->
-                            <!--<includes>-->
-                                <!--<include>oauth.js</include>-->
-                                <!--<include>swfobject.js</include>-->
-                                <!--<include>client-1.0-SNAPSHOT.html</include>-->
-                                <!--<include>history</include>-->
-                            <!--</includes>-->
-                        <!--</resource>-->
-                    <!--</resources>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+
+                <executions>
+                    <execution>
+                        <id>main-resources-copy</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/src/main/webapp</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../client/target</directory>
+                                    <includes>
+                                        <include>auth.js</include>
+                                        <include>swfobject.js</include>
+                                        <include>index.html</include>
+                                        <include>oauth.js</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-history-directory</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${basedir}/src/main/webapp/history</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../client/target/history</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 </project>

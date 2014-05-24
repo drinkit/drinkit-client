@@ -60,9 +60,13 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>wrapper</goal>
                         </goals>
+                        <configuration>
+                            <htmlName>index</htmlName>
+                        </configuration>
                     </execution>
                 </executions>
                 <!--  explicitly define the Flex SDK compiler version to use -->
@@ -79,12 +83,6 @@
     </build>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>com.adobe.flexunit</groupId>-->
-            <!--<artifactId>flexunit</artifactId>-->
-            <!--<version>4.0-rc-2</version>-->
-            <!--<type>swc</type>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.sonatype.flexmojos</groupId>
