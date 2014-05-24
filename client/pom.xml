@@ -44,6 +44,8 @@
                 <version>4.2-beta</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <debug>true</debug>
+                    <outputFile>client</outputFile>
                     <updateSecuritySandbox>false</updateSecuritySandbox>
                     <storepass></storepass>
                     <coverage>true</coverage>

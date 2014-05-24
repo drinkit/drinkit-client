@@ -31,8 +31,8 @@ package models
 		
 		private function onSocialLogin(result:String):void
 		{
-			var userinfo:Object = JSON.parse(result);
-			checkSocialUser(userinfo.email);
+			var userInfo:Object = JSON.parse(result);
+			checkSocialUser(userInfo.email);
 		}
 		
 		private function generateFakeSocialPassword():String
