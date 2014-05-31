@@ -36,7 +36,7 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <!--<testSourceDirectory>tests</testSourceDirectory>-->
+        <testSourceDirectory>tests</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.sonatype.flexmojos</groupId>
@@ -47,7 +47,7 @@
                     <debug>true</debug>
                     <outputFile>client</outputFile>
                     <updateSecuritySandbox>false</updateSecuritySandbox>
-                    <testPort>15555</testPort>
+                    <testPort>25000</testPort>
                     <storepass></storepass>
                     <coverage>true</coverage>
                     <templateURI>folder:${basedir}/html-template</templateURI>
