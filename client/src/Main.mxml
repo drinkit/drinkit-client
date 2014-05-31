@@ -62,7 +62,7 @@
 			
 			private function readFlashVars():void
 			{
-				if (parameters.serviceAddress)
+				if (parameters.hasOwnProperty("serviceAddress"))
 					ServiceUtil.instance.init(parameters.serviceAddress);
 			}
 			

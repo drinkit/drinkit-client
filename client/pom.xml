@@ -47,7 +47,6 @@
                     <debug>true</debug>
                     <outputFile>client</outputFile>
                     <updateSecuritySandbox>false</updateSecuritySandbox>
-                    <testPort>25000</testPort>
                     <storepass></storepass>
                     <coverage>true</coverage>
                     <templateURI>folder:${basedir}/html-template</templateURI>
@@ -65,10 +64,13 @@
                         </goals>
                         <configuration>
                             <htmlName>index</htmlName>
+                            <parameters>
+                                <useBrowserHistory>--</useBrowserHistory>
+                            </parameters>
                         </configuration>
                     </execution>
                 </executions>
-                <!--  explicitly define the Flex SDK compiler version to use -->
+
                 <dependencies>
                     <dependency>
                         <groupId>com.adobe.flex</groupId>
@@ -83,18 +85,11 @@
 
     <dependencies>
         <!--<dependency>-->
-            <!--<groupId>com.adobe.flexunit</groupId>-->
-            <!--<artifactId>flexunit</artifactId>-->
-            <!--<version>4.0-rc-2</version>-->
+            <!--<groupId>org.sonatype.flexmojos</groupId>-->
+            <!--<artifactId>flexmojos-unittest-flexunit4</artifactId>-->
+            <!--<version>4.2-beta</version>-->
             <!--<type>swc</type>-->
         <!--</dependency>-->
-
-        <dependency>
-            <groupId>org.sonatype.flexmojos</groupId>
-            <artifactId>flexmojos-unittest-flexunit4</artifactId>
-            <version>4.2-beta</version>
-            <type>swc</type>
-        </dependency>
 
         <dependency>
             <groupId>com.adobe.flex.framework</groupId>
@@ -124,7 +119,6 @@
 			<version>1.3</version>
 			<type>swc</type>
 		</dependency>
-
     </dependencies>
 
 </project>
