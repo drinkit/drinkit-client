@@ -2,7 +2,9 @@ package ua.kiev.naiv.drinkit.springconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,18 +21,8 @@ import ua.kiev.naiv.drinkit.security.CustomDigestAuthenticationEntryPoint;
  */
 @Configuration
 @EnableWebSecurity()
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-
-//    @Override
-//    protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService());
-//    }
-
-//    @Override
-//    public UserDetailsService userDetailsServiceBean() throws Exception {
-//        return userDetailsService();
-//    }
 
     @Bean
     @Override
@@ -43,17 +35,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService());
     }
 
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()//todo Invalid CSRF Token 'null' was found on the request parameter '_csrf' or header 'X-CSRF-TOKEN
                 .httpBasic().authenticationEntryPoint(digestAuthenticationEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .antMatcher("/rest/**")
                 .addFilterAfter(digestAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/rest/user/**").authenticated()
                 .antMatchers("/rest/admin/**").hasRole("ADMIN")
-//                .anyRequest().authenticated()
         ;
     }
 
@@ -73,8 +70,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return digestAuthenticationEntryPoint;
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.
-//    }
 }

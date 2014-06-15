@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import ua.kiev.naiv.drinkit.cocktail.common.DetailedUser;
 import ua.kiev.naiv.drinkit.cocktail.model.User;
 import ua.kiev.naiv.drinkit.cocktail.repository.UserRepository;
@@ -20,6 +21,7 @@ import java.util.List;
  * Date: 16.03.14
  * Time: 19:22
  */
+@Component
 public class BasicUserDetailsService implements UserDetailsService {
 
     @Resource
@@ -46,8 +48,13 @@ public class BasicUserDetailsService implements UserDetailsService {
         return roles;
     }
 
-    public void createUser(User user) {
-        userRepository.saveAndFlush(user);
+    public boolean createUser(User user) {
+        try {
+            userRepository.saveAndFlush(user);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
 
