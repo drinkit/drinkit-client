@@ -14,6 +14,10 @@ import javax.persistence.*;
         @UniqueConstraint(columnNames = "username")
 })
 public class User {
+
+    public static final int ACCESS_LVL_USER = 9;
+    public static final int ACCESS_LVL_ADMIN = 0;
+
     @Id
     @GeneratedValue()
     private Integer id;

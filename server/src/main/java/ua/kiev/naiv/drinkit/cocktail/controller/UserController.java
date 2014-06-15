@@ -40,7 +40,7 @@ public class UserController {
         user.setUsername(email);
         user.setPassword(password);
         user.setDisplayName(displayName);
-        user.setAccessLevel(9);//todo
+        user.setAccessLevel(User.ACCESS_LVL_USER);
         boolean created = basicUserDetailsService.createUser(user);
         return new ResponseEntity<>(created ? HttpStatus.CREATED : HttpStatus.FORBIDDEN);
     }

@@ -2,6 +2,7 @@ package ua.kiev.naiv.drinkit.springconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,6 +17,8 @@ import org.springframework.security.web.authentication.www.DigestAuthenticationF
 import ua.kiev.naiv.drinkit.cocktail.service.impl.BasicUserDetailsService;
 import ua.kiev.naiv.drinkit.security.CustomDigestAuthenticationEntryPoint;
 
+import javax.annotation.Resource;
+
 /**
  * @author pkolmykov
  */
@@ -23,6 +26,9 @@ import ua.kiev.naiv.drinkit.security.CustomDigestAuthenticationEntryPoint;
 @EnableWebSecurity()
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Resource
+    Environment environment;
 
     @Bean
     @Override
@@ -44,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()//todo Invalid CSRF Token 'null' was found on the request parameter '_csrf' or header 'X-CSRF-TOKEN
+                .csrf().disable()
                 .httpBasic().authenticationEntryPoint(digestAuthenticationEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .antMatcher("/rest/**")
@@ -66,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public DigestAuthenticationEntryPoint digestAuthenticationEntryPoint() {
         DigestAuthenticationEntryPoint digestAuthenticationEntryPoint = new CustomDigestAuthenticationEntryPoint();
         digestAuthenticationEntryPoint.setRealmName("DrinkIt");
-        digestAuthenticationEntryPoint.setKey("boozinga");//todo move it to property file
+        digestAuthenticationEntryPoint.setKey(environment.getRequiredProperty("digest.key"));
         return digestAuthenticationEntryPoint;
     }
 

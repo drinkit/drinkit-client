@@ -40,9 +40,9 @@ public class BasicUserDetailsService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> getAuthorities(Integer accessLevel) {
         List<GrantedAuthority> roles = new ArrayList<>();
         switch (accessLevel) {
-            case 0:
+            case User.ACCESS_LVL_ADMIN:
                 roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-            case 9:
+            case User.ACCESS_LVL_USER:
                 roles.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
         return roles;
