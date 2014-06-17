@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PreAuthorize("isAnonymous()")
-    @RequestMapping(method = RequestMethod.POST, value = "/register")
+    @RequestMapping(method = RequestMethod.POST, value = "/register", headers = "Content-Type=application/x-www-form-urlencoded")
     public ResponseEntity<User> registerUser(@RequestParam String email, @RequestParam String password, @RequestParam String displayName) {
         User user = new User();
         user.setUsername(email);
