@@ -24,7 +24,7 @@ function sendRequest(method, address, params, headers, requestID) {
     var xmlhttp = new XMLHttpRequest();
     var target;
 
-    if (params != "")
+    if (method == "GET" && params != null)
         target = address + '?' + params;
     else
         target = address;
@@ -51,6 +51,9 @@ function sendRequest(method, address, params, headers, requestID) {
             }
         }
     };
+
+    if (method != "GET")
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xmlhttp.send(params);
 }

@@ -26,7 +26,7 @@
 
         protected function onSignUpButtonClick(event:MouseEvent):void
         {
-            _signUpController.registerUser(emailInput.text, passwordInput.text);
+            _signUpController.registerUser(emailInput.text, passwordInput.text, displayNameInput.text);
         }
 
         public static function show():void

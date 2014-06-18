@@ -76,7 +76,7 @@ package controllers
             var vars:URLVariables = new URLVariables();
             vars.criteria = criteria.toString();
             //
-            ServiceUtil.instance.requestData(Services.SEARCH_BY_BUILDER, vars, onSearchComplete);
+            ServiceUtil.instance.getData(Services.SEARCH_BY_BUILDER, vars, onSearchComplete);
         }
 
         private function onSearchComplete(response:String):void

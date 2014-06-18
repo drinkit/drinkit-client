@@ -5,6 +5,8 @@ package controllers
 {
     import controllers.supportClasses.Services;
 
+    import flash.net.URLVariables;
+
     import utils.ServiceUtil;
 
     public class SignUpController
@@ -13,9 +15,13 @@ package controllers
         {
         }
 
-        public function registerUser(email:String, password:String):void
+        public function registerUser(email:String, password:String, displayName:String):void
         {
-            ServiceUtil.instance.sendData(Services.REGISTER_USER, {"email": email, "password": password}, onRegister);
+            var variables:URLVariables = new URLVariables();
+            variables["email"] = email;
+            variables["password"] = password;
+            variables["displayName"] = displayName;
+            ServiceUtil.instance.postData(Services.REGISTER_USER, variables.toString(), onRegister);
         }
 
         private function onRegister(response:String):void

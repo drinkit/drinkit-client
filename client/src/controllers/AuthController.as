@@ -32,7 +32,7 @@ package controllers
 
         public function requestUserInfo():void
         {
-            ServiceUtil.instance.requestData(Services.GET_USER_INFO, null, onGetUserInfo);
+            ServiceUtil.instance.getData(Services.GET_USER_INFO, null, onGetUserInfo);
         }
 
         private function getHighestRole(roles:Array):uint
