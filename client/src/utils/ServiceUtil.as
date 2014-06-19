@@ -49,19 +49,6 @@ package utils
             handler(response);
         }
 
-        /**
-         *
-         * @param functionName
-         * @param params
-         * @param handler function(responseBody:String):void
-         */
-        public function getData(functionName:String, params:Object, handler:Function):void
-        {
-            var requestID:String = prepareRequest(functionName, params, handler);
-            var paramsString:String = params ? params.toString() : "";
-            ExternalInterface.call("sendRequest", URLRequestMethod.GET, _serviceAddress + functionName, paramsString, [_currentAuthHeader], requestID);
-        }
-
         public function processAuth(authResponseHeader:String, method:String, address:String, paramsString:String, requestID:String):void
         {
             if (UserInfoModel.instance.email == "" || UserInfoModel.instance.password == "")
@@ -90,17 +77,22 @@ package utils
             Alert.show("Ошибка соединения с сервером!");
         }
 
-        public function postData(functionName:String, params:Object, handler:Function):void
+        private function prepareHeaders(request:JSRequest):Array
         {
-            var requestID:String = prepareRequest(functionName, params, handler);
-            var paramsString:String = params ? params.toString() : "";
-            ExternalInterface.call("sendRequest", URLRequestMethod.POST, _serviceAddress + functionName, paramsString, handler, [_currentAuthHeader], requestID);
+            var headers:Array = [];
+
+            if (request.contentType)
+                headers.push({"name": "Content-Type", "value": request.contentType});
+
+            headers.push(_currentAuthHeader);
+            return headers;
         }
 
-        public function putData(functionName:String, params:Object, handler:Function):void
+        public function sendRequest(functionName:String, request:JSRequest, handler:Function):void
         {
-            var requestID:String = prepareRequest(functionName, params, handler);
-            ExternalInterface.call("sendRequest", URLRequestMethod.PUT, _serviceAddress + functionName, params, handler, [_currentAuthHeader], requestID);
+            var requestID:String = prepareRequest(functionName, handler);
+            var headers:Array = prepareHeaders(request);
+            ExternalInterface.call("sendRequest", request.method, _serviceAddress + functionName, request.queryParams, request.bodyParams, headers, request.expectedStatus, requestID);
         }
 
         private function isNonceExpired(headers:String):Boolean
@@ -108,7 +100,7 @@ package utils
             return headers.indexOf('stale="true"') > 0;
         }
 
-        private function prepareRequest(functionName:String, params:Object, handler:Function):String
+        private function prepareRequest(functionName:String, handler:Function):String
         {
             var requestID:String = functionName + new Date().time.toString();
             _waitingHandlers[requestID] = handler;

@@ -9,6 +9,8 @@ package controllers
     import models.UserRoles;
     import models.events.AuthEvent;
 
+    import utils.JSRequest;
+
     import utils.ServiceUtil;
 
     public class AuthController
@@ -32,7 +34,8 @@ package controllers
 
         public function requestUserInfo():void
         {
-            ServiceUtil.instance.getData(Services.GET_USER_INFO, null, onGetUserInfo);
+            var request:JSRequest = new JSRequest();
+            ServiceUtil.instance.sendRequest(Services.GET_USER_INFO, request, onGetUserInfo);
         }
 
         private function getHighestRole(roles:Array):uint

@@ -13,6 +13,7 @@ package controllers
     import mx.collections.ArrayCollection;
 
     import utils.JSONInstantiator;
+    import utils.JSRequest;
     import utils.ServiceUtil;
 
     public class CocktailBuilderController
@@ -76,7 +77,9 @@ package controllers
             var vars:URLVariables = new URLVariables();
             vars.criteria = criteria.toString();
             //
-            ServiceUtil.instance.getData(Services.SEARCH_BY_BUILDER, vars, onSearchComplete);
+            var request:JSRequest = new JSRequest();
+            request.queryParams = vars.toString();
+            ServiceUtil.instance.sendRequest(Services.SEARCH_BY_BUILDER, request, onSearchComplete);
         }
 
         private function onSearchComplete(response:String):void

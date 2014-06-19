@@ -9,6 +9,7 @@ package controllers
     import models.CocktailModel;
 
     import utils.JSONInstantiator;
+    import utils.JSRequest;
     import utils.ServiceUtil;
 
     /**
@@ -31,7 +32,9 @@ package controllers
         {
             var params:URLVariables = new URLVariables();
             params.id = key;
-            ServiceUtil.instance.getData(Services.GET_COCKTAIL_INFO, params, onCocktailInfoLoad);
+            var request:JSRequest = new JSRequest();
+            request.queryParams = params.toString();
+            ServiceUtil.instance.sendRequest(Services.GET_COCKTAIL_INFO, request, onCocktailInfoLoad);
         }
 
         private function onCocktailInfoLoad(response:String):void

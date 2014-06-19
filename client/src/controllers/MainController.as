@@ -13,6 +13,7 @@ package controllers
     import mx.utils.URLUtil;
 
     import utils.JSONInstantiator;
+    import utils.JSRequest;
     import utils.ServiceUtil;
 
     public class MainController
@@ -79,7 +80,8 @@ package controllers
          */
         public function requestIngredients():void
         {
-            ServiceUtil.instance.getData(Services.GET_INGREDIENTS, null, onIngredientsLoad);
+            var request:JSRequest = new JSRequest();
+            ServiceUtil.instance.sendRequest(Services.GET_INGREDIENTS, request, onIngredientsLoad);
         }
 
         private function onIngredientsLoad(response:String):void

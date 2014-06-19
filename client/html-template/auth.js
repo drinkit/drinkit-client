@@ -20,12 +20,12 @@ function getProfile(error, result) {
     result.get(_action).done(onSuccessGetProfile);
 }
 
-function sendRequest(method, address, params, headers, requestID) {
+function sendRequest(method, address, queryParams, bodyParams, headers, expectedStatus, requestID) {
     var xmlhttp = new XMLHttpRequest();
     var target;
 
-    if (method == "GET" && params != null)
-        target = address + '?' + params;
+    if (queryParams != null)
+        target = address + '?' + queryParams;
     else
         target = address;
 
@@ -40,7 +40,7 @@ function sendRequest(method, address, params, headers, requestID) {
 
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4) {
-            if (xmlhttp.status == 200) {
+            if (xmlhttp.status == expectedStatus) {
                 document.${application}.onRequestComplete(xmlhttp.responseText, requestID);
             }
             else if (xmlhttp.status == 401) {
@@ -52,8 +52,5 @@ function sendRequest(method, address, params, headers, requestID) {
         }
     };
 
-    if (method != "GET")
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-    xmlhttp.send(params);
+    xmlhttp.send(bodyParams);
 }
