@@ -11,6 +11,9 @@ package utils
 
     import mx.controls.Alert;
 
+    import utils.supportClasses.JSRequest;
+    import utils.supportClasses.WaitingRequest;
+
     [Event(name="authError", type="models.events.AuthEvent")]
     public class ServiceUtil extends EventDispatcher
     {
@@ -25,7 +28,7 @@ package utils
         }
 
         private var _serviceAddress:String = "";
-        private var _waitingHandlers:Object = new Object();
+        private var _waitingRequests:Object = new Object();
         private var _currentAuthHeader:Object = null;
 
         public function init(serviceAddress:String):void
@@ -44,12 +47,12 @@ package utils
 
         public function onRequestComplete(response:String, requestID:String):void
         {
-            var handler:Function = (_waitingHandlers[requestID] as Function);
-            delete _waitingHandlers[requestID];
+            var handler:Function = (_waitingRequests[requestID] as WaitingRequest).handler;
+            delete _waitingRequests[requestID];
             handler(response);
         }
 
-        public function processAuth(authResponseHeader:String, method:String, address:String, paramsString:String, requestID:String):void
+        public function processAuth(authResponseHeader:String, address:String, requestID:String):void
         {
             if (UserInfoModel.instance.email == "" || UserInfoModel.instance.password == "")
             {
@@ -57,11 +60,14 @@ package utils
                 return;
             }
 
+            var curRequest:JSRequest = (_waitingRequests[requestID] as WaitingRequest).request;
+
             if (!_currentAuthHeader || isNonceExpired(authResponseHeader))
             {
-                var digest:Digest = new Digest(UserInfoModel.instance.email, UserInfoModel.instance.password, method);
+                var digest:Digest = new Digest(UserInfoModel.instance.email, UserInfoModel.instance.password, curRequest.method);
                 _currentAuthHeader = digest.generateAuthHeader(authResponseHeader);
-                ExternalInterface.call("sendRequest", method, address, paramsString, [_currentAuthHeader], requestID);
+                var headers:Array = prepareHeaders(curRequest);
+                ExternalInterface.call("sendRequest", curRequest.method, address, curRequest.queryParams, curRequest.bodyParams, headers, curRequest.expectedStatus, requestID);
             }
             else
             {
@@ -90,7 +96,7 @@ package utils
 
         public function sendRequest(functionName:String, request:JSRequest, handler:Function):void
         {
-            var requestID:String = prepareRequest(functionName, handler);
+            var requestID:String = prepareRequest(functionName, request, handler);
             var headers:Array = prepareHeaders(request);
             ExternalInterface.call("sendRequest", request.method, _serviceAddress + functionName, request.queryParams, request.bodyParams, headers, request.expectedStatus, requestID);
         }
@@ -100,10 +106,10 @@ package utils
             return headers.indexOf('stale="true"') > 0;
         }
 
-        private function prepareRequest(functionName:String, handler:Function):String
+        private function prepareRequest(functionName:String, request:JSRequest, handler:Function):String
         {
             var requestID:String = functionName + new Date().time.toString();
-            _waitingHandlers[requestID] = handler;
+            _waitingRequests[requestID] = new WaitingRequest(request, handler);
             return requestID;
         }
     }

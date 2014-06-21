@@ -1,4 +1,4 @@
-package utils
+package utils.supportClasses
 {
     import flash.net.URLRequestMethod;
 

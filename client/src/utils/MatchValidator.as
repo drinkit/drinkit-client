@@ -60,7 +60,6 @@ package utils
 			
 			// Call base class doValidation().
 			var results:Array = super.doValidation(value.ours);
-			trace(value.ours + ' ' + value.toMatch);
 			
 			var val:String = value.ours ? String(value.ours) : "";
 			

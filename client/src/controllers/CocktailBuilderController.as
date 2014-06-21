@@ -13,7 +13,7 @@ package controllers
     import mx.collections.ArrayCollection;
 
     import utils.JSONInstantiator;
-    import utils.JSRequest;
+    import utils.supportClasses.JSRequest;
     import utils.ServiceUtil;
 
     public class CocktailBuilderController

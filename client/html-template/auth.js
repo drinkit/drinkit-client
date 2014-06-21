@@ -44,7 +44,7 @@ function sendRequest(method, address, queryParams, bodyParams, headers, expected
                 document.${application}.onRequestComplete(xmlhttp.responseText, requestID);
             }
             else if (xmlhttp.status == 401) {
-                document.${application}.processAuth(xmlhttp.getResponseHeader('WWW-Authenticate'), method, address, params, requestID);
+                document.${application}.processAuth(xmlhttp.getResponseHeader('WWW-Authenticate'), address, requestID);
             }
             else {
                 document.${application}.onError(xmlhttp.responseText);

@@ -9,11 +9,11 @@ package controllers
     import models.UserRoles;
     import models.events.AuthEvent;
 
-    import utils.JSRequest;
+    import utils.supportClasses.JSRequest;
 
     import utils.ServiceUtil;
 
-    public class AuthController
+    public class AuthController extends UserController
     {
         public function AuthController()
         {
@@ -21,7 +21,7 @@ package controllers
 
         public function login(user:String, password:String):void
         {
-            UserInfoModel.instance.setUserCredentials(user, password);
+            UserInfoModel.instance.setUserCredentials(user, encryptPassword(password));
             requestUserInfo();
         }
 

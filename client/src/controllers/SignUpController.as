@@ -3,6 +3,8 @@
  */
 package controllers
 {
+    import components.SignupWindow;
+
     import controllers.supportClasses.Services;
 
     import flash.net.URLRequestMethod;
@@ -11,12 +13,12 @@ package controllers
 
     import mx.controls.Alert;
 
-    import utils.JSRequest;
+    import utils.supportClasses.JSRequest;
 
     import utils.ServiceUtil;
     import utils.URLContentTypes;
 
-    public class SignUpController
+    public class SignUpController extends UserController
     {
         public function SignUpController()
         {
@@ -26,7 +28,7 @@ package controllers
         {
             var variables:URLVariables = new URLVariables();
             variables["email"] = email;
-            variables["password"] = password;
+            variables["password"] = encryptPassword(password);
             variables["displayName"] = displayName;
             var request:JSRequest = new JSRequest(URLRequestMethod.POST);
             request.bodyParams = variables.toString();
@@ -38,6 +40,7 @@ package controllers
 
         private function onRegister(response:String):void
         {
+            SignupWindow.close();
             Alert.show("Вы успешно зарегестрированы!");
         }
     }

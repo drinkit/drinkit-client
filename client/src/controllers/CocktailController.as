@@ -9,7 +9,7 @@ package controllers
     import models.CocktailModel;
 
     import utils.JSONInstantiator;
-    import utils.JSRequest;
+    import utils.supportClasses.JSRequest;
     import utils.ServiceUtil;
 
     /**

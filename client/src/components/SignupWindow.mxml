@@ -64,8 +64,9 @@
 
         protected function onClose(event:CloseEvent):void
         {
-            PopUpManager.removePopUp(_signUpWindow);
+            close();
         }
+
         ]]>
 	</fx:Script>
 
