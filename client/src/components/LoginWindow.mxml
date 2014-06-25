@@ -40,7 +40,7 @@
         }
 
         protected function onSocialLoginClick(event:MouseEvent):void {
-            _authModel.login(event.currentTarget.name, AuthModelIO.LOGIN_URLS[event.currentTarget.name]);
+            _authModel.login(event.currentTarget.name);
         }
 
         protected function onClose(event:CloseEvent):void {
@@ -91,7 +91,7 @@
 	<s:Button width="100%" label="Войти" click="onBasicLoginClick(event)"/>
 	<s:Label id="errorMessage" text="Неправильный электронный адрес или пароль!" color="0xff0000" includeInLayout="false" visible="false" />
 	<s:HGroup width="100%">
-		<s:Button width="32" height="32" label="V" name="vkontakte" click="onSocialLoginClick(event)" />
+		<s:Button width="32" height="32" label="V" name="vk" click="onSocialLoginClick(event)" />
 		<s:Button width="32" height="32" label="F" name="facebook" click="onSocialLoginClick(event)" />
 		<s:Button width="32" height="32" label="G" name="google" click="onSocialLoginClick(event)" />
 	</s:HGroup>

@@ -1,23 +1,28 @@
 /**
  * Created by Crabar on 22.05.2014.
  */
-var _action;
 
 function initOAuthIO() {
     OAuth.initialize('w5lnaZLTxqd0EeBl99PrcUK3UBo');
 }
 
-function socialLogin(provider, action) {
-    _action = action;
-    OAuth.popup(provider, getProfile);
+
+
+function socialLogin(provider) {
+    OAuth.popup(provider).done(function(result) {
+        result.me().done(function(me) {
+            alert(me.name);
+            document.${application}.onSocialLogin(me);
+        })
+    });
 }
 
 function onSuccessGetProfile(result) {
     document.${application}.onSocialLogin(result);
 }
 
-function getProfile(error, result) {
-    result.get(_action).done(onSuccessGetProfile);
+function getProfile(result) {
+    result.me().done(onSuccessGetProfile);
 }
 
 function sendRequest(method, address, queryParams, bodyParams, headers, expectedStatus, requestID) {

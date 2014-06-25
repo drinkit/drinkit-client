@@ -2,8 +2,9 @@ package models
 {
 	import flash.display.Stage;
 	import flash.external.ExternalInterface;
-	
-	import mx.controls.Alert;
+    import flash.media.scanHardware;
+
+    import mx.controls.Alert;
 	
 	public class AuthModelIO implements IAuthModel
 	{
@@ -21,7 +22,7 @@ package models
 		{
 		}
 		
-		public static const LOGIN_URLS:Object = {"google":"/oauth2/v1/userinfo"};
+//		public static const LOGIN_URLS:Object = {"google":"/oauth2/v1/userinfo", "vk": ""};
 		
 		public function init(stage:Stage):void
 		{
@@ -29,10 +30,10 @@ package models
 			ExternalInterface.addCallback("onSocialLogin", onSocialLogin);
 		}
 		
-		private function onSocialLogin(result:String):void
+		private function onSocialLogin(result:Object):void
 		{
-			var userInfo:Object = JSON.parse(result);
-			checkSocialUser(userInfo.email);
+//			var userInfo:Object = JSON.parse(result);
+			checkSocialUser(result.email);
 		}
 		
 		private function generateFakeSocialPassword():String
@@ -45,9 +46,9 @@ package models
 			
 		}
 		
-		public function login(provider:String, action:String):void
+		public function login(provider:String):void
 		{
-			ExternalInterface.call("socialLogin", provider, action);
+			ExternalInterface.call("socialLogin", provider);
 		}
 	}
 }

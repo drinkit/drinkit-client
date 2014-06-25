@@ -5,6 +5,6 @@ package models
 	public interface IAuthModel
 	{
 		function init(stage:Stage):void;
-		function login(provider:String, action:String):void;
+		function login(provider:String):void;
 	}
 }
