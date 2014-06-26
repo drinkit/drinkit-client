@@ -10,8 +10,7 @@ function initOAuthIO() {
 
 function socialLogin(provider) {
     OAuth.popup(provider).done(function(result) {
-        result.me().done(function(me) {
-            alert(me.name);
+        result.me(['name', 'email', 'id']).done(function(me) {
             document.${application}.onSocialLogin(me);
         })
     });
