@@ -43,12 +43,12 @@ package models.supportClasses
 
         private static function getFacebookId(raw:Object):Number
         {
-            return NaN;
+            return Number(raw.id);
         }
 
         private static function getGoogleId(raw:Object):Number
         {
-            return NaN;
+            return Number(raw.id);
         }
 
         public function SocialNetParser()
