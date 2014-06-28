@@ -64,5 +64,6 @@ public class UserInfoModel extends EventDispatcher
         dispatchEvent(event);
     }
 
+
 }
 }

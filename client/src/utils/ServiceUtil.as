@@ -4,7 +4,6 @@ package utils
 
     import flash.events.EventDispatcher;
     import flash.external.ExternalInterface;
-    import flash.net.URLRequestMethod;
 
     import models.UserInfoModel;
     import models.events.AuthEvent;
@@ -28,15 +27,16 @@ package utils
         }
 
         private var _serviceAddress:String = "";
-        private var _waitingRequests:Object = new Object();
+        private var _waitingRequests:Object = {};
         private var _currentAuthHeader:Object = null;
 
         public function init(serviceAddress:String):void
         {
             _serviceAddress = serviceAddress;
-            trace(ExternalInterface.available);
+
             ExternalInterface.addCallback("onRequestComplete", onRequestComplete);
             ExternalInterface.addCallback("processAuth", processAuth);
+            ExternalInterface.addCallback("onExpectedError", onExpectedError);
             ExternalInterface.addCallback("onError", onError);
         }
 
@@ -49,10 +49,21 @@ package utils
         {
             var handler:Function = (_waitingRequests[requestID] as WaitingRequest).handler;
             delete _waitingRequests[requestID];
-            handler(response);
+
+            if (handler)
+                handler(response);
         }
 
-        public function processAuth(authResponseHeader:String, address:String, requestID:String):void
+        public function onExpectedError(response:String, requestID:String):void
+        {
+            var errorHandler:Function = (_waitingRequests[requestID] as WaitingRequest).errorHandler;
+            delete _waitingRequests[requestID];
+
+            if (errorHandler)
+                errorHandler(response);
+        }
+
+        public function processAuth(response:String, authResponseHeader:String, address:String, requestID:String):void
         {
             if (UserInfoModel.instance.email == "" || UserInfoModel.instance.password == "")
             {
@@ -67,12 +78,17 @@ package utils
                 var digest:Digest = new Digest(UserInfoModel.instance.email, UserInfoModel.instance.password, curRequest.method);
                 _currentAuthHeader = digest.generateAuthHeader(authResponseHeader);
                 var headers:Array = prepareHeaders(curRequest);
-                ExternalInterface.call("sendRequest", curRequest.method, address, curRequest.queryParams, curRequest.bodyParams, headers, curRequest.expectedStatus, requestID);
+                ExternalInterface.call("sendRequest", curRequest.method, address, curRequest.queryParams, curRequest.bodyParams, headers, curRequest.expectedStatus, curRequest.expectedErrorStatus, requestID);
+            }
+            else if (curRequest.expectedErrorStatus == 401)
+            {
+                clearDigest();
+                onExpectedError(response, requestID);
             }
             else
             {
                 LoginWindow.show();
-                _currentAuthHeader = null;
+                clearDigest();
                 dispatchEvent(new AuthEvent(AuthEvent.AUTH_ERROR));
             }
 
@@ -94,11 +110,11 @@ package utils
             return headers;
         }
 
-        public function sendRequest(functionName:String, request:JSRequest, handler:Function):void
+        public function sendRequest(functionName:String, request:JSRequest, handler:Function, errorHandler:Function = null):void
         {
-            var requestID:String = prepareRequest(functionName, request, handler);
+            var requestID:String = prepareRequest(functionName, request, handler, errorHandler);
             var headers:Array = prepareHeaders(request);
-            ExternalInterface.call("sendRequest", request.method, _serviceAddress + functionName, request.queryParams, request.bodyParams, headers, request.expectedStatus, requestID);
+            ExternalInterface.call("sendRequest", request.method, _serviceAddress + functionName, request.queryParams, request.bodyParams, headers, request.expectedStatus, request.expectedErrorStatus, requestID);
         }
 
         private function isNonceExpired(headers:String):Boolean
@@ -106,10 +122,10 @@ package utils
             return headers.indexOf('stale="true"') > 0;
         }
 
-        private function prepareRequest(functionName:String, request:JSRequest, handler:Function):String
+        private function prepareRequest(functionName:String, request:JSRequest, handler:Function, errorHandler:Function):String
         {
             var requestID:String = functionName + new Date().time.toString();
-            _waitingRequests[requestID] = new WaitingRequest(request, handler);
+            _waitingRequests[requestID] = new WaitingRequest(request, handler, errorHandler);
             return requestID;
         }
     }

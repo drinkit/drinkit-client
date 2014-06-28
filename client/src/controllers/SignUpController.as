@@ -24,8 +24,17 @@ package controllers
         {
         }
 
-        public function registerUser(email:String, password:String, displayName:String):void
+        private var _email:String;
+        private var _password:String;
+
+        private var _isSilentMode:Boolean;
+
+        public function registerUser(email:String, password:String, displayName:String, isSilentMode:Boolean = false):void
         {
+            _email = email;
+            _password = password;
+            _isSilentMode = isSilentMode;
+            //
             var variables:URLVariables = new URLVariables();
             variables["email"] = email;
             variables["password"] = encryptPassword(password);
@@ -34,14 +43,25 @@ package controllers
             request.bodyParams = variables.toString();
             request.contentType = URLContentTypes.FORM_URLENCODED;
             request.expectedStatus = 201;
+            request.expectedErrorStatus = 403;
 
-            ServiceUtil.instance.sendRequest(Services.REGISTER_USER, request, onRegister);
+            ServiceUtil.instance.sendRequest(Services.REGISTER_USER, request, onRegister, onRegisterError);
         }
 
         private function onRegister(response:String):void
         {
             SignupWindow.close();
-            Alert.show("Вы успешно зарегестрированы!");
+            var authController:AuthController = new AuthController();
+            authController.login(_email, _password);
+
+            if (!_isSilentMode)
+                Alert.show("Вы успешно зарегестрированы!");
+        }
+
+        private function onRegisterError(response:String):void
+        {
+            SignupWindow.close();
+            Alert.show("Пользователь с таким именем уже существует!");
         }
     }
 }

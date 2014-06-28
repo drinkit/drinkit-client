@@ -19,10 +19,10 @@ package controllers
         {
         }
 
-        public function login(user:String, password:String):void
+        public function login(user:String, password:String, customAuthHandler:Function = null):void
         {
             UserInfoModel.instance.setUserCredentials(user, encryptPassword(password));
-            requestUserInfo();
+            requestUserInfo(customAuthHandler);
         }
 
         public function logout():void
@@ -32,10 +32,14 @@ package controllers
             UserInfoModel.instance.dispatchEvent(new AuthEvent(AuthEvent.LOGOUT));
         }
 
-        public function requestUserInfo():void
+        public function requestUserInfo(customAuthHandler:Function = null):void
         {
             var request:JSRequest = new JSRequest();
-            ServiceUtil.instance.sendRequest(Services.GET_USER_INFO, request, onGetUserInfo);
+
+            if (customAuthHandler)
+                request.expectedErrorStatus = 401;
+
+            ServiceUtil.instance.sendRequest(Services.GET_USER_INFO, request, onGetUserInfo, customAuthHandler);
         }
 
         private function getHighestRole(roles:Array):uint

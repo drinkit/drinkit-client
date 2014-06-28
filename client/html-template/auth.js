@@ -24,7 +24,7 @@ function getProfile(result) {
     result.me().done(onSuccessGetProfile);
 }
 
-function sendRequest(method, address, queryParams, bodyParams, headers, expectedStatus, requestID) {
+function sendRequest(method, address, queryParams, bodyParams, headers, expectedStatus, expectedErrorStatus, requestID) {
     var xmlhttp = new XMLHttpRequest();
     var target;
 
@@ -48,7 +48,10 @@ function sendRequest(method, address, queryParams, bodyParams, headers, expected
                 document.${application}.onRequestComplete(xmlhttp.responseText, requestID);
             }
             else if (xmlhttp.status == 401) {
-                document.${application}.processAuth(xmlhttp.getResponseHeader('WWW-Authenticate'), address, requestID);
+                document.${application}.processAuth(xmlhttp.responseText, xmlhttp.getResponseHeader('WWW-Authenticate'), address, requestID);
+            }
+            else if (xmlhttp.status == expectedErrorStatus) {
+                document.${application}.onExpectedError(xmlhttp.responseText, requestID);
             }
             else {
                 document.${application}.onError(xmlhttp.responseText);
