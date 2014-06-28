@@ -20,6 +20,6 @@ package utils.supportClasses
         public var bodyParams:String;
         public var contentType:String;
         public var expectedStatus:uint = 200;
-
+        public var expectedErrorStatus:uint = 0;
     }
 }
