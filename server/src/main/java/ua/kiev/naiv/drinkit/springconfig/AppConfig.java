@@ -38,6 +38,9 @@ public class AppConfig {
         dataSource.setUrl(env.getRequiredProperty("db.url"));
         dataSource.setUsername(env.getRequiredProperty("db.username"));
         dataSource.setPassword(env.getRequiredProperty("db.password"));
+        Properties properties = new Properties();
+        properties.setProperty("characterEncoding", "utf8");
+        dataSource.setConnectionProperties(properties);
         return dataSource;
     }
 
