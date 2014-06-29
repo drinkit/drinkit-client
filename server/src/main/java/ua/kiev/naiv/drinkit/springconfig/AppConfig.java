@@ -4,19 +4,18 @@ package ua.kiev.naiv.drinkit.springconfig;
  * @author pkolmykov
  */
 
+import java.util.Properties;
+
+import javax.annotation.Resource;
+
+import org.flywaydb.core.Flyway;
 import org.hibernate.ejb.HibernatePersistence;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-
-import javax.annotation.Resource;
-import java.util.Properties;
 
 
 /**
@@ -45,6 +44,16 @@ public class AppConfig {
     }
 
     @Bean
+    public Flyway flyway(){
+        Flyway flyway = new Flyway();
+        flyway.setDataSource(dataSource());
+        flyway.setCleanOnValidationError(true);
+        flyway.migrate();
+        return flyway;
+    }
+
+    @Bean
+    @DependsOn("flyway")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean sessionFactory = new LocalContainerEntityManagerFactoryBean();
         sessionFactory.setDataSource(dataSource());

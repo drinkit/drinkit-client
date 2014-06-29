@@ -178,8 +178,11 @@
             <artifactId>spring-security-config</artifactId>
             <version>3.2.1.RELEASE</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>3.0</version>
+        </dependency>
     </dependencies>
 
     <repositories>
