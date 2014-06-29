@@ -69,6 +69,7 @@
                         <configuration>
                             <htmlName>index</htmlName>
                             <parameters>
+                                <title>drinkIt</title>
                                 <useBrowserHistory>--</useBrowserHistory>
                             </parameters>
                         </configuration>

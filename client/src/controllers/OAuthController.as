@@ -7,6 +7,8 @@ package controllers
 
     import models.supportClasses.SocialNetParser;
 
+    import mx.controls.Alert;
+
     public class OAuthController implements IOAuthController
     {
         public function OAuthController(authController:AuthController, signUpController:SignUpController)
@@ -36,6 +38,13 @@ package controllers
         private function onSocialLogin(result:Object):void
         {
             var userID:Number = SocialNetParser.getSocialNetUserId(_lastLoggedProvider, result.raw);
+
+            if (isNaN(userID))
+            {
+                Alert.show("Ошибка связи с социальной сетью!");
+                return;
+            }
+
             var userLogin:String = generateLogin(_lastLoggedProvider, userID);
             var userPassword:String = generatePassword(_lastLoggedProvider, userID);
 
@@ -56,7 +65,7 @@ package controllers
 
         private function onUserNotExists(response:String):void
         {
-            _signUpController.registerUser(_lastLoggedUser.login, _lastLoggedUser.password, _lastLoggedUser.displayName);
+            _signUpController.registerUser(_lastLoggedUser.login, _lastLoggedUser.password, _lastLoggedUser.displayName, true);
             _lastLoggedUser = null;
         }
     }
