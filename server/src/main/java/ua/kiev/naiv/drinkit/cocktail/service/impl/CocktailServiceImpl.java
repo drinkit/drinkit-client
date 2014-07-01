@@ -38,7 +38,7 @@ public class CocktailServiceImpl implements CocktailService {
 
     @Override
     public Recipe create(Recipe recipe) {
-        throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
+        return recipeRepository.saveAndFlush(recipe);//todo add transformation
     }
 
     @Override
