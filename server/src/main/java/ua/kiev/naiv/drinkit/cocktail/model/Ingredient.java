@@ -26,13 +26,6 @@ public class Ingredient {
     @JsonIgnore
     private Set<IngredientWithQuantity> cocktailIngredients;
 
-    public Ingredient() {
-    }
-
-    public Ingredient(int id) {
-        this.id = id;
-    }
-
     @Id
     @Column(name = "id")
     public Integer getId() {

@@ -24,7 +24,7 @@ public class IngredientWithQuantity implements Serializable {
 
     private Integer quantity;
     @JsonIgnore
-    private CocktailIngredientId cocktailIngredientId = new CocktailIngredientId();
+    private CocktailIngredientId cocktailIngredientId;
 
     @EmbeddedId
     public CocktailIngredientId getCocktailIngredientId() {
