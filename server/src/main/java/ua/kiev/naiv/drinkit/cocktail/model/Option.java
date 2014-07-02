@@ -23,6 +23,13 @@ public class Option {
     private String option;
     private String name;
 
+    public Option() {
+    }
+
+    public Option(int id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     @Column

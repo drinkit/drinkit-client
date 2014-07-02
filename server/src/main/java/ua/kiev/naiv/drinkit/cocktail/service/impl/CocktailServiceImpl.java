@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
 import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.pojos.RecipeInput;
 import ua.kiev.naiv.drinkit.cocktail.repository.CocktailTypeRepository;
 import ua.kiev.naiv.drinkit.cocktail.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.repository.RecipeRepository;
@@ -37,8 +38,8 @@ public class CocktailServiceImpl implements CocktailService {
     CocktailTypeRepository cocktailTypeRepository;
 
     @Override
-    public Recipe create(Recipe recipe) {
-        return recipeRepository.saveAndFlush(recipe);//todo add transformation
+    public Recipe create(RecipeInput recipeInput) {
+        return recipeRepository.saveAndFlush(recipeInput.transform());
     }
 
     @Override

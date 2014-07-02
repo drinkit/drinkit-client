@@ -3,6 +3,7 @@ package ua.kiev.naiv.drinkit.cocktail.service;
 import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
 import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.pojos.RecipeInput;
 import ua.kiev.naiv.drinkit.cocktail.search.Criteria;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public interface CocktailService {
 
-    Recipe create(Recipe recipe);
+    Recipe create(RecipeInput recipeInput);
 
     Recipe delete(int id);
 
