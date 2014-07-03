@@ -37,8 +37,10 @@
                                                        labelField="name" paddingLeft="0" prompt="Напишите ингредиент..." />
                     <s:DataGrid>
                         <s:columns>
-                            <s:GridColumn headerText="Название" editable="false" />
-                            <s:GridColumn headerText="Количество" editable="true" />
+                            <s:ArrayList>
+                                <s:GridColumn headerText="Название" editable="false" />
+                                <s:GridColumn headerText="Количество" editable="true" />
+                            </s:ArrayList>
                         </s:columns>
                     </s:DataGrid>
                 </s:VGroup>
