@@ -9,14 +9,30 @@ package controllers
     import models.UserRoles;
     import models.events.AuthEvent;
 
+    import utils.CookieUtil;
+
     import utils.supportClasses.JSRequest;
 
     import utils.ServiceUtil;
 
     public class AuthController extends UserController
     {
+        private static const USER_COOKIE_NAME:String = "user_credentials";
+
         public function AuthController()
         {
+        }
+
+        public function tryLoginWithStoredUserCredentials():void
+        {
+            var userCredentials:Object = JSON.parse(String(CookieUtil.getCookie(USER_COOKIE_NAME)));
+
+            if (userCredentials)
+            {
+                UserInfoModel.instance.setUserCredentials(userCredentials.login, userCredentials.password);
+                requestUserInfo();
+            }
+
         }
 
         public function login(user:String, password:String, customAuthHandler:Function = null):void
@@ -27,6 +43,7 @@ package controllers
 
         public function logout():void
         {
+            clearStoredUserCredentials();
             UserInfoModel.instance.clear();
             ServiceUtil.instance.clearDigest();
             UserInfoModel.instance.dispatchEvent(new AuthEvent(AuthEvent.LOGOUT));
@@ -65,7 +82,19 @@ package controllers
             UserInfoModel.instance.displayName = responseJSON.displayName;
             UserInfoModel.instance.role = getHighestRole(responseJSON.authorities);
             //
+            storeUserCredentials(UserInfoModel.instance.email, UserInfoModel.instance.password);
+            //
             UserInfoModel.instance.dispatchEvent(new AuthEvent(AuthEvent.AUTH_SUCCESS));
+        }
+
+        private function clearStoredUserCredentials():void
+        {
+            CookieUtil.deleteCookie(USER_COOKIE_NAME);
+        }
+
+        private function storeUserCredentials(login:String, hashedPassword:String):void
+        {
+            CookieUtil.setCookie(USER_COOKIE_NAME, JSON.stringify({login: login, password: hashedPassword}), 7);
         }
     }
 }

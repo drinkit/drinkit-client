@@ -10,7 +10,8 @@
 	<fx:Style source="/design/newStyle.css" />
 	<fx:Script>
 		<![CDATA[
-			import controllers.MainController;
+        import controllers.AuthController;
+        import controllers.MainController;
 			
 			import design.DesignModel;
 			
@@ -53,6 +54,9 @@
 				readFlashVars();
 				UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onAuthChange);
 				UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onAuthChange);
+                //
+                var auth:AuthController = new AuthController();
+                auth.tryLoginWithStoredUserCredentials();
 			}
 			
 			private function onAuthChange(event:AuthEvent):void
