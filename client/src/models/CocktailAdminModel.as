@@ -35,6 +35,12 @@ package models
         [Bindable]
         public var cocktailTypeId:uint;
 
+        [Bindable]
+        public var name:String;
+
+        [Bindable]
+        public var description:String;
+
         private function onIngredientsQueryListChange(event:CollectionEvent):void
         {
             ingredientsList.refresh();

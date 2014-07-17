@@ -33,7 +33,7 @@
 
         private function loadCocktail(id:Number):void
         {
-
+            _controller.loadCocktailInfo(id);
         }
 
         private function onIngrChooseChange(event:IndexChangeEvent):void
@@ -169,14 +169,14 @@
     </s:HGroup>
     <s:Group width="100%">
         <s:HGroup left="0" verticalAlign="middle">
-            <s:TextInput id="titleInput"/>
+            <s:TextInput id="titleInput" text="@{_model.name}"/>
             <s:CheckBox id="isDevelopCheckBox" label="в разработке"/>
         </s:HGroup>
         <s:Button label="Загрузить фото" right="0" click="onLoadPhotoButtonClick(event)"/>
     </s:Group>
     <s:HGroup width="100%" height="100%">
         <s:VGroup width="100%" height="100%">
-            <s:TextArea id="descriptionInput" width="100%" textAlign="left" verticalAlign="top"/>
+            <s:TextArea id="descriptionInput" width="100%" textAlign="left" verticalAlign="top" text="@{_model.description}"/>
             <s:HGroup width="100%" height="100%">
                 <s:VGroup width="100%" height="100%">
                     <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="100%" height="26"
