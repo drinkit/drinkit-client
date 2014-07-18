@@ -31,13 +31,11 @@
         private var _model:CocktailAdminModel;
         private var _controller:CocktailAdminController;
 
-        private function loadCocktail(id:Number):void
-        {
+        private function loadCocktail(id:Number):void {
             _controller.loadCocktailInfo(id);
         }
 
-        private function onIngrChooseChange(event:IndexChangeEvent):void
-        {
+        private function onIngrChooseChange(event:IndexChangeEvent):void {
             if (event.newIndex >= 0)
                 _controller.addIngredientToCocktail(ingrChoose.selectedItem);
 
@@ -45,12 +43,9 @@
             ingrChoose.validateProperties();
         }
 
-        private function filterCBList(item:Object):Boolean
-        {
-            function isIngredientSelected(ingredient:Ingredient):Boolean
-            {
-                for (var i:uint = 0; i < _model.selectedIngredientsList.length; i++)
-                {
+        private function filterCBList(item:Object):Boolean {
+            function isIngredientSelected(ingredient:Ingredient):Boolean {
+                for (var i:uint = 0; i < _model.selectedIngredientsList.length; i++) {
                     if (_model.selectedIngredientsList.getItemAt(i).id == ingredient.id)
                         return true;
                 }
@@ -67,25 +62,21 @@
             return false;
         }
 
-        private function creationCompleteHandler(event:FlexEvent):void
-        {
+        private function creationCompleteHandler(event:FlexEvent):void {
             _model = new CocktailAdminModel();
             _controller = new CocktailAdminController(_model);
         }
 
-        private function onSaveButtonClick(event:Event):void
-        {
+        private function onSaveButtonClick(event:Event):void {
             trace(1);
         }
 
-        private function onCocktailOptionsChange(event:IndexChangeEvent):void
-        {
+        private function onCocktailOptionsChange(event:IndexChangeEvent):void {
             var selectedItems:Vector.<Object> = List(event.currentTarget).selectedItems;
             _controller.updateOptions(selectedItems);
         }
 
-        private function onLoadButtonClick(event:MouseEvent):void
-        {
+        private function onLoadButtonClick(event:MouseEvent):void {
             loadCocktail(Number(idInput.text));
         }
 
@@ -93,13 +84,12 @@
         private var _photoLoader:Loader;
         private var _fileLoad:FileReference;
 
-        private function onLoadPhotoButtonClick(event:MouseEvent):void
-        {
+        private function onLoadPhotoButtonClick(event:MouseEvent):void {
             _fileLoad = new FileReference();
             _fileLoad.addEventListener(Event.SELECT, onFileSelect);
             _fileLoad.addEventListener(Event.CANCEL, onBrowseCancel);
             _fileLoad.addEventListener(SecurityErrorEvent.SECURITY_ERROR,
-                    onSecurityError);
+                                       onSecurityError);
             _fileLoad.addEventListener(IOErrorEvent.IO_ERROR, onPhotoLoadError);
             _fileLoad.addEventListener(Event.COMPLETE, onPhotoLoaded);
 
@@ -108,18 +98,15 @@
 
         }
 
-        private function onSecurityError(event:SecurityErrorEvent):void
-        {
+        private function onSecurityError(event:SecurityErrorEvent):void {
             trace("security error");
         }
 
-        private function onBrowseCancel(event:Event):void
-        {
+        private function onBrowseCancel(event:Event):void {
             trace("select cancel");
         }
 
-        private function onFileSelect(event:Event):void
-        {
+        private function onFileSelect(event:Event):void {
             FileReference(event.currentTarget).load();
             trace("selected");
         }
@@ -140,8 +127,7 @@
         {
             var photo:Bitmap = LoaderInfo(event.currentTarget).content as Bitmap;
 
-            if (photo.width < CocktailModel.BIG_IMAGE_WIDTH || photo.height < CocktailModel.BIG_IMAGE_HEIGHT)
-            {
+            if (photo.width < CocktailModel.BIG_IMAGE_WIDTH || photo.height < CocktailModel.BIG_IMAGE_HEIGHT) {
                 Alert.show("Картинка слишком маленькая! Минимальный размер: " + CocktailModel.BIG_IMAGE_WIDTH + "x" + CocktailModel.BIG_IMAGE_HEIGHT);
                 return;
             }
@@ -152,6 +138,14 @@
         private function onCocktailTypeChange(event:IndexChangeEvent):void
         {
             _controller.setCocktailType(List(event.currentTarget).selectedItem);
+        }
+
+        private function onDataGridIngredientDeleter(event:KeyboardEvent):void
+        {
+            if (event.keyCode == Keyboard.DELETE && selectedIngredientsGrid.selectedItem)
+            {
+                _controller.removeIngredientFromCocktail(selectedIngredientsGrid.selectedItem.id);
+            }
         }
         ]]>
     </fx:Script>
@@ -164,7 +158,7 @@
     </s:HGroup>
     <mx:HRule width="100%" strokeWidth="1" strokeColor="0x000000"/>
     <s:HGroup verticalAlign="middle">
-        <s:TextInput id="idInput"/>
+        <s:TextInput id="idInput" />
         <s:Button label="Загрузить" click="onLoadButtonClick(event)"/>
     </s:HGroup>
     <s:Group width="100%">
@@ -188,8 +182,8 @@
                                                        labelField="name" paddingLeft="0" prompt="Напишите ингредиент..."
                                                        change="onIngrChooseChange(event)"
                                                        dataProvider="{IngredientsModel.instance.ingredientsList}"/>
-                    <s:DataGrid width="100%" height="100%" dataProvider="{_model.selectedIngredientsList}"
-                                editable="true">
+                    <s:DataGrid id="selectedIngredientsGrid" width="100%" height="100%" dataProvider="{_model.selectedIngredientsList}"
+                                editable="true" keyUp="onDataGridIngredientDeleter(event)">
                         <s:columns>
                             <s:ArrayList>
                                 <s:GridColumn headerText="Название" dataField="name" editable="false"/>
