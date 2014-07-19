@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.web.controller;
+package ua.kiev.naiv.drinkit.cocktail.service;
 
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 

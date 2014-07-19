@@ -18,12 +18,8 @@ public enum Role {
 
     public static List<Role> getRolesByAccessLevel(Integer accessLevel) {
         return Arrays.stream(Role.values())
-                .filter(role -> role.accessLevel <= accessLevel)
+                .filter(role -> role.accessLevel >= accessLevel)
                 .collect(Collectors.toList());
-    }
-
-    public String getEL(){
-        return null;
     }
 
 }

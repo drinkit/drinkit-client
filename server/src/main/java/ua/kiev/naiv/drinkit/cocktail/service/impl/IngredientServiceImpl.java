@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;
-import ua.kiev.naiv.drinkit.cocktail.web.controller.IngredientService;
+import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 
 import java.util.List;
 
