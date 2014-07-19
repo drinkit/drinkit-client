@@ -64,8 +64,8 @@ package controllers
             _model.name = cocktail.name;
             _model.description = cocktail.description;
             _model.cocktailTypeId = cocktail.cocktailTypeId;
-            _model.selectedOptions = Vector.<Object>(cocktail.optionIds);
-            _model.selectedIngredientsList = convertIngredientsWithQuantitiesToSelectedIngredients(cocktail.ingredientsWithQuantities);
+            _model.selectedOptions = Vector.<Object>(cocktail.options);
+            _model.selectedIngredientsList = convertIngredientsWithQuantitiesToSelectedIngredients(cocktail.cocktailIngredients);
         }
 
         private function convertIngredientsWithQuantitiesToSelectedIngredients(source:Array):ArrayList

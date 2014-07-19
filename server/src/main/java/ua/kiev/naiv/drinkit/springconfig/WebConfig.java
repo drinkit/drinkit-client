@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @ComponentScan({
-        "ua.kiev.naiv.drinkit.cocktail.controller",
+        "ua.kiev.naiv.drinkit.cocktail.web.controller",
         "ua.kiev.naiv.drinkit.cocktail.common"
 })
 @EnableWebMvc

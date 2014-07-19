@@ -46,8 +46,8 @@
 					//
 					_cocktail = CocktailMini(value);
 					cocktailName.text = _cocktail.name;
-					buildRecipe(_cocktail.ingredientIds);
-					buildTags(_cocktail.cocktailTypeId, _cocktail.optionIds);
+					buildRecipe(_cocktail.cocktailIngredients);
+					buildTags(_cocktail.cocktailTypeId, _cocktail.options);
 				}
 			}
 			
@@ -89,7 +89,7 @@
 				
 				for (var i:uint = 0; i < ingredients.length; i++)
 				{
-					item = {id: ingredients[i], label: IngredientsModel.instance.getIngredientNameById(ingredients[i]).toLowerCase()};					
+					item = {id: ingredients[i][0], label: IngredientsModel.instance.getIngredientNameById(ingredients[i][0]).toLowerCase()};
 					_ingredients.addItem(item);
 				}
 			}

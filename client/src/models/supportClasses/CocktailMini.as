@@ -15,8 +15,8 @@ package models.supportClasses
 		public var id:Number;
 		public var name:String;
 		public var cocktailTypeId:Number;
-		public var ingredientIds:Array;
-		public var optionIds:Array;
+		public var cocktailIngredients:Array;
+		public var options:Array;
 		
 		private var _image:Bitmap;
 		
@@ -43,7 +43,7 @@ package models.supportClasses
 			id = aId;
 			name = aName;
 			thumbnail = aThumbnail;
-			ingredientIds = aIngredients;
+            cocktailIngredients = aIngredients;
 			cocktailTypeId = aCocktailTypeId;
 		}
 

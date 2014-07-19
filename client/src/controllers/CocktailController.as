@@ -30,11 +30,11 @@ package controllers
 
         private function requestCocktailData(key:Number):void
         {
-            var params:URLVariables = new URLVariables();
-            params.id = key;
+//            var params:URLVariables = new URLVariables();
+//            params.id = key;
             var request:JSRequest = new JSRequest();
-            request.queryParams = params.toString();
-            ServiceUtil.instance.sendRequest(Services.GET_COCKTAIL_INFO, request, onCocktailInfoLoad);
+//            request.queryParams = params.toString();
+            ServiceUtil.instance.sendRequest(Services.GET_COCKTAIL_INFO + key, request, onCocktailInfoLoad);
         }
 
         private function onCocktailInfoLoad(response:String):void

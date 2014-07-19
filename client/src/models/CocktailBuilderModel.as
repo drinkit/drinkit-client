@@ -2,7 +2,7 @@ package models
 {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	
+
 	import models.supportClasses.Ingredient;
 	
 	import mx.binding.utils.BindingUtils;
@@ -24,7 +24,7 @@ package models
 		{
 			BindingUtils.bindProperty(this, "ingredientsList", IngredientsModel.instance, "ingredientsList");
 			selectedIngredientsList = new ArrayList();
-			cocktailsList = MockData.fakeCocktails();
+			cocktailsList = new ArrayCollection();//MockData.fakeCocktails();
 			//
 			selectedIngredientsList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
 		}

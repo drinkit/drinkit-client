@@ -15,8 +15,8 @@
 				
 				if (data)
 				{
-					ingrName.text = IngredientsModel.instance.getIngredientNameById(data.ingredientId);
-					ingrQuantity.text = data.quantity?data.quantity + " мл":"немного";
+					ingrName.text = IngredientsModel.instance.getIngredientNameById(data[0]);
+					ingrQuantity.text = data[1]?data[1] + " мл":"немного";
 				}
 			}
 

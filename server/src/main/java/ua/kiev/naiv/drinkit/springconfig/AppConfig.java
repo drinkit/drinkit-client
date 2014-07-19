@@ -4,12 +4,8 @@ package ua.kiev.naiv.drinkit.springconfig;
  * @author pkolmykov
  */
 
-import java.util.Properties;
-
-import javax.annotation.Resource;
-
 import org.flywaydb.core.Flyway;
-import org.hibernate.ejb.HibernatePersistence;
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -17,12 +13,15 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
+import javax.annotation.Resource;
+import java.util.Properties;
+
 
 /**
  * @author pkolmykov
  */
 @Configuration
-@EnableJpaRepositories("ua.kiev.naiv.drinkit.cocktail.repository")
+@EnableJpaRepositories("ua.kiev.naiv.drinkit.cocktail.persistence.repository")
 @ComponentScan("ua.kiev.naiv.drinkit.cocktail.service")
 @PropertySource("classpath:application.properties")
 public class AppConfig {
@@ -57,8 +56,8 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean sessionFactory = new LocalContainerEntityManagerFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("ua.kiev.naiv.drinkit.cocktail.model");
-        sessionFactory.setPersistenceProviderClass(HibernatePersistence.class);
+        sessionFactory.setPackagesToScan("ua.kiev.naiv.drinkit.cocktail.persistence.model");
+        sessionFactory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         sessionFactory.setJpaProperties(hibProperties());
         return sessionFactory;
     }

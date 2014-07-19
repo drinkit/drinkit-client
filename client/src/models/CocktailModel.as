@@ -19,12 +19,12 @@ package models
 		public var name:String;
 		public var description:String;
 		public var cocktailTypeId:int;
-		public var ingredientsWithQuantities:Array;
-		public var optionIds:Array;
+		public var cocktailIngredients:Array;
+		public var options:Array;
 		
 		public function get ingredientWithQuantitiesProvider():ArrayCollection
 		{
-			return new ArrayCollection(ingredientsWithQuantities);
+			return new ArrayCollection(cocktailIngredients);
 		}
 		
 		private var _image:Bitmap;

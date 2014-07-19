@@ -7,13 +7,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import ua.kiev.naiv.drinkit.cocktail.common.DetailedUser;
-import ua.kiev.naiv.drinkit.cocktail.model.User;
-import ua.kiev.naiv.drinkit.cocktail.repository.UserRepository;
+import ua.kiev.naiv.drinkit.cocktail.common.Role;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.User;
+import ua.kiev.naiv.drinkit.cocktail.persistence.repository.UserRepository;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,23 +38,17 @@ public class BasicUserDetailsService implements UserDetailsService {
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(Integer accessLevel) {
-        List<GrantedAuthority> roles = new ArrayList<>();
-        switch (accessLevel) {
-            case User.ACCESS_LVL_ADMIN:
-                roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-            case User.ACCESS_LVL_USER:
-                roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-        }
-        return roles;
+        return Role.getRolesByAccessLevel(accessLevel).stream()
+                .map(role -> new SimpleGrantedAuthority(role.name()))
+                .collect(Collectors.toList());
     }
 
     public boolean createUser(User user) {
-        try {
+        boolean isNew = userRepository.findByUsername(user.getUsername()) == null;
+        if(isNew){
             userRepository.saveAndFlush(user);
-        } catch (Exception e) {
-            return false;
         }
-        return true;
+        return isNew;
     }
 
 

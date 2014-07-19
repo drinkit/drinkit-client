@@ -1,3 +1,4 @@
+
 package ua.kiev.naiv.drinkit.cocktail.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +22,7 @@ public class MixinAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(MixinAspect.class);
 
     @Around("@annotation(annotation)")
-    public Object test(final ProceedingJoinPoint joinPoint, final JsonMixin annotation) {
+    public Object assignMixinToEntity(final ProceedingJoinPoint joinPoint, final JsonMixIn annotation) {
         Class<?> mixin = annotation.value();
         ObjectMapper mapper = new ObjectMapper();
         MethodSignature msig = (MethodSignature) joinPoint.getSignature();
