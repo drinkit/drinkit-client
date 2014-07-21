@@ -19,12 +19,6 @@ import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeSearchResultMixin;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 21.07.13
- * Time: 13:54
- */
 @Controller
 @RequestMapping(value = "recipes")
 public class RecipeController {

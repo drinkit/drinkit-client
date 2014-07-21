@@ -7,9 +7,6 @@ import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 import java.util.Arrays;
 import java.util.HashSet;
 
-/**
- * @author pkolmykov
- */
 public class MockObjectsGenerator {
 
     public static Recipe creteMockRecipe() {

@@ -3,12 +3,7 @@ package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 20.07.13
- * Time: 17:43
- */
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "recipes_has_ingredients")
 @AssociationOverrides({

@@ -5,12 +5,7 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 16.03.14
- * Time: 22:08
- */
+@SuppressWarnings("unused")
 public class DetailedUser extends User {
 
     private final String displayName;

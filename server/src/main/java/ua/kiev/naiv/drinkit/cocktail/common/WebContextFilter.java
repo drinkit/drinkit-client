@@ -8,12 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 28.07.13
- * Time: 16:04
- */
 @Component("webContextFilter")
 public class WebContextFilter extends GenericFilterBean {
 

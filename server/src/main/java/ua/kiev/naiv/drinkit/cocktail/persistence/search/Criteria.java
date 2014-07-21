@@ -2,12 +2,7 @@ package ua.kiev.naiv.drinkit.cocktail.persistence.search;
 
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 22.07.13
- * Time: 21:39
- */
+@SuppressWarnings("unused")
 public class Criteria {
 
     private Set<Integer> cocktailTypes;
@@ -23,7 +18,6 @@ public class Criteria {
         this.options = options;
     }
 
-    //    @JsonIdentityReference(alwaysAsId = true)
     public Set<Integer> getCocktailTypes() {
         return cocktailTypes;
     }
@@ -32,7 +26,6 @@ public class Criteria {
         this.cocktailTypes = cocktailTypes;
     }
 
-    //    @JsonIdentityReference(alwaysAsId = true)
     public Set<Integer> getIngredients() {
         return ingredients;
     }

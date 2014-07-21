@@ -5,9 +5,7 @@ import ua.kiev.naiv.drinkit.cocktail.persistence.model.IngredientWithQuantity;
 
 import java.util.Set;
 
-/**
- * @author pkolmykov
- */
+@SuppressWarnings("unused")
 public abstract class IngredientMixIn {
     @JsonIgnore
     private Set<IngredientWithQuantity> cocktailIngredients;

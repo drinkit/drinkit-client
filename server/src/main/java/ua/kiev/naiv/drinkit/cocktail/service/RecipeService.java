@@ -6,12 +6,6 @@ import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 20.07.13
- * Time: 21:52
- */
 public interface RecipeService {
 
     @PreAuthorize("hasRole(ROLE_ADMIN)")
@@ -26,10 +20,4 @@ public interface RecipeService {
 
     Recipe getRecipeById(int id);
 
-//    CocktailType findCocktailTypeById(int id);
-
-//    List<CocktailType> findAllCocktailType();
-
-
-//    List<CocktailType> getCocktailTypes();
 }

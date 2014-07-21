@@ -12,9 +12,6 @@ import ua.kiev.naiv.drinkit.cocktail.web.model.IngredientMixIn;
 
 import java.util.List;
 
-/**
-* @author pkolmykov
-*/
 @Controller
 @RequestMapping("ingredients")
 public class IngredientsController {

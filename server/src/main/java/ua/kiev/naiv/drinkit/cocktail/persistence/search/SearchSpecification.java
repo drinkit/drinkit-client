@@ -8,9 +8,6 @@ import ua.kiev.naiv.drinkit.cocktail.persistence.model.*;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 
-/**
- * @author pkolmykov
- */
 public class SearchSpecification {
 
     public static Specification<RecipeEntity> byCriteria(final Criteria criteria) {

@@ -15,12 +15,6 @@ import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 16.03.14
- * Time: 19:22
- */
 @Component
 public class BasicUserDetailsService implements UserDetailsService {
 

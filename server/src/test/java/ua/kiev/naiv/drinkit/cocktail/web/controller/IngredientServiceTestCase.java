@@ -23,9 +23,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ua.kiev.naiv.drinkit.MockObjectsGenerator.createMockIngredient;
 
-/**
- * @author pkolmykov
- */
 @RunWith(MockitoJUnitRunner.class)
 public class IngredientServiceTestCase {
 

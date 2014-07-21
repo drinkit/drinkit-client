@@ -4,9 +4,6 @@ import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 
 import java.util.List;
 
-/**
- * @author pkolmykov
- */
 public interface IngredientService {
 
     List<Ingredient> getIngredients();

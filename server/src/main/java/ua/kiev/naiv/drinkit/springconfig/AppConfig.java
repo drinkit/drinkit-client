@@ -1,9 +1,5 @@
 package ua.kiev.naiv.drinkit.springconfig;
 
-/**
- * @author pkolmykov
- */
-
 import org.flywaydb.core.Flyway;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.*;
@@ -16,10 +12,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import javax.annotation.Resource;
 import java.util.Properties;
 
-
-/**
- * @author pkolmykov
- */
 @Configuration
 @EnableJpaRepositories("ua.kiev.naiv.drinkit.cocktail.persistence.repository")
 @ComponentScan("ua.kiev.naiv.drinkit.cocktail.service")

@@ -5,14 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 28.07.13
- * Time: 15:56
+ * Copy-pasted from web. Container for getting access to web context from
+ * {@link ua.kiev.naiv.drinkit.cocktail.common.MixinAspect}
  */
+@SuppressWarnings("unused")
 public class WebContext {
 
-    private static ThreadLocal<WebContext> tlv = new ThreadLocal<WebContext>();
+    private static ThreadLocal<WebContext> tlv = new ThreadLocal<>();
     private HttpServletRequest request;
     private HttpServletResponse response;
     private ServletContext servletContext;

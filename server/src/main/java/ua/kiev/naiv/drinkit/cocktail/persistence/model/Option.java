@@ -2,12 +2,7 @@ package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 25.07.13
- * Time: 22:31
- */
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "recipe_options", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id"),

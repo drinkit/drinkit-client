@@ -7,13 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import java.io.Serializable;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 20.07.13
- * Time: 20:42
- */
-
+@SuppressWarnings("unused")
 @Embeddable
 public class CocktailIngredientId implements Serializable {
 
@@ -45,7 +39,7 @@ public class CocktailIngredientId implements Serializable {
 
     @Transient
     private void setId(int id) {
-
+        ingredient.setId(id);
     }
 
     @Override

@@ -2,9 +2,7 @@ package ua.kiev.naiv.drinkit.cocktail.web.model;
 
 import java.util.Arrays;
 
-/**
- * @author pkolmykov
- */
+@SuppressWarnings("RedundantIfStatement")
 public class Recipe {
 
     private int cocktailTypeId;

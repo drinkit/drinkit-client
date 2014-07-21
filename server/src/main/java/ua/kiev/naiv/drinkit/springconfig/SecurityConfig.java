@@ -19,9 +19,6 @@ import ua.kiev.naiv.drinkit.security.CustomDigestAuthenticationEntryPoint;
 
 import javax.annotation.Resource;
 
-/**
- * @author pkolmykov
- */
 @Configuration
 @EnableWebSecurity()
 @EnableGlobalMethodSecurity(prePostEnabled = true)

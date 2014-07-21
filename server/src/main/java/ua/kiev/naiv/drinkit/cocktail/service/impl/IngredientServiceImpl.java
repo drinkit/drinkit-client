@@ -10,9 +10,6 @@ import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 
 import java.util.List;
 
-/**
- * @author pkolmykov
- */
 @Service
 public class IngredientServiceImpl implements IngredientService {
 

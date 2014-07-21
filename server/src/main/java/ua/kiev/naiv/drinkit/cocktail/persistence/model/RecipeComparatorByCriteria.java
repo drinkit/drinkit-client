@@ -6,12 +6,9 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author pkolmykov
- */
 public class RecipeComparatorByCriteria implements Comparator<RecipeEntity> {
 
-    private Criteria criteria;
+    private final Criteria criteria;
 
     public RecipeComparatorByCriteria(Criteria criteria) {
         this.criteria = criteria;

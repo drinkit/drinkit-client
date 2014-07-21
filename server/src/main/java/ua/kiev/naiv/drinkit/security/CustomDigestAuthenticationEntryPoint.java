@@ -18,10 +18,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 05.03.14
- * Time: 0:27
+ * Copy-pasted class from parent with slight difference:
+ * added "_" symbol before authenticateHeader for disabling browser authentication.
  */
 public class CustomDigestAuthenticationEntryPoint extends DigestAuthenticationEntryPoint {
     private static final Log logger = LogFactory.getLog(DigestAuthenticationEntryPoint.class);
@@ -52,10 +50,6 @@ public class CustomDigestAuthenticationEntryPoint extends DigestAuthenticationEn
             logger.debug("WWW-Authenticate header sent to user agent: " + authenticateHeader);
         }
 
-//        copy(new ByteArrayInputStream("asdasdasdasd".getBytes()), response.getOutputStream());
-//        PrintWriter writer = response.getWriter();
-//        writer.write("asdasdasdas");
-//        writer.flush();
         response.addHeader("WWW-Authenticate", authenticateHeader);
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
     }

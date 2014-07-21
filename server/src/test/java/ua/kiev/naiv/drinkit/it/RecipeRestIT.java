@@ -14,9 +14,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static ua.kiev.naiv.drinkit.MockObjectsGenerator.creteMockRecipe;
 
-/**
- * @author pkolmykov
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AppConfig.class)
 @Transactional()

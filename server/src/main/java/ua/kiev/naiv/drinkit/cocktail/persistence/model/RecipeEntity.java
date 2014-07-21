@@ -5,13 +5,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 20.07.13
- * Time: 16:42
- */
-
 @Entity
 @Table(name = "recipes", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id"),

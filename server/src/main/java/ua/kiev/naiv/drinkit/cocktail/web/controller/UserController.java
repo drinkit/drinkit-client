@@ -13,12 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.User;
 import ua.kiev.naiv.drinkit.cocktail.service.impl.BasicUserDetailsService;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 16.03.14
- * Time: 23:03
- */
 @Controller
 @RequestMapping("user")
 public class UserController {

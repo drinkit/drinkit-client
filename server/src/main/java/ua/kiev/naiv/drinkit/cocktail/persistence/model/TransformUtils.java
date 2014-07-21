@@ -5,9 +5,6 @@ import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-/**
- * @author pkolmykov
- */
 public class TransformUtils {
 
 

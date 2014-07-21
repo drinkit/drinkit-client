@@ -3,13 +3,7 @@ package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 import javax.persistence.*;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 20.07.13
- * Time: 17:35
- */
-
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "ingredients")
 public class Ingredient {

@@ -27,9 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ua.kiev.naiv.drinkit.MockObjectsGenerator.createMockCriteria;
 import static ua.kiev.naiv.drinkit.MockObjectsGenerator.creteMockRecipe;
 
-/**
- * @author pkolmykov
- */
 @RunWith(MockitoJUnitRunner.class)
 public class RecipeServiceTestCase {
 
@@ -59,16 +56,6 @@ public class RecipeServiceTestCase {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(content().string(objectMapper.writeValueAsString(creteMockRecipe())));
     }
-
-//    @Test   //todo move + move test to controller package
-//    public void getIngredientsShouldReturnValidResult() throws Exception {
-//        when(service.getIngredients()).thenReturn(Arrays.asList(new Ingredient()));
-//        ResultActions resultActions = mockMvc.perform(get("/ingredients"));
-//        resultActions
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType("application/json;charset=UTF-8"))
-//                .andExpect(content().string(objectMapper.writeValueAsString(new Ingredient())));
-//    }
 
     @Test
     public void searchRecipeShouldReturnValidRecipes() throws Exception {

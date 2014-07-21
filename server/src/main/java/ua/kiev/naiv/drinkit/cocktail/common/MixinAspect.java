@@ -10,12 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 28.07.13
- * Time: 16:14
- */
 @Component
 @Aspect
 public class MixinAspect {

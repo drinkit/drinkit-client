@@ -5,12 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 20.07.13
- * Time: 17:32
- */
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "recipe_types")
 public class CocktailType implements Serializable {
