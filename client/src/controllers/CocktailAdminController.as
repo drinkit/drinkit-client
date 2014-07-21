@@ -133,7 +133,7 @@ package controllers
             for (var i:int = 0; i < source.length; i++)
             {
                 curIngredient = source.getItemAt(i);
-                ingredient = [[curIngredient.id], [curIngredient.quantity]];
+                ingredient = [curIngredient.id, curIngredient.quantity];
                 result.push(ingredient);
             }
 
@@ -148,6 +148,7 @@ package controllers
         public function saveCocktailToDB():void
         {
             var cocktail:Object = {};
+            cocktail.id = _model.cocktailId;
             cocktail.name = _model.name;
             cocktail.description = _model.description;
             cocktail.options = _model.selectedOptions;
