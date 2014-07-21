@@ -3,13 +3,18 @@
  */
 package models
 {
+    import flash.display.Bitmap;
+    import flash.display.Loader;
+    import flash.events.Event;
     import flash.events.EventDispatcher;
+    import flash.geom.Rectangle;
 
     import mx.binding.utils.BindingUtils;
     import mx.collections.ArrayCollection;
     import mx.collections.ArrayList;
 
     import mx.events.CollectionEvent;
+    import mx.utils.Base64Decoder;
 
     [Event(name="modelUpdated", type="flash.events.Event")]
     public class CocktailAdminModel extends EventDispatcher
@@ -18,10 +23,12 @@ package models
         {
             BindingUtils.bindProperty(this, "ingredientsList", IngredientsModel.instance, "ingredientsList");
             selectedIngredientsList = new ArrayList();
-            selectedOptions = new <Object>[];
+            selectedOptions = [];
             //
             selectedIngredientsList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
         }
+
+        public var cocktailId:Number;
 
         [Bindable]
         public var ingredientsList:ArrayCollection = IngredientsModel.instance.ingredientsList;
@@ -30,7 +37,7 @@ package models
         public var selectedIngredientsList:ArrayList;
 
         [Bindable]
-        public var selectedOptions:Vector.<Object>;
+        public var selectedOptions:Array;
 
         [Bindable]
         public var cocktailTypeId:uint;
@@ -40,6 +47,12 @@ package models
 
         [Bindable]
         public var description:String;
+
+        [Bindable]
+        public var image:Bitmap;
+
+        public var imageClipRect:Rectangle;
+
 
         private function onIngredientsQueryListChange(event:CollectionEvent):void
         {

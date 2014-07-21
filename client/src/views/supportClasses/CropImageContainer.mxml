@@ -3,6 +3,9 @@
   Created by Crabar on 12.07.2014.
 -->
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" creationComplete="creationCompleteHandler(event)">
+    <fx:Metadata>
+        [Event(name="clipRectChanged", type="flash.events.Event")]
+    </fx:Metadata>
 
     <fx:Script>
         <![CDATA[
@@ -82,11 +85,12 @@
 
         protected function onMouseClick(event:MouseEvent):void
         {
+            dispatchEvent(new Event("clipRectChanged"));
             removeEventListener(MouseEvent.MOUSE_UP, onMouseClick);
             removeEventListener(MouseEvent.MOUSE_MOVE, onMoveInParentBox1);
         }
 
-        public function photoClipRect():Rectangle
+        public function get photoClipRect():Rectangle
         {
             return clipRect.getRect(clipRect);
         }
