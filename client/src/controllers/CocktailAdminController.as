@@ -145,8 +145,57 @@ package controllers
             _model.imageClipRect = clipRect;
         }
 
+        private function validateCurrentCocktail():Boolean {
+            var errorString:String = "";
+
+            if (_model.name == "")
+                errorString += "Нет имени коктейля\n";
+
+            if (_model.description == "")
+                errorString += "Нет описания коктейля\n";
+
+            if (isNaN(_model.cocktailId))
+                errorString += "Не выбран тип коктейля\n";
+
+            if (_model.selectedIngredientsList.length == 0)
+                errorString += "Нет ингредиентов\n";
+
+            if (errorString == "")
+            {
+                return true;
+            }
+            else
+            {
+                Alert.show(errorString);
+                return false;
+            }
+        }
+
+        public function saveNewCocktailToDB():void {
+            if (!validateCurrentCocktail())
+                return;
+
+            var cocktail:Object = {};
+            cocktail.name = _model.name;
+            cocktail.description = _model.description;
+            cocktail.options = _model.selectedOptions;
+            cocktail.cocktailIngredients = convertSelectedIngredientsToIngredientsWithQuantities(_model.selectedIngredientsList);
+            cocktail.cocktailTypeId = _model.cocktailTypeId;
+            var images:Array = cropAndSerializeCocktailImage(_model.image, _model.imageClipRect);
+            cocktail.thumbnail = images[0];
+            cocktail.image = images[1];
+            var request:JSRequest = new JSRequest(URLRequestMethod.POST);
+            request.bodyParams = JSON.stringify(cocktail);
+            request.contentType = "application/json;charset=UTF-8";
+            ServiceUtil.instance.sendRequest(Services.GET_COCKTAIL_INFO, request, onCocktailSave);
+
+        }
+
         public function saveCocktailToDB():void
         {
+            if (!validateCurrentCocktail())
+                return;
+
             var cocktail:Object = {};
             cocktail.id = _model.cocktailId;
             cocktail.name = _model.name;
@@ -170,6 +219,11 @@ package controllers
 
         private function cropAndSerializeCocktailImage(image:Bitmap, clipRect:Rectangle):Array
         {
+            if (!image)
+            {
+                return [null, null];
+            }
+
             var bigImageBD:BitmapData = new BitmapData(CocktailModel.BIG_IMAGE_WIDTH, CocktailModel.BIG_IMAGE_HEIGHT);
             var smallImageBD:BitmapData = new BitmapData(CocktailModel.SMALL_IMAGE_WIDTH, CocktailModel.SMALL_IMAGE_HEIGHT);
             //
