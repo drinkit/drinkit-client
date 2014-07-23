@@ -28,7 +28,7 @@
 			<s:SolidColor color="{DesignModel.ORANGE_BEACH}" />
 		</s:fill>
 	</s:Rect>
-	<s:Label id="labelDisplay" text="{data.label}" />
+	<s:Label id="labelDisplay" text="{data.label}" verticalAlign="middle" />
 	
 	
 </s:ItemRenderer>
