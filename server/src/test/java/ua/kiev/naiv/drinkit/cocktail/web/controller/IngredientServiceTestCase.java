@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 
 import java.util.Arrays;
@@ -64,9 +65,11 @@ public class IngredientServiceTestCase {
 
     @Test
     public void updateShouldReturn200() throws Exception {
+        Ingredient mockIngredient = createMockIngredient();
+        mockIngredient.setId(1);
         mockMvc.perform(put("/ingredients/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsBytes(createMockIngredient())))
+                .content(objectMapper.writeValueAsBytes(mockIngredient)))
                 .andExpect(status().isOk());
     }
 

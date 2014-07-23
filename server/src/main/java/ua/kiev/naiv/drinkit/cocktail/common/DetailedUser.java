@@ -28,4 +28,12 @@ public class DetailedUser extends User {
     public String getDisplayName() {
         return displayName;
     }
+
+    @Override
+    public String toString() {
+        return "DetailedUser{" +
+                "displayName='" + displayName + '\'' +
+                ", userId=" + userId +
+                "} " + super.toString();
+    }
 }

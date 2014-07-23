@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface RecipeService {
 
-    @PreAuthorize("hasRole(ROLE_ADMIN)")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     int save(Recipe recipe);
 
-    @PreAuthorize("hasRole(ROLE_ADMIN)")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(int id);
 
     List<Recipe> findAll();

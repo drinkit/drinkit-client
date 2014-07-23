@@ -109,11 +109,13 @@ public class Recipe {
     @Override
     public String toString() {
         return "Recipe{" +
-                "cocktailTypeId=" + cocktailTypeId +
-                ", description='" + description + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", cocktailTypeId=" + cocktailTypeId +
                 ", options=" + Arrays.toString(options) +
-                ", id=" + id +
+                ", image=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(image, 0, 5)) + "...") +
+                ", thumbnail=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(thumbnail, 0, 5)) + "...") +
                 '}';
     }
 }

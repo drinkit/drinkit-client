@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import ua.kiev.naiv.drinkit.cocktail.common.JsonMixIn;
+import ua.kiev.naiv.drinkit.cocktail.common.LoggerUtils;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
@@ -41,6 +42,7 @@ public class RecipeController {
 //    @ResponseBody
     public HttpEntity<Integer> createRecipe(@RequestBody Recipe recipe){
         Assert.isNull(recipe.getId());
+        LoggerUtils.logOperation("Creating recipe", recipe);
         return new HttpEntity<>(recipeService.save(recipe));
     }
 
@@ -62,15 +64,17 @@ public class RecipeController {
 		return recipeService.findByCriteria(criteria);
 	}
 
-    @RequestMapping(value = "{recipeId}", method = RequestMethod.DELETE)
-    public void deleteRecipe(@PathVariable int recipeId){
-        recipeService.delete(recipeId);
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public void deleteRecipe(@PathVariable int id){
+        LoggerUtils.logOperation("Deleting recipe", id);
+        recipeService.delete(id);
     }
 
     @RequestMapping(value = "{recipeId}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void updateRecipe(@PathVariable int recipeId, @RequestBody Recipe recipe){
         Assert.isTrue(recipeId == recipe.getId(), "id from uri and id from json should be identical");
+        LoggerUtils.logOperation("Updating recipe", recipe);
         recipeService.save(recipe);
     }
 
