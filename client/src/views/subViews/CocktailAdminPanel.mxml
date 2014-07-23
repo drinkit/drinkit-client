@@ -254,7 +254,7 @@
             </s:HGroup>
         </s:VGroup>
         <supportclasses:CropImageContainer id="cocktailPhoto" width="{CocktailModel.BIG_IMAGE_WIDTH}"
-                                           source="{_model.image}"
+                                           source="@{_model.image}"
                                            height="{CocktailModel.BIG_IMAGE_HEIGHT}" backgroundColor="0x15ffda"
                                            clipRectChanged="onClipRectChanged(event)"/>
     </s:HGroup>
