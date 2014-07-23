@@ -28,7 +28,7 @@ package utils
 
         private var _serviceAddress:String = "";
         private var _waitingRequests:Object = {};
-        private var _currentAuthHeader:Object = null;
+        private var _digests:Object = {};
 
         public function init(serviceAddress:String):void
         {
@@ -42,7 +42,7 @@ package utils
 
         public function clearDigest():void
         {
-            _currentAuthHeader = null;
+            _digests = {};
         }
 
         public function onRequestComplete(response:String, requestID:String):void
@@ -72,11 +72,12 @@ package utils
             }
 
             var curRequest:JSRequest = (_waitingRequests[requestID] as WaitingRequest).request;
+            var digestHeader:Object = _digests[curRequest.method];
 
-            if (!_currentAuthHeader || isNonceExpired(authResponseHeader))
+            if (!digestHeader || isNonceExpired(authResponseHeader))
             {
                 var digest:Digest = new Digest(UserInfoModel.instance.email, UserInfoModel.instance.password, curRequest.method);
-                _currentAuthHeader = digest.generateAuthHeader(authResponseHeader);
+                _digests[curRequest.method] = digest.generateAuthHeader(authResponseHeader);
                 var headers:Array = prepareHeaders(curRequest);
                 ExternalInterface.call("sendRequest", curRequest.method, address, curRequest.queryParams, curRequest.bodyParams, headers, curRequest.expectedStatus, curRequest.expectedErrorStatus, requestID);
             }
@@ -106,7 +107,7 @@ package utils
             if (request.contentType)
                 headers.push({"name": "Content-Type", "value": request.contentType});
 
-            headers.push(_currentAuthHeader);
+            headers.push(_digests[request.method]);
             return headers;
         }
 
