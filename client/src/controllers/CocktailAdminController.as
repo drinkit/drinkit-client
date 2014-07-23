@@ -154,7 +154,7 @@ package controllers
             if (_model.description == "")
                 errorString += "Нет описания коктейля\n";
 
-            if (isNaN(_model.cocktailId))
+            if (isNaN(_model.cocktailTypeId))
                 errorString += "Не выбран тип коктейля\n";
 
             if (_model.selectedIngredientsList.length == 0)

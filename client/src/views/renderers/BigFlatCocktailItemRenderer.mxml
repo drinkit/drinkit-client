@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created by ypoliakov on 23.07.2014.
+-->
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx"
+                xmlns:components="components.*" width="340" height="184" opaqueBackground="0xffffff">
+
+
+    <s:filters>
+        <s:DropShadowFilter />
+    </s:filters>
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="hovered" />
+    </s:states>
+    <fx:Script>
+        <![CDATA[
+        import models.CocktailBuilderModel;
+        import models.CocktailModel;
+        import models.IngredientsModel;
+        import models.TagsModel;
+        import models.supportClasses.CocktailMini;
+        import models.supportClasses.Ingredient;
+
+        import mx.collections.ArrayList;
+
+        import spark.skins.spark.DefaultItemRenderer;
+
+        import views.CocktailBuilderView;
+
+        private var _cocktail:CocktailMini;
+        private var _model:CocktailBuilderModel;
+
+        override public function set data(value:Object):void
+        {
+            if (value)
+            {
+                init();
+                //
+                _cocktail = CocktailMini(value);
+                cocktailNameLabel.text = _cocktail.name;
+                cocktailImage.source = _cocktail.image;
+                buildRecipe(_cocktail.cocktailIngredients);
+                buildTags(_cocktail.cocktailTypeId, _cocktail.options);
+            }
+        }
+
+        private function init():void
+        {
+            if (!_model)
+                _model = CocktailBuilderView(List(owner).document).model;
+        }
+
+        private function buildTags(cocktailType:int, options:Array):void
+        {
+            tagsGroup.removeAllElements();
+            tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(cocktailType, TagsModel.COCKTAIL_TYPE_TAG, 24));
+
+            if (options)
+            {
+                for (var i:uint = 0; i < options.length; i++)
+                {
+                    tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG, 24));
+                }
+            }
+        }
+
+        private function buildRecipe(ingredients:Array):void
+        {
+            var ingredients:ArrayList = new ArrayList();
+
+            if (!ingredients || ingredients.length == 0)
+                return;
+
+            var item:Ingredient;
+
+            for (var i:uint = 0; i < ingredients.length; i++)
+            {
+                item = new Ingredient(ingredients[i][0], IngredientsModel.instance.getIngredientNameById(ingredients[i][0]).toLowerCase());
+                ingredients.addItem(item);
+            }
+
+            ingredientsList.dataProvider = ingredients;
+        }
+
+        private function cocktailStructureItemRendererFunction(item:Object):IFactory
+        {
+            if (_model.isIngredientSelected(item.id))
+                return new ClassFactory(SimpleIngredientItemRenderer);
+
+            return new ClassFactory(DefaultItemRenderer);
+        }
+
+        ]]>
+    </fx:Script>
+    <s:HGroup width="100%" height="100%" paddingBottom="4" paddingTop="4" paddingLeft="4" paddingRight="4">
+        <s:BitmapImage id="cocktailImage" source="{_cocktail.image}" width="{CocktailModel.SMALL_IMAGE_WIDTH}" height="{CocktailModel.SMALL_IMAGE_HEIGHT}" />
+        <s:VGroup width="100%" height="100%">
+            <s:Label id="cocktailNameLabel" width="100%" textAlign="center" fontFamily="Georgia" color="#464077" fontWeight="bold" fontStyle="italic" fontSize="18" />
+            <s:List id="ingredientsList" width="100%" height="100%" fontFamily="CenturyGothic" color="#1c1c1c" fontSize="14" itemRendererFunction="cocktailStructureItemRendererFunction" labelField="name" borderVisible="false">
+                <s:layout>
+                    <components:FlowLayout clipAndEnableScrolling="false" />
+                </s:layout>
+            </s:List>
+            <s:HGroup id="tagsGroup" gap="2" height="24" />
+        </s:VGroup>
+    </s:HGroup>
+    <s:Rect includeIn="hovered" width="100%" height="100%">
+        <s:fill>
+            <mx:SolidColor color="#ffae00" alpha="0.9" />
+        </s:fill>
+    </s:Rect>
+</s:ItemRenderer>
