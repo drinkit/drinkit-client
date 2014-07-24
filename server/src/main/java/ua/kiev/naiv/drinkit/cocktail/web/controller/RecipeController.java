@@ -24,55 +24,60 @@ import java.util.List;
 @RequestMapping(value = "recipes")
 public class RecipeController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RecipeController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RecipeController.class);
 
-	@Autowired
+    @Autowired
     RecipeService recipeService;
 
-	@RequestMapping(value = "/{recipeId}", method = RequestMethod.GET)
-	@ResponseBody
+    @RequestMapping(value = "/{recipeId}", method = RequestMethod.GET)
+    @ResponseBody
     @Transactional(readOnly = true)
-	public Recipe getRecipeById(@PathVariable int recipeId) {
-		return recipeService.getRecipeById(recipeId);
-	}
+    public Recipe getRecipeById(@PathVariable int recipeId) {
+        return recipeService.getRecipeById(recipeId);
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     @Transactional
 //    @ResponseStatus(HttpStatus.OK)
 //    @ResponseBody
-    public HttpEntity<Integer> createRecipe(@RequestBody Recipe recipe){
+    public HttpEntity<Integer> createRecipe(@RequestBody Recipe recipe) {
         Assert.isNull(recipe.getId());
         LoggerUtils.logOperation("Creating recipe", recipe);
         return new HttpEntity<>(recipeService.save(recipe));
     }
 
 
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	@ResponseBody
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
     @Transactional(readOnly = true)
     @JsonMixIn(value = RecipeSearchResultMixin.class, targetClass = Recipe.class)
-	public List<Recipe> searchRecipes(@RequestParam(value = "criteria") String json) {
-		ObjectMapper objectMapper = new ObjectMapper();
-		Criteria criteria;
-		try {
-			criteria = objectMapper.readValue(json, Criteria.class);
-		} catch (IOException e) {
-			LOGGER.error("Bad criteria", e);
-			return null;
-		}
-
-		return recipeService.findByCriteria(criteria);
-	}
+    public List<Recipe> searchRecipes(@RequestParam(value = "criteria", required = false) String json) {
+        List<Recipe> recipes;
+        if (json != null) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Criteria criteria;
+            try {
+                criteria = objectMapper.readValue(json, Criteria.class);
+            } catch (IOException e) {
+                LOGGER.error("Bad criteria", e);
+                return null;
+            }
+            recipes = recipeService.findByCriteria(criteria);
+        } else {
+            recipes = recipeService.findAll();
+        }
+        return recipes;
+    }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public void deleteRecipe(@PathVariable int id){
+    public void deleteRecipe(@PathVariable int id) {
         LoggerUtils.logOperation("Deleting recipe", id);
         recipeService.delete(id);
     }
 
     @RequestMapping(value = "{recipeId}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void updateRecipe(@PathVariable int recipeId, @RequestBody Recipe recipe){
+    public void updateRecipe(@PathVariable int recipeId, @RequestBody Recipe recipe) {
         Assert.isTrue(recipeId == recipe.getId(), "id from uri and id from json should be identical");
         LoggerUtils.logOperation("Updating recipe", recipe);
         recipeService.save(recipe);

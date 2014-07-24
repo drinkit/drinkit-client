@@ -62,7 +62,7 @@ public class RecipeServiceTestCase {
         Criteria criteria = createMockCriteria();
         when(recipeService.findByCriteria(any()))//todo fix any to criteria
                 .thenReturn(Arrays.asList(creteMockRecipe()));
-        ResultActions resultActions = mockMvc.perform(get("/recipes/search")
+        ResultActions resultActions = mockMvc.perform(get("/recipes")
         .param("criteria", objectMapper.writeValueAsString(criteria)));
         resultActions
                 .andExpect(status().isOk())
