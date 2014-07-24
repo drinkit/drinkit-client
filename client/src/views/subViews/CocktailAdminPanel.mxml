@@ -158,7 +158,8 @@
                 return;
             }
 
-            cocktailPhoto.source = LoaderInfo(event.currentTarget).content;
+            cocktailPhoto.source = photo;
+            _controller.updateImage(photo);
         }
 
         private function onCocktailTypeChange(event:IndexChangeEvent):void {

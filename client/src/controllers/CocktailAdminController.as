@@ -249,5 +249,10 @@ package controllers
 
             return [smallImageEncoded, bigImageEncoded];
         }
+
+        public function updateImage(content:Bitmap):void
+        {
+            _model.image = content;
+        }
     }
 }

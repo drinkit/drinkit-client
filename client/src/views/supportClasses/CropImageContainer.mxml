@@ -24,12 +24,23 @@
             determinateClipRectSize(_source.width, _source.height, width, height);
         }
 
+        private function determinateImageScaleFactor(width:Number, height:Number):void
+        {
+            var scaleWidthFactor:Number = width / this.width;
+            var scaleHeightFactor:Number = height / this.height;
+
+            _imageScaleFactor = Math.max(scaleWidthFactor, scaleHeightFactor);
+        }
+
+        private var _imageScaleFactor:Number = 1;
+
         private function determinateClipRectSize(sourceWidth:Number, sourceHeight:Number, parentWidth:Number, parentHeight:Number):void
         {
             var scaleWidthFactor:Number = parentWidth / sourceWidth;
             var scaleHeightFactor:Number = parentHeight / sourceHeight;
 
             var absoluteScaleFactor:Number = Math.min(scaleWidthFactor, scaleHeightFactor);
+            _imageScaleFactor = absoluteScaleFactor;
 
             var scaledSourceWidth:Number = absoluteScaleFactor * sourceWidth;
             var scaledSourceHeight:Number = absoluteScaleFactor * sourceHeight;
@@ -92,7 +103,16 @@
 
         public function get photoClipRect():Rectangle
         {
-            return clipRect.getRect(clipRect);
+            var scaledClipRect:Rectangle = new Rectangle();
+            scaledClipRect.copyFrom(clipRect.getBounds(this));
+            scaledClipRect.x -= _scaledSourceRect.x;
+            scaledClipRect.y -= _scaledSourceRect.y;
+            scaledClipRect.x /= _imageScaleFactor;
+            scaledClipRect.y /= _imageScaleFactor;
+            scaledClipRect.width /= _imageScaleFactor;
+            scaledClipRect.height /= _imageScaleFactor;
+
+            return scaledClipRect;
         }
 
         private function creationCompleteHandler(event:FlexEvent):void
