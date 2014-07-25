@@ -15,6 +15,8 @@
     </s:states>
     <fx:Script>
         <![CDATA[
+        import design.DesignModel;
+
         import models.CocktailBuilderModel;
         import models.CocktailModel;
         import models.IngredientsModel;
@@ -96,7 +98,7 @@
     <s:HGroup width="100%" height="100%" paddingBottom="4" paddingTop="4" paddingLeft="4" paddingRight="4">
         <s:BitmapImage id="cocktailImage" source="{_cocktail.image}" width="{CocktailModel.SMALL_IMAGE_WIDTH}" height="{CocktailModel.SMALL_IMAGE_HEIGHT}" />
         <s:VGroup width="100%" height="100%">
-            <s:Label id="cocktailNameLabel" width="100%" textAlign="center" fontFamily="Georgia" color="#464077" fontWeight="bold" fontStyle="italic" fontSize="18" />
+            <s:Label id="cocktailNameLabel" width="100%" textAlign="center" fontFamily="Georgia" color="{DesignModel.VIOLET}" fontWeight="bold" fontStyle="italic" fontSize="18" />
             <s:List id="ingredientsList" width="100%" height="100%" fontFamily="CenturyGothic" color="#1c1c1c" fontSize="14" itemRendererFunction="cocktailStructureItemRendererFunction" labelField="name" borderVisible="false">
                 <s:layout>
                     <components:FlowLayout clipAndEnableScrolling="false" />

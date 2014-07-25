@@ -33,3 +33,7 @@ s|TextInput
 	paddingLeft: 5;
 }
 
+s|TitleWindow
+{
+    skinClass: ClassReference("design.skins.TitleWindowSkin");
+}
