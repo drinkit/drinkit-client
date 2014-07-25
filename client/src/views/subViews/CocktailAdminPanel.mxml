@@ -184,12 +184,15 @@
             _controller.saveNewCocktailToDB();
         }
 
+        private function onDeleteClick(event:MouseEvent):void {
+            _controller.deleteCocktail();
+        }
         ]]>
     </fx:Script>
 
     <s:HGroup>
         <s:Button label="Создать" click="onCreateCocktailButtonClick(event)"/>
-        <s:Button label="Удалить"/>
+        <s:Button label="Удалить" click="onDeleteClick(event)"/>
         <s:Spacer width="1"/>
         <s:Button label="Сохранить" click="onSaveButtonClick(event)"/>
     </s:HGroup>

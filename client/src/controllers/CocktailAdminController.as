@@ -27,6 +27,7 @@ package controllers
 
     import mx.collections.ArrayList;
     import mx.controls.Alert;
+    import mx.graphics.codec.PNGEncoder;
     import mx.utils.Base64Encoder;
 
     import utils.ArrayUtil;
@@ -253,6 +254,17 @@ package controllers
         public function updateImage(content:Bitmap):void
         {
             _model.image = content;
+        }
+
+        public function deleteCocktail():void
+        {
+            var deleteRequest:JSRequest = new JSRequest(URLRequestMethod.DELETE);
+            ServiceUtil.instance.sendRequest(Services.GET_COCKTAIL_INFO + _model.cocktailId, deleteRequest, onCocktailDelete);
+        }
+
+        private function onCocktailDelete(response:String):void
+        {
+            Alert.show("Коктейль успешно удален!");
         }
     }
 }
