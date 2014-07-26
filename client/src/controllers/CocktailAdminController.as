@@ -27,7 +27,6 @@ package controllers
 
     import mx.collections.ArrayList;
     import mx.controls.Alert;
-    import mx.graphics.codec.PNGEncoder;
     import mx.utils.Base64Encoder;
 
     import utils.ArrayUtil;
