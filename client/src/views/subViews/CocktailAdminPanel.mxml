@@ -73,6 +73,7 @@
         private function onModelUpdate(event:Event):void {
             updatedSelectedType(_model.cocktailTypeId);
             updateSelectedOptions(_model.selectedOptions);
+            _controller.updateImageClipRect(cocktailPhoto.photoClipRect);
         }
 
         private function updatedSelectedType(typeId:uint):void {
@@ -124,7 +125,7 @@
             _fileLoad.addEventListener(IOErrorEvent.IO_ERROR, onPhotoLoadError);
             _fileLoad.addEventListener(Event.COMPLETE, onPhotoLoaded);
 
-            _fileLoad.browse([new FileFilter("Images", "*.jpg;*.gif;*.png")]);
+            _fileLoad.browse([new FileFilter("Images", "*.jpg;*.gif;*.png;*.jpeg")]);
         }
 
         private function onSecurityError(event:SecurityErrorEvent):void {
