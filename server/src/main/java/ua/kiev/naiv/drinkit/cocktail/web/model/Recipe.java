@@ -13,6 +13,9 @@ public class Recipe {
     private byte[] image;
     private byte[] thumbnail;
     private Integer id;
+    private int views;
+    private Double rating;
+    private int votes;
 
     public Integer getId() {
         return id;
@@ -117,5 +120,29 @@ public class Recipe {
                 ", image=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(image, 0, 5)) + "...") +
                 ", thumbnail=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(thumbnail, 0, 5)) + "...") +
                 '}';
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface RecipeService {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    int save(Recipe recipe);
+    Recipe save(Recipe recipe);
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(int id);

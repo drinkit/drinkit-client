@@ -22,8 +22,8 @@ public class RecipeServiceImpl implements RecipeService {
     RecipeRepository recipeRepository;
 
     @Override
-    public int save(Recipe recipe) {
-        return recipeRepository.saveAndFlush(transform(recipe)).getId();
+    public Recipe save(Recipe recipe) {
+        return transform(recipeRepository.saveAndFlush(transform(recipe)));
     }
 
     @Override

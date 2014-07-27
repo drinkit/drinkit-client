@@ -40,7 +40,7 @@ public class RecipeController {
     @Transactional
 //    @ResponseStatus(HttpStatus.OK)
 //    @ResponseBody
-    public HttpEntity<Integer> createRecipe(@RequestBody Recipe recipe) {
+    public HttpEntity<Recipe> createRecipe(@RequestBody Recipe recipe) {
         Assert.isNull(recipe.getId());
         LoggerUtils.logOperation("Creating recipe", recipe);
         return new HttpEntity<>(recipeService.save(recipe));

@@ -28,7 +28,7 @@ public class RecipeRestIT {
     @Rollback(false)
     public void recipeTestCase() {
         Recipe recipe = creteMockRecipe();
-        int id = recipeService.save(recipe);
+        int id = recipeService.save(recipe).getId();
         assertEquals(recipe, recipeService.getRecipeById(id));
         recipe.setName("modified");
         recipe.setId(id);
@@ -36,6 +36,13 @@ public class RecipeRestIT {
         assertEquals(recipe, recipeService.getRecipeById(id));
         recipeService.delete(id);
         assertNull(recipeService.getRecipeById(id));
+    }
+
+    @Test
+    public void recipeStatisticsTest() {
+//        Recipe recipe = recipeService.save(creteMockRecipe());
+        Recipe recipe = recipeService.getRecipeById(1);
+        assertEquals(0, recipe.getViews());
     }
 
 }

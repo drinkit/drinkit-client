@@ -20,6 +20,7 @@ public class RecipeEntity implements Serializable {
     private List<Option> options;
     private byte[] image;
     private byte[] thumbnail;
+    private List<RecipeStatistics> recipeStatistics;
 
     @Transient
     public List<Integer> getIngredientIds() {
@@ -104,5 +105,14 @@ public class RecipeEntity implements Serializable {
 
     public void setThumbnail(byte[] thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    @OneToMany(mappedBy = "recipeEntity")
+    public List<RecipeStatistics> getRecipeStatistics() {
+        return recipeStatistics;
+    }
+
+    public void setRecipeStatistics(List<RecipeStatistics> recipeStatistics) {
+        this.recipeStatistics = recipeStatistics;
     }
 }

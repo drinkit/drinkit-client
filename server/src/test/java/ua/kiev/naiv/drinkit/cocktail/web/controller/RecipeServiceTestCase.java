@@ -95,7 +95,7 @@ public class RecipeServiceTestCase {
 
     @Test
     public void createRecipeShouldReturnId() throws Exception {
-        when(recipeService.save(creteMockRecipe())).thenReturn(1);
+//        when(recipeService.save(creteMockRecipe())).thenReturn(1);//todo fix it
         String json = objectMapper.writeValueAsString(creteMockRecipe());
         mockMvc.perform(post("/recipes").content(json).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

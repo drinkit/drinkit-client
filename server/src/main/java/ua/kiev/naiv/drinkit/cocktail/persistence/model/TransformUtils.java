@@ -3,13 +3,14 @@ package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransformUtils {
 
 
     public static Recipe transform(RecipeEntity recipeEntity) {
-        if(recipeEntity == null){
+        if (recipeEntity == null) {
             return null;
         }
         Recipe recipe = new Recipe();
@@ -25,7 +26,20 @@ public class TransformUtils {
         recipe.setOptions(recipeEntity.getOptions().stream()
                 .mapToInt(Option::getId)
                 .toArray());
+        if (recipeEntity.getRecipeStatistics() != null) {
+            processStatistics(recipeEntity.getRecipeStatistics(), recipe);
+        }
         return recipe;
+    }
+
+    private static void processStatistics(List<RecipeStatistics> recipeStatistics, Recipe recipe) {
+        recipe.setViews(recipeStatistics
+                .stream().mapToInt(RecipeStatistics::getViews).sum());
+        recipe.setRating(recipeStatistics
+                .stream().filter(val -> val.getRating() != null)
+                .mapToInt(RecipeStatistics::getRating).average().getAsDouble());
+        recipe.setVotes((int) recipeStatistics
+                .stream().filter(val -> val.getRating() != null).count());
     }
 
     public static RecipeEntity transform(Recipe recipe) {
