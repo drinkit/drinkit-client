@@ -3,12 +3,8 @@
   Created by ypoliakov on 23.07.2014.
 -->
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx"
-                xmlns:components="components.*" width="340" height="184" opaqueBackground="0xffffff">
+                xmlns:components="components.*" width="340" height="184" autoDrawBackground="false" buttonMode="true">
 
-
-    <s:filters>
-        <s:DropShadowFilter />
-    </s:filters>
     <s:states>
         <s:State name="normal" />
         <s:State name="hovered" />
@@ -16,6 +12,8 @@
     <fx:Script>
         <![CDATA[
         import design.DesignModel;
+
+        import flash.filters.BitmapFilterQuality;
 
         import models.CocktailBuilderModel;
         import models.CocktailModel;
@@ -26,12 +24,12 @@
 
         import mx.collections.ArrayList;
 
-        import spark.skins.spark.DefaultItemRenderer;
-
         import views.CocktailBuilderView;
 
+        [Bindable]
         private var _cocktail:CocktailMini;
         private var _model:CocktailBuilderModel;
+        private var _cornerRadius:Number = 5;
 
         override public function set data(value:Object):void
         {
@@ -69,7 +67,7 @@
 
         private function buildRecipe(ingredients:Array):void
         {
-            var ingredients:ArrayList = new ArrayList();
+            var ingredientsDataProvider:ArrayList = new ArrayList();
 
             if (!ingredients || ingredients.length == 0)
                 return;
@@ -79,10 +77,10 @@
             for (var i:uint = 0; i < ingredients.length; i++)
             {
                 item = new Ingredient(ingredients[i][0], IngredientsModel.instance.getIngredientNameById(ingredients[i][0]).toLowerCase());
-                ingredients.addItem(item);
+                ingredientsDataProvider.addItem(item);
             }
 
-            ingredientsList.dataProvider = ingredients;
+            ingredientsList.dataProvider = ingredientsDataProvider;
         }
 
         private function cocktailStructureItemRendererFunction(item:Object):IFactory
@@ -90,16 +88,27 @@
             if (_model.isIngredientSelected(item.id))
                 return new ClassFactory(SimpleIngredientItemRenderer);
 
-            return new ClassFactory(DefaultItemRenderer);
+            return new ClassFactory(NonSelectableItemRendeder);
         }
 
         ]]>
+
     </fx:Script>
+    <s:Rect width="100%" height="100%" bottomLeftRadiusX="{_cornerRadius}" bottomLeftRadiusY="{_cornerRadius}" bottomRightRadiusX="{_cornerRadius}"
+            bottomRightRadiusY="{_cornerRadius}" topLeftRadiusX="{_cornerRadius}" topLeftRadiusY="{_cornerRadius}" topRightRadiusX="{_cornerRadius}"
+            topRightRadiusY="{_cornerRadius}">
+        <s:fill>
+            <s:SolidColor color="#ffffff" />
+        </s:fill>
+        <s:filters>
+            <s:DropShadowFilter alpha="0.5" blurX="8" blurY="8" distance="3" strength="0.9" quality="{BitmapFilterQuality.HIGH}" />
+        </s:filters>
+    </s:Rect>
     <s:HGroup width="100%" height="100%" paddingBottom="4" paddingTop="4" paddingLeft="4" paddingRight="4">
         <s:BitmapImage id="cocktailImage" source="{_cocktail.image}" width="{CocktailModel.SMALL_IMAGE_WIDTH}" height="{CocktailModel.SMALL_IMAGE_HEIGHT}" />
         <s:VGroup width="100%" height="100%">
             <s:Label id="cocktailNameLabel" width="100%" textAlign="center" fontFamily="Georgia" color="{DesignModel.VIOLET}" fontWeight="bold" fontStyle="italic" fontSize="18" />
-            <s:List id="ingredientsList" width="100%" height="100%" fontFamily="CenturyGothic" color="#1c1c1c" fontSize="14" itemRendererFunction="cocktailStructureItemRendererFunction" labelField="name" borderVisible="false">
+            <s:List id="ingredientsList" mouseEnabled="false" width="100%" height="100%" fontFamily="CenturyGothic" color="#1c1c1c" fontSize="14" itemRendererFunction="cocktailStructureItemRendererFunction" labelField="name" borderVisible="false">
                 <s:layout>
                     <components:FlowLayout clipAndEnableScrolling="false" />
                 </s:layout>
@@ -107,9 +116,11 @@
             <s:HGroup id="tagsGroup" gap="2" height="24" />
         </s:VGroup>
     </s:HGroup>
-    <s:Rect includeIn="hovered" width="100%" height="100%">
+    <s:Rect includeIn="hovered" width="100%" height="100%" bottomLeftRadiusX="{_cornerRadius}" bottomLeftRadiusY="{_cornerRadius}" bottomRightRadiusX="{_cornerRadius}"
+            bottomRightRadiusY="{_cornerRadius}" topLeftRadiusX="{_cornerRadius}" topLeftRadiusY="{_cornerRadius}" topRightRadiusX="{_cornerRadius}"
+            topRightRadiusY="{_cornerRadius}">
         <s:fill>
-            <mx:SolidColor color="#ffae00" alpha="0.9" />
+            <s:SolidColor color="#ffae00" alpha="0.1" />
         </s:fill>
     </s:Rect>
 </s:ItemRenderer>

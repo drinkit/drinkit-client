@@ -2,21 +2,30 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				autoDrawBackground="false">
+				autoDrawBackground="false" height="25" minWidth="25">
 	
 	<fx:Script>
 		<![CDATA[
 			
 			import design.DesignModel;
 			
-			import flash.filters.BitmapFilterQuality;
-			
 			import models.supportClasses.Ingredient;
-			
-			import spark.components.List;
 			
 			private const cornerRadius:uint = 10;
 			private var ingredientData:Ingredient;
+
+            override public function set data(value:Object):void
+            {
+                super.data = value;
+
+                if (data)
+                {
+                    ingredientData = Ingredient(data);
+                    labelDisplay.text = label;
+                    labelDisplay.validateSize();
+                    width = labelDisplay.getExplicitOrMeasuredWidth() + 10;
+                }
+            }
 
 		]]>
 	</fx:Script>
@@ -25,10 +34,8 @@
 			bottomRightRadiusY="{cornerRadius}" topLeftRadiusX="{cornerRadius}" topLeftRadiusY="{cornerRadius}" topRightRadiusX="{cornerRadius}"
 			topRightRadiusY="{cornerRadius}">
 		<s:fill>
-			<s:SolidColor color="{DesignModel.ORANGE_BEACH}" />
+			<s:SolidColor color="#b2e6dd" />
 		</s:fill>
 	</s:Rect>
-	<s:Label id="labelDisplay" text="{data.label}" verticalAlign="middle" />
-	
-	
+	<s:Label id="labelDisplay" text="{data.label}" verticalCenter="0" horizontalCenter="0" />
 </s:ItemRenderer>

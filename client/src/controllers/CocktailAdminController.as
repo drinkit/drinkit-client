@@ -10,6 +10,7 @@ package controllers
 
     import flash.display.Bitmap;
     import flash.display.BitmapData;
+    import flash.display.Shape;
 
     import flash.events.Event;
     import flash.geom.Matrix;
@@ -231,10 +232,10 @@ package controllers
             croppedImageBD.copyPixels(image.bitmapData, clipRect, new Point());
             //
             var bigScaleFactor:Number = CocktailModel.BIG_IMAGE_WIDTH / clipRect.width;
-            var smallScaleFactor:Number = CocktailModel.SMALL_IMAGE_WIDTH / clipRect.width;
+            var smallScaleFactor:Number = CocktailModel.SMALL_IMAGE_WIDTH / CocktailModel.BIG_IMAGE_WIDTH;
 
-            bigImageBD.draw(croppedImageBD, new Matrix(bigScaleFactor, 0, 0, bigScaleFactor), null, null, null, true);
-            smallImageBD.draw(croppedImageBD, new Matrix(smallScaleFactor, 0, 0, smallScaleFactor), null, null, null, true);
+            bigImageBD = scaleImage(croppedImageBD, bigScaleFactor, CocktailModel.BIG_IMAGE_WIDTH, CocktailModel.BIG_IMAGE_HEIGHT);// .draw(croppedImageBD, new Matrix(bigScaleFactor, 0, 0, bigScaleFactor), null, null, null, true);
+            smallImageBD = scaleImage(bigImageBD, smallScaleFactor, CocktailModel.SMALL_IMAGE_WIDTH, CocktailModel.SMALL_IMAGE_HEIGHT);
 
             var base64encoder:Base64Encoder = new Base64Encoder();
             var bigImageBytes:ByteArray = PNGEncoder.encode(bigImageBD);
@@ -248,6 +249,18 @@ package controllers
             var bigImageEncoded:String = base64encoder.toString();
 
             return [smallImageEncoded, bigImageEncoded];
+        }
+
+        private function scaleImage(source:BitmapData, scaleFactor:Number, width:Number, height:Number):BitmapData
+        {
+            var result:BitmapData = new BitmapData(width, height);
+            var sh:Shape = new Shape();
+            sh.graphics.beginBitmapFill(source, new Matrix(scaleFactor, 0, 0, scaleFactor), false, true);
+            sh.graphics.lineStyle(0, 0, 0);
+            sh.graphics.drawRect(0, 0, width, height);
+            sh.graphics.endFill();
+            result.draw(sh, null, null, null, null, false);
+            return result;
         }
 
         public function updateImage(content:Bitmap):void
