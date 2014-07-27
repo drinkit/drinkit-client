@@ -67,7 +67,7 @@ public class RecipeEntity implements Serializable {
         this.cocktailType = cocktailType;
     }
 
-    @OneToMany(mappedBy = "cocktailIngredientId.recipeEntity", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cocktailIngredientId.recipeEntity", cascade = CascadeType.ALL)
     public List<IngredientWithQuantity> getIngredientsWithQuantities() {
         return ingredientsWithQuantities;
     }
