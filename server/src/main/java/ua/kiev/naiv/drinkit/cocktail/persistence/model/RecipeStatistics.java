@@ -6,7 +6,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "recipe_statistics")
+@Table(name = "recipe_statistics", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"user_id", "recipe_id"})})
 @IdClass(RecipeStatistics.PrimaryKey.class)
 public class RecipeStatistics implements Serializable {
 

@@ -10,10 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import ua.kiev.naiv.drinkit.cocktail.common.DrinkitUtils;
 import ua.kiev.naiv.drinkit.cocktail.common.JsonMixIn;
-import ua.kiev.naiv.drinkit.cocktail.common.LoggerUtils;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
+import ua.kiev.naiv.drinkit.cocktail.service.RecipeStatisticsService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeSearchResultMixin;
 
@@ -28,11 +29,14 @@ public class RecipeController {
 
     @Autowired
     RecipeService recipeService;
+    @Autowired
+    RecipeStatisticsService recipeStatisticsService;
 
     @RequestMapping(value = "/{recipeId}", method = RequestMethod.GET)
     @ResponseBody
     @Transactional(readOnly = true)
     public Recipe getRecipeById(@PathVariable int recipeId) {
+        recipeStatisticsService.incrementViewsCount(recipeId, DrinkitUtils.getCurrentUserId());
         return recipeService.getRecipeById(recipeId);
     }
 
@@ -42,7 +46,7 @@ public class RecipeController {
 //    @ResponseBody
     public HttpEntity<Recipe> createRecipe(@RequestBody Recipe recipe) {
         Assert.isNull(recipe.getId());
-        LoggerUtils.logOperation("Creating recipe", recipe);
+        DrinkitUtils.logOperation("Creating recipe", recipe);
         return new HttpEntity<>(recipeService.save(recipe));
     }
 
@@ -71,7 +75,7 @@ public class RecipeController {
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void deleteRecipe(@PathVariable int id) {
-        LoggerUtils.logOperation("Deleting recipe", id);
+        DrinkitUtils.logOperation("Deleting recipe", id);
         recipeService.delete(id);
     }
 
@@ -79,7 +83,7 @@ public class RecipeController {
     @ResponseStatus(HttpStatus.OK)
     public void updateRecipe(@PathVariable int recipeId, @RequestBody Recipe recipe) {
         Assert.isTrue(recipeId == recipe.getId(), "id from uri and id from json should be identical");
-        LoggerUtils.logOperation("Updating recipe", recipe);
+        DrinkitUtils.logOperation("Updating recipe", recipe);
         recipeService.save(recipe);
     }
 

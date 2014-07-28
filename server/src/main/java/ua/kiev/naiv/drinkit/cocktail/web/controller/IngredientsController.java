@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import ua.kiev.naiv.drinkit.cocktail.common.DrinkitUtils;
 import ua.kiev.naiv.drinkit.cocktail.common.JsonMixIn;
-import ua.kiev.naiv.drinkit.cocktail.common.LoggerUtils;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.IngredientMixIn;
@@ -29,23 +29,23 @@ public class IngredientsController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public HttpEntity<Integer> addNewIngredient(@RequestBody Ingredient ingredient){
+    public HttpEntity<Integer> addNewIngredient(@RequestBody Ingredient ingredient) {
         Assert.isNull(ingredient.getId());
-        LoggerUtils.logOperation("Creating ingredient", ingredient);
+        DrinkitUtils.logOperation("Creating ingredient", ingredient);
         return new HttpEntity<>(ingredientService.create(ingredient));
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void editIngredient(@RequestBody Ingredient ingredient, @PathVariable int id){
+    public void editIngredient(@RequestBody Ingredient ingredient, @PathVariable int id) {
         Assert.isTrue(id == ingredient.getId(), "id from uri and id from json should be identical");
-        LoggerUtils.logOperation("Updating ingredient", ingredient);
+        DrinkitUtils.logOperation("Updating ingredient", ingredient);
         ingredientService.update(ingredient);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable int id){
-        LoggerUtils.logOperation("Deleting ingredient", id);
+    public void delete(@PathVariable int id) {
+        DrinkitUtils.logOperation("Deleting ingredient", id);
         ingredientService.delete(id);
     }
 
