@@ -34,7 +34,7 @@ package controllers
 //            params.id = key;
             var request:JSRequest = new JSRequest();
 //            request.queryParams = params.toString();
-            ServiceUtil.instance.sendRequest(Services.GET_COCKTAIL_INFO + key, request, onCocktailInfoLoad);
+            ServiceUtil.instance.sendRequest(Services.RECIPES + key, request, onCocktailInfoLoad);
         }
 
         private function onCocktailInfoLoad(response:String):void
