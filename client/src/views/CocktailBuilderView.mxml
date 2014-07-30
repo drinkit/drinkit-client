@@ -165,7 +165,7 @@
 													   itemRenderer="components.renderers.AutoCompleteRenderer"
 													   skinClass="design.skins.LiveSearchComboBoxSkin" focusSkin="{null}" focusRect="false"
 													   labelField="name" paddingLeft="0" prompt="Напишите ингредиент..." />
-					<s:List width="100%" minWidth="200" dataProvider="{_model.selectedIngredientsList}"
+					<s:List width="100%" minWidth="200" dataProvider="{_model.selectedIngredientsList}" focusEnabled="false"
 							itemRenderer="views.renderers.IngredientItemRenderer" labelField="name" borderVisible="false">
 						<s:layout>
 							<components:FlowLayout clipAndEnableScrolling="false" paddingLeft="0" paddingBottom="5" paddingRight="5" paddingTop="5" />
@@ -179,7 +179,7 @@
 			<s:Label visible="{_model.isNoCocktailsFound}" width="70%" fontSize="24" textAlign="center" styleName="regularText" horizontalCenter="0"
 					 maxDisplayedLines="2" paddingLeft="5" paddingRight="5" text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
 					 top="20" />
-			<s:List id="recipesList" borderVisible="false" width="100%" height="100%" change="selectCocktailHandler(event)" contentBackgroundAlpha="0"
+			<s:List id="recipesList" borderVisible="false" width="100%" height="100%" change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
 					itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{_model.cocktailsList}" visible="{!_model.isNoCocktailsFound}">
 				<s:layout>
 					<s:TileLayout horizontalGap="10" verticalGap="10" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" />
