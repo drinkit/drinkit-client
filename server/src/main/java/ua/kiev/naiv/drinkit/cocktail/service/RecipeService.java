@@ -20,4 +20,13 @@ public interface RecipeService {
 
     Recipe getRecipeById(int id);
 
+    /**
+     * Find recipe by id and increment count of views in Recipe Statistic table
+     *
+     * @param id     recipeId
+     * @param userId id if user which requested this recipe.
+     * @return recipe
+     */
+    Recipe getRecipeByIdAndIncrementViewsCount(int id, int userId);
+
 }

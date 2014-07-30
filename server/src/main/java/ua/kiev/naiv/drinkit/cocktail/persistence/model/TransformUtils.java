@@ -35,9 +35,10 @@ public class TransformUtils {
     private static void processStatistics(List<RecipeStatistics> recipeStatistics, Recipe recipe) {
         recipe.setViews(recipeStatistics
                 .stream().mapToInt(RecipeStatistics::getViews).sum());
-        recipe.setRating(recipeStatistics
+        recipeStatistics
                 .stream().filter(val -> val.getRating() != null)
-                .mapToInt(RecipeStatistics::getRating).average().getAsDouble());
+                .mapToInt(RecipeStatistics::getRating).average().ifPresent(
+                recipe::setRating);
         recipe.setVotes((int) recipeStatistics
                 .stream().filter(val -> val.getRating() != null).count());
     }

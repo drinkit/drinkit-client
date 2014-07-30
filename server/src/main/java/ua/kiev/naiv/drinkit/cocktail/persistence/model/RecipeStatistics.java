@@ -12,7 +12,6 @@ import java.util.Date;
 public class RecipeStatistics implements Serializable {
 
     private int userId;
-    private int recipeId;
     private RecipeEntity recipeEntity;
     private int views;
     private Integer rating;
@@ -29,16 +28,7 @@ public class RecipeStatistics implements Serializable {
     }
 
     @Id
-    @Column(name = "recipe_id")
-    public int getRecipeId() {
-        return recipeId;
-    }
-
-    public void setRecipeId(int recipeId) {
-        this.recipeId = recipeId;
-    }
-
-    @ManyToOne()
+    @ManyToOne(optional = false)
     @JoinColumn(name = "recipe_id", insertable = false, updatable = false)
     public RecipeEntity getRecipeEntity() {
         return recipeEntity;
@@ -78,7 +68,7 @@ public class RecipeStatistics implements Serializable {
     @SuppressWarnings("unused")
     public static class PrimaryKey implements Serializable {
         private int userId;
-        private int recipeId;
+        private int recipeEntity;
 
         public int getUserId() {
             return userId;
@@ -88,12 +78,32 @@ public class RecipeStatistics implements Serializable {
             this.userId = userId;
         }
 
-        public int getRecipeId() {
-            return recipeId;
+        public int getRecipeEntity() {
+            return recipeEntity;
         }
 
-        public void setRecipeId(int recipeId) {
-            this.recipeId = recipeId;
+        public void setRecipeEntity(int recipeEntity) {
+            this.recipeEntity = recipeEntity;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            PrimaryKey that = (PrimaryKey) o;
+
+            if (recipeEntity != that.recipeEntity) return false;
+            if (userId != that.userId) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = userId;
+            result = 31 * result + recipeEntity;
+            return result;
         }
     }
 }

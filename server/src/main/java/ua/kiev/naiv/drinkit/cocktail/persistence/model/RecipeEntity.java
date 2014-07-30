@@ -2,6 +2,7 @@ package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class RecipeEntity implements Serializable {
     private List<Option> options;
     private byte[] image;
     private byte[] thumbnail;
-    private List<RecipeStatistics> recipeStatistics;
+    private List<RecipeStatistics> recipeStatistics = new ArrayList<>();
 
     @Transient
     public List<Integer> getIngredientIds() {
@@ -107,7 +108,7 @@ public class RecipeEntity implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-    @OneToMany(mappedBy = "recipeEntity")
+    @OneToMany(mappedBy = "recipeEntity", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     public List<RecipeStatistics> getRecipeStatistics() {
         return recipeStatistics;
     }

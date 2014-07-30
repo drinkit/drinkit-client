@@ -14,12 +14,12 @@ import ua.kiev.naiv.drinkit.cocktail.common.DrinkitUtils;
 import ua.kiev.naiv.drinkit.cocktail.common.JsonMixIn;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
-import ua.kiev.naiv.drinkit.cocktail.service.RecipeStatisticsService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeSearchResultMixin;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.OptionalInt;
 
 @Controller
 @RequestMapping(value = "recipes")
@@ -29,15 +29,14 @@ public class RecipeController {
 
     @Autowired
     RecipeService recipeService;
-    @Autowired
-    RecipeStatisticsService recipeStatisticsService;
 
     @RequestMapping(value = "/{recipeId}", method = RequestMethod.GET)
     @ResponseBody
     @Transactional(readOnly = true)
     public Recipe getRecipeById(@PathVariable int recipeId) {
-        recipeStatisticsService.incrementViewsCount(recipeId, DrinkitUtils.getCurrentUserId());
-        return recipeService.getRecipeById(recipeId);
+        OptionalInt userId = DrinkitUtils.getCurrentUserId();
+        return userId.isPresent() ? recipeService.getRecipeByIdAndIncrementViewsCount(recipeId, userId.getAsInt()) :
+                recipeService.getRecipeById(recipeId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
