@@ -6,7 +6,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.User;
 
 import java.util.OptionalInt;
 
@@ -31,7 +30,7 @@ public class DrinkitUtils {
                 userId = 0;
             } else if (!((UserDetails) authentication.getPrincipal()).getAuthorities()
                     .contains(new SimpleGrantedAuthority(Role.ROLE_ADMIN.name()))) {
-                userId = ((User) authentication.getPrincipal()).getId();
+                userId = ((DetailedUser) authentication.getPrincipal()).getUserId();
             }
         }
         return userId == null ? OptionalInt.empty() : OptionalInt.of(userId);
