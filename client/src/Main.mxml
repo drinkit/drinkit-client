@@ -101,7 +101,7 @@
 				<s:VerticalLayout paddingLeft="20" paddingTop="10" paddingRight="20" gap="5" />
 			</s:layout>
 			<s:TabBar id="menu" height="50" dataProvider="{viewstack1}"
-					  change="menu_changeHandler(event)" skinClass="design.skins.tabbar.SimpleTabBarSkin"/>
+					  change="menu_changeHandler(event)" skinClass="design.skins.tabbar.SimpleTabBarSkin" />
 			<s:Group width="100%" height="10">
 				<s:Line top="0" left="0" right="0" yFrom="0" yTo="0">
 					<s:stroke>
