@@ -1,16 +1,19 @@
 package models.supportClasses
 {
+    [Bindable]
 	public class Ingredient
 	{
 		public var id:Number;
 		public var name:String;
 		public var vol:uint;
+        public var description:String;
 		
-		public function Ingredient(aId:Number = -1, aName:String = "", aVol:uint = 0)
+		public function Ingredient(aId:Number = NaN, aName:String = "", aVol:uint = 0, aDescription:String = "")
 		{
 			id = aId;
 			name = aName;
 			vol = aVol;
+            description = aDescription;
 		}
 	}
 }

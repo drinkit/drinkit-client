@@ -13,7 +13,7 @@
             <subviews:CocktailAdminPanel width="100%" height="100%" />
         </s:NavigatorContent>
         <s:NavigatorContent label="Ингредиенты" >
-
+            <subviews:IngredientAdminPanel width="100%" height="100%" />
         </s:NavigatorContent>
     </mx:ViewStack>
 </s:Group>

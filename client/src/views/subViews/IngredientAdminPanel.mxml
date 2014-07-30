@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+  Created by Crabar on 28.07.2014.
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:flextras="spark.flextras.autoCompleteComboBox.*" creationComplete="onCreationComplete(event)">
+    <s:layout>
+        <s:VerticalLayout paddingBottom="10"/>
+    </s:layout>
+
+    <fx:Script>
+        <![CDATA[
+        import controllers.IngredientAdminController;
+
+        import models.IngredientsModel;
+        import models.supportClasses.Ingredient;
+
+        import mx.events.FlexEvent;
+
+        import spark.events.IndexChangeEvent;
+        import spark.events.TextOperationEvent;
+
+        [Bindable]
+        private var _model:Ingredient;
+        private var _controller:IngredientAdminController;
+
+        private function onCreateIngredientButtonClick(event:MouseEvent):void
+        {
+            _controller.createNewIngredient();
+        }
+
+        private function onDeleteClick(event:MouseEvent):void
+        {
+            _controller.deleteIngredient();
+        }
+
+        private function onSaveButtonClick(event:MouseEvent):void
+        {
+            _controller.saveCurrentIngredient();
+        }
+
+        private function onIngrChooseChange(event:IndexChangeEvent):void
+        {
+            _controller.loadIngredient(ingrChoose.selectedItem as Ingredient);
+        }
+
+        private function onCreationComplete(event:FlexEvent):void
+        {
+            _model = new Ingredient();
+            _controller = new IngredientAdminController(_model);
+        }
+
+        private function onVolumeChange(event:TextOperationEvent):void
+        {
+            _model.vol = uint(volumeInput.text);
+        }
+
+        ]]>
+    </fx:Script>
+
+
+    <s:HGroup>
+        <s:Button label="Создать" click="onCreateIngredientButtonClick(event)"/>
+        <s:Button label="Удалить" click="onDeleteClick(event)"/>
+        <s:Spacer width="1"/>
+        <s:Button label="Сохранить" click="onSaveButtonClick(event)"/>
+    </s:HGroup>
+    <mx:HRule width="100%" strokeWidth="1" strokeColor="0x000000"/>
+    <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="100%" height="26"
+                                       styleName="regularText"
+                                       itemRenderer="components.renderers.AutoCompleteRenderer"
+                                       skinClass="design.skins.LiveSearchComboBoxSkin"
+                                       focusSkin="{null}" focusRect="false"
+                                       labelField="name" paddingLeft="0" prompt="Напишите ингредиент..."
+                                       change="onIngrChooseChange(event)"
+                                       dataProvider="{IngredientsModel.instance.ingredientsList}"/>
+    <mx:HRule width="100%" strokeWidth="1" strokeColor="0x000000"/>
+    <s:TextInput id="ingredientName" text="@{_model.name}" width="300" />
+    <s:TextInput id="volumeInput" restrict="0-9" text="{_model.vol}" change="onVolumeChange(event)" />
+    <s:TextArea id="ingredientDescription" width="100%" height="100%" textAlign="left" verticalAlign="top" text="@{_model.description}" />
+
+</s:Group>

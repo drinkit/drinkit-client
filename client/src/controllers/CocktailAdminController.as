@@ -33,6 +33,7 @@ package controllers
     import utils.ArrayUtil;
 
     import utils.JSONInstantiator;
+    import utils.JSONUtil;
 
     import utils.ServiceUtil;
 
@@ -89,7 +90,7 @@ package controllers
         public function loadCocktailInfo(id:Number):void
         {
             var request:JSRequest = new JSRequest();
-            ServiceUtil.instance.sendRequest(Services.GET_COCKTAIL_INFO + id, request, onCocktailInfoLoad);
+            ServiceUtil.instance.sendRequest(Services.RECIPES + id, request, onCocktailInfoLoad);
         }
 
         private var _lastCocktailModel:CocktailModel;
@@ -186,9 +187,9 @@ package controllers
             cocktail.thumbnail = images[0];
             cocktail.image = images[1];
             var request:JSRequest = new JSRequest(URLRequestMethod.POST);
-            request.bodyParams = JSON.stringify(cocktail);
+            request.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(cocktail));
             request.contentType = "application/json;charset=UTF-8";
-            ServiceUtil.instance.sendRequest(Services.GET_COCKTAIL_INFO, request, onCocktailSave);
+            ServiceUtil.instance.sendRequest(Services.RECIPES, request, onCocktailSave);
 
         }
 
@@ -208,9 +209,9 @@ package controllers
             cocktail.thumbnail = images[0];
             cocktail.image = images[1];
             var request:JSRequest = new JSRequest(URLRequestMethod.PUT);
-            request.bodyParams = JSON.stringify(cocktail);
+            request.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(cocktail));
             request.contentType = "application/json;charset=UTF-8";
-            ServiceUtil.instance.sendRequest(Services.GET_COCKTAIL_INFO + _model.cocktailId, request, onCocktailSave);
+            ServiceUtil.instance.sendRequest(Services.RECIPES + _model.cocktailId, request, onCocktailSave);
         }
 
         private function onCocktailSave(response:String):void
@@ -271,7 +272,7 @@ package controllers
         public function deleteCocktail():void
         {
             var deleteRequest:JSRequest = new JSRequest(URLRequestMethod.DELETE);
-            ServiceUtil.instance.sendRequest(Services.GET_COCKTAIL_INFO + _model.cocktailId, deleteRequest, onCocktailDelete);
+            ServiceUtil.instance.sendRequest(Services.RECIPES + _model.cocktailId, deleteRequest, onCocktailDelete);
         }
 
         private function onCocktailDelete(response:String):void

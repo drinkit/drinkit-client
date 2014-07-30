@@ -81,7 +81,7 @@ package controllers
         public function requestIngredients():void
         {
             var request:JSRequest = new JSRequest();
-            ServiceUtil.instance.sendRequest(Services.GET_INGREDIENTS, request, onIngredientsLoad);
+            ServiceUtil.instance.sendRequest(Services.INGREDIENTS, request, onIngredientsLoad);
         }
 
         private function onIngredientsLoad(response:String):void
