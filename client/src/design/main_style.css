@@ -3,37 +3,31 @@
 @namespace mx "library://ns.adobe.com/flex/mx";
 @namespace components "components.*";
 
-.darkGreen
-{
-	color: PropertyReference("darkGreen");
+.darkGreen {
+    color: PropertyReference("darkGreen");
 }
 
-s|ToggleButton
-{
-	skinClass: ClassReference("design.skins.FlatToggleButtonSkin");
-	cornerRadius: 3;
+s|ToggleButton {
+    skinClass: ClassReference("design.skins.FlatToggleButtonSkin");
+    cornerRadius: 3;
 }
 
-s|TabBar
-{
-	cornerRadius: 0;
-	skinClass: ClassReference("design.skins.FlatTabBarSkin");
+s|TabBar {
+    cornerRadius: 0;
+    skinClass: ClassReference("design.skins.FlatTabBarSkin");
 }
 
-s|Button
-{
-	cornerRadius: 3;
-	skinClass: ClassReference("design.skins.FlatButtonSkin");
+s|Button {
+    cornerRadius: 3;
+    skinClass: ClassReference("design.skins.FlatButtonSkin");
 }
 
-s|TextInput
-{
-	fontSize: 14;
-	fontFamily: "CenturyGothic";
-	paddingLeft: 5;
+s|TextInput {
+    fontSize: 14;
+    fontFamily: "CenturyGothic";
+    paddingLeft: 5;
 }
 
-s|TitleWindow
-{
+s|TitleWindow {
     skinClass: ClassReference("design.skins.TitleWindowSkin");
 }

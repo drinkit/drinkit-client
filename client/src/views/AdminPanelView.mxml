@@ -5,15 +5,15 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:subviews="views.subViews.*">
     <s:layout>
-        <s:VerticalLayout />
+        <s:VerticalLayout/>
     </s:layout>
     <s:TabBar dataProvider="{stack}" width="100%"/>
     <mx:ViewStack id="stack" width="100%" height="100%">
         <s:NavigatorContent label="Коктейли">
-            <subviews:CocktailAdminPanel width="100%" height="100%" />
+            <subviews:CocktailAdminPanel width="100%" height="100%"/>
         </s:NavigatorContent>
-        <s:NavigatorContent label="Ингредиенты" >
-            <subviews:IngredientAdminPanel width="100%" height="100%" />
+        <s:NavigatorContent label="Ингредиенты">
+            <subviews:IngredientAdminPanel width="100%" height="100%"/>
         </s:NavigatorContent>
     </mx:ViewStack>
 </s:Group>

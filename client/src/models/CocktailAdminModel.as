@@ -4,17 +4,13 @@
 package models
 {
     import flash.display.Bitmap;
-    import flash.display.Loader;
-    import flash.events.Event;
     import flash.events.EventDispatcher;
     import flash.geom.Rectangle;
 
     import mx.binding.utils.BindingUtils;
     import mx.collections.ArrayCollection;
     import mx.collections.ArrayList;
-
     import mx.events.CollectionEvent;
-    import mx.utils.Base64Decoder;
 
     [Event(name="modelUpdated", type="flash.events.Event")]
     public class CocktailAdminModel extends EventDispatcher

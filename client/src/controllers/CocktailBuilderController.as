@@ -13,17 +13,16 @@ package controllers
     import mx.collections.ArrayCollection;
 
     import utils.JSONInstantiator;
-    import utils.supportClasses.JSRequest;
     import utils.ServiceUtil;
+    import utils.supportClasses.JSRequest;
 
     public class CocktailBuilderController
     {
-        private var _model:CocktailBuilderModel;
-
         public function CocktailBuilderController(model:CocktailBuilderModel)
         {
             _model = model;
         }
+        private var _model:CocktailBuilderModel;
 
         public function addIngredientToQuery(ingr:Object):void
         {

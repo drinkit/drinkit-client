@@ -1,192 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-				   xmlns:flextras="spark.flextras.autoCompleteComboBox.*" xmlns:mx="library://ns.adobe.com/flex/mx" width="1024" height="768"
-				   xmlns:components="components.*" creationComplete="creationCompleteHandler(event)"
-				   contentCreationComplete="bordercontainer1_contentCreationCompleteHandler(event)" backgroundColor="0xffffff" borderVisible="false">
-	<s:layout>
-		<s:VerticalLayout />
-	</s:layout>
-	<fx:Script>
+                   xmlns:flextras="spark.flextras.autoCompleteComboBox.*"
+                   xmlns:components="components.*" width="1024"
+                   height="768" creationComplete="creationCompleteHandler(event)"
+                   contentCreationComplete="bordercontainer1_contentCreationCompleteHandler(event)"
+                   backgroundColor="0xffffff" borderVisible="false">
+    <s:layout>
+        <s:VerticalLayout/>
+    </s:layout>
+    <fx:Script>
 		<![CDATA[
+        import controllers.CocktailBuilderController;
+        import controllers.MainController;
 
-			import controllers.CocktailBuilderController;
-			import controllers.MainController;
-			
-			import design.DesignModel;
-			
-			import models.CocktailBuilderModel;
-			import models.MainModel;
-			import models.supportClasses.CocktailTypes;
-			import models.supportClasses.Ingredient;
-			import models.supportClasses.OptionParameters;
-			
-			import mx.events.FlexEvent;
-			
-			import spark.events.IndexChangeEvent;
-			
-			[Bindable]
-			private var _model:CocktailBuilderModel;
-			
-			public function get model():CocktailBuilderModel
-			{
-				return _model;
-			}
-			
-			[Bindable]
-			private var _controller:CocktailBuilderController;
-			
-			public function get controller():CocktailBuilderController
-			{
-				return _controller;
-			}
-			
-			protected function combobox1_changeHandler(event:IndexChangeEvent):void
-			{
-				if (event.newIndex >= 0)
-					_controller.addIngredientToQuery(ingrChoose.selectedItem);
-				
-				ingrChoose.selectedIndex = -1;
-				ingrChoose.validateProperties();
-			}
-			
-			
-			private function filterCBList(item:Object):Boolean
-			{
-				var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
-				var ingr:Ingredient = Ingredient(item);
-				
-				if (String(ingr.name).toLowerCase().search(inputValue) > -1 && (_model.selectedIngredientsList.getItemIndex(item) == -1))
-					return true;
-				
-				return false;
-			}
-			
-			protected function creationCompleteHandler(event:FlexEvent):void
-			{
-				_model = new CocktailBuilderModel();
-				_model.addEventListener(CocktailBuilderModel.SELECTED_INGREDIENTS_CHANGED, selectedIngredientsChangeHandler);
-				_controller = new CocktailBuilderController(_model);
-				//
-				MainController.instance.requestIngredients();
-			}
-			
-			private function selectedIngredientsChangeHandler(event:Event):void
-			{
-				_controller.performSearch();
-			}
-			
-			protected function cocktailTypeChangeHandler(event:Event):void
-			{
-				_controller.toggleCocktailType(uint(event.currentTarget.name), event.currentTarget.selected);
-				_controller.performSearch();
-			}
-			
-			protected function optionChangeHandler(event:Event):void
-			{
-				_controller.toggleOption(uint(event.currentTarget.name), event.currentTarget.selected);
-				_controller.performSearch();
-			}
-			
-			
-			protected function selectCocktailHandler(event:IndexChangeEvent):void
-			{
-				if (recipesList.selectedItem)
-				{
-					var cocktailId:Number = recipesList.selectedItem.id;
-					recipesList.selectedIndex = -1;
-					recipesList.validateProperties();
-					MainController.instance.changeView(MainModel.COCKTAIL_VIEW, cocktailId);
-				}
-			}
-			
-			protected function bordercontainer1_contentCreationCompleteHandler(event:FlexEvent):void
-			{
-				validateNow();
-			}
-			
-		]]>
+        import design.DesignModel;
+
+        import models.CocktailBuilderModel;
+        import models.MainModel;
+        import models.supportClasses.CocktailTypes;
+        import models.supportClasses.Ingredient;
+        import models.supportClasses.OptionParameters;
+
+        import mx.events.FlexEvent;
+
+        import spark.events.IndexChangeEvent;
+
+        [Bindable]
+        private var _model:CocktailBuilderModel;
+
+        public function get model():CocktailBuilderModel
+        {
+            return _model;
+        }
+
+        [Bindable]
+        private var _controller:CocktailBuilderController;
+
+        public function get controller():CocktailBuilderController
+        {
+            return _controller;
+        }
+
+        protected function combobox1_changeHandler(event:IndexChangeEvent):void
+        {
+            if (event.newIndex >= 0)
+                _controller.addIngredientToQuery(ingrChoose.selectedItem);
+
+            ingrChoose.selectedIndex = -1;
+            ingrChoose.validateProperties();
+        }
+
+
+        private function filterCBList(item:Object):Boolean
+        {
+            var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
+            var ingr:Ingredient = Ingredient(item);
+
+            if (String(ingr.name).toLowerCase().search(inputValue) > -1 && (_model.selectedIngredientsList.getItemIndex(item) == -1))
+                return true;
+
+            return false;
+        }
+
+        protected function creationCompleteHandler(event:FlexEvent):void
+        {
+            _model = new CocktailBuilderModel();
+            _model.addEventListener(CocktailBuilderModel.SELECTED_INGREDIENTS_CHANGED, selectedIngredientsChangeHandler);
+            _controller = new CocktailBuilderController(_model);
+            //
+            MainController.instance.requestIngredients();
+        }
+
+        private function selectedIngredientsChangeHandler(event:Event):void
+        {
+            _controller.performSearch();
+        }
+
+        protected function cocktailTypeChangeHandler(event:Event):void
+        {
+            _controller.toggleCocktailType(uint(event.currentTarget.name), event.currentTarget.selected);
+            _controller.performSearch();
+        }
+
+        protected function optionChangeHandler(event:Event):void
+        {
+            _controller.toggleOption(uint(event.currentTarget.name), event.currentTarget.selected);
+            _controller.performSearch();
+        }
+
+
+        protected function selectCocktailHandler(event:IndexChangeEvent):void
+        {
+            if (recipesList.selectedItem)
+            {
+                var cocktailId:Number = recipesList.selectedItem.id;
+                recipesList.selectedIndex = -1;
+                recipesList.validateProperties();
+                MainController.instance.changeView(MainModel.COCKTAIL_VIEW, cocktailId);
+            }
+        }
+
+        protected function bordercontainer1_contentCreationCompleteHandler(event:FlexEvent):void
+        {
+            validateNow();
+        }
+        ]]>
 	</fx:Script>
-	<fx:Declarations>
-	</fx:Declarations>
-	<!-- <s:Label id="pageTitle" width="100%" height="50" styleName="pageTitleText" text="Конструктор коктейлей" textAlign="center" verticalAlign="middle" /> -->
-	<s:HGroup width="100%" height="100%">
-		<s:VGroup id="searchPanel" paddingTop="5" width="250" height="100%">
-			<s:BorderContainer width="100%" height="100%" borderVisible="false">
-				<s:layout>
-					<s:VerticalLayout paddingLeft="0" paddingRight="5" paddingTop="5" />
-				</s:layout>
+    <fx:Declarations>
+    </fx:Declarations>
+    <!-- <s:Label id="pageTitle" width="100%" height="50" styleName="pageTitleText" text="Конструктор коктейлей" textAlign="center" verticalAlign="middle" /> -->
+    <s:HGroup width="100%" height="100%">
+        <s:VGroup id="searchPanel" paddingTop="5" width="250" height="100%">
+            <s:BorderContainer width="100%" height="100%" borderVisible="false">
+                <s:layout>
+                    <s:VerticalLayout paddingLeft="0" paddingRight="5" paddingTop="5"/>
+                </s:layout>
 
-				<s:Label text="Формат коктейля" styleName="headerGreenText" />
-				<s:Spacer width="100%" height="5" />
-				<s:HGroup id="cocktailTypesGroup" width="100%" gap="15" horizontalAlign="center">
-					<s:ToggleButton width="64" height="64" name="{CocktailTypes.LONG_DRINK}" change="cocktailTypeChangeHandler(event)"
-									icon="@Embed(source='/../assets/long-64.png')" toolTip="Long drink" />
-					<s:ToggleButton width="64" height="64" name="{CocktailTypes.SHORT_DRINK}" change="cocktailTypeChangeHandler(event)"
-									icon="@Embed(source='/../assets/short-64.png')" toolTip="Short drink" />
-					<s:ToggleButton width="64" height="64" name="{CocktailTypes.SHOOTER}" change="cocktailTypeChangeHandler(event)"
-									icon="@Embed(source='/../assets/shooter-64.png')" toolTip="Shooter" />
-				</s:HGroup>
-                <s:Spacer width="100%" height="0" />
-				<s:Line yFrom="0" yTo="0" width="100%">
-					<s:stroke>
-						<s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7" />
-					</s:stroke>
-				</s:Line>
-				<s:Spacer width="100%" height="10" />
-				<s:Label text="Дополнительные опции" styleName="headerGreenText" />
-				<s:Group id="optionsGroup" width="100%">
-					<s:layout>
-						<components:FlowLayout clipAndEnableScrolling="false" horizontalGap="13" verticalGap="10" paddingBottom="5" paddingRight="5"
-											   paddingTop="5" />
-					</s:layout>
+                <s:Label text="Формат коктейля" styleName="headerGreenText" width="100%" textAlign="center"/>
+                <s:Spacer width="100%" height="5"/>
+                <s:HGroup id="cocktailTypesGroup" width="100%" gap="15" horizontalAlign="center">
+                    <s:ToggleButton width="64" height="64" name="{CocktailTypes.LONG_DRINK}"
+                                    change="cocktailTypeChangeHandler(event)"
+                                    icon="@Embed(source='/../assets/long-64.png')" toolTip="Long drink"/>
+                    <s:ToggleButton width="64" height="64" name="{CocktailTypes.SHORT_DRINK}"
+                                    change="cocktailTypeChangeHandler(event)"
+                                    icon="@Embed(source='/../assets/short-64.png')" toolTip="Short drink"/>
+                    <s:ToggleButton width="64" height="64" name="{CocktailTypes.SHOOTER}"
+                                    change="cocktailTypeChangeHandler(event)"
+                                    icon="@Embed(source='/../assets/shooter-64.png')" toolTip="Shooter"/>
+                </s:HGroup>
+                <s:Spacer width="100%" height="0"/>
+                <s:Line yFrom="0" yTo="0" width="100%">
+                    <s:stroke>
+                        <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
+                    </s:stroke>
+                </s:Line>
+                <s:Spacer width="100%" height="10"/>
+                <s:Label text="Дополнительные опции" styleName="headerGreenText" width="100%" textAlign="center"/>
+                <s:Group id="optionsGroup" width="100%">
+                    <s:layout>
+                        <components:FlowLayout clipAndEnableScrolling="false" horizontalGap="13" verticalGap="10"
+                                               paddingBottom="5" paddingRight="5"
+                                               paddingTop="5"/>
+                    </s:layout>
 
-					<s:ToggleButton label="горящий" name="{OptionParameters.BURNING}" buttonMode="true" skinClass="design.skins.OptionLabelSkin"
-									click="optionChangeHandler(event)" />
-					<s:ToggleButton label="слоёный" name="{OptionParameters.FLACKY}" buttonMode="true" skinClass="design.skins.OptionLabelSkin"
-									click="optionChangeHandler(event)" />
-					<s:ToggleButton label="со льдом" name="{OptionParameters.WITH_ICE}" buttonMode="true" skinClass="design.skins.OptionLabelSkin"
-									click="optionChangeHandler(event)" />
-					<s:ToggleButton label="официальный" name="{OptionParameters.IBA}" buttonMode="true" skinClass="design.skins.OptionLabelSkin"
-									click="optionChangeHandler(event)" toolTip="утвержденый международной ассоациацией барменов (IBA)" />
-					<s:ToggleButton label="проверенный" name="{OptionParameters.CHECKED}" buttonMode="true" skinClass="design.skins.OptionLabelSkin"
-									click="optionChangeHandler(event)" toolTip="проверенный администрацией собственоручно" />
-				</s:Group>
-				<s:Line yFrom="0" yTo="0" width="100%">
-					<s:stroke>
-						<s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7" />
-					</s:stroke>
-				</s:Line>
-				<s:Spacer width="100%" height="5" />
-				<s:Label text="Выбор ингредиентов" styleName="headerGreenText" />
-				<s:Spacer width="100%" height="5" />
-				<s:VGroup width="100%" height="100%">
-					<flextras:AutoCompleteComboBoxLite id="ingrChoose" width="100%" height="26" change="combobox1_changeHandler(event)"
-													   dataProvider="{_model.ingredientsList}" filterFunction="filterCBList" styleName="regularText"
-													   itemRenderer="components.renderers.AutoCompleteRenderer"
-													   skinClass="design.skins.LiveSearchComboBoxSkin" focusSkin="{null}" focusRect="false"
-													   labelField="name" paddingLeft="0" prompt="Напишите ингредиент..." />
-					<s:List width="100%" minWidth="200" dataProvider="{_model.selectedIngredientsList}" focusEnabled="false"
-							itemRenderer="views.renderers.IngredientItemRenderer" labelField="name" borderVisible="false">
-						<s:layout>
-							<components:FlowLayout clipAndEnableScrolling="false" paddingLeft="0" paddingBottom="5" paddingRight="5" paddingTop="5" />
-						</s:layout>
-					</s:List>
-				</s:VGroup>
-			</s:BorderContainer>
+                    <s:ToggleButton label="горящий" name="{OptionParameters.BURNING}" buttonMode="true"
+                                    skinClass="design.skins.OptionLabelSkin"
+                                    click="optionChangeHandler(event)"/>
+                    <s:ToggleButton label="слоёный" name="{OptionParameters.FLACKY}" buttonMode="true"
+                                    skinClass="design.skins.OptionLabelSkin"
+                                    click="optionChangeHandler(event)"/>
+                    <s:ToggleButton label="со льдом" name="{OptionParameters.WITH_ICE}" buttonMode="true"
+                                    skinClass="design.skins.OptionLabelSkin"
+                                    click="optionChangeHandler(event)"/>
+                    <s:ToggleButton label="официальный" name="{OptionParameters.IBA}" buttonMode="true"
+                                    skinClass="design.skins.OptionLabelSkin"
+                                    click="optionChangeHandler(event)"
+                                    toolTip="утвержденый международной ассоациацией барменов (IBA)"/>
+                    <s:ToggleButton label="проверенный" name="{OptionParameters.CHECKED}" buttonMode="true"
+                                    skinClass="design.skins.OptionLabelSkin"
+                                    click="optionChangeHandler(event)"
+                                    toolTip="проверенный администрацией собственоручно"/>
+                </s:Group>
+                <s:Line yFrom="0" yTo="0" width="100%">
+                    <s:stroke>
+                        <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
+                    </s:stroke>
+                </s:Line>
+                <s:Spacer width="100%" height="5"/>
+                <s:Label text="Выбор ингредиентов" styleName="headerGreenText" width="100%" textAlign="center"/>
+                <s:Spacer width="100%" height="5"/>
+                <s:VGroup width="100%" height="100%">
+                    <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="100%" height="26"
+                                                       change="combobox1_changeHandler(event)"
+                                                       dataProvider="{_model.ingredientsList}"
+                                                       filterFunction="filterCBList" styleName="regularText"
+                                                       itemRenderer="components.renderers.AutoCompleteRenderer"
+                                                       skinClass="design.skins.LiveSearchComboBoxSkin"
+                                                       focusSkin="{null}" focusRect="false"
+                                                       labelField="name" paddingLeft="0"
+                                                       prompt="Напишите ингредиент..."/>
+                    <s:List width="100%" minWidth="200" height="100%" dataProvider="{_model.selectedIngredientsList}"
+                            focusEnabled="false"
+                            itemRenderer="views.renderers.IngredientItemRenderer" labelField="name"
+                            borderVisible="false">
+                        <s:layout>
+                            <components:FlowLayout clipAndEnableScrolling="true" paddingLeft="0" paddingBottom="5"
+                                                   paddingRight="5" paddingTop="5"/>
+                        </s:layout>
+                    </s:List>
+                </s:VGroup>
+            </s:BorderContainer>
 
-		</s:VGroup>
-		<s:Group width="100%" height="100%">
-			<s:Label visible="{_model.isNoCocktailsFound}" width="70%" fontSize="24" textAlign="center" styleName="regularText" horizontalCenter="0"
-					 maxDisplayedLines="2" paddingLeft="5" paddingRight="5" text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
-					 top="20" />
-			<s:List id="recipesList" borderVisible="false" width="100%" height="100%" change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
-					itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{_model.cocktailsList}" visible="{!_model.isNoCocktailsFound}">
-				<s:layout>
-					<s:TileLayout horizontalGap="10" verticalGap="10" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" />
-				</s:layout>
-			</s:List>
-		</s:Group>
-	</s:HGroup>
+        </s:VGroup>
+        <s:Group width="100%" height="100%">
+            <s:Label visible="{_model.isNoCocktailsFound}" width="70%" fontSize="24" textAlign="center"
+                     styleName="regularText" horizontalCenter="0"
+                     maxDisplayedLines="2" paddingLeft="5" paddingRight="5"
+                     text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
+                     top="20"/>
+            <s:List id="recipesList" left="5" borderVisible="false" width="100%" height="100%"
+                    change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
+                    itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{_model.cocktailsList}"
+                    visible="{!_model.isNoCocktailsFound}">
+                <s:layout>
+                    <s:TileLayout horizontalGap="10" verticalGap="10" paddingBottom="5" paddingLeft="5" paddingRight="5"
+                                  paddingTop="5"/>
+                </s:layout>
+            </s:List>
+        </s:Group>
+    </s:HGroup>
 
 
 </s:BorderContainer>

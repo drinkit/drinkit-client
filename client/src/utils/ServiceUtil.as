@@ -100,6 +100,13 @@ package utils
             Alert.show("Ошибка соединения с сервером!");
         }
 
+        public function sendRequest(functionName:String, request:JSRequest, handler:Function, errorHandler:Function = null):void
+        {
+            var requestID:String = prepareRequest(functionName, request, handler, errorHandler);
+            var headers:Array = prepareHeaders(request);
+            ExternalInterface.call("sendRequest", request.method, _serviceAddress + functionName, request.queryParams, request.bodyParams, headers, request.expectedStatus, request.expectedErrorStatus, requestID);
+        }
+
         private function prepareHeaders(request:JSRequest):Array
         {
             var headers:Array = [];
@@ -109,13 +116,6 @@ package utils
 
             headers.push(_digests[request.method]);
             return headers;
-        }
-
-        public function sendRequest(functionName:String, request:JSRequest, handler:Function, errorHandler:Function = null):void
-        {
-            var requestID:String = prepareRequest(functionName, request, handler, errorHandler);
-            var headers:Array = prepareHeaders(request);
-            ExternalInterface.call("sendRequest", request.method, _serviceAddress + functionName, request.queryParams, request.bodyParams, headers, request.expectedStatus, request.expectedErrorStatus, requestID);
         }
 
         private function isNonceExpired(headers:String):Boolean

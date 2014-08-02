@@ -98,6 +98,14 @@
             close();
             SignupWindow.show();
         }
+
+        protected function onKeyDown(event:KeyboardEvent):void
+        {
+            if (event.keyCode == Keyboard.ENTER)
+            {
+                _authController.login(userLogin.text, userPassword.text);
+            }
+        }
         ]]>
 	</fx:Script>
 
@@ -105,9 +113,9 @@
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>
     <s:TextInput id="userLogin" width="100%" height="36" borderVisible="true" horizontalCenter="0"
-                 prompt="Электронный адрес..." textAlign="left"/>
+                 prompt="Электронный адрес..." textAlign="left" keyDown="onKeyDown(event)"/>
     <s:TextInput id="userPassword" width="100%" height="36" displayAsPassword="true"
-                 prompt="Пароль..."/>
+                 prompt="Пароль..." keyDown="onKeyDown(event)"/>
     <s:Button width="100%" label="Войти" click="onBasicLoginClick(event)"/>
     <s:Label id="errorMessage" text="Неправильный электронный адрес или пароль!" color="0xff0000"
              includeInLayout="false" visible="false"/>

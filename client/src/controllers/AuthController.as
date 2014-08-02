@@ -10,10 +10,8 @@ package controllers
     import models.events.AuthEvent;
 
     import utils.CookieUtil;
-
-    import utils.supportClasses.JSRequest;
-
     import utils.ServiceUtil;
+    import utils.supportClasses.JSRequest;
 
     public class AuthController extends UserController
     {

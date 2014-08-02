@@ -7,27 +7,22 @@ package controllers
 
     import flash.net.URLRequestMethod;
 
-    import models.IngredientsModel;
-
     import models.supportClasses.Ingredient;
 
     import mx.controls.Alert;
 
     import utils.JSONUtil;
-
     import utils.ServiceUtil;
-
     import utils.supportClasses.JSRequest;
 
     public class IngredientAdminController
     {
-        [Bindable]
-        private var _model:Ingredient;
-
         public function IngredientAdminController(model:Ingredient)
         {
             _model = model;
         }
+        [Bindable]
+        private var _model:Ingredient;
 
         public function createNewIngredient():void
         {
@@ -37,24 +32,12 @@ package controllers
             ServiceUtil.instance.sendRequest(Services.INGREDIENTS, createRequest, onCreateIngredient);
         }
 
-        private function onCreateIngredient(response:String):void
-        {
-            Alert.show("Ингредиент успешно создан");
-            MainController.instance.requestIngredients();
-        }
-
         public function saveCurrentIngredient():void
         {
             var saveRequest:JSRequest = new JSRequest(URLRequestMethod.PUT);
             saveRequest.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(_model));
             saveRequest.contentType = "application/json;charset=UTF-8";
             ServiceUtil.instance.sendRequest(Services.INGREDIENTS + _model.id, saveRequest, onSaveIngredient);
-        }
-
-        private function onSaveIngredient(response:String):void
-        {
-            Alert.show("Ингредиент успешно обновлен");
-            MainController.instance.requestIngredients();
         }
 
         public function loadIngredient(ingredient:Ingredient):void
@@ -69,6 +52,18 @@ package controllers
         {
             var deleteRequest:JSRequest = new JSRequest(URLRequestMethod.DELETE);
             ServiceUtil.instance.sendRequest(Services.INGREDIENTS + _model.id, deleteRequest, onDeleteIngredient);
+        }
+
+        private function onCreateIngredient(response:String):void
+        {
+            Alert.show("Ингредиент успешно создан");
+            MainController.instance.requestIngredients();
+        }
+
+        private function onSaveIngredient(response:String):void
+        {
+            Alert.show("Ингредиент успешно обновлен");
+            MainController.instance.requestIngredients();
         }
 
         private function onDeleteIngredient(response:String):void

@@ -1,10 +1,9 @@
-package utils {
+package utils
+{
     import flash.external.ExternalInterface;
 
-    public class CookieUtil {
-        public function CookieUtil() {
-        }
-
+    public class CookieUtil
+    {
         private static const FUNCTION_SETCOOKIE:String =
                 "document.insertScript = function ()" +
                 "{ " +
@@ -22,7 +21,6 @@ package utils {
                 "}" +
                 "}" +
                 "}";
-
         private static const FUNCTION_GETCOOKIE:String =
                 "document.insertScript = function ()" +
                 "{ " +
@@ -41,35 +39,41 @@ package utils {
                 "}" +
                 "}" +
                 "}";
-
-
         private static var INITIALIZED:Boolean = false;
 
-        private static function init():void {
-            ExternalInterface.call(FUNCTION_GETCOOKIE);
-            ExternalInterface.call(FUNCTION_SETCOOKIE);
-            INITIALIZED = true;
-        }
-
-        public static function setCookie(name:String, value:Object, days:int):void {
+        public static function setCookie(name:String, value:Object, days:int):void
+        {
             if (!INITIALIZED)
                 init();
 
             ExternalInterface.call("setCookie", name, value, days);
         }
 
-        public static function getCookie(name:String):Object {
+        public static function getCookie(name:String):Object
+        {
             if (!INITIALIZED)
                 init();
 
             return ExternalInterface.call("getCookie", name);
         }
 
-        public static function deleteCookie(name:String):void {
+        public static function deleteCookie(name:String):void
+        {
             if (!INITIALIZED)
                 init();
 
             ExternalInterface.call("setCookie", name, "", -1);
+        }
+
+        private static function init():void
+        {
+            ExternalInterface.call(FUNCTION_GETCOOKIE);
+            ExternalInterface.call(FUNCTION_SETCOOKIE);
+            INITIALIZED = true;
+        }
+
+        public function CookieUtil()
+        {
         }
 
     }
