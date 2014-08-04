@@ -13,8 +13,8 @@ package controllers
     import mx.utils.URLUtil;
 
     import utils.JSONInstantiator;
-    import utils.supportClasses.JSRequest;
     import utils.ServiceUtil;
+    import utils.supportClasses.JSRequest;
 
     public class MainController
     {
@@ -31,15 +31,28 @@ package controllers
 
         /////////////
 
-        private var _model:MainModel;
-
         public function MainController(value:PrivateConstructor)
         {
         }
 
+        private var _model:MainModel;
+
         public function set model(value:MainModel):void
         {
             _model = value;
+        }
+
+        public function get viewData():Object
+        {
+            if (_model)
+            {
+                var data:Object = _model.viewData;
+                _model.viewData = null;
+                return data;
+            }
+
+            return null;
+
         }
 
         public function changeView(view:ViewInformation, data:Object):void
@@ -61,19 +74,6 @@ package controllers
             BrowserManager.getInstance().setTitle("drinkIt - " + value);
         }
 
-        public function get viewData():Object
-        {
-            if (_model)
-            {
-                var data:Object = _model.viewData;
-                _model.viewData = null;
-                return data;
-            }
-
-            return null;
-
-        }
-
         /**
          * Request and load ingredients.
          *
@@ -82,6 +82,13 @@ package controllers
         {
             var request:JSRequest = new JSRequest();
             ServiceUtil.instance.sendRequest(Services.INGREDIENTS, request, onIngredientsLoad);
+        }
+
+        public function initBrowserEngine():void
+        {
+            BrowserManager.getInstance().addEventListener(BrowserChangeEvent.BROWSER_URL_CHANGE, onURLChange);
+            BrowserManager.getInstance().init("", "drinkIt - " + MainModel.BUILDER_VIEW.title);
+            checkFragments();
         }
 
         private function onIngredientsLoad(response:String):void
@@ -117,13 +124,6 @@ package controllers
                     break;
                 }
             }
-        }
-
-        public function initBrowserEngine():void
-        {
-            BrowserManager.getInstance().addEventListener(BrowserChangeEvent.BROWSER_URL_CHANGE, onURLChange);
-            BrowserManager.getInstance().init("", "drinkIt - " + MainModel.BUILDER_VIEW.title);
-            checkFragments();
         }
 
         private function onURLChange(event:BrowserChangeEvent):void

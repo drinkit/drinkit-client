@@ -8,15 +8,13 @@ package controllers
     import controllers.supportClasses.Services;
 
     import flash.net.URLRequestMethod;
-
     import flash.net.URLVariables;
 
     import mx.controls.Alert;
 
-    import utils.supportClasses.JSRequest;
-
     import utils.ServiceUtil;
     import utils.URLContentTypes;
+    import utils.supportClasses.JSRequest;
 
     public class SignUpController extends UserController
     {

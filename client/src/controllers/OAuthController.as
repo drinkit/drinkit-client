@@ -19,6 +19,8 @@ package controllers
 
         private var _authController:AuthController;
         private var _signUpController:SignUpController;
+        private var _lastLoggedProvider:String;
+        private var _lastLoggedUser:Object;
 
         public function init():void
         {
@@ -31,9 +33,6 @@ package controllers
             _lastLoggedProvider = provider;
             ExternalInterface.call("socialLogin", provider);
         }
-
-        private var _lastLoggedProvider:String;
-        private var _lastLoggedUser:Object;
 
         private function onSocialLogin(result:Object):void
         {

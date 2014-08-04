@@ -8,6 +8,11 @@ package utils.supportClasses
         {
             _method = method;
         }
+        public var queryParams:String;
+        public var bodyParams:String;
+        public var contentType:String;
+        public var expectedStatus:uint = 200;
+        public var expectedErrorStatus:uint = 0;
 
         private var _method:String;
 
@@ -15,11 +20,5 @@ package utils.supportClasses
         {
             return _method;
         }
-
-        public var queryParams:String;
-        public var bodyParams:String;
-        public var contentType:String;
-        public var expectedStatus:uint = 200;
-        public var expectedErrorStatus:uint = 0;
     }
 }

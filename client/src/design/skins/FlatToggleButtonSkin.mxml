@@ -11,100 +11,102 @@
 
 -->
 
-<!--- The default skin class for a Spark ToggleButton component.  
+<!--- The default skin class for a Spark ToggleButton component.
 
-     @see spark.components.ToggleButton
-        
-      @langversion 3.0
-      @playerversion Flash 10
-      @playerversion AIR 1.5
-      @productversion Flex 4
+ @see spark.components.ToggleButton
+
+ @langversion 3.0
+ @playerversion Flash 10
+ @playerversion AIR 1.5
+ @productversion Flex 4
 -->
-<s:SparkButtonSkin xmlns:fx="http://ns.adobe.com/mxml/2009" 
-                   xmlns:s="library://ns.adobe.com/flex/spark" 
+<s:SparkButtonSkin xmlns:fx="http://ns.adobe.com/mxml/2009"
+                   xmlns:s="library://ns.adobe.com/flex/spark"
                    xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
-                   minWidth="21" minHeight="21" 
+                   minWidth="21" minHeight="21"
                    alpha.disabledStates="0.5">
-    
+
     <!-- host component -->
     <fx:Metadata>
-    <![CDATA[ 
-        /** 
+    <![CDATA[
+        /**
          * @copy spark.skins.spark.ApplicationSkin#hostComponent
          */
         [HostComponent("spark.components.ToggleButton")]
-    ]]>
+        ]]>
     </fx:Metadata>
-	<fx:Script>
+    <fx:Script>
 		<![CDATA[
-			import design.DesignModel;
-			
-			import flash.filters.BitmapFilterType;
-		]]>
+        ]]>
 	</fx:Script>
-    
+
     <fx:Script fb:purpose="styling">
         /* Define the skin elements that should not be colorized. 
-           For toggle button, the graphics are colorized but the label is not. */
+         For toggle button, the graphics are colorized but the label is not. */
         static private const exclusions:Array = [];
 
         /**
          * @private
-         */    
-        override public function get colorizeExclusions():Array {return exclusions;}
-        
+         */
+        override public function get colorizeExclusions():Array
+        {
+            return exclusions;
+        }
+
         /**
          * @private
          */
         override protected function initializationComplete():void
         {
             useChromeColor = true;
-			autoIconManagement = false;
-			hostComponent.buttonMode = true;
+            autoIconManagement = false;
+            hostComponent.buttonMode = true;
             super.initializationComplete();
-			
+
         }
-        
+
         /**
          * @private
          */
-        override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number) : void
+        override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
         {
             var cr:Number = getStyle("cornerRadius");
-            
+
             if (cornerRadius != cr)
             {
                 cornerRadius = cr;
-				body.radiusX = cornerRadius;
-				body.radiusY = cornerRadius;
-			}
-            
+                body.radiusX = cornerRadius;
+                body.radiusY = cornerRadius;
+            }
+
             super.updateDisplayList(unscaledWidth, unscaledHeight);
         }
-        
+
         private var cornerRadius:Number = 0;
     </fx:Script>
-    
+
     <!-- states -->
     <s:states>
-        <s:State name="up" />
-        <s:State name="over" stateGroups="overStates" />
-        <s:State name="down" stateGroups="downStates" />
-        <s:State name="disabled" stateGroups="disabledStates" />
-        <s:State name="upAndSelected" stateGroups="selectedStates, selectedUpStates" />
-        <s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
-        <s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
-        <s:State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates" />
+        <s:State name="up"/>
+        <s:State name="over" stateGroups="overStates"/>
+        <s:State name="down" stateGroups="downStates"/>
+        <s:State name="disabled" stateGroups="disabledStates"/>
+        <s:State name="upAndSelected" stateGroups="selectedStates, selectedUpStates"/>
+        <s:State name="overAndSelected" stateGroups="overStates, selectedStates"/>
+        <s:State name="downAndSelected" stateGroups="downStates, selectedStates"/>
+        <s:State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates"/>
     </s:states>
-    
+
     <s:Rect id="body" left="0" right="0" top="0" bottom="0">
-		<s:stroke>
-			<s:SolidColorStroke color.up="0xBBD2C7" color.over="0xBBD2C7" color.down="0xBBD2C7" color.selectedStates="0x78A590" />
-		</s:stroke>
-		<s:fill>
-			<s:SolidColor color.up="0xffffff" color.over="0xf3f3f3" color.down="0xf3f3f3" color.selectedStates="0xcae6da" />
-		</s:fill>
-	</s:Rect>	
-	<s:BitmapImage id="iconDisplay" bottom="0" left="0" top="0" right="0" />
-    
+        <s:stroke>
+            <s:SolidColorStroke color.up="0xBBD2C7" color.over="0xBBD2C7" color.down="0xBBD2C7"
+                                color.selectedStates="0x78A590"/>
+        </s:stroke>
+        <s:fill>
+            <s:SolidColor color.up="0xffffff" color.over="0xf3f3f3" color.down="0xf3f3f3"
+                          color.selectedStates="0xcae6da"/>
+        </s:fill>
+    </s:Rect>
+    <s:BitmapImage id="iconDisplay" bottom="0" left="0" top="0" right="0"/>
+
 </s:SparkButtonSkin>

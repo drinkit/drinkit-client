@@ -4,13 +4,12 @@ package controllers
 
     import flash.events.Event;
     import flash.events.EventDispatcher;
-    import flash.net.URLVariables;
 
     import models.CocktailModel;
 
     import utils.JSONInstantiator;
-    import utils.supportClasses.JSRequest;
     import utils.ServiceUtil;
+    import utils.supportClasses.JSRequest;
 
     /**
      * @eventType controllers.CocktailController.COCKTAIL_DATA_LOADED
@@ -20,13 +19,12 @@ package controllers
     {
         public static const COCKTAIL_DATA_LOADED:String = "cocktailDataLoaded";
 
-        [Bindable]
-        public var model:CocktailModel;
-
         public function CocktailController(key:Number)
         {
             requestCocktailData(key);
         }
+        [Bindable]
+        public var model:CocktailModel;
 
         private function requestCocktailData(key:Number):void
         {

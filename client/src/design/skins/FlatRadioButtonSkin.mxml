@@ -11,46 +11,52 @@
 
 -->
 
-<!--- The default skin class for a Spark RadioButton component.  
+<!--- The default skin class for a Spark RadioButton component.
 
-       @see spark.components.RadioButton
-       @see spark.components.RadioButtonGroup
-        
-      @langversion 3.0
-      @playerversion Flash 10
-      @playerversion AIR 1.5
-      @productversion Flex 4
+ @see spark.components.RadioButton
+ @see spark.components.RadioButtonGroup
+
+ @langversion 3.0
+ @playerversion Flash 10
+ @playerversion AIR 1.5
+ @productversion Flex 4
 -->
 <s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-    xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabledStates="0.5">
+             xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabledStates="0.5">
 
     <fx:Metadata>
-    <![CDATA[ 
-        /** 
+    <![CDATA[
+        /**
          * @copy spark.skins.spark.ApplicationSkin#hostComponent
          */
         [HostComponent("components.IconRadioButton")]
-    ]]>
-    </fx:Metadata> 
-    
+        ]]>
+    </fx:Metadata>
+
     <fx:Script fb:purpose="styling">
         /* Define the skin elements that should not be colorized. 
-           For button, the graphics are colorized but the label is not. */
+         For button, the graphics are colorized but the label is not. */
         static private const exclusions:Array = [];
 
         /**
          * @private
          */
-        override public function get colorizeExclusions():Array {return exclusions;}
-        
+        override public function get colorizeExclusions():Array
+        {
+            return exclusions;
+        }
+
         /* Define the symbol fill items that should be colored by the "symbolColor" style. */
         static private const symbols:Array = [];
-        
+
         /**
          * @private
          */
-        override public function get symbolItems():Array {return symbols};
-        
+        override public function get symbolItems():Array
+        {
+            return symbols
+        };
+
         /**
          * @private
          */
@@ -60,53 +66,55 @@
             super.initializationComplete();
         }
     </fx:Script>
-    
+
     <fx:Script>
         <![CDATA[
-			
-			[Bindable]
-			private var selectedColor:int;
-			
-			[Bindable]
-			private var chromeColor:int;
-        /** 
-         * @private 
-         */     
+        [Bindable]
+        private var selectedColor:int;
+
+        [Bindable]
+        private var chromeColor:int;
+        /**
+         * @private
+         */
         private static const focusExclusions:Array = ["imageDisplay"];
 
         /**
          *  @private
          */
-        override public function get focusSkinExclusions():Array { return focusExclusions;};
-			
-			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
-			{
-				super.updateDisplayList(unscaledWidth, unscaledHeight);
-				
-				selectedColor = hostComponent.getStyle("selectedColor");
-				chromeColor = hostComponent.getStyle("chromeColor");
-			}
+        override public function get focusSkinExclusions():Array
+        {
+            return focusExclusions;
+        };
+
+        override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+        {
+            super.updateDisplayList(unscaledWidth, unscaledHeight);
+
+            selectedColor = hostComponent.getStyle("selectedColor");
+            chromeColor = hostComponent.getStyle("chromeColor");
+        }
         ]]>
     </fx:Script>
-    
+
     <s:states>
-        <s:State name="up" />
-        <s:State name="over" stateGroups="overStates" />
-        <s:State name="down" stateGroups="downStates" />
-        <s:State name="disabled" stateGroups="disabledStates" />
-        <s:State name="upAndSelected" stateGroups="selectedStates" />
-        <s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
-        <s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
-        <s:State name="disabledAndSelected" stateGroups="disabledStates, selectedStates" />
+        <s:State name="up"/>
+        <s:State name="over" stateGroups="overStates"/>
+        <s:State name="down" stateGroups="downStates"/>
+        <s:State name="disabled" stateGroups="disabledStates"/>
+        <s:State name="upAndSelected" stateGroups="selectedStates"/>
+        <s:State name="overAndSelected" stateGroups="overStates, selectedStates"/>
+        <s:State name="downAndSelected" stateGroups="downStates, selectedStates"/>
+        <s:State name="disabledAndSelected" stateGroups="disabledStates, selectedStates"/>
     </s:states>
-    
+
     <s:Group width="100%" height="100%">
-		<s:Rect width="100%" height="100%">
-			<s:fill>
-				<s:SolidColor color="{chromeColor}" color.selectedStates="{selectedColor}"  />
-			</s:fill>
-		</s:Rect>
-		<s:BitmapImage id="imageDisplay" source="{hostComponent.icon}" width="100%" height="100%" />
+        <s:Rect width="100%" height="100%">
+            <s:fill>
+                <s:SolidColor color="{chromeColor}" color.selectedStates="{selectedColor}"/>
+            </s:fill>
+        </s:Rect>
+        <s:BitmapImage id="imageDisplay" source="{hostComponent.icon}" width="100%" height="100%"/>
     </s:Group>
 
 

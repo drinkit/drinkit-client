@@ -6,6 +6,7 @@ package controllers
     public interface IOAuthController
     {
         function init():void;
+
         function login(provider:String):void;
     }
 }

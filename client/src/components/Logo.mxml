@@ -70,7 +70,7 @@
             <s:BitmapFill source="@Embed(source='/../assets/pattern-top.png')" fillMode="repeat"/>
         </s:fill>
     </s:Rect>
-    <s:Image width="240" height="80" left="5" verticalCenter="0" source="@Embed(source='/../assets/logo-main.png')"
+    <s:Image width="240" height="80" left="15" verticalCenter="0" source="@Embed(source='/../assets/logo-main.png')"
              blendMode="normal" buttonMode="true" click="onLogoClick(event)"/>
     <s:HGroup right="10" top="10" gap="10" includeIn="anonymous">
         <s:Label text="Войти" fontSize="14" textDecoration="underline" color="0xffffff" fontFamily="CenturyGothic"
