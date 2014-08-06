@@ -24,10 +24,10 @@
             <id>project.local</id>
             <name>project</name>
             <url>file:${project.basedir}/libs</url>
-            <snapshots>
+            <releases>
                 <enabled>true</enabled>
-                <checksumPolicy>fail</checksumPolicy>
-            </snapshots>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
         </repository>
     </repositories>
 
