@@ -67,7 +67,7 @@
     </fx:Declarations>
     <s:Rect width="100%" height="100%">
         <s:fill>
-            <s:BitmapFill source="@Embed(source='/../assets/pattern-top.png')" fillMode="repeat"/>
+            <s:BitmapFill source="@Embed(source='/../assets/pattern-top.png')" smooth="true" fillMode="repeat"/>
         </s:fill>
     </s:Rect>
     <s:Image width="240" height="80" left="15" verticalCenter="0" source="@Embed(source='/../assets/logo-main.png')"

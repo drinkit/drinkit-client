@@ -50,7 +50,6 @@
             {
                 displayNameInput.text = "";
                 emailInput.text = "";
-                repeatEmailInput.text = "";
                 passwordInput.text = "";
                 repeatPasswordInput.text = "";
             }
@@ -71,10 +70,6 @@
 
     <fx:Declarations>
         <mx:EmailValidator required="true" source="{emailInput}" property="text"/>
-        <utils:MatchValidator required="true" source="{repeatEmailInput}" property="text" matchSource="{emailInput}"
-                              matchProperty="text"
-                              noMatchError="E-mail не совпадает с предыдущим."
-                              triggerEvent="{TextOperationEvent.CHANGE}"/>
         <utils:MatchValidator required="true" source="{repeatPasswordInput}" property="text"
                               matchSource="{passwordInput}" matchProperty="text"
                               noMatchError="Пароли должны совпадать." triggerEvent="{TextOperationEvent.CHANGE}"/>
@@ -84,24 +79,10 @@
         <s:Label left="0" text="Отображаемое имя:" verticalCenter="0"/>
         <s:TextInput id="displayNameInput" right="0" width="200"/>
     </s:Group>
-    <s:Line yFrom="0" yTo="0" width="100%">
-        <s:stroke>
-            <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
-        </s:stroke>
-    </s:Line>
     <s:Group width="100%">
         <s:Label left="0" text="Электронный адрес (e-mail):" verticalCenter="0"/>
         <s:TextInput id="emailInput" right="0" width="200"/>
     </s:Group>
-    <s:Group width="100%">
-        <s:Label left="0" text="Повторите электронный адрес:" verticalCenter="0"/>
-        <s:TextInput id="repeatEmailInput" right="0" width="200"/>
-    </s:Group>
-    <s:Line yFrom="0" yTo="0" width="100%">
-        <s:stroke>
-            <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
-        </s:stroke>
-    </s:Line>
     <s:Group width="100%">
         <s:Label left="0" text="Пароль:" verticalCenter="0"/>
         <s:TextInput id="passwordInput" right="0" width="200" displayAsPassword="true"/>
