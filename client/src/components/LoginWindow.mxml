@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+<components:PopupWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
                xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:components="components.*"
                close="onClose(event)" controlBarVisible="true"
                creationComplete="onCreationComplete(event)" title="Вход">
-    <s:controlBarLayout>
+    <components:controlBarLayout>
         <s:HorizontalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" />
-    </s:controlBarLayout>
+    </components:controlBarLayout>
     <fx:Script>
 		<![CDATA[
         import controllers.AuthController;
@@ -84,7 +85,7 @@
 
         private function onAuthError(event:AuthEvent):void
         {
-            showErrorMessage();
+            showErrorMessage("Неправильный электронный адрес или пароль!");
         }
 
         protected function onBasicLoginClick(event:MouseEvent):void
@@ -106,14 +107,6 @@
             }
         }
 
-        private function showErrorMessage():void {
-            var errorMessage:Label = new Label();
-            errorMessage.text = "Неправильный электронный адрес или пароль!";
-            errorMessage.setStyle("color", 0xff0000);
-            errorMessage.width = contentGroup.width - 10;
-            errorMessage.maxDisplayedLines = 2;
-            controlBarContent = [errorMessage];
-        }
         ]]>
 	</fx:Script>
 
@@ -133,4 +126,4 @@
         </s:HGroup>
         <s:Button width="100%" label="Зарегистрироваться" click="onSignUpButtonClick(event)"/>
     </s:VGroup>
-</s:TitleWindow>
+</components:PopupWindow>

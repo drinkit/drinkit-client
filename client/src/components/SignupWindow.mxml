@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-               xmlns:mx="library://ns.adobe.com/flex/mx"
-               xmlns:utils="utils.*" width="400" title="Регистрация" creationPolicy="all" show="onShow(event)"
-               close="onClose(event)">
+<components:PopupWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+                        xmlns:s="library://ns.adobe.com/flex/spark"
+                        xmlns:components="components.*"
+                        xmlns:mx="library://ns.adobe.com/flex/mx"
+                        xmlns:utils="utils.*" width="400" title="Регистрация" creationPolicy="all" show="onShow(event)"
+                        close="onClose(event)">
 
-    <s:layout>
+    <components:layout>
         <s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center"/>
-    </s:layout>
+    </components:layout>
+
     <fx:Script>
 		<![CDATA[
         import controllers.SignUpController;
-
-        import design.DesignModel;
 
         import mx.core.FlexGlobals;
         import mx.events.CloseEvent;
         import mx.events.FlexEvent;
         import mx.managers.PopUpManager;
+        import mx.validators.Validator;
 
         import spark.components.Application;
         import spark.events.TextOperationEvent;
@@ -26,7 +28,34 @@
 
         protected function onSignUpButtonClick(event:MouseEvent):void
         {
-            _signUpController.registerUser(emailInput.text, passwordInput.text, displayNameInput.text);
+            if (validateForm())
+                _signUpController.registerUser(emailInput.text, passwordInput.text, displayNameInput.text);
+        }
+
+        private function validateInput(inputField:TextInput):Boolean
+        {
+            if (inputField.errorString != "")
+            {
+                showErrorImmediately(inputField);
+                inputField.setFocus();
+                return false;
+            }
+
+            return true;
+        }
+
+        private function validateForm():Boolean
+        {
+            Validator.validateAll(validators);
+
+            var result:Boolean = true;
+
+            result = result && validateInput(displayNameInput);
+            result = result && validateInput(emailInput);
+            result = result && validateInput(passwordInput);
+            result = result && validateInput(repeatPasswordInput);
+
+            return result;
         }
 
         public static function show():void
@@ -69,27 +98,31 @@
 	</fx:Script>
 
     <fx:Declarations>
-        <mx:EmailValidator required="true" source="{emailInput}" property="text"/>
-        <utils:MatchValidator required="true" source="{repeatPasswordInput}" property="text"
-                              matchSource="{passwordInput}" matchProperty="text"
-                              noMatchError="Пароли должны совпадать." triggerEvent="{TextOperationEvent.CHANGE}"/>
+        <fx:Array id="validators">
+            <mx:StringValidator required="true" source="{displayNameInput}" property="text" />
+            <mx:EmailValidator required="true" source="{emailInput}" property="text" />
+            <mx:StringValidator required="true" source="{passwordInput}" property="text" />
+            <utils:MatchValidator required="true" source="{repeatPasswordInput}" property="text"
+                                  matchSource="{passwordInput}" matchProperty="text"
+                                  noMatchError="Пароли должны совпадать." triggerEvent="{TextOperationEvent.CHANGE}" />
+        </fx:Array>
     </fx:Declarations>
 
     <s:Group width="100%">
-        <s:Label left="0" text="Отображаемое имя:" verticalCenter="0"/>
+        <s:Label left="0" text="Отображаемое имя:" verticalCenter="0" styleName="regularText"/>
         <s:TextInput id="displayNameInput" right="0" width="200"/>
     </s:Group>
     <s:Group width="100%">
-        <s:Label left="0" text="Электронный адрес (e-mail):" verticalCenter="0"/>
+        <s:Label left="0" text="Электронный адрес (e-mail):" verticalCenter="0" styleName="regularText"/>
         <s:TextInput id="emailInput" right="0" width="200"/>
     </s:Group>
     <s:Group width="100%">
-        <s:Label left="0" text="Пароль:" verticalCenter="0"/>
+        <s:Label left="0" text="Пароль:" verticalCenter="0" styleName="regularText"/>
         <s:TextInput id="passwordInput" right="0" width="200" displayAsPassword="true"/>
     </s:Group>
     <s:Group width="100%">
-        <s:Label left="0" text="Повторите пароль:" verticalCenter="0"/>
+        <s:Label left="0" text="Повторите пароль:" verticalCenter="0" styleName="regularText"/>
         <s:TextInput id="repeatPasswordInput" right="0" width="200" displayAsPassword="true"/>
     </s:Group>
     <s:Button label="Зарегистрироваться" click="onSignUpButtonClick(event)"/>
-</s:TitleWindow>
+</components:PopupWindow>

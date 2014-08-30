@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+  Created by Crabar on 30.08.2014.
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+    <fx:Script>
+        <![CDATA[
+        import mx.core.UIComponent;
+        import mx.managers.ToolTipManager;
+
+        import spark.components.Label;
+
+        protected function showErrorMessage(text:String):void
+        {
+            var errorMessage:Label = new Label();
+            errorMessage.text = text;
+            errorMessage.setStyle("color", 0xff0000);
+            errorMessage.width = contentGroup.width - 10;
+            errorMessage.maxDisplayedLines = 2;
+            controlBarContent = [errorMessage];
+            controlBarVisible = true;
+        }
+
+        protected function hideErrorMessage():void
+        {
+            controlBarContent = [];
+            controlBarVisible = false;
+        }
+
+        protected function showErrorImmediately(target:UIComponent):void
+        {
+            // we have to callLater this to avoid other fields that send events
+            // that reset the timers and prevent the errorTip ever showing up.
+            target.callLater(showDeferred, [target]);
+        }
+
+        private function showDeferred(target:UIComponent):void
+        {
+            var oldShowDelay:Number = ToolTipManager.showDelay;
+            ToolTipManager.showDelay = 0;
+            if (target.visible)
+            {
+                // try popping the resulting error flag via the hack
+                // courtesy Adobe bug tracking system
+                target.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OUT));
+                target.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
+            }
+            ToolTipManager.showDelay = oldShowDelay;
+        }
+
+        protected function clearErrorImmediately(target:UIComponent):void
+        {
+            target.callLater(clearDeferred, [target]);
+        }
+
+        private function clearDeferred(target:UIComponent):void
+        {
+            var oldDelay:Number = ToolTipManager.hideDelay;
+            ToolTipManager.hideDelay = 0;
+            if (target.visible)
+            {
+                // clear the errorTip
+                try
+                {
+                    target.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
+                    target.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OUT));
+                }
+                catch (e:Error)
+                {
+                    // sometimes things aren't initialized fully when we try that trick
+                }
+            }
+            ToolTipManager.hideDelay = oldDelay;
+        }
+
+        ]]>
+    </fx:Script>
+</s:TitleWindow>

@@ -67,6 +67,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <debug>true</debug>
+                    <localesCompiled>
+                        <locale>ru_RU</locale>
+                    </localesCompiled>
                     <outputFile>client</outputFile>
                     <updateSecuritySandbox>false</updateSecuritySandbox>
                     <storepass></storepass>
