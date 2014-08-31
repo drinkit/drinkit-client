@@ -30,4 +30,5 @@ s|TextInput {
 
 s|TitleWindow {
     skinClass: ClassReference("design.skins.TitleWindowSkin");
+    borderColor: #464077;
 }

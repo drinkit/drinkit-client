@@ -26,7 +26,7 @@
             <url>file:${project.basedir}/libs</url>
             <releases>
                 <enabled>true</enabled>
-                <checksumPolicy>warn</checksumPolicy>
+                <checksumPolicy>ignore</checksumPolicy>
             </releases>
         </repository>
     </repositories>
@@ -67,6 +67,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <debug>true</debug>
+                    <localesCompiled>
+                        <locale>ru_RU</locale>
+                    </localesCompiled>
                     <outputFile>client</outputFile>
                     <updateSecuritySandbox>false</updateSecuritySandbox>
                     <storepass></storepass>

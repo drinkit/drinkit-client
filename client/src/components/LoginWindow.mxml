@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+<components:PopupWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
                xmlns:s="library://ns.adobe.com/flex/spark"
-               close="onClose(event)"
+               xmlns:components="components.*"
+               close="onClose(event)" controlBarVisible="true"
                creationComplete="onCreationComplete(event)" title="Вход">
-    <s:layout>
-        <s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center"/>
-    </s:layout>
-
+    <components:controlBarLayout>
+        <s:HorizontalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" />
+    </components:controlBarLayout>
     <fx:Script>
 		<![CDATA[
         import controllers.AuthController;
@@ -24,6 +24,7 @@
         import mx.managers.PopUpManager;
 
         import spark.components.Application;
+        import spark.components.Label;
 
         private static var _loginWindow:LoginWindow;
 
@@ -80,12 +81,11 @@
         {
             userLogin.text = "";
             userPassword.text = "";
-            errorMessage.includeInLayout = errorMessage.visible = false;
         }
 
         private function onAuthError(event:AuthEvent):void
         {
-            errorMessage.includeInLayout = errorMessage.visible = true;
+            showErrorMessage("Неправильный электронный адрес или пароль!");
         }
 
         protected function onBasicLoginClick(event:MouseEvent):void
@@ -106,23 +106,24 @@
                 _authController.login(userLogin.text, userPassword.text);
             }
         }
+
         ]]>
 	</fx:Script>
 
     <fx:Declarations>
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>
-    <s:TextInput id="userLogin" width="100%" height="36" borderVisible="true" horizontalCenter="0"
-                 prompt="Электронный адрес..." textAlign="left" keyDown="onKeyDown(event)"/>
-    <s:TextInput id="userPassword" width="100%" height="36" displayAsPassword="true"
-                 prompt="Пароль..." keyDown="onKeyDown(event)"/>
-    <s:Button width="100%" label="Войти" click="onBasicLoginClick(event)"/>
-    <s:Label id="errorMessage" text="Неправильный электронный адрес или пароль!" color="0xff0000"
-             includeInLayout="false" visible="false"/>
-    <s:HGroup width="100%">
-        <s:Button width="32" height="32" label="V" name="{SocialNets.VKONTAKTE}" click="onSocialLoginClick(event)"/>
-        <s:Button width="32" height="32" label="F" name="{SocialNets.FACEBOOK}" click="onSocialLoginClick(event)"/>
-        <s:Button width="32" height="32" label="G" name="{SocialNets.GOOGLE}" click="onSocialLoginClick(event)"/>
-    </s:HGroup>
-    <s:Button width="100%" label="Зарегистрироваться" click="onSignUpButtonClick(event)"/>
-</s:TitleWindow>
+    <s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center">
+        <s:TextInput id="userLogin" width="100%" height="36" borderVisible="true" horizontalCenter="0"
+                     prompt="Электронный адрес..." textAlign="left" keyDown="onKeyDown(event)"/>
+        <s:TextInput id="userPassword" width="100%" height="36" displayAsPassword="true"
+                     prompt="Пароль..." keyDown="onKeyDown(event)"/>
+        <s:Button width="100%" label="Войти" click="onBasicLoginClick(event)"/>
+        <s:HGroup width="100%">
+            <s:Button width="32" height="32" label="V" name="{SocialNets.VKONTAKTE}" click="onSocialLoginClick(event)"/>
+            <s:Button width="32" height="32" label="F" name="{SocialNets.FACEBOOK}" click="onSocialLoginClick(event)"/>
+            <!-- <s:Button width="32" height="32" label="G" name="{SocialNets.GOOGLE}" click="onSocialLoginClick(event)"/> -->
+        </s:HGroup>
+        <s:Button width="100%" label="Зарегистрироваться" click="onSignUpButtonClick(event)"/>
+    </s:VGroup>
+</components:PopupWindow>
