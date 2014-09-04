@@ -28,6 +28,10 @@
                 <enabled>true</enabled>
                 <checksumPolicy>ignore</checksumPolicy>
             </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </snapshots>
         </repository>
     </repositories>
 
@@ -58,7 +62,7 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <!--<testSourceDirectory>tests</testSourceDirectory>-->
+        <testSourceDirectory>tests</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.sonatype.flexmojos</groupId>
@@ -110,12 +114,12 @@
     </build>
 
     <dependencies>
-        <!--<dependency>-->
-        <!--<groupId>org.sonatype.flexmojos</groupId>-->
-        <!--<artifactId>flexmojos-unittest-flexunit4</artifactId>-->
-        <!--<version>4.2-beta</version>-->
-        <!--<type>swc</type>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.sonatype.flexmojos</groupId>
+            <artifactId>flexmojos-unittest-flexunit4</artifactId>
+            <version>4.2-beta</version>
+            <type>swc</type>
+        </dependency>
 
         <dependency>
             <groupId>com.adobe.flex.framework</groupId>
