@@ -62,7 +62,7 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>tests</testSourceDirectory>
+        <!--<testSourceDirectory>tests</testSourceDirectory>-->
         <plugins>
             <plugin>
                 <groupId>org.sonatype.flexmojos</groupId>
