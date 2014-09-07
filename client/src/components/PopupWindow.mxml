@@ -3,8 +3,13 @@
   Created by Crabar on 30.08.2014.
 -->
 <s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+    <s:controlBarLayout>
+        <s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="20" />
+    </s:controlBarLayout>
     <fx:Script>
         <![CDATA[
+        import design.DesignModel;
+
         import mx.core.UIComponent;
         import mx.managers.ToolTipManager;
 
@@ -14,9 +19,11 @@
         {
             var errorMessage:Label = new Label();
             errorMessage.text = text;
-            errorMessage.setStyle("color", 0xff0000);
+            errorMessage.styleName = "regularText";
+            errorMessage.setStyle("color", DesignModel.ORANGE_BEACH);
+            errorMessage.setStyle("fontSize", 12);
             errorMessage.width = contentGroup.width - 10;
-            errorMessage.maxDisplayedLines = 2;
+            errorMessage.maxDisplayedLines = 3;
             controlBarContent = [errorMessage];
             controlBarVisible = true;
         }

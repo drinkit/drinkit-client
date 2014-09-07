@@ -10,6 +10,9 @@ package controllers
     import flash.net.URLRequestMethod;
     import flash.net.URLVariables;
 
+    import models.UserInfoModel;
+    import models.events.AuthEvent;
+
     import mx.controls.Alert;
 
     import utils.ServiceUtil;
@@ -52,14 +55,13 @@ package controllers
             var authController:AuthController = new AuthController();
             authController.login(_email, _password);
 
-            if (!_isSilentMode)
-                Alert.show("Вы успешно зарегестрированы!");
+//            if (!_isSilentMode)
+//                Alert.show("Вы успешно зарегистрированы!");
         }
 
         private function onRegisterError(response:String):void
         {
-            SignupWindow.close();
-            Alert.show("Пользователь с таким именем уже существует!");
+            UserInfoModel.instance.dispatchEvent(new AuthEvent(AuthEvent.SIGNUP_ERROR));
         }
     }
 }

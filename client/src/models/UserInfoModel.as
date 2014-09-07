@@ -9,6 +9,7 @@ package models
     [Event(name="authSuccess", type="models.events.AuthEvent")]
     [Event(name="authError", type="models.events.AuthEvent")]
     [Event(name="logout", type="models.events.AuthEvent")]
+    [Event(name="signUpError", type="models.events.AuthEvent")]
     public class UserInfoModel extends EventDispatcher
     {
         private static var _instance:UserInfoModel;
@@ -25,6 +26,7 @@ package models
         {
             ServiceUtil.instance.addEventListener(AuthEvent.AUTH_ERROR, onAuthError);
         }
+
         [Bindable]
         public var displayName:String;
         [Bindable]
@@ -62,7 +64,5 @@ package models
         {
             dispatchEvent(event);
         }
-
-
     }
 }

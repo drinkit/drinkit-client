@@ -3,8 +3,8 @@
                         xmlns:s="library://ns.adobe.com/flex/spark"
                         xmlns:components="components.*"
                         xmlns:mx="library://ns.adobe.com/flex/mx"
-                        xmlns:utils="utils.*" width="400" title="Регистрация" creationPolicy="all" show="onShow(event)"
-                        close="onClose(event)">
+                        xmlns:utils="utils.*" title="Регистрация" creationPolicy="all" show="onShow(event)"
+                        close="onClose(event)" width="200" creationComplete="onCreationComplete(event)">
 
     <components:layout>
         <s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center"/>
@@ -13,6 +13,9 @@
     <fx:Script>
 		<![CDATA[
         import controllers.SignUpController;
+
+        import models.UserInfoModel;
+        import models.events.AuthEvent;
 
         import mx.core.FlexGlobals;
         import mx.events.CloseEvent;
@@ -86,13 +89,30 @@
 
         protected function onShow(event:FlexEvent):void
         {
+            hideErrorMessage();
             clearData();
-            _signUpController = new SignUpController();
         }
 
         protected function onClose(event:CloseEvent):void
         {
             close();
+        }
+
+        private function onGoToLoginClick(event:MouseEvent):void
+        {
+            close();
+            LoginWindow.show();
+        }
+
+        private function onCreationComplete(event:FlexEvent):void
+        {
+            _signUpController = new SignUpController();
+            UserInfoModel.instance.addEventListener(AuthEvent.SIGNUP_ERROR, onSignUpError);
+        }
+
+        private function onSignUpError(event:AuthEvent):void
+        {
+            showErrorMessage("На этот e-mail уже зарегистрирован пользователь");
         }
         ]]>
 	</fx:Script>
@@ -108,21 +128,13 @@
         </fx:Array>
     </fx:Declarations>
 
-    <s:Group width="100%">
-        <s:Label left="0" text="Отображаемое имя:" verticalCenter="0" styleName="regularText"/>
-        <s:TextInput id="displayNameInput" right="0" width="200"/>
-    </s:Group>
-    <s:Group width="100%">
-        <s:Label left="0" text="Электронный адрес (e-mail):" verticalCenter="0" styleName="regularText"/>
-        <s:TextInput id="emailInput" right="0" width="200"/>
-    </s:Group>
-    <s:Group width="100%">
-        <s:Label left="0" text="Пароль:" verticalCenter="0" styleName="regularText"/>
-        <s:TextInput id="passwordInput" right="0" width="200" displayAsPassword="true"/>
-    </s:Group>
-    <s:Group width="100%">
-        <s:Label left="0" text="Повторите пароль:" verticalCenter="0" styleName="regularText"/>
-        <s:TextInput id="repeatPasswordInput" right="0" width="200" displayAsPassword="true"/>
-    </s:Group>
-    <s:Button label="Зарегистрироваться" click="onSignUpButtonClick(event)"/>
+    <s:TextInput id="displayNameInput" width="100%" height="36" prompt="Отображаемое имя..." />
+    <s:TextInput id="emailInput" width="100%" height="36" prompt="Электронный адрес..."/>
+    <s:TextInput id="passwordInput" width="100%" height="36" displayAsPassword="true" prompt="Пароль..." />
+    <s:TextInput id="repeatPasswordInput" width="100%" height="36" displayAsPassword="true" prompt="Повторите пароль..." />
+    <s:Button label="Зарегистрироваться" click="onSignUpButtonClick(event)" width="100%"/>
+    <s:HGroup verticalAlign="middle" width="100%">
+        <s:Label text="Уже есть аккаунт?" styleName="regularText" />
+        <s:Button label="Вход" click="onGoToLoginClick(event)" width="100%" />
+    </s:HGroup>
 </components:PopupWindow>

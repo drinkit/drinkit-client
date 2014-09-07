@@ -26,6 +26,7 @@ s|TextInput {
     fontSize: 14;
     fontFamily: "CenturyGothic";
     paddingLeft: 5;
+    height: 25;
 }
 
 s|TitleWindow {

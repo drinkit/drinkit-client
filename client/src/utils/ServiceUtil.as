@@ -92,7 +92,6 @@ package utils
                 clearDigest();
                 dispatchEvent(new AuthEvent(AuthEvent.AUTH_ERROR));
             }
-
         }
 
         public function onError(errorText:String):void

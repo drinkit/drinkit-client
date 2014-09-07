@@ -221,8 +221,8 @@
                 <!-- layer 3: text -->
                 <!--- @copy spark.components.Panel#titleDisplay -->
                 <s:Label id="titleDisplay" maxDisplayedLines="1"
-                         left="2" right="1" top="1" bottom="0" minHeight="30" color="0xffffff"
-                         verticalAlign="middle" textAlign="center" fontSize="16" fontWeight="bold" fontStyle="italic" fontFamily="Georgia"/>
+                         left="2" right="1" top="1" bottom="0" minHeight="40" color="0xffffff"
+                         verticalAlign="middle" textAlign="center" fontSize="18" fontWeight="bold" fontStyle="italic" fontFamily="Georgia"/>
 
                 <!-- layer 4: moveArea -->
                 <!--- @copy spark.components.TitleWindow#moveArea -->
@@ -230,7 +230,7 @@
 
                 <!--- @copy spark.components.TitleWindow#closeButton -->
                 <s:Button id="closeButton" skinClass="design.skins.TitleWindowCloseButtonSkin"
-                          width="15" height="15" right="7" top="7" buttonMode="true"/>
+                          width="15" height="15" right="7" verticalCenter="0" buttonMode="true"/>
             </s:Group>
 
             <!--
