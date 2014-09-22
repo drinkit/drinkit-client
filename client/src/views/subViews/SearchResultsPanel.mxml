@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+  Created by Crabar on 9/14/14.
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+    <fx:Script>
+        <![CDATA[
+        import models.CocktailBuilderModel;
+
+        import spark.events.IndexChangeEvent;
+        import controllers.MainController;
+        import models.MainModel;
+
+        [Bindable]
+        public var model:CocktailBuilderModel;
+
+        protected function selectCocktailHandler(event:IndexChangeEvent):void
+        {
+            if (recipesList.selectedItem)
+            {
+                var cocktailId:Number = recipesList.selectedItem.id;
+                recipesList.selectedIndex = -1;
+                recipesList.validateProperties();
+                MainController.instance.changeView(MainModel.COCKTAIL_VIEW, cocktailId);
+            }
+        }
+
+        ]]>
+    </fx:Script>
+    <s:Label visible="{model.isNoCocktailsFound}" width="70%" fontSize="24" textAlign="center"
+             styleName="regularText" horizontalCenter="0"
+             maxDisplayedLines="2" paddingLeft="5" paddingRight="5"
+             text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
+             top="20"/>
+    <s:List id="recipesList" left="5" borderVisible="false" width="100%" height="100%"
+            change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
+            itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{model.cocktailsList}"
+            visible="{!model.isNoCocktailsFound}">
+        <s:layout>
+            <s:TileLayout horizontalGap="10" verticalGap="10" paddingBottom="5" paddingLeft="5" paddingRight="5"
+                          paddingTop="5"/>
+        </s:layout>
+    </s:List>
+
+</s:Group>
