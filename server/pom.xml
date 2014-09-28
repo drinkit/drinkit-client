@@ -215,11 +215,11 @@
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
             <properties>
-                <maven.compiler.executable>${env.OPENSHIFT_WILDFLY_DIR}usr/lib/jvm/jdk1.8.0_05/bin/javac</maven.compiler.executable>
+                <maven.compiler.executable>${env.OPENSHIFT_DATA_DIR}java/bin/javac</maven.compiler.executable>
                 <maven.compiler.fork>true</maven.compiler.fork>
             </properties>
             <build>
-                <finalName>wildfly</finalName>
+                <finalName>tomcat7</finalName>
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
@@ -240,10 +240,9 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
+                        <version>2.1.1</version>
                         <configuration>
-                            <failOnMissingWebXml>false</failOnMissingWebXml>
                             <outputDirectory>deployments</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
