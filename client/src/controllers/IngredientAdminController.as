@@ -21,12 +21,14 @@ package controllers
         {
             _model = model;
         }
+
         [Bindable]
         private var _model:Ingredient;
 
         public function createNewIngredient():void
         {
             var createRequest:JSRequest = new JSRequest(URLRequestMethod.POST);
+            _model.id = NaN;
             createRequest.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(_model));
             createRequest.contentType = "application/json;charset=UTF-8";
             ServiceUtil.instance.sendRequest(Services.INGREDIENTS, createRequest, onCreateIngredient);

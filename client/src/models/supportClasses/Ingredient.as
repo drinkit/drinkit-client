@@ -10,6 +10,7 @@ package models.supportClasses
             vol = aVol;
             description = aDescription;
         }
+
         public var id:Number;
         public var name:String;
         public var vol:uint;

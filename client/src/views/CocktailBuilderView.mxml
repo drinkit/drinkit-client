@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
                    xmlns:flextras="spark.flextras.autoCompleteComboBox.*"
-                   xmlns:components="components.*" width="1024"
+                   xmlns:components="components.*" xmlns:subviews="views.subViews.*" width="1024"
                    height="768" creationComplete="creationCompleteHandler(event)"
                    contentCreationComplete="bordercontainer1_contentCreationCompleteHandler(event)"
                    backgroundColor="0xffffff" borderVisible="false">
@@ -86,18 +86,6 @@
         {
             _controller.toggleOption(uint(event.currentTarget.name), event.currentTarget.selected);
             _controller.performSearch();
-        }
-
-
-        protected function selectCocktailHandler(event:IndexChangeEvent):void
-        {
-            if (recipesList.selectedItem)
-            {
-                var cocktailId:Number = recipesList.selectedItem.id;
-                recipesList.selectedIndex = -1;
-                recipesList.validateProperties();
-                MainController.instance.changeView(MainModel.COCKTAIL_VIEW, cocktailId);
-            }
         }
 
         protected function bordercontainer1_contentCreationCompleteHandler(event:FlexEvent):void
@@ -193,22 +181,7 @@
             </s:BorderContainer>
 
         </s:VGroup>
-        <s:Group width="100%" height="100%">
-            <s:Label visible="{_model.isNoCocktailsFound}" width="70%" fontSize="24" textAlign="center"
-                     styleName="regularText" horizontalCenter="0"
-                     maxDisplayedLines="2" paddingLeft="5" paddingRight="5"
-                     text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
-                     top="20"/>
-            <s:List id="recipesList" left="5" borderVisible="false" width="100%" height="100%"
-                    change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
-                    itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{_model.cocktailsList}"
-                    visible="{!_model.isNoCocktailsFound}">
-                <s:layout>
-                    <s:TileLayout horizontalGap="10" verticalGap="10" paddingBottom="5" paddingLeft="5" paddingRight="5"
-                                  paddingTop="5"/>
-                </s:layout>
-            </s:List>
-        </s:Group>
+        <subviews:SearchResultsPanel width="100%" height="100%" model="{_model}" />
     </s:HGroup>
 
 
