@@ -2,7 +2,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
                xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="views.*" xmlns:components="components.*"
                creationPolicy="all"
-               applicationComplete="onApplicationCreationComplete(event)" minWidth="1024" preinitialize="application1_preinitializeHandler(event)">
+               applicationComplete="onApplicationCreationComplete(event)" minWidth="1024" minHeight="600" preinitialize="application1_preinitializeHandler(event)">
     <s:layout>
         <s:BasicLayout/>
     </s:layout>
@@ -42,7 +42,6 @@
 
         protected function onApplicationCreationComplete(event:FlexEvent):void
         {
-
             ToolTipManager.showDelay = 300;
             //
             _model = new MainModel();
