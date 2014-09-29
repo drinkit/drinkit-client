@@ -5,7 +5,7 @@
                applicationComplete="onApplicationCreationComplete(event)"
                preinitialize="application1_preinitializeHandler(event)">
     <s:layout>
-        <s:BasicLayout clipAndEnableScrolling="true"/>
+        <s:BasicLayout />
     </s:layout>
     <fx:Style source="/design/main_style.css"/>
     <fx:Style source="/design/newStyle.css"/>
@@ -88,51 +88,60 @@
 
     <s:Scroller width="100%" height="100%">
         <s:Group>
-            <s:Rect width="100%" height="100%">
-                <s:fill>
+            <!--<s:Rect width="100%" height="100%" minHeight="600" minWidth="1024">-->
+                <!--<s:fill>-->
+                    <!--<s:BitmapFill scaleX="1" scaleY="1" fillMode="repeat" alpha="0.7"-->
+                                  <!--source="@Embed(source='/../assets/new-pattern.png')"/>-->
+                <!--</s:fill>-->
+            <!--</s:Rect>-->
+            <s:BorderContainer width="100%" height="100%" minHeight="560" minWidth="1024" borderVisible="false">
+                <s:backgroundFill>
                     <s:BitmapFill scaleX="1" scaleY="1" fillMode="repeat" alpha="0.7"
                                   source="@Embed(source='/../assets/new-pattern.png')"/>
-                </s:fill>
-            </s:Rect>
-            <s:VGroup gap="0" top="20" bottom="20" width="1024" minWidth="1024" height="100%" minHeight="600" horizontalCenter="0">
-                <components:Logo/>
-                <s:BorderContainer backgroundColor="0xffffff" width="100%" height="100%" borderVisible="false">
-                    <s:layout>
-                        <s:VerticalLayout paddingLeft="20" paddingTop="10" paddingRight="20" gap="5"/>
-                    </s:layout>
-                    <s:TabBar id="menu" height="50" dataProvider="{viewstack1}" focusEnabled="false"
-                              hasFocusableChildren="false"
-                              change="menu_changeHandler(event)" skinClass="design.skins.tabbar.SimpleTabBarSkin"/>
-                    <s:Group width="100%" height="10">
-                        <s:Line top="0" left="0" right="0" yFrom="0" yTo="0">
-                            <s:stroke>
-                                <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
-                            </s:stroke>
-                        </s:Line>
-                        <s:Line top="3" left="0" right="0" yFrom="0" yTo="0">
-                            <s:stroke>
-                                <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
-                            </s:stroke>
-                        </s:Line>
-                    </s:Group>
-                    <mx:ViewStack id="viewstack1" width="100%" height="100%">
-                        <components:ExtNavigationContent width="100%" height="100%" label="Конструктор">
-                            <views:CocktailBuilderView width="100%" height="100%"/>
-                        </components:ExtNavigationContent>
-                        <components:ExtNavigationContent width="100%" height="100%" label="Коктейль" includeInBar="false">
-                            <views:CocktailView width="100%" height="100%"/>
-                        </components:ExtNavigationContent>
-                        <components:ExtNavigationContent width="100%" height="100%" label="Мой бар">
-                            <views:MyBar width="100%" height="100%"/>
-                        </components:ExtNavigationContent>
-                        <components:ExtNavigationContent width="100%" height="100%" label="Админ-панель"
-                                                         includeInBar="{UserInfoModel.instance.role == UserRoles.ADMIN}">
-                            <views:AdminPanelView width="100%" height="100%"/>
-                        </components:ExtNavigationContent>
-                    </mx:ViewStack>
-                </s:BorderContainer>
+                </s:backgroundFill>
+                <s:layout>
+                    <s:VerticalLayout gap="0" horizontalAlign="center" paddingTop="20" paddingBottom="20" />
+                </s:layout>
+                <s:VGroup gap="0" width="1024" height="100%">
+                    <components:Logo />
+                    <s:BorderContainer backgroundColor="0xffffff" width="100%" height="100%" borderVisible="false">
+                        <s:layout>
+                            <s:VerticalLayout paddingLeft="20" paddingTop="10" paddingRight="20" gap="5"/>
+                        </s:layout>
+                        <s:TabBar id="menu" height="50" dataProvider="{viewstack1}" focusEnabled="false"
+                                  hasFocusableChildren="false"
+                                  change="menu_changeHandler(event)" skinClass="design.skins.tabbar.SimpleTabBarSkin"/>
+                        <s:Group width="100%" height="10">
+                            <s:Line top="0" left="0" right="0" yFrom="0" yTo="0">
+                                <s:stroke>
+                                    <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
+                                </s:stroke>
+                            </s:Line>
+                            <s:Line top="3" left="0" right="0" yFrom="0" yTo="0">
+                                <s:stroke>
+                                    <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
+                                </s:stroke>
+                            </s:Line>
+                        </s:Group>
+                        <mx:ViewStack id="viewstack1" width="100%" height="100%">
+                            <components:ExtNavigationContent width="100%" height="100%" label="Конструктор">
+                                <views:CocktailBuilderView width="100%" height="100%"/>
+                            </components:ExtNavigationContent>
+                            <components:ExtNavigationContent width="100%" height="100%" label="Коктейль" includeInBar="false">
+                                <views:CocktailView width="100%" height="100%"/>
+                            </components:ExtNavigationContent>
+                            <components:ExtNavigationContent width="100%" height="100%" label="Мой бар">
+                                <views:MyBar width="100%" height="100%"/>
+                            </components:ExtNavigationContent>
+                            <components:ExtNavigationContent width="100%" height="100%" label="Админ-панель"
+                                                             includeInBar="{UserInfoModel.instance.role == UserRoles.ADMIN}">
+                                <views:AdminPanelView width="100%" height="100%"/>
+                            </components:ExtNavigationContent>
+                        </mx:ViewStack>
+                    </s:BorderContainer>
+                </s:VGroup>
 
-            </s:VGroup>
+            </s:BorderContainer>
         </s:Group>
     </s:Scroller>
 
