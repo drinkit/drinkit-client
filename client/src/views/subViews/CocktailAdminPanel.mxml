@@ -229,12 +229,12 @@
     </s:HGroup>
     <mx:HRule width="100%" strokeWidth="1" strokeColor="0x000000"/>
     <s:HGroup verticalAlign="middle">
-        <s:TextInput id="idInput" change="onIdInputChange(event)"/>
+        <s:TextInput id="idInput" change="onIdInputChange(event)" prompt="id коктейля..."/>
         <s:Button label="Загрузить" click="onLoadButtonClick(event)"/>
     </s:HGroup>
     <s:Group width="100%">
         <s:HGroup left="0" verticalAlign="middle">
-            <s:TextInput id="titleInput" text="@{_model.name}"/>
+            <s:TextInput id="titleInput" text="@{_model.name}" prompt="название коктейля..."/>
             <s:CheckBox id="isDevelopCheckBox" label="в разработке"/>
         </s:HGroup>
         <s:Button label="Загрузить фото" right="0" click="onLoadPhotoButtonClick(event)"/>
@@ -242,7 +242,7 @@
     <s:HGroup width="100%" height="100%">
         <s:VGroup width="100%" height="100%">
             <s:TextArea id="descriptionInput" width="100%" textAlign="left" verticalAlign="top"
-                        text="@{_model.description}"/>
+                        text="@{_model.description}" prompt="описание коктейля..."/>
             <s:HGroup width="100%" height="100%">
                 <s:VGroup width="100%" height="100%">
                     <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="100%" height="26"
