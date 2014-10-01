@@ -4,6 +4,7 @@
 package models
 {
     import flash.display.Bitmap;
+    import flash.events.Event;
     import flash.events.EventDispatcher;
     import flash.geom.Rectangle;
 
@@ -36,7 +37,7 @@ package models
         public var selectedOptions:Array;
 
         [Bindable]
-        public var cocktailTypeId:uint;
+        public var cocktailTypeId:int;
 
         [Bindable]
         public var name:String;
@@ -53,6 +54,18 @@ package models
         private function onIngredientsQueryListChange(event:CollectionEvent):void
         {
             ingredientsList.refresh();
+        }
+
+        public function clear():void
+        {
+            selectedOptions = [];
+            name = "";
+            description = "";
+            selectedIngredientsList = new ArrayList();
+            image = null;
+            imageClipRect = null;
+            cocktailTypeId = -1;
+            dispatchEvent(new Event("modelUpdated"));
         }
     }
 }

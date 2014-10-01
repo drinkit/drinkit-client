@@ -80,6 +80,7 @@ package controllers
 
         public function loadCocktailInfo(id:Number):void
         {
+            _model.clear();
             var request:JSRequest = new JSRequest();
             ServiceUtil.instance.sendRequest(Services.RECIPES + id, request, onCocktailInfoLoad);
         }

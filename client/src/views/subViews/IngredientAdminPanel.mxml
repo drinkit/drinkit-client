@@ -75,9 +75,9 @@
                                        change="onIngrChooseChange(event)"
                                        dataProvider="{IngredientsModel.instance.ingredientsList}"/>
     <mx:HRule width="100%" strokeWidth="1" strokeColor="0x000000"/>
-    <s:TextInput id="ingredientName" text="@{_model.name}" width="300"/>
-    <s:TextInput id="volumeInput" restrict="0-9" text="{_model.vol}" change="onVolumeChange(event)"/>
+    <s:TextInput id="ingredientName" text="@{_model.name}" width="300" prompt="название..."/>
+    <s:TextInput id="volumeInput" restrict="0-9" text="{_model.vol}" change="onVolumeChange(event)" prompt="крепость..." />
     <s:TextArea id="ingredientDescription" width="100%" height="100%" textAlign="left" verticalAlign="top"
-                text="@{_model.description}"/>
+                text="@{_model.description}" prompt="описание..."/>
 
 </s:Group>

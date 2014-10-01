@@ -62,10 +62,7 @@
             var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
             var ingr:Ingredient = Ingredient(item);
 
-            if (String(ingr.name).toLowerCase().search(inputValue) > -1 && (!isIngredientSelected(ingr)))
-                return true;
-
-            return false;
+            return (String(ingr.name).toLowerCase().search(inputValue) > -1 && (!isIngredientSelected(ingr)));
         }
 
         private function creationCompleteHandler(event:FlexEvent):void
@@ -83,8 +80,13 @@
             _controller.updateImageClipRect(cocktailPhoto.photoClipRect);
         }
 
-        private function updatedSelectedType(typeId:uint):void
+        private function updatedSelectedType(typeId:int):void
         {
+            if (typeId == -1) {
+                cocktailTypesList.selectedIndex = -1;
+                return;
+            }
+
             for (var j:int = 0; j < cocktailTypesList.dataProvider.length; j++)
             {
                 var object:Object = cocktailTypesList.dataProvider.getItemAt(j);
@@ -234,7 +236,7 @@
     </s:HGroup>
     <s:Group width="100%">
         <s:HGroup left="0" verticalAlign="middle">
-            <s:TextInput id="titleInput" text="@{_model.name}" prompt="название коктейля..."/>
+            <s:TextInput id="titleInput" text="@{_model.name}" width="300" prompt="название коктейля..."/>
             <s:CheckBox id="isDevelopCheckBox" label="в разработке"/>
         </s:HGroup>
         <s:Button label="Загрузить фото" right="0" click="onLoadPhotoButtonClick(event)"/>
