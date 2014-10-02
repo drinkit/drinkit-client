@@ -15,7 +15,10 @@
         import design.DesignModel;
 
         import models.CocktailModel;
+        import models.MainModel;
         import models.TagsModel;
+        import models.UserInfoModel;
+        import models.UserRoles;
 
         import mx.events.FlexEvent;
 
@@ -61,6 +64,11 @@
                 }
             }
         }
+
+        private function onEditButtonClick(event:MouseEvent):void
+        {
+            MainController.instance.changeView(MainModel.ADMIN_VIEW, _model.id);
+        }
         ]]>
 	</fx:Script>
 
@@ -87,5 +95,6 @@
         </components:GroupBox>
         <s:TileGroup id="tagsContainer" width="100%" horizontalGap="2" paddingLeft="0" paddingRight="0">
         </s:TileGroup>
+        <s:Button visible="{UserInfoModel.instance.role == UserRoles.ADMIN}" label="Редактировать" click="onEditButtonClick(event)" />
     </s:VGroup>
 </s:Group>

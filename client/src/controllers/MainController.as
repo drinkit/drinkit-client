@@ -106,7 +106,6 @@ package controllers
                 return;
             }
 
-
             switch (fragments.panel)
             {
                 case MainModel.BUILDER_VIEW.id:
@@ -122,6 +121,18 @@ package controllers
                         changeView(MainModel.BUILDER_VIEW, null);
 
                     break;
+                }
+                case MainModel.ADMIN_VIEW.id:
+                {
+                    try
+                    {
+                        var id:Number = Number(fragments.id);
+                        changeView(MainModel.ADMIN_VIEW, id);
+                    }
+                    catch (error:Error)
+                    {
+                        changeView(MainModel.ADMIN_VIEW, null);
+                    }
                 }
             }
         }

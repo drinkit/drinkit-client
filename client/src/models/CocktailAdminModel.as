@@ -25,6 +25,7 @@ package models
             selectedIngredientsList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
         }
 
+        [Bindable]
         public var cocktailId:Number;
 
         [Bindable]

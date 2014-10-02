@@ -88,13 +88,7 @@
 
     <s:Scroller width="100%" height="100%">
         <s:Group>
-            <!--<s:Rect width="100%" height="100%" minHeight="600" minWidth="1024">-->
-                <!--<s:fill>-->
-                    <!--<s:BitmapFill scaleX="1" scaleY="1" fillMode="repeat" alpha="0.7"-->
-                                  <!--source="@Embed(source='/../assets/new-pattern.png')"/>-->
-                <!--</s:fill>-->
-            <!--</s:Rect>-->
-            <s:BorderContainer width="100%" height="100%" minHeight="560" minWidth="1024" borderVisible="false">
+            <s:BorderContainer width="100%" height="100%" minHeight="900" minWidth="1024" borderVisible="false">
                 <s:backgroundFill>
                     <s:BitmapFill scaleX="1" scaleY="1" fillMode="repeat" alpha="0.7"
                                   source="@Embed(source='/../assets/new-pattern.png')"/>
