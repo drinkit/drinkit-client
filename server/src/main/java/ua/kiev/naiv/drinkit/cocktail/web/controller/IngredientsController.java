@@ -1,8 +1,10 @@
 package ua.kiev.naiv.drinkit.cocktail.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +38,7 @@ public class IngredientsController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void editIngredient(@RequestBody Ingredient ingredient, @PathVariable int id) {
         Assert.isTrue(id == ingredient.getId(), "id from uri and id from json should be identical");
         DrinkitUtils.logOperation("Updating ingredient", ingredient);
@@ -44,9 +46,14 @@ public class IngredientsController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable int id) {
-        DrinkitUtils.logOperation("Deleting ingredient", id);
-        ingredientService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable int id) {
+        try {
+            DrinkitUtils.logOperation("Deleting ingredient", id);
+            ingredientService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (EmptyResultDataAccessException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
