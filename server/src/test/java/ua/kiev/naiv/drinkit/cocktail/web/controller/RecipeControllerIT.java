@@ -1,6 +1,6 @@
 package ua.kiev.naiv.drinkit.cocktail.web.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +9,10 @@ import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 import ua.kiev.naiv.drinkit.it.AbstractRestMockMvc;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import java.io.InputStream;
+
+import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,7 +46,6 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 
     @Test
     public void testCreateRecipe() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         mockMvc.perform(
                 post(RESOURCE_ENDPOINT)
                         .content(objectMapper.writeValueAsBytes(createNewRecipe()))
@@ -73,6 +72,16 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 
     @Test
     public void testUpdateRecipe() throws Exception {
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("test.jpg");
 
+        insertedRecipe.setImage(IOUtils.toByteArray(inputStream));
+        insertedRecipe.setCocktailIngredients(new Integer[][]{{firstIngredient.getId(), 13}});
+        insertedRecipe.setName("modified");
+        mockMvc.perform(
+                put(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId())
+                        .content(objectMapper.writeValueAsBytes(insertedRecipe))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+        assertEquals(insertedRecipe, recipeService.getRecipeById(insertedRecipe.getId()));
     }
 }

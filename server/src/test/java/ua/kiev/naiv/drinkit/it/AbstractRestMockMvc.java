@@ -1,5 +1,6 @@
 package ua.kiev.naiv.drinkit.it;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 import ua.kiev.naiv.drinkit.cocktail.common.WebContextFilter;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
+import ua.kiev.naiv.drinkit.cocktail.web.model.IngredientMixIn;
 import ua.kiev.naiv.drinkit.springconfig.AppConfig;
 import ua.kiev.naiv.drinkit.springconfig.WebConfig;
 
@@ -35,10 +37,11 @@ public class AbstractRestMockMvc {
     private WebApplicationContext webApplicationContext;
     @Autowired
     private IngredientService ingredientService;
+    protected ObjectMapper objectMapper = new ObjectMapper();
 
     @Before
-    public void initTestData() {
-        System.out.println("main before");
+    public void init() {
+        objectMapper.addMixInAnnotations(Ingredient.class, IngredientMixIn.class);
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
                 .addFilter(new WebContextFilter())
                 .build();

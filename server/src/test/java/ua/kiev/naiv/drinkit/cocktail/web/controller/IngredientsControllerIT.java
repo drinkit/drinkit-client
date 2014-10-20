@@ -1,10 +1,8 @@
 package ua.kiev.naiv.drinkit.cocktail.web.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
-import ua.kiev.naiv.drinkit.cocktail.web.model.IngredientMixIn;
 import ua.kiev.naiv.drinkit.it.AbstractRestMockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -16,8 +14,6 @@ public class IngredientsControllerIT extends AbstractRestMockMvc {
 
     @Test
     public void testGetIngredients() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.addMixInAnnotations(Ingredient.class, IngredientMixIn.class);
         mockMvc.perform(get(RESOURCE_ENDPOINT))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(new Ingredient[]{firstIngredient, secondIngredient})))
