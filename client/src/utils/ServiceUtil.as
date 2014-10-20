@@ -50,7 +50,7 @@ package utils
             var handler:Function = (_waitingRequests[requestID] as WaitingRequest).handler;
             delete _waitingRequests[requestID];
 
-            if (handler)
+            if (handler != null)
                 handler(response);
         }
 
@@ -59,7 +59,7 @@ package utils
             var errorHandler:Function = (_waitingRequests[requestID] as WaitingRequest).errorHandler;
             delete _waitingRequests[requestID];
 
-            if (errorHandler)
+            if (errorHandler != null)
                 errorHandler(response);
         }
 

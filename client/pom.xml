@@ -80,6 +80,10 @@
                     <coverage>true</coverage>
                     <templateURI>folder:${basedir}/html-template</templateURI>
                     <sourceFile>Main.mxml</sourceFile>
+                    <compilerWarnings>
+                        <show-binding-warnings>false</show-binding-warnings>
+                        <warn-no-constructor>false</warn-no-constructor>
+                    </compilerWarnings>
                     <fonts>
                         <managers>
                             <manager>flash.fonts.CFFFontManager</manager>
