@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
-import ua.kiev.naiv.drinkit.it.AbstractRestMockMvc;
 
 import java.io.InputStream;
 
@@ -29,15 +28,6 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
         insertedRecipe = recipeService.save(createNewRecipe());
     }
 
-    private Recipe createNewRecipe() {
-        Recipe recipe = new Recipe();
-        recipe.setCocktailTypeId(1);
-        recipe.setDescription("desc");
-        recipe.setName("Test2");
-        recipe.setOptions(new int[]{1, 2});
-        recipe.setCocktailIngredients(new Integer[][]{{firstIngredient.getId(), 50}, {secondIngredient.getId(), 60}});
-        return recipe;
-    }
 
     @Test
     public void testGetRecipeById() throws Exception {

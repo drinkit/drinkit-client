@@ -1,5 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
+import org.springframework.dao.EmptyResultDataAccessException;
+import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 
 import java.util.Arrays;
@@ -43,7 +45,7 @@ public class TransformUtils {
                 .stream().filter(val -> val.getRating() != null).count());
     }
 
-    public static RecipeEntity transform(Recipe recipe) {
+    public static RecipeEntity transform(Recipe recipe, IngredientRepository ingredientRepository) {
         RecipeEntity recipeEntity = new RecipeEntity();
         recipeEntity.setId(recipe.getId());
         recipeEntity.setName(recipe.getName());
@@ -54,7 +56,10 @@ public class TransformUtils {
             IngredientWithQuantity ingredientWithQuantity = new IngredientWithQuantity();
             ingredientWithQuantity.setQuantity(val[1]);
             ingredientWithQuantity.setRecipeEntity(recipeEntity);
-            ingredientWithQuantity.setIngredient(new Ingredient(val[0]));
+            Ingredient ingredientById = ingredientRepository.findOne(val[0]);
+            if (ingredientById == null) throw new EmptyResultDataAccessException(1);
+            ingredientById.getCocktailIngredients().add(ingredientWithQuantity);
+            ingredientWithQuantity.setIngredient(ingredientById);
             return ingredientWithQuantity;
         }).collect(Collectors.toList()));
         recipeEntity.setImage(recipe.getImage());

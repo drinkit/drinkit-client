@@ -5,6 +5,7 @@ import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeComparatorByCriteri
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeEntity;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeStatistics;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils;
+import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.RecipeRepository;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.RecipesStatisticsRepository;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
@@ -22,14 +23,17 @@ import static ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils.tra
 public class RecipeServiceImpl implements RecipeService {
 
     @Resource
-    RecipeRepository recipeRepository;
+    private RecipeRepository recipeRepository;
 
     @Resource
-    public RecipesStatisticsRepository recipesStatisticsRepository;
+    private RecipesStatisticsRepository recipesStatisticsRepository;
+
+    @Resource
+    private IngredientRepository ingredientRepository;
 
     @Override
     public Recipe save(Recipe recipe) {
-        return transform(recipeRepository.saveAndFlush(transform(recipe)));
+        return transform(recipeRepository.saveAndFlush(transform(recipe, ingredientRepository)));
     }
 
     @Override

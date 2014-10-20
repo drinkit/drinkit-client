@@ -26,9 +26,10 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public Ingredient findIngredientById(int id) {
+    public Ingredient getIngredientById(int id) {
         return ingredientRepository.findOne(id);
     }
+
     @Override
     public int create(Ingredient ingredient) {
         if(ingredient.getId() != null){

@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.it;
+package ua.kiev.naiv.drinkit.cocktail.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -15,6 +15,7 @@ import ua.kiev.naiv.drinkit.cocktail.common.WebContextFilter;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.IngredientMixIn;
+import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 import ua.kiev.naiv.drinkit.springconfig.AppConfig;
 import ua.kiev.naiv.drinkit.springconfig.WebConfig;
 
@@ -55,5 +56,23 @@ public class AbstractRestMockMvc {
         secondIngredient.setName("Second");
         secondIngredient.setVol(40);
         ingredientService.create(secondIngredient);
+    }
+
+    protected Recipe createNewRecipe() {
+        Recipe recipe = new Recipe();
+        recipe.setCocktailTypeId(1);
+        recipe.setDescription("desc");
+        recipe.setName("Test2");
+        recipe.setOptions(new int[]{1, 2});
+        recipe.setCocktailIngredients(new Integer[][]{{firstIngredient.getId(), 50}, {secondIngredient.getId(), 60}});
+        return recipe;
+    }
+
+    protected Ingredient createNewIngredient() {
+        Ingredient ingredient = new Ingredient();
+        ingredient.setDescription("new ingredient");
+        ingredient.setName("new");
+        ingredient.setVol(44);
+        return ingredient;
     }
 }

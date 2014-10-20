@@ -1,6 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @SuppressWarnings("unused")
@@ -12,7 +13,7 @@ public class Ingredient {
     private String name;
     private Integer vol;
     private String description;
-    private Set<IngredientWithQuantity> cocktailIngredients;
+    private Set<IngredientWithQuantity> cocktailIngredients = new HashSet<>();
 
     public Ingredient() {
     }

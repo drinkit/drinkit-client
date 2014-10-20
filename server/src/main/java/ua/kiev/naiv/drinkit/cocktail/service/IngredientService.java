@@ -8,7 +8,7 @@ public interface IngredientService {
 
     List<Ingredient> getIngredients();
 
-    Ingredient findIngredientById(int id);
+    Ingredient getIngredientById(int id);
 
     int create(Ingredient ingredient);
 
