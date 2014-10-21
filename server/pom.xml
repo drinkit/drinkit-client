@@ -14,16 +14,6 @@
     </properties>
 
 
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>http://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <profiles>
         <profile>
@@ -35,10 +25,6 @@
                 folder. -->
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
-            <properties>
-                <maven.compiler.executable>${env.OPENSHIFT_DATA_DIR}java/bin/javac</maven.compiler.executable>
-                <maven.compiler.fork>true</maven.compiler.fork>
-            </properties>
             <build>
                 <finalName>tomcat7</finalName>
                 <plugins>
