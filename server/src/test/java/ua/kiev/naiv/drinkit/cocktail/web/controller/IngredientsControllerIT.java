@@ -1,16 +1,17 @@
 package ua.kiev.naiv.drinkit.cocktail.web.controller;
 
-import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import java.util.List;
+
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class IngredientsControllerIT extends AbstractRestMockMvc {
 
@@ -21,12 +22,11 @@ public class IngredientsControllerIT extends AbstractRestMockMvc {
 
     @Test
     public void testGetIngredients() throws Exception {
+        List<Ingredient> ingredients = ingredientService.getIngredients();
+        assertTrue(ingredients.size() > 0);
         mockMvc.perform(get(RESOURCE_ENDPOINT))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(new Ingredient[]{firstIngredient, secondIngredient})))
-                .andExpect(jsonPath("$[0].name").value("First"))
-                .andExpect(jsonPath("$", Matchers.hasSize(2)));
-
+                .andExpect(content().json(objectMapper.writeValueAsString(ingredients)));
     }
 
     @Test

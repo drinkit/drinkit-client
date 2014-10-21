@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import ua.kiev.naiv.drinkit.cocktail.common.DetailedUser;
 import ua.kiev.naiv.drinkit.cocktail.common.Role;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.User;
@@ -17,7 +16,6 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Component
-@Transactional
 public class BasicUserDetailsService implements UserDetailsService {
 
     @Resource
