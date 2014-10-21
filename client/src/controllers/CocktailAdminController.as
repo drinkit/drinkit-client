@@ -141,6 +141,7 @@ package controllers {
                 return;
 
             _lastCocktailModel = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
+            _model.cocktailId = _lastCocktailModel.id;
             _model.name = _lastCocktailModel.name;
             _model.description = _lastCocktailModel.description;
             _model.cocktailTypeId = _lastCocktailModel.cocktailTypeId;
