@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
@@ -11,6 +12,7 @@ import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 import java.util.List;
 
 @Service
+@Transactional
 public class IngredientServiceImpl implements IngredientService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IngredientService.class);

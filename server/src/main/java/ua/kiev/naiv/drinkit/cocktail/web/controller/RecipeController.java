@@ -9,7 +9,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import ua.kiev.naiv.drinkit.cocktail.common.DrinkitUtils;
@@ -34,7 +33,6 @@ public class RecipeController {
 
     @RequestMapping(value = "/{recipeId}", method = RequestMethod.GET)
     @ResponseBody
-    @Transactional(readOnly = true)
     public Recipe getRecipeById(@PathVariable int recipeId) {
         OptionalInt userId = DrinkitUtils.getCurrentUserId();
         return userId.isPresent() ? recipeService.getRecipeByIdAndIncrementViewsCount(recipeId, userId.getAsInt()) :
@@ -42,7 +40,6 @@ public class RecipeController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @Transactional
     public HttpEntity<Recipe> createRecipe(@RequestBody Recipe recipe) {
         Assert.isNull(recipe.getId());
         DrinkitUtils.logOperation("Creating recipe", recipe);
@@ -52,7 +49,6 @@ public class RecipeController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    @Transactional(readOnly = true)
     @JsonMixIn(value = RecipeSearchResultMixin.class, targetClass = Recipe.class)
     public List<Recipe> searchRecipes(@RequestParam(value = "criteria", required = false) String json) {
         List<Recipe> recipes;

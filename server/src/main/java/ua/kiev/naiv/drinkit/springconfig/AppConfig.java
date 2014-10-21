@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
 import java.util.Properties;
@@ -16,6 +17,7 @@ import java.util.Properties;
 @EnableJpaRepositories("ua.kiev.naiv.drinkit.cocktail.persistence.repository")
 @ComponentScan("ua.kiev.naiv.drinkit.cocktail.service")
 @PropertySource("classpath:application.properties")
+@EnableTransactionManagement
 public class AppConfig {
 
     @Resource

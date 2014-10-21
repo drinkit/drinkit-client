@@ -1,6 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeComparatorByCriteria;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeEntity;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeStatistics;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 import static ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils.transform;
 
 @Service
+@Transactional
 public class RecipeServiceImpl implements RecipeService {
 
     @Resource
