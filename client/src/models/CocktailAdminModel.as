@@ -57,13 +57,15 @@ package models
             ingredientsList.refresh();
         }
 
+        private var _emptyBitmap:Bitmap = new Bitmap();
+
         public function clear():void
         {
             selectedOptions = [];
             name = "";
             description = "";
             selectedIngredientsList = new ArrayList();
-            image = null;
+            image = _emptyBitmap
             imageClipRect = null;
             cocktailTypeId = -1;
             dispatchEvent(new Event("modelUpdated"));

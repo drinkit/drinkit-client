@@ -204,6 +204,8 @@ package controllers {
         }
 
         private function onCocktailSave(response:String):void {
+            _lastCocktailModel = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
+            _model.cocktailId = _lastCocktailModel.id;
             Alert.show("Коктейль успешно сохранен.");
         }
 
