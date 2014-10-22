@@ -3,19 +3,16 @@ package ua.kiev.naiv.drinkit.cocktail.web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import ua.kiev.naiv.drinkit.cocktail.common.DrinkitUtils;
 import ua.kiev.naiv.drinkit.cocktail.common.JsonMixIn;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.IngredientWithQuantity;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.IngredientMixIn;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("ingredients")
@@ -39,7 +36,7 @@ public class IngredientsController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT, reason = "Updated")
     public void editIngredient(@RequestBody Ingredient ingredient, @PathVariable int id) {
         Assert.isTrue(id == ingredient.getId(), "id from uri and id from json should be identical");
         DrinkitUtils.logOperation("Updating ingredient", ingredient);
@@ -47,20 +44,10 @@ public class IngredientsController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@PathVariable int id) {
-        Ingredient ingredient = ingredientService.getIngredientById(id);
-        if (ingredient == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Set<IngredientWithQuantity> cocktailIngredients = ingredient.getCocktailIngredients();
-        if (cocktailIngredients.isEmpty()) {
-            DrinkitUtils.logOperation("Deleting ingredient", id);
-            ingredientService.delete(id);
-            return ResponseEntity.noContent().build();
-        }
-
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    @ResponseStatus(value = HttpStatus.NO_CONTENT, reason = "Deleted")
+    public void delete(@PathVariable int id) {
+        DrinkitUtils.logOperation("Deleting ingredient", id);
+        ingredientService.delete(id);
     }
 
 }

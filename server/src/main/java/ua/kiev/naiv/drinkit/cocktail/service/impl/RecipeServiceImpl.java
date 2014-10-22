@@ -51,6 +51,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    @Transactional(readOnly = true)//todo figure out: readOnly = true or without @Transactional
     public List<Recipe> findByCriteria(Criteria criteria) {
         return recipeRepository.findAll(SearchSpecification.byCriteria(criteria)).stream()
                 .sorted(new RecipeComparatorByCriteria(criteria))
