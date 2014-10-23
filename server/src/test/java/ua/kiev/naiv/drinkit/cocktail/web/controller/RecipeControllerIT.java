@@ -38,11 +38,13 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
         mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipe)));
+        assertEquals(recipeService.getRecipeById(insertedRecipe.getId()).getViews(), views);
         SecurityContextHolder.createEmptyContext();
         SecurityContextHolder.getContext().setAuthentication(new TestingAuthenticationToken(null, "", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))));
         mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.views").value(++views));
+                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipe)));
+        assertEquals(recipeService.getRecipeById(insertedRecipe.getId()).getViews(), ++views);
 
     }
 

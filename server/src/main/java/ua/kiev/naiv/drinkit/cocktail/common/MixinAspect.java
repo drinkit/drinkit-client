@@ -9,6 +9,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import ua.kiev.naiv.drinkit.cocktail.common.aspect.annotation.JsonMixIn;
 
 @Component
 @Aspect
