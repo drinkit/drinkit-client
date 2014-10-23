@@ -5,15 +5,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 
 import java.io.InputStream;
+import java.util.Collections;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class RecipeControllerIT extends AbstractRestMockMvc {
 
@@ -30,7 +33,16 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 
 
     @Test
-    public void testGetRecipeById() throws Exception {
+    public void testGetRecipeByIdWithStats() throws Exception {
+        int views = insertedRecipe.getViews();
+        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipe)));
+        SecurityContextHolder.createEmptyContext();
+        SecurityContextHolder.getContext().setAuthentication(new TestingAuthenticationToken(null, "", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))));
+        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.views").value(++views));
 
     }
 
