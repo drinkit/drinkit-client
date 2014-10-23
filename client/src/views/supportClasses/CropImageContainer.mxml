@@ -21,8 +21,11 @@
         [Bindable]
         public function set source(value:Object):void
         {
-            _source = value;
-            determinateClipRectSize(_source.width, _source.height, width, height);
+            if (value) {
+                _source = value;
+                determinateClipRectSize(_source.width, _source.height, width, height);
+                dispatchEvent(new Event("clipRectChanged"));
+            }
         }
 
         private function determinateImageScaleFactor(width:Number, height:Number):void
@@ -61,6 +64,8 @@
                 clipRect.width = scaledSourceWidth;
                 clipRect.height = scaledSourceWidth / 0.75;
             }
+
+            clipRect.validateNow();
         }
 
         private var _scaledSourceRect:Rectangle;
@@ -129,7 +134,7 @@
         </s:fill>
     </s:Rect>
     <s:BitmapImage id="image" width="100%" height="100%" source="{source}" fillMode="scale" scaleMode="letterbox"
-                   smoothingQuality="high" smooth="true"/>
+                   smoothingQuality="high" smooth="true" />
     <s:BorderContainer id="clipRect" width="75" height="100" backgroundColor="0xffffff" backgroundAlpha="0.1"
                        borderColor="0x000000" borderAlpha="0.8" mouseDown="onBox1MouseDown(event)"/>
 
