@@ -20,7 +20,6 @@ import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeSearchResultMixin;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.OptionalInt;
 
 @Controller
 @RequestMapping(value = "recipes")
@@ -34,8 +33,8 @@ public class RecipeController {
     @RequestMapping(value = "/{recipeId}", method = RequestMethod.GET)
     @ResponseBody
     public Recipe getRecipeById(@PathVariable int recipeId) {
-        OptionalInt userId = DrinkitUtils.getCurrentUserId();
-        return userId.isPresent() ? recipeService.getRecipeByIdAndIncrementViewsCount(recipeId, userId.getAsInt()) :
+        Integer userId = DrinkitUtils.getCurrentUserId();
+        return userId != null ? recipeService.getRecipeByIdAndIncrementViewsCount(recipeId, userId) :
                 recipeService.getRecipeById(recipeId);
     }
 
