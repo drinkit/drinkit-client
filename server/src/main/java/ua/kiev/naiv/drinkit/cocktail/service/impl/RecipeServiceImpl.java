@@ -2,7 +2,7 @@ package ua.kiev.naiv.drinkit.cocktail.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.kiev.naiv.drinkit.cocktail.common.aspect.annotation.EnableStats;
+import ua.kiev.naiv.drinkit.cocktail.common.aspect.EnableStats;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeComparatorByCriteria;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import ua.kiev.naiv.drinkit.cocktail.common.DrinkitUtils;
-import ua.kiev.naiv.drinkit.cocktail.common.aspect.annotation.JsonMixIn;
+import ua.kiev.naiv.drinkit.cocktail.common.aspect.JsonMixIn;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;

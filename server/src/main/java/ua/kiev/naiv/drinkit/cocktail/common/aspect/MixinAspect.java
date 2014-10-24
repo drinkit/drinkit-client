@@ -1,5 +1,5 @@
 
-package ua.kiev.naiv.drinkit.cocktail.common;
+package ua.kiev.naiv.drinkit.cocktail.common.aspect;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -9,7 +9,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import ua.kiev.naiv.drinkit.cocktail.common.aspect.annotation.JsonMixIn;
+import ua.kiev.naiv.drinkit.cocktail.common.WebContext;
 
 @Component
 @Aspect

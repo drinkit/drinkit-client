@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.common.aspect.annotation;
+package ua.kiev.naiv.drinkit.cocktail.common.aspect;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
