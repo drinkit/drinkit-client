@@ -118,13 +118,14 @@
             </s:Rect>
         </s:Group>
 
+
         <s:VGroup width="100%" height="100%">
             <s:Label id="cocktailNameLabel" width="100%" textAlign="center" fontFamily="Georgia"
                      color="{DesignModel.VIOLET}" fontWeight="bold" fontStyle="italic" fontSize="18"/>
             <mx:Spacer width="100%" height="0"/>
             <s:List id="ingredientsList" mouseEnabled="false" width="100%" height="100%" fontFamily="CenturyGothic"
                     color="#1c1c1c" fontSize="14" itemRendererFunction="cocktailStructureItemRendererFunction"
-                    labelField="name" borderVisible="false">
+                    labelField="name" borderVisible="false" verticalScrollPolicy="off">
                 <s:layout>
                     <components:FlowLayout clipAndEnableScrolling="false"/>
                 </s:layout>
