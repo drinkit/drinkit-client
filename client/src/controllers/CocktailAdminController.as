@@ -3,6 +3,7 @@
  */
 package controllers {
 
+    import com.adobe.images.JPGEncoder;
     import com.adobe.images.PNGEncoder;
 
     import controllers.supportClasses.Services;
@@ -204,8 +205,11 @@ package controllers {
         }
 
         private function onCocktailSave(response:String):void {
-            _lastCocktailModel = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
-            _model.cocktailId = _lastCocktailModel.id;
+            if (response != "") {
+                _lastCocktailModel = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
+                _model.cocktailId = _lastCocktailModel.id;
+            }
+
             Alert.show("Коктейль успешно сохранен.");
         }
 
@@ -230,8 +234,9 @@ package controllers {
                                       CocktailModel.SMALL_IMAGE_HEIGHT);
 
             var base64encoder:Base64Encoder = new Base64Encoder();
-            var bigImageBytes:ByteArray = PNGEncoder.encode(bigImageBD);
-            var smallImageBytes:ByteArray = PNGEncoder.encode(smallImageBD);
+
+            var bigImageBytes:ByteArray = new JPGEncoder(95).encode(bigImageBD);
+            var smallImageBytes:ByteArray = new JPGEncoder(95).encode(smallImageBD);
 
             base64encoder.insertNewLines = false;
             base64encoder.encodeBytes(smallImageBytes);
