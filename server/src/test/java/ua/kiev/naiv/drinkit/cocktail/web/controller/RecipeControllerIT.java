@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeSearchResultMixin;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -87,5 +88,17 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
         assertEquals(insertedRecipe, recipeService.getRecipeById(insertedRecipe.getId()));
+    }
+
+    @Test
+    public void testFindRecipesByNamePart() throws Exception {
+        objectMapper.addMixInAnnotations(Recipe.class, RecipeSearchResultMixin.class);
+        mockMvc.perform(get(RESOURCE_ENDPOINT).param("namePart", "Integration Tests"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(Collections.singletonList(insertedRecipe))));
+
+        mockMvc.perform(get(RESOURCE_ENDPOINT).param("namePart", "%%%%%%%not exist$$$$$$$"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").doesNotExist());
     }
 }

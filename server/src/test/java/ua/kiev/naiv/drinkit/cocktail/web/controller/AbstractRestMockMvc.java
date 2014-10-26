@@ -62,7 +62,7 @@ public class AbstractRestMockMvc {
         Recipe recipe = new Recipe();
         recipe.setCocktailTypeId(1);
         recipe.setDescription("desc");
-        recipe.setName("Test2");
+        recipe.setName("Recipe for integration tests");
         recipe.setOptions(new int[]{1, 2});
         recipe.setCocktailIngredients(new Integer[][]{{firstIngredient.getId(), 50}, {secondIngredient.getId(), 60}});
         return recipe;
