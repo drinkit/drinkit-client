@@ -12,7 +12,7 @@ package models
      * @eventType controllers.CocktailController.COCKTAIL_DATA_LOADED
      */
     [Event(name="selectedIngredientsChanged", type="flash.events.Event")]
-    public class CocktailBuilderModel extends EventDispatcher
+    public class CocktailBuilderModel extends SearchResultsModel
     {
         public static const SELECTED_INGREDIENTS_CHANGED:String = "selectedIngredientsChanged";
 
@@ -26,12 +26,6 @@ package models
         }
 
         [Bindable]
-        public var isNoCocktailsFound:Boolean;
-
-        [Bindable]
-        public var cocktailsList:ArrayCollection;
-
-        [Bindable]
         public var ingredientsList:ArrayCollection = IngredientsModel.instance.ingredientsList;
 
         [Bindable]
@@ -41,7 +35,7 @@ package models
         public var selectedCocktailTypes:Array = [];
         public var selectedOptions:Array = [];
 
-        public function isIngredientSelected(id:Number):Boolean
+        override public function isIngredientSelected(id:Number):Boolean
         {
             for (var i:uint = 0; i < selectedIngredients.length; i++)
             {

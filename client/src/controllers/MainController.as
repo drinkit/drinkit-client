@@ -4,6 +4,7 @@ package controllers
 
     import models.IngredientsModel;
     import models.MainModel;
+    import models.events.ViewEvent;
     import models.supportClasses.Ingredient;
     import models.supportClasses.ViewInformation;
 
@@ -42,23 +43,9 @@ package controllers
             _model = value;
         }
 
-        public function get viewData():Object
-        {
-            if (_model)
-            {
-                var data:Object = _model.viewData;
-                _model.viewData = null;
-                return data;
-            }
-
-            return null;
-
-        }
-
-        public function changeView(view:ViewInformation, data:Object):void
+        public function changeView(view:ViewInformation, data:Object, changedByUser:Boolean = false):void
         {
             _model.currentView = view;
-            _model.viewData = data;
 
             var fragments:String = "panel=" + view.id;
 
@@ -67,6 +54,9 @@ package controllers
 
             BrowserManager.getInstance().setFragment(fragments);
             setTitle(view.title);
+
+            if (!changedByUser)
+                _model.dispatchEvent(new ViewEvent(ViewEvent.VIEW_CHANGED, view.id, data));
         }
 
         public function setTitle(value:String):void

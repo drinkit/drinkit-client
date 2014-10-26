@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-                   xmlns:flextras="spark.flextras.autoCompleteComboBox.*"
+<views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+                   xmlns:flextras="spark.flextras.autoCompleteComboBox.*" xmlns:views="views.*"
                    xmlns:components="components.*" xmlns:subviews="views.subViews.*" width="1024"
                    height="768" creationComplete="creationCompleteHandler(event)"
                    contentCreationComplete="bordercontainer1_contentCreationCompleteHandler(event)"
                    backgroundColor="0xffffff" borderVisible="false">
-    <s:layout>
+    <views:layout>
         <s:VerticalLayout/>
-    </s:layout>
+    </views:layout>
     <fx:Script>
 		<![CDATA[
         import controllers.CocktailBuilderController;
@@ -16,7 +16,6 @@
         import design.DesignModel;
 
         import models.CocktailBuilderModel;
-        import models.MainModel;
         import models.supportClasses.CocktailTypes;
         import models.supportClasses.Ingredient;
         import models.supportClasses.OptionParameters;
@@ -41,7 +40,7 @@
             return _controller;
         }
 
-        protected function combobox1_changeHandler(event:IndexChangeEvent):void
+        protected function onIngredientsChanged(event:IndexChangeEvent):void
         {
             if (event.newIndex >= 0)
                 _controller.addIngredientToQuery(ingrChoose.selectedItem);
@@ -160,7 +159,7 @@
                 <s:Spacer width="100%" height="5"/>
                 <s:VGroup width="100%" height="100%">
                     <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="100%" height="26"
-                                                       change="combobox1_changeHandler(event)"
+                                                       change="onIngredientsChanged(event)"
                                                        dataProvider="{_model.ingredientsList}"
                                                        filterFunction="filterCBList" styleName="regularText"
                                                        itemRenderer="components.renderers.AutoCompleteRenderer"
@@ -185,4 +184,4 @@
     </s:HGroup>
 
 
-</s:BorderContainer>
+</views:ViewBase>

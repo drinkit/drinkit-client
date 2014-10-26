@@ -15,8 +15,10 @@
 		<![CDATA[
         import controllers.AuthController;
         import controllers.MainController;
+        import controllers.SearchController;
 
         import models.MainModel;
+        import models.SearchResultsModel;
         import models.UserInfoModel;
         import models.events.AuthEvent;
 
@@ -60,6 +62,14 @@
         {
             _authController.logout();
         }
+
+        private function onSearchEnter(event:FlexEvent):void
+        {
+            var searchModel:SearchResultsModel = new SearchResultsModel();
+            var searchController:SearchController = new SearchController(searchModel);
+            searchController.findCocktail(event.currentTarget.text);
+        }
+
         ]]>
 	</fx:Script>
     <fx:Declarations>
@@ -94,5 +104,5 @@
         <s:Label text="Выйти" fontSize="14" textDecoration="underline" color="0xffffff" fontFamily="CenturyGothic"
                  buttonMode="true" click="onLogoutClick(event)"/>
     </s:HGroup>
-
+    <s:TextInput right="10" bottom="10" width="200" enter="onSearchEnter(event)" skinClass="design.skins.RoundTextInputSkin" />
 </s:Group>

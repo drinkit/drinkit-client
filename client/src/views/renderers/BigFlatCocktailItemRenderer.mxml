@@ -19,6 +19,7 @@
         import models.CocktailBuilderModel;
         import models.CocktailModel;
         import models.IngredientsModel;
+        import models.SearchResultsModel;
         import models.TagsModel;
         import models.supportClasses.CocktailMini;
         import models.supportClasses.Ingredient;
@@ -30,7 +31,7 @@
 
         [Bindable]
         private var _cocktail:CocktailMini;
-        private var _model:CocktailBuilderModel;
+        private var _model:SearchResultsModel;
         private var _cornerRadius:Number = 5;
 
         override public function set data(value:Object):void

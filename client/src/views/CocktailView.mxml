@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-         xmlns:components="components.*" add="group1_addHandler(event)">
-    <s:layout>
+<views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:components="components.*" xmlns:views="views.*" viewChanged="onViewChanged(event)" borderVisible="false">
+    <views:layout>
         <s:HorizontalLayout gap="5" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5"/>
-    </s:layout>
+    </views:layout>
 
     <fx:Style source="/design/newStyle.css"/>
 
@@ -19,6 +19,7 @@
         import models.TagsModel;
         import models.UserInfoModel;
         import models.UserRoles;
+        import models.events.ViewEvent;
 
         import mx.events.FlexEvent;
 
@@ -29,17 +30,6 @@
 
         [Bindable]
         private var _controller:CocktailController;
-
-        protected function group1_showHandler(event:FlexEvent):void
-        {
-            _controller = new CocktailController(Number(MainController.instance.viewData));
-            _controller.addEventListener(CocktailController.COCKTAIL_DATA_LOADED, onDataLoaded);
-        }
-
-        protected function group1_addHandler(event:FlexEvent):void
-        {
-            NavigatorContent(owner).addEventListener(FlexEvent.SHOW, group1_showHandler);
-        }
 
         private function onDataLoaded(event:Event):void
         {
@@ -69,6 +59,12 @@
         {
             MainController.instance.changeView(MainModel.ADMIN_VIEW, _model.id);
         }
+
+        private function onViewChanged(event:ViewEvent):void
+        {
+            _controller = new CocktailController(Number(event.viewData));
+            _controller.addEventListener(CocktailController.COCKTAIL_DATA_LOADED, onDataLoaded);
+        }
         ]]>
 	</fx:Script>
 
@@ -97,4 +93,4 @@
         </s:TileGroup>
         <s:Button visible="{UserInfoModel.instance.role == UserRoles.ADMIN}" label="Редактировать" click="onEditButtonClick(event)" />
     </s:VGroup>
-</s:Group>
+</views:ViewBase>

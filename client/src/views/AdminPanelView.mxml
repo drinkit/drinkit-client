@@ -2,32 +2,27 @@
 <!--
   Created by Crabar on 29.06.2014.
 -->
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-         xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:subviews="views.subViews.*" add="onAdd(event)">
-    <s:layout>
+<views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="views.*" xmlns:subviews="views.subViews.*"
+         viewChanged="onViewChanged(event)" borderVisible="false">
+    <views:layout>
         <s:VerticalLayout/>
-    </s:layout>
+    </views:layout>
     <fx:Script>
         <![CDATA[
-        import controllers.MainController;
+        import models.events.ViewEvent;
 
-        import mx.events.FlexEvent;
 
-        private function onAdd(event:FlexEvent):void
+        private function onViewChanged(event:ViewEvent):void
         {
-            NavigatorContent(owner).addEventListener(FlexEvent.SHOW, onShow);
-        }
+            var cocktailId:Number = Number(event.viewData);
 
-        private function onShow(event:FlexEvent):void
-        {
-            var cocktailId:Number = Number(MainController.instance.viewData);
-
-            if (cocktailId && !isNaN(cocktailId)) {
+            if (cocktailId && !isNaN(cocktailId))
+            {
                 adminBar.selectedIndex = 0;
                 cocktailAdminPanel.loadCocktail(cocktailId);
             }
         }
-
 
         ]]>
     </fx:Script>
@@ -41,4 +36,4 @@
         </s:NavigatorContent>
     </mx:ViewStack>
 
-</s:Group>
+</views:ViewBase>
