@@ -7,8 +7,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.OptionalInt;
-
 public class DrinkitUtils {
 
     public static final Logger LOGGER = LoggerFactory.getLogger("CommonLogging");
@@ -21,19 +19,23 @@ public class DrinkitUtils {
         LOGGER.info(info);
     }
 
-    public static OptionalInt getCurrentUserId() {
-        Integer userId = null;
+    /**
+     * Retrieve userId from security context
+     *
+     * @return '0' for anonymous, 'userId' if user authorized and is not admin, otherwise return null;
+     */
+    public static Integer getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             if (authentication.getAuthorities().size() != 0 &&
                     authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))) {
-                userId = 0;
+                return  0;
             } else if (!((UserDetails) authentication.getPrincipal()).getAuthorities()
                     .contains(new SimpleGrantedAuthority(Role.ROLE_ADMIN.name()))) {
-                userId = ((DetailedUser) authentication.getPrincipal()).getUserId();
+                return ((DetailedUser) authentication.getPrincipal()).getUserId();
             }
         }
-        return userId == null ? OptionalInt.empty() : OptionalInt.of(userId);
+        return null;
     }
 
 }

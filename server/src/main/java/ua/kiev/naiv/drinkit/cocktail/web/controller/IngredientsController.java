@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import ua.kiev.naiv.drinkit.cocktail.common.DrinkitUtils;
-import ua.kiev.naiv.drinkit.cocktail.common.JsonMixIn;
+import ua.kiev.naiv.drinkit.cocktail.common.aspect.JsonMixIn;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.IngredientMixIn;
@@ -36,7 +36,7 @@ public class IngredientsController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT, reason = "Updated")
     public void editIngredient(@RequestBody Ingredient ingredient, @PathVariable int id) {
         Assert.isTrue(id == ingredient.getId(), "id from uri and id from json should be identical");
         DrinkitUtils.logOperation("Updating ingredient", ingredient);
@@ -44,6 +44,7 @@ public class IngredientsController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT, reason = "Deleted")
     public void delete(@PathVariable int id) {
         DrinkitUtils.logOperation("Deleting ingredient", id);
         ingredientService.delete(id);

@@ -118,7 +118,7 @@ public class Recipe {
                 ", cocktailTypeId=" + cocktailTypeId +
                 ", options=" + Arrays.toString(options) +
                 ", image=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(image, 0, 5)) + "...") +
-                ", thumbnail=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(thumbnail, 0, 5)) + "...") +
+                ", thumbnail=" + (thumbnail == null ? "null" : Arrays.toString(Arrays.copyOfRange(thumbnail, 0, 5)) + "...") +
                 '}';
     }
 

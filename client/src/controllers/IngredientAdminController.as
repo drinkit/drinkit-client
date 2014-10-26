@@ -39,6 +39,7 @@ package controllers
             var saveRequest:JSRequest = new JSRequest(URLRequestMethod.PUT);
             saveRequest.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(_model));
             saveRequest.contentType = "application/json;charset=UTF-8";
+            saveRequest.expectedStatus = 204;
             ServiceUtil.instance.sendRequest(Services.INGREDIENTS + _model.id, saveRequest, onSaveIngredient);
         }
 
@@ -53,7 +54,13 @@ package controllers
         public function deleteIngredient():void
         {
             var deleteRequest:JSRequest = new JSRequest(URLRequestMethod.DELETE);
-            ServiceUtil.instance.sendRequest(Services.INGREDIENTS + _model.id, deleteRequest, onDeleteIngredient);
+            deleteRequest.expectedStatus = 204;
+            deleteRequest.expectedErrorStatus = 409;
+            ServiceUtil.instance.sendRequest(Services.INGREDIENTS + _model.id, deleteRequest, onDeleteIngredient, onDeleteIngredientError);
+        }
+
+        private function onDeleteIngredientError(response:String):void {
+            Alert.show("Вы не можете удалить ингредиент, так как он используется в существующих коктейлях!");
         }
 
         private function onCreateIngredient(response:String):void

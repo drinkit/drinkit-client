@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.common;
+package ua.kiev.naiv.drinkit.cocktail.common.aspect;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

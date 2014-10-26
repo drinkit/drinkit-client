@@ -1,14 +1,15 @@
 /**
  * Created by Crabar on 10.07.2014.
  */
-package controllers
-{
+package controllers {
 
+    import com.adobe.images.JPGEncoder;
     import com.adobe.images.PNGEncoder;
 
     import controllers.supportClasses.Services;
 
     import flash.display.Bitmap;
+
     import flash.display.BitmapData;
     import flash.display.Shape;
     import flash.events.Event;
@@ -24,7 +25,9 @@ package controllers
     import models.supportClasses.Ingredient;
 
     import mx.binding.utils.BindingUtils;
+
     import mx.collections.ArrayList;
+
     import mx.controls.Alert;
     import mx.utils.Base64Encoder;
 
@@ -34,63 +37,52 @@ package controllers
     import utils.ServiceUtil;
     import utils.supportClasses.JSRequest;
 
-    public class CocktailAdminController
-    {
-        public function CocktailAdminController(model:CocktailAdminModel)
-        {
+    public class CocktailAdminController {
+        public function CocktailAdminController(model:CocktailAdminModel) {
             _model = model;
         }
 
         private var _model:CocktailAdminModel;
         private var _lastCocktailModel:CocktailModel;
 
-        public function updateCocktailId(value:Number):void
-        {
+        public function updateCocktailId(value:Number):void {
             _model.cocktailId = value;
         }
 
-        public function addIngredientToCocktail(ingredient:Ingredient):void
-        {
+        public function addIngredientToCocktail(ingredient:Ingredient):void {
             _model.selectedIngredientsList.addItem({id: ingredient.id, name: ingredient.name, quantity: ""});
         }
 
-        public function removeIngredientFromCocktail(ingredientId:Number):void
-        {
-            for (var i:int = 0; i < _model.selectedIngredientsList.length; i++)
-            {
+        public function removeIngredientFromCocktail(ingredientId:Number):void {
+            for (var i:int = 0; i < _model.selectedIngredientsList.length; i++) {
                 var object:Object = _model.selectedIngredientsList.getItemAt(i);
 
-                if (object.id == ingredientId)
-                {
+                if (object.id == ingredientId) {
                     _model.selectedIngredientsList.removeItemAt(i);
                     return;
                 }
             }
         }
 
-        public function updateOptions(selectedOptions:Vector.<Object>):void
-        {
+        public function updateOptions(selectedOptions:Vector.<Object>):void {
             _model.selectedOptions = ArrayUtil.fromVectorToArray(selectedOptions.map(itemToId));
         }
 
-        public function setCocktailType(selectedType:Object):void
-        {
+        public function setCocktailType(selectedType:Object):void {
             _model.cocktailTypeId = selectedType.value;
         }
 
-        public function loadCocktailInfo(id:Number):void
-        {
+        public function loadCocktailInfo(id:Number):void {
+            _model.clear();
             var request:JSRequest = new JSRequest();
             ServiceUtil.instance.sendRequest(Services.RECIPES + id, request, onCocktailInfoLoad);
         }
 
-        public function updateImageClipRect(clipRect:Rectangle):void
-        {
+        public function updateImageClipRect(clipRect:Rectangle):void {
             _model.imageClipRect = clipRect;
         }
 
-        public function saveNewCocktailToDB():void
-        {
+        public function saveNewCocktailToDB():void {
             if (!validateCurrentCocktail())
                 return;
 
@@ -110,8 +102,7 @@ package controllers
 
         }
 
-        public function saveCocktailToDB():void
-        {
+        public function saveCocktailToDB():void {
             if (!validateCurrentCocktail())
                 return;
 
@@ -127,32 +118,31 @@ package controllers
             cocktail.image = images[1];
             var request:JSRequest = new JSRequest(URLRequestMethod.PUT);
             request.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(cocktail));
+            request.expectedStatus = 204;
             request.contentType = "application/json;charset=UTF-8";
             ServiceUtil.instance.sendRequest(Services.RECIPES + _model.cocktailId, request, onCocktailSave);
         }
 
-        public function updateImage(content:Bitmap):void
-        {
+        public function updateImage(content:Bitmap):void {
             _model.image = content;
         }
 
-        public function deleteCocktail():void
-        {
+        public function deleteCocktail():void {
             var deleteRequest:JSRequest = new JSRequest(URLRequestMethod.DELETE);
+            deleteRequest.expectedStatus = 204;
             ServiceUtil.instance.sendRequest(Services.RECIPES + _model.cocktailId, deleteRequest, onCocktailDelete);
         }
 
-        private function itemToId(item:*, index:int, array:Vector.<Object>):uint
-        {
+        private function itemToId(item:*, index:int, array:Vector.<Object>):uint {
             return item.value;
         }
 
-        private function onCocktailInfoLoad(response:String):void
-        {
+        private function onCocktailInfoLoad(response:String):void {
             if (response == "")
                 return;
 
             _lastCocktailModel = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
+            _model.cocktailId = _lastCocktailModel.id;
             _model.name = _lastCocktailModel.name;
             _model.description = _lastCocktailModel.description;
             _model.cocktailTypeId = _lastCocktailModel.cocktailTypeId;
@@ -162,14 +152,12 @@ package controllers
             _model.dispatchEvent(new Event("modelUpdated"));
         }
 
-        private function convertIngredientsWithQuantitiesToSelectedIngredients(source:Array):ArrayList
-        {
+        private function convertIngredientsWithQuantitiesToSelectedIngredients(source:Array):ArrayList {
             var result:Array = [];
             var curIngredient:Object;
             var ingredient:Array;
 
-            for (var i:int = 0; i < source.length; i++)
-            {
+            for (var i:int = 0; i < source.length; i++) {
                 ingredient = source[i];
                 curIngredient = {id: ingredient[0], name: IngredientsModel.instance.getIngredientNameById(ingredient[0]), quantity: ingredient[1]};
                 result.push(curIngredient)
@@ -178,14 +166,12 @@ package controllers
             return new ArrayList(result);
         }
 
-        private function convertSelectedIngredientsToIngredientsWithQuantities(source:ArrayList):Array
-        {
+        private function convertSelectedIngredientsToIngredientsWithQuantities(source:ArrayList):Array {
             var result:Array = [];
             var curIngredient:Object;
             var ingredient:Array;
 
-            for (var i:int = 0; i < source.length; i++)
-            {
+            for (var i:int = 0; i < source.length; i++) {
                 curIngredient = source.getItemAt(i);
                 ingredient = [curIngredient.id, curIngredient.quantity];
                 result.push(ingredient);
@@ -194,8 +180,7 @@ package controllers
             return result;
         }
 
-        private function validateCurrentCocktail():Boolean
-        {
+        private function validateCurrentCocktail():Boolean {
             var errorString:String = "";
 
             if (_model.name == "")
@@ -210,31 +195,32 @@ package controllers
             if (_model.selectedIngredientsList.length == 0)
                 errorString += "Нет ингредиентов\n";
 
-            if (errorString == "")
-            {
+            if (errorString == "") {
                 return true;
             }
-            else
-            {
+            else {
                 Alert.show(errorString);
                 return false;
             }
         }
 
-        private function onCocktailSave(response:String):void
-        {
+        private function onCocktailSave(response:String):void {
+            if (response != "") {
+                _lastCocktailModel = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
+                _model.cocktailId = _lastCocktailModel.id;
+            }
+
             Alert.show("Коктейль успешно сохранен.");
         }
 
-        private function cropAndSerializeCocktailImage(image:Bitmap, clipRect:Rectangle):Array
-        {
-            if (!image)
-            {
+        private function cropAndSerializeCocktailImage(image:Bitmap, clipRect:Rectangle):Array {
+            if (!image) {
                 return [null, null];
             }
 
             var bigImageBD:BitmapData = new BitmapData(CocktailModel.BIG_IMAGE_WIDTH, CocktailModel.BIG_IMAGE_HEIGHT);
-            var smallImageBD:BitmapData = new BitmapData(CocktailModel.SMALL_IMAGE_WIDTH, CocktailModel.SMALL_IMAGE_HEIGHT);
+            var smallImageBD:BitmapData = new BitmapData(CocktailModel.SMALL_IMAGE_WIDTH,
+                                                         CocktailModel.SMALL_IMAGE_HEIGHT);
             //
             var croppedImageBD:BitmapData = new BitmapData(clipRect.width, clipRect.height);
             croppedImageBD.copyPixels(image.bitmapData, clipRect, new Point());
@@ -242,12 +228,15 @@ package controllers
             var bigScaleFactor:Number = CocktailModel.BIG_IMAGE_WIDTH / clipRect.width;
             var smallScaleFactor:Number = CocktailModel.SMALL_IMAGE_WIDTH / CocktailModel.BIG_IMAGE_WIDTH;
 
-            bigImageBD = scaleImage(croppedImageBD, bigScaleFactor, CocktailModel.BIG_IMAGE_WIDTH, CocktailModel.BIG_IMAGE_HEIGHT);// .draw(croppedImageBD, new Matrix(bigScaleFactor, 0, 0, bigScaleFactor), null, null, null, true);
-            smallImageBD = scaleImage(bigImageBD, smallScaleFactor, CocktailModel.SMALL_IMAGE_WIDTH, CocktailModel.SMALL_IMAGE_HEIGHT);
+            bigImageBD = scaleImage(croppedImageBD, bigScaleFactor, CocktailModel.BIG_IMAGE_WIDTH,
+                                    CocktailModel.BIG_IMAGE_HEIGHT);// .draw(croppedImageBD, new Matrix(bigScaleFactor, 0, 0, bigScaleFactor), null, null, null, true);
+            smallImageBD = scaleImage(bigImageBD, smallScaleFactor, CocktailModel.SMALL_IMAGE_WIDTH,
+                                      CocktailModel.SMALL_IMAGE_HEIGHT);
 
             var base64encoder:Base64Encoder = new Base64Encoder();
-            var bigImageBytes:ByteArray = PNGEncoder.encode(bigImageBD);
-            var smallImageBytes:ByteArray = PNGEncoder.encode(smallImageBD);
+
+            var bigImageBytes:ByteArray = new JPGEncoder(95).encode(bigImageBD);
+            var smallImageBytes:ByteArray = new JPGEncoder(95).encode(smallImageBD);
 
             base64encoder.insertNewLines = false;
             base64encoder.encodeBytes(smallImageBytes);
@@ -259,8 +248,7 @@ package controllers
             return [smallImageEncoded, bigImageEncoded];
         }
 
-        private function scaleImage(source:BitmapData, scaleFactor:Number, width:Number, height:Number):BitmapData
-        {
+        private function scaleImage(source:BitmapData, scaleFactor:Number, width:Number, height:Number):BitmapData {
             var result:BitmapData = new BitmapData(width, height);
             var sh:Shape = new Shape();
             sh.graphics.beginBitmapFill(source, new Matrix(scaleFactor, 0, 0, scaleFactor), false, true);
@@ -271,8 +259,7 @@ package controllers
             return result;
         }
 
-        private function onCocktailDelete(response:String):void
-        {
+        private function onCocktailDelete(response:String):void {
             Alert.show("Коктейль успешно удален!");
         }
     }

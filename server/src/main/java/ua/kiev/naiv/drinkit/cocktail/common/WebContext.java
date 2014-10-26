@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Copy-pasted from web. Container for getting access to web context from
- * {@link ua.kiev.naiv.drinkit.cocktail.common.MixinAspect}
+ * {@link ua.kiev.naiv.drinkit.cocktail.common.aspect.MixinAspect}
  */
 @SuppressWarnings("unused")
 public class WebContext {

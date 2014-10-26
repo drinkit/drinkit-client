@@ -28,6 +28,10 @@
                 <enabled>true</enabled>
                 <checksumPolicy>ignore</checksumPolicy>
             </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </snapshots>
         </repository>
     </repositories>
 
@@ -76,6 +80,10 @@
                     <coverage>true</coverage>
                     <templateURI>folder:${basedir}/html-template</templateURI>
                     <sourceFile>Main.mxml</sourceFile>
+                    <compilerWarnings>
+                        <show-binding-warnings>false</show-binding-warnings>
+                        <warn-no-constructor>false</warn-no-constructor>
+                    </compilerWarnings>
                     <fonts>
                         <managers>
                             <manager>flash.fonts.CFFFontManager</manager>
@@ -111,10 +119,10 @@
 
     <dependencies>
         <!--<dependency>-->
-        <!--<groupId>org.sonatype.flexmojos</groupId>-->
-        <!--<artifactId>flexmojos-unittest-flexunit4</artifactId>-->
-        <!--<version>4.2-beta</version>-->
-        <!--<type>swc</type>-->
+            <!--<groupId>org.sonatype.flexmojos</groupId>-->
+            <!--<artifactId>flexmojos-unittest-flexunit4</artifactId>-->
+            <!--<version>4.2-beta</version>-->
+            <!--<type>swc</type>-->
         <!--</dependency>-->
 
         <dependency>

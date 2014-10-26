@@ -2,7 +2,6 @@ package ua.kiev.naiv.drinkit.cocktail.web.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import ua.kiev.naiv.drinkit.MockObjectsGenerator;
 
 import java.io.IOException;
 
@@ -12,12 +11,22 @@ public class RecipeJsonTest {
     ObjectMapper objectMapper = new ObjectMapper();
     @Test
     public void readWriteJson() throws IOException {
-        Recipe mockRecipe = MockObjectsGenerator.creteMockRecipe();
+        Recipe mockRecipe = creteMockRecipe();
         mockRecipe.setId(1);
         String json = objectMapper.writeValueAsString(mockRecipe);
         System.out.println(json);
         Recipe parsedRecipe = objectMapper.readValue(json, Recipe.class);
         assertEquals(mockRecipe, parsedRecipe);
+    }
+
+    private Recipe creteMockRecipe() {
+        Recipe recipe = new Recipe();
+        recipe.setCocktailTypeId(1);
+        recipe.setDescription("desc");
+        recipe.setName("Test2");
+        recipe.setOptions(new int[]{1, 2});
+        recipe.setCocktailIngredients(new Integer[][]{{1, 50}, {2, 60}});
+        return recipe;
     }
 
     @Test
