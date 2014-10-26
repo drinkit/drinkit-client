@@ -62,4 +62,11 @@ public class RecipeServiceImpl implements RecipeService {
         return transform(recipeRepository.findOne(id));
     }
 
+
+    @Override
+    public List<Recipe> findByRecipeNameContaining(String namePart) {
+        return recipeRepository.findByNameContaining(namePart).stream()
+                .map(TransformUtils::transform)
+                .collect(Collectors.toList());
+    }
 }

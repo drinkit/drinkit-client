@@ -18,6 +18,8 @@ public interface RecipeService {
 
     List<Recipe> findByCriteria(Criteria criteria);
 
+    List<Recipe> findByRecipeNameContaining(String namePart);
+
     Recipe getRecipeById(int id);
 
 }

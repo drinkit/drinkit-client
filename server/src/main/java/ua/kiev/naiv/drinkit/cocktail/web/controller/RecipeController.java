@@ -44,7 +44,7 @@ public class RecipeController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, params = "criteria")
     @ResponseBody
     @JsonMixIn(value = RecipeSearchResultMixin.class, targetClass = Recipe.class)
     public List<Recipe> searchRecipes(@RequestParam(value = "criteria", required = false) String json) {
@@ -82,6 +82,13 @@ public class RecipeController {
         Assert.isTrue(recipeId == recipe.getId(), "id from uri and id from json should be identical");
         DrinkitUtils.logOperation("Updating recipe", recipe);
         recipeService.save(recipe);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, params = "namePart")
+    @JsonMixIn(value = RecipeSearchResultMixin.class, targetClass = Recipe.class)
+    @ResponseBody
+    public List<Recipe> findRecipesByNamePart(@RequestParam() String namePart) {
+        return recipeService.findByRecipeNameContaining(namePart);
     }
 
 }
