@@ -4,12 +4,8 @@
 package controllers {
 
     import com.adobe.images.JPGEncoder;
-    import com.adobe.images.PNGEncoder;
 
     import controllers.supportClasses.Services;
-
-    import flash.display.Bitmap;
-
     import flash.display.BitmapData;
     import flash.display.Shape;
     import flash.events.Event;
@@ -17,6 +13,8 @@ package controllers {
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import flash.net.URLRequestMethod;
+    import flash.net.URLVariables;
+    import flash.utils.ByteArray;
     import flash.utils.ByteArray;
 
     import models.CocktailAdminModel;
@@ -88,18 +86,34 @@ package controllers {
 
             var cocktail:Object = {};
             cocktail.name = _model.name;
+            cocktail.imageFileName = "";
+            cocktail.thumbnailFileName = "";
             cocktail.description = _model.description;
             cocktail.options = _model.selectedOptions;
             cocktail.cocktailIngredients = convertSelectedIngredientsToIngredientsWithQuantities(_model.selectedIngredientsList);
             cocktail.cocktailTypeId = _model.cocktailTypeId;
-            var images:Array = cropAndSerializeCocktailImage(_model.image, _model.imageClipRect);
-            cocktail.thumbnail = images[0];
-            cocktail.image = images[1];
             var request:JSRequest = new JSRequest(URLRequestMethod.POST);
             request.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(cocktail));
             request.contentType = "application/json;charset=UTF-8";
             ServiceUtil.instance.sendRequest(Services.RECIPES, request, onCocktailSave);
+        }
 
+        private function uploadPhoto(id:Number, imageData:BitmapData, clipRect:Rectangle):void
+        {
+            var images:Array = cropAndSerializeCocktailImage(imageData, clipRect);
+            var request:JSRequest = new JSRequest(URLRequestMethod.POST);
+            var params:Object = {};
+            params.image = images[1];
+            params.thumbnail = images[0];
+            request.contentType = "application/json;charset=UTF-8";
+            request.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(params));
+            request.expectedStatus = 204;
+            ServiceUtil.instance.sendRequest(Services.RECIPES + id.toString() + "/media", request, onImageUpload)
+        }
+
+        private function onImageUpload(response:String):void
+        {
+            trace(response);
         }
 
         public function saveCocktailToDB():void {
@@ -113,9 +127,6 @@ package controllers {
             cocktail.options = _model.selectedOptions;
             cocktail.cocktailIngredients = convertSelectedIngredientsToIngredientsWithQuantities(_model.selectedIngredientsList);
             cocktail.cocktailTypeId = _model.cocktailTypeId;
-            var images:Array = cropAndSerializeCocktailImage(_model.image, _model.imageClipRect);
-            cocktail.thumbnail = images[0];
-            cocktail.image = images[1];
             var request:JSRequest = new JSRequest(URLRequestMethod.PUT);
             request.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(cocktail));
             request.expectedStatus = 204;
@@ -123,8 +134,8 @@ package controllers {
             ServiceUtil.instance.sendRequest(Services.RECIPES + _model.cocktailId, request, onCocktailSave);
         }
 
-        public function updateImage(content:Bitmap):void {
-            _model.image = content;
+        public function updateImage(content:BitmapData):void {
+            _model.imageData = content;
         }
 
         public function deleteCocktail():void {
@@ -147,7 +158,7 @@ package controllers {
             _model.description = _lastCocktailModel.description;
             _model.cocktailTypeId = _lastCocktailModel.cocktailTypeId;
             _model.selectedOptions = _lastCocktailModel.options;
-            BindingUtils.bindProperty(_model, "image", _lastCocktailModel, "bigImage");
+            _model.imageUrl = _lastCocktailModel.imageUrl;
             _model.selectedIngredientsList = convertIngredientsWithQuantitiesToSelectedIngredients(_lastCocktailModel.cocktailIngredients);
             _model.dispatchEvent(new Event("modelUpdated"));
         }
@@ -210,11 +221,12 @@ package controllers {
                 _model.cocktailId = _lastCocktailModel.id;
             }
 
+            uploadPhoto(_model.cocktailId, _model.imageData, _model.imageClipRect);
             Alert.show("Коктейль успешно сохранен.");
         }
 
-        private function cropAndSerializeCocktailImage(image:Bitmap, clipRect:Rectangle):Array {
-            if (!image) {
+        private function cropAndSerializeCocktailImage(imageData:BitmapData, clipRect:Rectangle):Array {
+            if (!imageData) {
                 return [null, null];
             }
 
@@ -223,7 +235,7 @@ package controllers {
                                                          CocktailModel.SMALL_IMAGE_HEIGHT);
             //
             var croppedImageBD:BitmapData = new BitmapData(clipRect.width, clipRect.height);
-            croppedImageBD.copyPixels(image.bitmapData, clipRect, new Point());
+            croppedImageBD.copyPixels(imageData, clipRect, new Point());
             //
             var bigScaleFactor:Number = CocktailModel.BIG_IMAGE_WIDTH / clipRect.width;
             var smallScaleFactor:Number = CocktailModel.SMALL_IMAGE_WIDTH / CocktailModel.BIG_IMAGE_WIDTH;

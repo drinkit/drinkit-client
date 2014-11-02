@@ -4,8 +4,6 @@ package models
 
     import mx.collections.ArrayCollection;
 
-    import utils.MockData;
-
     public class IngredientsModel
     {
         private static var _instance:IngredientsModel;
@@ -23,7 +21,7 @@ package models
         }
 
         [Bindable]
-        public var ingredientsList:ArrayCollection = MockData.fakeIngredients();
+        public var ingredientsList:ArrayCollection;
 
         public function getIngredientNameById(id:Number):String
         {

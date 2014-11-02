@@ -16,21 +16,18 @@
 
         import flash.filters.BitmapFilterQuality;
 
-        import models.CocktailBuilderModel;
         import models.CocktailModel;
         import models.IngredientsModel;
         import models.SearchResultsModel;
         import models.TagsModel;
-        import models.supportClasses.CocktailMini;
         import models.supportClasses.Ingredient;
 
         import mx.collections.ArrayList;
 
-        import views.CocktailBuilderView;
         import views.subViews.SearchResultsPanel;
 
         [Bindable]
-        private var _cocktail:CocktailMini;
+        private var _cocktail:CocktailModel;
         private var _model:SearchResultsModel;
         private var _cornerRadius:Number = 5;
 
@@ -40,9 +37,9 @@
             {
                 init();
                 //
-                _cocktail = CocktailMini(value);
+                _cocktail = value as CocktailModel;
                 cocktailNameLabel.text = _cocktail.name;
-                cocktailImage.source = _cocktail.image;
+                cocktailImage.source = _cocktail.thumbnailUrl;
                 buildRecipe(_cocktail.cocktailIngredients);
                 buildTags(_cocktail.cocktailTypeId, _cocktail.options);
             }
@@ -111,7 +108,7 @@
     </s:Rect>
     <s:HGroup width="100%" height="100%" paddingBottom="4" paddingTop="4" paddingLeft="4" paddingRight="4">
         <s:Group>
-            <s:BitmapImage id="cocktailImage" source="{_cocktail.image}" width="{CocktailModel.SMALL_IMAGE_WIDTH}"
+            <s:BitmapImage id="cocktailImage" width="{CocktailModel.SMALL_IMAGE_WIDTH}"
                            height="{CocktailModel.SMALL_IMAGE_HEIGHT}"/>
             <s:Rect width="{CocktailModel.SMALL_IMAGE_WIDTH}" height="{CocktailModel.SMALL_IMAGE_HEIGHT}">
                 <s:stroke>

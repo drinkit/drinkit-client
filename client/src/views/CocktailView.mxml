@@ -34,10 +34,7 @@
         private function onDataLoaded(event:Event):void
         {
             _model = _controller.model;
-            //
-//				photo.source = _model.bigImage;
-//				cocktailName.text = _model.name;
-//				cocktailDescription.text = _model.description;
+            photo.source = _model.imageUrl;
             buildTags(_model.cocktailTypeId, _model.options);
         }
 
@@ -72,8 +69,7 @@
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>
 
-    <s:BitmapImage id="photo" width="{CocktailModel.BIG_IMAGE_WIDTH}" height="{CocktailModel.BIG_IMAGE_HEIGHT}"
-                   source="{_model.bigImage}"/>
+    <s:BitmapImage id="photo" width="{CocktailModel.BIG_IMAGE_WIDTH}" height="{CocktailModel.BIG_IMAGE_HEIGHT}" />
     <s:VGroup width="100%">
         <s:Label id="cocktailName" width="100%" fontSize="22" textAlign="center" text="{_model.name}"/>
         <s:TextArea id="cocktailDescription" styleName="regularText" contentBackgroundAlpha="0"

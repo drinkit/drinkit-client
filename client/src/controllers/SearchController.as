@@ -7,11 +7,11 @@ package controllers
 
     import flash.net.URLVariables;
 
+    import models.CocktailModel;
+
     import models.MainModel;
 
     import models.SearchResultsModel;
-
-    import models.supportClasses.CocktailMini;
 
     import mx.collections.ArrayCollection;
 
@@ -40,7 +40,7 @@ package controllers
 
         private function onSearchEnd(response:String):void
         {
-            var res:Array = JSONInstantiator.createInstance(response, CocktailMini, false) as Array;
+            var res:Array = JSONInstantiator.createInstance(response, CocktailModel, false) as Array;
             _model.isNoCocktailsFound = !res || res.length == 0;
             _model.cocktailsList = new ArrayCollection(res);
             MainController.instance.changeView(MainModel.SEARCH_BY_NAME_VIEW, _model);
