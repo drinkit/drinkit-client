@@ -1,6 +1,7 @@
 package ua.kiev.naiv.drinkit.springconfig;
 
 import org.springframework.core.annotation.Order;
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import ua.kiev.naiv.drinkit.cocktail.common.WebContextFilter;
 
@@ -31,7 +32,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Filter[] getServletFilters() {
-        return new Filter[]{new WebContextFilter()};
+        return new Filter[]{new WebContextFilter(), new ShallowEtagHeaderFilter()};
     }
 
 }
