@@ -4,6 +4,7 @@
 package models
 {
     import flash.display.Bitmap;
+    import flash.display.BitmapData;
     import flash.events.Event;
     import flash.events.EventDispatcher;
     import flash.geom.Rectangle;
@@ -16,6 +17,7 @@ package models
     [Event(name="modelUpdated", type="flash.events.Event")]
     public class CocktailAdminModel extends EventDispatcher
     {
+        public var imageData:BitmapData;
         public function CocktailAdminModel()
         {
             BindingUtils.bindProperty(this, "ingredientsList", IngredientsModel.instance, "ingredientsList");
@@ -24,6 +26,9 @@ package models
             //
             selectedIngredientsList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
         }
+
+        [Bindable]
+        public var imageUrl:String;
 
         [Bindable]
         public var cocktailId:Number;
@@ -46,29 +51,24 @@ package models
         [Bindable]
         public var description:String;
 
-        [Bindable]
-        public var image:Bitmap;
-
         public var imageClipRect:Rectangle;
-
-
-        private function onIngredientsQueryListChange(event:CollectionEvent):void
-        {
-            ingredientsList.refresh();
-        }
-
-        private var _emptyBitmap:Bitmap = new Bitmap();
 
         public function clear():void
         {
             selectedOptions = [];
             name = "";
             description = "";
+            imageData = null;
+            imageUrl = "";
             selectedIngredientsList = new ArrayList();
-            image = _emptyBitmap
             imageClipRect = null;
             cocktailTypeId = -1;
             dispatchEvent(new Event("modelUpdated"));
+        }
+
+        private function onIngredientsQueryListChange(event:CollectionEvent):void
+        {
+            ingredientsList.refresh();
         }
     }
 }
