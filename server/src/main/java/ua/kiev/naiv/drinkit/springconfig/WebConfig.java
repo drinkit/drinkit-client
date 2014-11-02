@@ -27,7 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/media/**").addResourceLocations("file:/" + environment.getProperty("media.folder") + "/").setCachePeriod(60000);
+        registry.addResourceHandler("/media/**").addResourceLocations("file:///" + environment.getProperty("media.folder") + "/").setCachePeriod(60000);
     }
 
 }
