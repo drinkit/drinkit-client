@@ -12,7 +12,7 @@ import java.util.Date;
 public class RecipeStatistics implements Serializable {
 
     private int userId;
-    private RecipeEntity recipeEntity;
+    private Recipe recipe;
     private int views;
     private Integer rating;
     private Date lastTimestamp;
@@ -30,12 +30,12 @@ public class RecipeStatistics implements Serializable {
     @Id
     @ManyToOne(optional = false)
     @JoinColumn(name = "recipe_id", insertable = false, updatable = false)
-    public RecipeEntity getRecipeEntity() {
-        return recipeEntity;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
-    public void setRecipeEntity(RecipeEntity recipeEntity) {
-        this.recipeEntity = recipeEntity;
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @Column(name = "views")
@@ -68,7 +68,7 @@ public class RecipeStatistics implements Serializable {
     @SuppressWarnings("unused")
     public static class PrimaryKey implements Serializable {
         private int userId;
-        private int recipeEntity;
+        private int recipe;
 
         public int getUserId() {
             return userId;
@@ -78,12 +78,12 @@ public class RecipeStatistics implements Serializable {
             this.userId = userId;
         }
 
-        public int getRecipeEntity() {
-            return recipeEntity;
+        public int getrecipe() {
+            return recipe;
         }
 
-        public void setRecipeEntity(int recipeEntity) {
-            this.recipeEntity = recipeEntity;
+        public void setrecipe(int recipe) {
+            this.recipe = recipe;
         }
 
         @Override
@@ -93,7 +93,7 @@ public class RecipeStatistics implements Serializable {
 
             PrimaryKey that = (PrimaryKey) o;
 
-            if (recipeEntity != that.recipeEntity) return false;
+            if (recipe != that.recipe) return false;
             if (userId != that.userId) return false;
 
             return true;
@@ -102,7 +102,7 @@ public class RecipeStatistics implements Serializable {
         @Override
         public int hashCode() {
             int result = userId;
-            result = 31 * result + recipeEntity;
+            result = 31 * result + recipe;
             return result;
         }
     }

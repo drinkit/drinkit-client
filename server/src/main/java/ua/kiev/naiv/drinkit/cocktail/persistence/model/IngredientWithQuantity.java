@@ -7,22 +7,22 @@ import java.io.Serializable;
 @Entity
 @Table(name = "recipes_has_ingredients")
 @AssociationOverrides({
-        @AssociationOverride(name = "cocktailIngredientId.recipeEntity",
+        @AssociationOverride(name = "recipeIngredientId.recipe",
                 joinColumns = @JoinColumn(name = "recipe_id")),
-        @AssociationOverride(name = "cocktailIngredientId.ingredient",
+        @AssociationOverride(name = "recipeIngredientId.ingredient",
                 joinColumns = @JoinColumn(name = "ingredient_id"))})
 public class IngredientWithQuantity implements Serializable {
 
     private Integer quantity;
-    private CocktailIngredientId cocktailIngredientId = new CocktailIngredientId();
+    private RecipeIngredientId recipeIngredientId = new RecipeIngredientId();
 
     @EmbeddedId
-    public CocktailIngredientId getCocktailIngredientId() {
-        return cocktailIngredientId;
+    public RecipeIngredientId getRecipeIngredientId() {
+        return recipeIngredientId;
     }
 
-    public void setCocktailIngredientId(CocktailIngredientId cocktailIngredientId) {
-        this.cocktailIngredientId = cocktailIngredientId;
+    public void setRecipeIngredientId(RecipeIngredientId recipeIngredientId) {
+        this.recipeIngredientId = recipeIngredientId;
     }
 
     @Column(name = "quantity")
@@ -36,20 +36,20 @@ public class IngredientWithQuantity implements Serializable {
 
     @Transient
     public Ingredient getIngredient() {
-        return getCocktailIngredientId().getIngredient();
+        return getRecipeIngredientId().getIngredient();
     }
 
     public void setIngredient(Ingredient ingredient) {
-        getCocktailIngredientId().setIngredient(ingredient);
+        getRecipeIngredientId().setIngredient(ingredient);
     }
 
     @Transient
-    public RecipeEntity getRecipeEntity() {
-        return getCocktailIngredientId().getRecipeEntity();
+    public Recipe getRecipe() {
+        return getRecipeIngredientId().getRecipe();
     }
 
-    public void setRecipeEntity(RecipeEntity recipeEntity) {
-        getCocktailIngredientId().setRecipeEntity(recipeEntity);
+    public void setrecipe(Recipe recipe) {
+        getRecipeIngredientId().setRecipe(recipe);
     }
 
     @Override

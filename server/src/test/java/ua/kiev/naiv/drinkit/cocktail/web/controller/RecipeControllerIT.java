@@ -9,8 +9,8 @@ import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
-import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeSearchResultMixin;
+import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
+import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeSearchResultMixin;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -25,27 +25,27 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 
     @Autowired
     RecipeService recipeService;
-    private Recipe insertedRecipe;
+    private RecipeDto insertedRecipeDto;
 
     @Before
     public void insertTestRecipe() {
-        insertedRecipe = recipeService.save(createNewRecipe());
+        insertedRecipeDto = recipeService.save(createNewRecipe());
     }
 
 
     @Test
     public void testGetRecipeByIdWithStats() throws Exception {
-        int views = insertedRecipe.getViews();
-        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
+        int views = insertedRecipeDto.getViews();
+        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipeDto.getId()))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipe)));
-        assertEquals(recipeService.getRecipeById(insertedRecipe.getId()).getViews(), views);
+                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipeDto)));
+        assertEquals(recipeService.getRecipeById(insertedRecipeDto.getId()).getViews(), views);
         SecurityContextHolder.createEmptyContext();
         SecurityContextHolder.getContext().setAuthentication(new TestingAuthenticationToken(null, "", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))));
-        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
+        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipeDto.getId()))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipe)));
-        assertEquals(recipeService.getRecipeById(insertedRecipe.getId()).getViews(), ++views);
+                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipeDto)));
+        assertEquals(recipeService.getRecipeById(insertedRecipeDto.getId()).getViews(), ++views);
 
     }
 
@@ -67,11 +67,11 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 
     @Test
     public void testDeleteRecipe() throws Exception {
-        assertNotNull(recipeService.getRecipeById(insertedRecipe.getId()));
-        mockMvc.perform(delete(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
+        assertNotNull(recipeService.getRecipeById(insertedRecipeDto.getId()));
+        mockMvc.perform(delete(RESOURCE_ENDPOINT + "/" + insertedRecipeDto.getId()))
                 .andExpect(status().isNoContent());
-        assertNull(recipeService.getRecipeById(insertedRecipe.getId()));
-        mockMvc.perform(delete(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
+        assertNull(recipeService.getRecipeById(insertedRecipeDto.getId()));
+        mockMvc.perform(delete(RESOURCE_ENDPOINT + "/" + insertedRecipeDto.getId()))
                 .andExpect(status().isNotFound());
     }
 
@@ -79,23 +79,23 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
     public void testUpdateRecipe() throws Exception {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("test.jpg");
 
-        insertedRecipe.setImage(IOUtils.toByteArray(inputStream));
-        insertedRecipe.setCocktailIngredients(new Integer[][]{{firstIngredient.getId(), 13}});
-        insertedRecipe.setName("modified");
+        insertedRecipeDto.setImage(IOUtils.toByteArray(inputStream));
+        insertedRecipeDto.setCocktailIngredients(new Integer[][]{{firstIngredient.getId(), 13}});
+        insertedRecipeDto.setName("modified");
         mockMvc.perform(
-                put(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId())
-                        .content(objectMapper.writeValueAsBytes(insertedRecipe))
+                put(RESOURCE_ENDPOINT + "/" + insertedRecipeDto.getId())
+                        .content(objectMapper.writeValueAsBytes(insertedRecipeDto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
-        assertEquals(insertedRecipe, recipeService.getRecipeById(insertedRecipe.getId()));
+        assertEquals(insertedRecipeDto, recipeService.getRecipeById(insertedRecipeDto.getId()));
     }
 
     @Test
     public void testFindRecipesByNamePart() throws Exception {
-        objectMapper.addMixInAnnotations(Recipe.class, RecipeSearchResultMixin.class);
+        objectMapper.addMixInAnnotations(RecipeDto.class, RecipeSearchResultMixin.class);
         mockMvc.perform(get(RESOURCE_ENDPOINT).param("namePart", "Integration Tests"))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(Collections.singletonList(insertedRecipe))));
+                .andExpect(content().json(objectMapper.writeValueAsString(Collections.singletonList(insertedRecipeDto))));
 
         mockMvc.perform(get(RESOURCE_ENDPOINT).param("namePart", "%%%%%%%not exist$$$$$$$"))
                 .andExpect(status().isOk())

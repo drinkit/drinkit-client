@@ -9,7 +9,7 @@ import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeStatistics;
 public interface RecipesStatisticsRepository extends JpaRepository<RecipeStatistics, RecipeStatistics.PrimaryKey> {
 
     @Modifying
-    @Query("UPDATE RecipeStatistics s SET s.views=s.views + 1 WHERE s.recipeEntity.id=:recipeId AND s.userId=:userId")
+    @Query("UPDATE RecipeStatistics s SET s.views=s.views + 1 WHERE s.recipe.id=:recipeId AND s.userId=:userId")
     public int incrementViewsField(@Param("recipeId") int recipeId, @Param("userId") int userId);
 
 }

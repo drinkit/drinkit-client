@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
         @UniqueConstraint(columnNames = "id"),
         @UniqueConstraint(columnNames = "name")
 })
-public class RecipeEntity implements Serializable {
+public class Recipe implements Serializable {
 
     private Integer id;
     private String name;
@@ -69,7 +69,7 @@ public class RecipeEntity implements Serializable {
         this.cocktailType = cocktailType;
     }
 
-    @OneToMany(mappedBy = "cocktailIngredientId.recipeEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recipeIngredientId.recipe", cascade = CascadeType.ALL)
     public List<IngredientWithQuantity> getIngredientsWithQuantities() {
         return ingredientsWithQuantities;
     }
@@ -108,7 +108,7 @@ public class RecipeEntity implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-    @OneToMany(mappedBy = "recipeEntity", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     public List<RecipeStatistics> getRecipeStatistics() {
         return recipeStatistics;
     }

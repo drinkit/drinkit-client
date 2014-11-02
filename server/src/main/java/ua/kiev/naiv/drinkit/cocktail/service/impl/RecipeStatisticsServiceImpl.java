@@ -3,7 +3,7 @@ package ua.kiev.naiv.drinkit.cocktail.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeEntity;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeStatistics;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.RecipeRepository;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.RecipesStatisticsRepository;
@@ -24,12 +24,12 @@ public class RecipeStatisticsServiceImpl implements RecipeStatisticsService {
     public void incrementViewsCount(int recipeId, int userId) {
         int updatedRecords = recipesStatisticsRepository.incrementViewsField(recipeId, userId);
         if (updatedRecords == 0) {
-            RecipeEntity recipeEntity = recipeRepository.findOne(recipeId);
+            Recipe recipe = recipeRepository.findOne(recipeId);
             RecipeStatistics recipeStatistics = new RecipeStatistics();
             recipeStatistics.setViews(1);
             recipeStatistics.setUserId(userId);
-            recipeStatistics.setRecipeEntity(recipeEntity);
-            recipeEntity.getRecipeStatistics().add(recipeStatistics);
+            recipeStatistics.setRecipe(recipe);
+            recipe.getRecipeStatistics().add(recipeStatistics);
             recipesStatisticsRepository.saveAndFlush(recipeStatistics);
         }
     }

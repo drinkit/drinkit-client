@@ -1,7 +1,6 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 
-
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
@@ -9,18 +8,18 @@ import java.io.Serializable;
 
 @SuppressWarnings("unused")
 @Embeddable
-public class CocktailIngredientId implements Serializable {
+public class RecipeIngredientId implements Serializable {
 
-    private RecipeEntity recipeEntity;
+    private Recipe recipe;
     private Ingredient ingredient;
 
     @ManyToOne
-    public RecipeEntity getRecipeEntity() {
-        return recipeEntity;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
-    public void setRecipeEntity(RecipeEntity recipeEntity) {
-        this.recipeEntity = recipeEntity;
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @ManyToOne()
@@ -47,17 +46,17 @@ public class CocktailIngredientId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CocktailIngredientId that = (CocktailIngredientId) o;
+        RecipeIngredientId that = (RecipeIngredientId) o;
 
         if (!ingredient.equals(that.ingredient)) return false;
-        if (!recipeEntity.equals(that.recipeEntity)) return false;
+        if (!recipe.equals(that.recipe)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = recipeEntity.hashCode();
+        int result = recipe.hashCode();
         result = 31 * result + ingredient.hashCode();
         return result;
     }

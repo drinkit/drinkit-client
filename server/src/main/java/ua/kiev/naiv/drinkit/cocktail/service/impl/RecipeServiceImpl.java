@@ -10,7 +10,7 @@ import ua.kiev.naiv.drinkit.cocktail.persistence.repository.RecipeRepository;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.SearchSpecification;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -29,8 +29,8 @@ public class RecipeServiceImpl implements RecipeService {
     private IngredientRepository ingredientRepository;
 
     @Override
-    public Recipe save(Recipe recipe) {
-        return transform(recipeRepository.saveAndFlush(transform(recipe, ingredientRepository)));
+    public RecipeDto save(RecipeDto recipeDto) {
+        return transform(recipeRepository.saveAndFlush(transform(recipeDto, ingredientRepository)));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Recipe> findAll() {
+    public List<RecipeDto> findAll() {
         return recipeRepository.findAll().stream()
                 .map(TransformUtils::transform)
                 .collect(Collectors.toList());
@@ -48,7 +48,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Recipe> findByCriteria(Criteria criteria) {
+    public List<RecipeDto> findByCriteria(Criteria criteria) {
         return recipeRepository.findAll(SearchSpecification.byCriteria(criteria)).stream()
                 .sorted(new RecipeComparatorByCriteria(criteria))
                 .map(TransformUtils::transform)
@@ -58,13 +58,13 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @EnableStats
     @Transactional(readOnly = true)
-    public Recipe getRecipeById(int id) {
+    public RecipeDto getRecipeById(int id) {
         return transform(recipeRepository.findOne(id));
     }
 
 
     @Override
-    public List<Recipe> findByRecipeNameContaining(String namePart) {
+    public List<RecipeDto> findByRecipeNameContaining(String namePart) {
         return recipeRepository.findByNameContaining(namePart).stream()
                 .map(TransformUtils::transform)
                 .collect(Collectors.toList());

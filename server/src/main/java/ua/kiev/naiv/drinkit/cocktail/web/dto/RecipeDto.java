@@ -1,9 +1,9 @@
-package ua.kiev.naiv.drinkit.cocktail.web.model;
+package ua.kiev.naiv.drinkit.cocktail.web.dto;
 
 import java.util.Arrays;
 
 @SuppressWarnings("RedundantIfStatement")
-public class Recipe {
+public class RecipeDto {
 
     private int cocktailTypeId;
     private String description;
@@ -86,14 +86,15 @@ public class Recipe {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Recipe recipe = (Recipe) o;
+        RecipeDto recipeDto = (RecipeDto) o;
 
-        if (cocktailTypeId != recipe.cocktailTypeId) return false;
-        if (description != null ? !description.equals(recipe.description) : recipe.description != null) return false;
-        if (!Arrays.equals(image, recipe.image)) return false;
-        if (!name.equals(recipe.name)) return false;
-        if (!Arrays.equals(options, recipe.options)) return false;
-        if (!Arrays.equals(thumbnail, recipe.thumbnail)) return false;
+        if (cocktailTypeId != recipeDto.cocktailTypeId) return false;
+        if (description != null ? !description.equals(recipeDto.description) : recipeDto.description != null)
+            return false;
+        if (!Arrays.equals(image, recipeDto.image)) return false;
+        if (!name.equals(recipeDto.name)) return false;
+        if (!Arrays.equals(options, recipeDto.options)) return false;
+        if (!Arrays.equals(thumbnail, recipeDto.thumbnail)) return false;
 
         return true;
     }

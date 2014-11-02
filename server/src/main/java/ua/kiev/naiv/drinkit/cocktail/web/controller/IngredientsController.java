@@ -10,7 +10,7 @@ import ua.kiev.naiv.drinkit.cocktail.common.DrinkitUtils;
 import ua.kiev.naiv.drinkit.cocktail.common.aspect.JsonMixIn;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
-import ua.kiev.naiv.drinkit.cocktail.web.model.IngredientMixIn;
+import ua.kiev.naiv.drinkit.cocktail.web.dto.IngredientMixIn;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.web.model;
+package ua.kiev.naiv.drinkit.cocktail.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
