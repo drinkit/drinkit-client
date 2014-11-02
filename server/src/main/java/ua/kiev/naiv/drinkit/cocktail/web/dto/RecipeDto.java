@@ -2,7 +2,6 @@ package ua.kiev.naiv.drinkit.cocktail.web.dto;
 
 import java.util.Arrays;
 
-@SuppressWarnings("RedundantIfStatement")
 public class RecipeDto {
 
     private int cocktailTypeId;
@@ -10,28 +9,10 @@ public class RecipeDto {
     private String name;
     private int[] options;
     private Integer[][] cocktailIngredients;
-    private byte[] image;
-    private byte[] thumbnail;
+    private String imageUrl;
+    private String thumbnailUrl;
     private Integer id;
-    private int views;
-    private Double rating;
-    private int votes;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
+    //-------------------------------------------------------------------
 
     public int getCocktailTypeId() {
         return cocktailTypeId;
@@ -41,44 +22,60 @@ public class RecipeDto {
         this.cocktailTypeId = cocktailTypeId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setOptions(int[] options) {
-        this.options = options;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int[] getOptions() {
         return options;
     }
 
-    public void setCocktailIngredients(Integer[][] cocktailIngredients) {
-        this.cocktailIngredients = cocktailIngredients;
+    public void setOptions(int[] options) {
+        this.options = options;
     }
 
     public Integer[][] getCocktailIngredients() {
         return cocktailIngredients;
     }
 
-    public void setThumbnail(byte[] thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setCocktailIngredients(Integer[][] cocktailIngredients) {
+        this.cocktailIngredients = cocktailIngredients;
     }
 
-    public byte[] getThumbnail() {
-        return thumbnail;
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
@@ -91,10 +88,13 @@ public class RecipeDto {
         if (cocktailTypeId != recipeDto.cocktailTypeId) return false;
         if (description != null ? !description.equals(recipeDto.description) : recipeDto.description != null)
             return false;
-        if (!Arrays.equals(image, recipeDto.image)) return false;
+        if (id != null ? !id.equals(recipeDto.id) : recipeDto.id != null) return false;
+        if (imageUrl != null ? !imageUrl.equals(recipeDto.imageUrl) : recipeDto.imageUrl != null)
+            return false;
         if (!name.equals(recipeDto.name)) return false;
         if (!Arrays.equals(options, recipeDto.options)) return false;
-        if (!Arrays.equals(thumbnail, recipeDto.thumbnail)) return false;
+        if (thumbnailUrl != null ? !thumbnailUrl.equals(recipeDto.thumbnailUrl) : recipeDto.thumbnailUrl != null)
+            return false;
 
         return true;
     }
@@ -105,45 +105,9 @@ public class RecipeDto {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + name.hashCode();
         result = 31 * result + (options != null ? Arrays.hashCode(options) : 0);
-        result = 31 * result + (image != null ? Arrays.hashCode(image) : 0);
-        result = 31 * result + (thumbnail != null ? Arrays.hashCode(thumbnail) : 0);
+        result = 31 * result + (imageUrl != null ? imageUrl.hashCode() : 0);
+        result = 31 * result + (thumbnailUrl != null ? thumbnailUrl.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", cocktailTypeId=" + cocktailTypeId +
-                ", options=" + Arrays.toString(options) +
-                ", image=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(image, 0, 5)) + "...") +
-                ", thumbnail=" + (thumbnail == null ? "null" : Arrays.toString(Arrays.copyOfRange(thumbnail, 0, 5)) + "...") +
-                '}';
-    }
-
-    public int getViews() {
-        return views;
-    }
-
-    public void setViews(int views) {
-        this.views = views;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
     }
 }

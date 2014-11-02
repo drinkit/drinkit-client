@@ -5,7 +5,6 @@ import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository
 import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransformUtils {
@@ -17,8 +16,8 @@ public class TransformUtils {
         }
         RecipeDto recipeDto = new RecipeDto();
         recipeDto.setId(recipe.getId());
-        recipeDto.setImage(recipe.getImage());
-        recipeDto.setThumbnail(recipe.getThumbnail());
+        recipeDto.setImageUrl("/rest/media/image/" + recipe.getImageFileName());
+        recipeDto.setThumbnailUrl("/rest/media/thumbnail/" + recipe.getThumbnailFileName());
         recipeDto.setCocktailTypeId(recipe.getCocktailType().getId());
         recipeDto.setDescription(recipe.getDescription());
         recipeDto.setName(recipe.getName());
@@ -28,22 +27,22 @@ public class TransformUtils {
         recipeDto.setOptions(recipe.getOptions().stream()
                 .mapToInt(Option::getId)
                 .toArray());
-        if (recipe.getRecipeStatistics() != null) {
-            processStatistics(recipe.getRecipeStatistics(), recipeDto);
-        }
+//        if (recipe.getRecipeStatistics() != null) {
+//            processStatistics(recipe.getRecipeStatistics(), recipeDto);
+//        }
         return recipeDto;
     }
 
-    private static void processStatistics(List<RecipeStatistics> recipeStatistics, RecipeDto recipeDto) {
-        recipeDto.setViews(recipeStatistics
-                .stream().mapToInt(RecipeStatistics::getViews).sum());
-        recipeStatistics
-                .stream().filter(val -> val.getRating() != null)
-                .mapToInt(RecipeStatistics::getRating).average().ifPresent(
-                recipeDto::setRating);
-        recipeDto.setVotes((int) recipeStatistics
-                .stream().filter(val -> val.getRating() != null).count());
-    }
+//    private static void processStatistics(List<RecipeStatistics> recipeStatistics, RecipeDto recipeDto) {
+//        recipeDto.setViews(recipeStatistics
+//                .stream().mapToInt(RecipeStatistics::getViews).sum());
+//        recipeStatistics
+//                .stream().filter(val -> val.getRating() != null)
+//                .mapToInt(RecipeStatistics::getRating).average().ifPresent(
+//                recipeDto::setRating);
+//        recipeDto.setVotes((int) recipeStatistics
+//                .stream().filter(val -> val.getRating() != null).count());
+//    }
 
     public static Recipe transform(RecipeDto recipeDto, IngredientRepository ingredientRepository) {
         Recipe recipe = new Recipe();
@@ -62,8 +61,8 @@ public class TransformUtils {
             ingredientWithQuantity.setIngredient(ingredientById);
             return ingredientWithQuantity;
         }).collect(Collectors.toList()));
-        recipe.setImage(recipeDto.getImage());
-        recipe.setThumbnail(recipeDto.getThumbnail());
+//        recipe.setImageUrl(recipeDto.getImageUrl());
+//        recipe.setThumbnailUrl(recipeDto.getThumbnailUrl());
         return recipe;
     }
 

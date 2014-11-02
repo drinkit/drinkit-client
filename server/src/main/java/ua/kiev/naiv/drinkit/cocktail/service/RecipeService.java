@@ -4,6 +4,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface RecipeService {
@@ -22,4 +23,5 @@ public interface RecipeService {
 
     RecipeDto getRecipeById(int id);
 
+    void saveMedia(int recipeId, byte[] image, byte[] thumbnail) throws IOException;
 }

@@ -1,66 +1,79 @@
-SET FOREIGN_KEY_CHECKS=0;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for `ingredients`
 -- ----------------------------
 CREATE TABLE `ingredients` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) NOT NULL,
-  `vol` float NOT NULL,
-  `description` varchar(4000) DEFAULT NULL,
+  `id`          INT(11)      NOT NULL AUTO_INCREMENT,
+  `name`        VARCHAR(200) NOT NULL,
+  `vol`         FLOAT        NOT NULL,
+  `description` VARCHAR(4000) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+)
+  ENGINE =InnoDB
+  AUTO_INCREMENT =19
+  DEFAULT CHARSET =utf8;
 
 -- ----------------------------
 -- Table structure for `recipes`
 -- ----------------------------
 CREATE TABLE `recipes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(500) NOT NULL,
-  `description` varchar(4000) DEFAULT NULL,
-  `image` mediumblob,
-  `thumbnail` blob,
-  `type_id` tinyint(1) NOT NULL,
+  `id`                 INT(11)      NOT NULL AUTO_INCREMENT,
+  `name`               VARCHAR(500) NOT NULL,
+  `description`        VARCHAR(4000) DEFAULT NULL,
+  `image_filename`     VARCHAR(255),
+  `thumbnail_filename` VARCHAR(255),
+  `type_id`            TINYINT(1)   NOT NULL,
   PRIMARY KEY (`id`),
   KEY `type_fk` (`type_id`),
   CONSTRAINT `type_fk` FOREIGN KEY (`type_id`) REFERENCES `recipe_types` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+)
+  ENGINE =InnoDB
+  AUTO_INCREMENT =7
+  DEFAULT CHARSET =utf8;
 
 -- ----------------------------
 -- Table structure for `recipes_has_ingredients`
 -- ----------------------------
 CREATE TABLE `recipes_has_ingredients` (
-  `recipe_id` int(11) NOT NULL,
-  `ingredient_id` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  PRIMARY KEY (`recipe_id`,`ingredient_id`),
+  `recipe_id`     INT(11) NOT NULL,
+  `ingredient_id` INT(11) NOT NULL,
+  `quantity`      INT(11) DEFAULT NULL,
+  PRIMARY KEY (`recipe_id`, `ingredient_id`),
   KEY `ingredient_fk` (`ingredient_id`),
   CONSTRAINT `ingredient_fk` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`id`),
   CONSTRAINT `recipe_fk` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)
+  ENGINE =InnoDB
+  DEFAULT CHARSET =utf8;
 
 -- ----------------------------
 -- Table structure for `recipes_has_options`
 -- ----------------------------
 CREATE TABLE `recipes_has_options` (
-  `recipe_id` int(11) NOT NULL,
-  `option_id` int(11) NOT NULL,
-  PRIMARY KEY (`recipe_id`,`option_id`),
+  `recipe_id` INT(11) NOT NULL,
+  `option_id` INT(11) NOT NULL,
+  PRIMARY KEY (`recipe_id`, `option_id`),
   KEY `opt_recipe_fk_option` (`option_id`),
   CONSTRAINT `opt_recipe_fk_option` FOREIGN KEY (`option_id`) REFERENCES `recipe_options` (`id`),
   CONSTRAINT `opt_recipe_fk_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)
+  ENGINE =InnoDB
+  DEFAULT CHARSET =utf8;
 
 
 -- ----------------------------
 -- Table structure for `recipe_options`
 -- ----------------------------
 CREATE TABLE `recipe_options` (
-  `id` int(4) NOT NULL AUTO_INCREMENT,
-  `option` char(20) NOT NULL,
-  `name` char(50) DEFAULT NULL,
+  `id`     INT(4)   NOT NULL AUTO_INCREMENT,
+  `option` CHAR(20) NOT NULL,
+  `name`   CHAR(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+)
+  ENGINE =InnoDB
+  AUTO_INCREMENT =6
+  DEFAULT CHARSET =utf8;
 
 -- ----------------------------
 -- Records of recipe_options
@@ -75,10 +88,13 @@ INSERT INTO `recipe_options` VALUES ('5', 'isFlacky', 'Слоеный');
 -- Table structure for `recipe_types`
 -- ----------------------------
 CREATE TABLE `recipe_types` (
-  `id` tinyint(1) NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) DEFAULT NULL,
+  `id`   TINYINT(1) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+)
+  ENGINE =InnoDB
+  AUTO_INCREMENT =4
+  DEFAULT CHARSET =utf8;
 
 -- ----------------------------
 -- Records of recipe_types
@@ -91,22 +107,27 @@ INSERT INTO `recipe_types` VALUES ('3', 'Shooter');
 -- Table structure for `users`
 -- ----------------------------
 CREATE TABLE `users` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `displayName` varchar(255) DEFAULT NULL,
-  `accessLevel` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`,`accessLevel`),
+  `id`          BIGINT(20)   NOT NULL AUTO_INCREMENT,
+  `username`    VARCHAR(255) NOT NULL,
+  `password`    VARCHAR(255) NOT NULL,
+  `displayName` VARCHAR(255) DEFAULT NULL,
+  `accessLevel` TINYINT(4)   NOT NULL,
+  PRIMARY KEY (`id`, `accessLevel`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+)
+  ENGINE =InnoDB
+  AUTO_INCREMENT =19
+  DEFAULT CHARSET =utf8;
 
 CREATE TABLE `recipe_statistics` (
-  `recipe_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `views` int(11) NOT NULL DEFAULT '0',
-  `rating` tinyint(1) DEFAULT NULL,
-  `last_timestamp` datetime DEFAULT NULL,
+  `recipe_id`      INT(11) NOT NULL,
+  `user_id`        INT(11) NOT NULL,
+  `views`          INT(11) NOT NULL DEFAULT '0',
+  `rating`         TINYINT(1) DEFAULT NULL,
+  `last_timestamp` DATETIME DEFAULT NULL,
   PRIMARY KEY (`recipe_id`, `user_id`),
   CONSTRAINT `statistics_fk_recipes` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)
+  ENGINE =InnoDB
+  DEFAULT CHARSET =utf8;
 

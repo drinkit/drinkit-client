@@ -13,14 +13,29 @@ import java.util.stream.Collectors;
 })
 public class Recipe implements Serializable {
 
+    @Id
+    @GeneratedValue()
+    @Column(name = "id", unique = true, nullable = false)
     private Integer id;
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
+    @Column(name = "description")
     private String description;
+    @ManyToOne()
+    @JoinColumn(name = "type_id")
     private CocktailType cocktailType;
+    @OneToMany(mappedBy = "recipeIngredientId.recipe", cascade = CascadeType.ALL)
     private List<IngredientWithQuantity> ingredientsWithQuantities;
+    @ManyToMany()
+    @JoinTable(name = "recipes_has_options",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "option_id"))
     private List<Option> options;
-    private byte[] image;
-    private byte[] thumbnail;
+    @Column(name = "image_filename")
+    private String imageFileName;
+    @Column(name = "thumbnail_filename")
+    private String thumbnailFileName;
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     private List<RecipeStatistics> recipeStatistics = new ArrayList<>();
 
     @Transient
@@ -30,9 +45,7 @@ public class Recipe implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    @Id
-    @GeneratedValue()
-    @Column(name = "id", unique = true, nullable = false)
+    //-----------------------------------------------------
     public Integer getId() {
         return id;
     }
@@ -41,7 +54,6 @@ public class Recipe implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "name", unique = true, nullable = false)
     public String getName() {
         return name;
     }
@@ -50,7 +62,6 @@ public class Recipe implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -59,8 +70,6 @@ public class Recipe implements Serializable {
         this.description = description;
     }
 
-    @ManyToOne()
-    @JoinColumn(name = "type_id")
     public CocktailType getCocktailType() {
         return cocktailType;
     }
@@ -69,7 +78,6 @@ public class Recipe implements Serializable {
         this.cocktailType = cocktailType;
     }
 
-    @OneToMany(mappedBy = "recipeIngredientId.recipe", cascade = CascadeType.ALL)
     public List<IngredientWithQuantity> getIngredientsWithQuantities() {
         return ingredientsWithQuantities;
     }
@@ -78,10 +86,6 @@ public class Recipe implements Serializable {
         this.ingredientsWithQuantities = ingredientsWithQuantities;
     }
 
-    @ManyToMany()
-    @JoinTable(name = "recipes_has_options",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "option_id"))
     public List<Option> getOptions() {
         return options;
     }
@@ -90,25 +94,22 @@ public class Recipe implements Serializable {
         this.options = options;
     }
 
-    @Column(name = "image")
-    public byte[] getImage() {
-        return image;
+    public String getImageFileName() {
+        return imageFileName;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 
-    @Column()
-    public byte[] getThumbnail() {
-        return thumbnail;
+    public String getThumbnailFileName() {
+        return thumbnailFileName;
     }
 
-    public void setThumbnail(byte[] thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setThumbnailFileName(String thumbnailFileName) {
+        this.thumbnailFileName = thumbnailFileName;
     }
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     public List<RecipeStatistics> getRecipeStatistics() {
         return recipeStatistics;
     }
@@ -116,4 +117,5 @@ public class Recipe implements Serializable {
     public void setRecipeStatistics(List<RecipeStatistics> recipeStatistics) {
         this.recipeStatistics = recipeStatistics;
     }
+
 }

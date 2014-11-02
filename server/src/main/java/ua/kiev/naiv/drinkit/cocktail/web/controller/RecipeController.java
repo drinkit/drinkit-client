@@ -1,9 +1,11 @@
 package ua.kiev.naiv.drinkit.cocktail.web.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -18,14 +20,23 @@ import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
 import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeSearchResultMixin;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
+import static ua.kiev.naiv.drinkit.cocktail.web.controller.RecipeController.RESOURCE_NAME;
+
 @Controller
-@RequestMapping(value = "recipes")
+@RequestMapping(value = RESOURCE_NAME)
 public class RecipeController {
 
+    public static final String RESOURCE_NAME = "recipes";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(RecipeController.class);
+
+
+    @Resource
+    Environment environment;
 
     @Autowired
     RecipeService recipeService;
@@ -90,5 +101,18 @@ public class RecipeController {
     public List<RecipeDto> findRecipesByNamePart(@RequestParam() String namePart) {
         return recipeService.findByRecipeNameContaining(namePart);
     }
+
+    @RequestMapping(value = "{recipeId}/media", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void uploadMedia(@RequestBody String json, @PathVariable int recipeId) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+
+        JsonNode root = objectMapper.readTree(json);
+        byte[] image = objectMapper.convertValue(root.get("image"), byte[].class);
+        byte[] thumbnail = objectMapper.convertValue(root.get("thumbnail"), byte[].class);
+        recipeService.saveMedia(recipeId, image, thumbnail);
+    }
+
 
 }
