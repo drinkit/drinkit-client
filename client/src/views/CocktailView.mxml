@@ -71,7 +71,7 @@
 
     <s:BitmapImage id="photo" width="{CocktailModel.BIG_IMAGE_WIDTH}" height="{CocktailModel.BIG_IMAGE_HEIGHT}" />
     <s:VGroup width="100%">
-        <s:Label id="cocktailName" width="100%" fontSize="22" textAlign="center" text="{_model.name}"/>
+        <s:Label id="cocktailName" width="100%" styleName="cocktailNameText" fontSize="22" textAlign="center" text="{_model.name}"/>
         <s:TextArea id="cocktailDescription" styleName="regularText" contentBackgroundAlpha="0"
                     borderColor="{DesignModel.ORANGE_BEACH}" width="100%" height="100%"
                     editable="false" text="{_model.description}"/>
