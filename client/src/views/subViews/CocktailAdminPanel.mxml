@@ -220,6 +220,10 @@
         {
             _controller.deleteCocktail();
         }
+
+        private function onImageLoad(event:Event):void {
+            _controller.updateImage(cocktailPhoto.imageBitmapData);
+        }
         ]]>
     </fx:Script>
 
@@ -293,6 +297,6 @@
         <supportclasses:CropImageContainer id="cocktailPhoto" width="{CocktailModel.BIG_IMAGE_WIDTH}"
                                            source="{_model.imageUrl}"
                                            height="{CocktailModel.BIG_IMAGE_HEIGHT}" backgroundColor="0x15ffda"
-                                           clipRectChanged="onClipRectChanged(event)"/>
+                                           clipRectChanged="onClipRectChanged(event)" imageLoaded="onImageLoad(event)"/>
     </s:HGroup>
 </s:Group>

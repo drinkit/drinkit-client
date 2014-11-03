@@ -6,6 +6,7 @@
          creationComplete="creationCompleteHandler(event)">
     <fx:Metadata>
         [Event(name="clipRectChanged", type="flash.events.Event")]
+        [Event(name="imageLoaded", type="flash.events.Event")]
     </fx:Metadata>
 
     <fx:Script>
@@ -23,8 +24,11 @@
         {
             if (value) {
                 _source = value;
-                determinateClipRectSize(_source.width, _source.height, width, height);
-                dispatchEvent(new Event("clipRectChanged"));
+
+                if (value is Bitmap) {
+                    determinateClipRectSize(_source.width, _source.height, width, height);
+                    dispatchEvent(new Event("clipRectChanged"));
+                }
             }
         }
 
@@ -121,9 +125,20 @@
             return scaledClipRect;
         }
 
+        public function get imageBitmapData():BitmapData {
+            return image.bitmapData;
+        }
+
         private function creationCompleteHandler(event:FlexEvent):void
         {
             _scaledSourceRect = this.getRect(this);
+        }
+
+        private function onImageLoad(event:Event):void
+        {
+            dispatchEvent(new Event("imageLoaded"));
+            determinateClipRectSize(image.bitmapData.width, image.bitmapData.height, width, height);
+            dispatchEvent(new Event("clipRectChanged"));
         }
         ]]>
         </fx:Script>
@@ -134,7 +149,7 @@
         </s:fill>
     </s:Rect>
     <s:BitmapImage id="image" width="100%" height="100%" source="{source}" fillMode="scale" scaleMode="letterbox"
-                   smoothingQuality="high" smooth="true" />
+                   smoothingQuality="high" smooth="true" complete="onImageLoad(event)" />
     <s:BorderContainer id="clipRect" width="75" height="100" backgroundColor="0xffffff" backgroundAlpha="0.1"
                        borderColor="0x000000" borderAlpha="0.8" mouseDown="onBox1MouseDown(event)"/>
 
