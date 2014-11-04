@@ -14,8 +14,8 @@ import org.springframework.web.context.WebApplicationContext;
 import ua.kiev.naiv.drinkit.cocktail.common.WebContextFilter;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
-import ua.kiev.naiv.drinkit.cocktail.web.model.IngredientMixIn;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.dto.IngredientMixIn;
+import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
 import ua.kiev.naiv.drinkit.springconfig.AppConfig;
 import ua.kiev.naiv.drinkit.springconfig.WebConfig;
 
@@ -58,14 +58,14 @@ public class AbstractRestMockMvc {
         ingredientService.create(secondIngredient);
     }
 
-    protected Recipe createNewRecipe() {
-        Recipe recipe = new Recipe();
-        recipe.setCocktailTypeId(1);
-        recipe.setDescription("desc");
-        recipe.setName("Recipe for integration tests");
-        recipe.setOptions(new int[]{1, 2});
-        recipe.setCocktailIngredients(new Integer[][]{{firstIngredient.getId(), 50}, {secondIngredient.getId(), 60}});
-        return recipe;
+    protected RecipeDto createNewRecipe() {
+        RecipeDto recipeDto = new RecipeDto();
+        recipeDto.setCocktailTypeId(1);
+        recipeDto.setDescription("desc");
+        recipeDto.setName("Recipe for integration tests");
+        recipeDto.setOptions(new int[]{1, 2});
+        recipeDto.setCocktailIngredients(new Integer[][]{{firstIngredient.getId(), 50}, {secondIngredient.getId(), 60}});
+        return recipeDto;
     }
 
     protected Ingredient createNewIngredient() {

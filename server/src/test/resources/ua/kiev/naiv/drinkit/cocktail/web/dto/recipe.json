@@ -1,0 +1,5 @@
+{"cocktailIngredients": [
+    [2, 50],
+    [3, 100],
+    [4, 10]
+], "cocktailTypeId": 1, "name": "Куба Либре", "options": [2, 4], "description": "Сам рецепт приготовления"}

@@ -2,69 +2,68 @@ package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransformUtils {
 
 
-    public static Recipe transform(RecipeEntity recipeEntity) {
-        if (recipeEntity == null) {
+    public static RecipeDto transform(Recipe recipe) {
+        if (recipe == null) {
             return null;
         }
-        Recipe recipe = new Recipe();
-        recipe.setId(recipeEntity.getId());
-        recipe.setImage(recipeEntity.getImage());
-        recipe.setThumbnail(recipeEntity.getThumbnail());
-        recipe.setCocktailTypeId(recipeEntity.getCocktailType().getId());
-        recipe.setDescription(recipeEntity.getDescription());
-        recipe.setName(recipeEntity.getName());
-        recipe.setCocktailIngredients(recipeEntity.getIngredientsWithQuantities().stream()
+        RecipeDto recipeDto = new RecipeDto();
+        recipeDto.setId(recipe.getId());
+        recipeDto.setImageUrl("/rest/media/image/" + recipe.getImageFileName());
+        recipeDto.setThumbnailUrl("/rest/media/thumbnail/" + recipe.getThumbnailFileName());
+        recipeDto.setCocktailTypeId(recipe.getCocktailType().getId());
+        recipeDto.setDescription(recipe.getDescription());
+        recipeDto.setName(recipe.getName());
+        recipeDto.setCocktailIngredients(recipe.getIngredientsWithQuantities().stream()
                 .<Integer[]>map(val -> new Integer[]{val.getIngredient().getId(), val.getQuantity()})
                 .toArray(Integer[][]::new));
-        recipe.setOptions(recipeEntity.getOptions().stream()
+        recipeDto.setOptions(recipe.getOptions().stream()
                 .mapToInt(Option::getId)
                 .toArray());
-        if (recipeEntity.getRecipeStatistics() != null) {
-            processStatistics(recipeEntity.getRecipeStatistics(), recipe);
-        }
-        return recipe;
+//        if (recipe.getRecipeStatistics() != null) {
+//            processStatistics(recipe.getRecipeStatistics(), recipeDto);
+//        }
+        return recipeDto;
     }
 
-    private static void processStatistics(List<RecipeStatistics> recipeStatistics, Recipe recipe) {
-        recipe.setViews(recipeStatistics
-                .stream().mapToInt(RecipeStatistics::getViews).sum());
-        recipeStatistics
-                .stream().filter(val -> val.getRating() != null)
-                .mapToInt(RecipeStatistics::getRating).average().ifPresent(
-                recipe::setRating);
-        recipe.setVotes((int) recipeStatistics
-                .stream().filter(val -> val.getRating() != null).count());
-    }
+//    private static void processStatistics(List<RecipeStatistics> recipeStatistics, RecipeDto recipeDto) {
+//        recipeDto.setViews(recipeStatistics
+//                .stream().mapToInt(RecipeStatistics::getViews).sum());
+//        recipeStatistics
+//                .stream().filter(val -> val.getRating() != null)
+//                .mapToInt(RecipeStatistics::getRating).average().ifPresent(
+//                recipeDto::setRating);
+//        recipeDto.setVotes((int) recipeStatistics
+//                .stream().filter(val -> val.getRating() != null).count());
+//    }
 
-    public static RecipeEntity transform(Recipe recipe, IngredientRepository ingredientRepository) {
-        RecipeEntity recipeEntity = new RecipeEntity();
-        recipeEntity.setId(recipe.getId());
-        recipeEntity.setName(recipe.getName());
-        recipeEntity.setDescription(recipe.getDescription());
-        recipeEntity.setOptions(Arrays.stream(recipe.getOptions()).<Option>mapToObj(Option::new).collect(Collectors.toList()));
-        recipeEntity.setCocktailType(new CocktailType(recipe.getCocktailTypeId()));
-        recipeEntity.setIngredientsWithQuantities(Arrays.stream(recipe.getCocktailIngredients()).<IngredientWithQuantity>map(val -> {
+    public static Recipe transform(RecipeDto recipeDto, IngredientRepository ingredientRepository) {
+        Recipe recipe = new Recipe();
+        recipe.setId(recipeDto.getId());
+        recipe.setName(recipeDto.getName());
+        recipe.setDescription(recipeDto.getDescription());
+        recipe.setOptions(Arrays.stream(recipeDto.getOptions()).<Option>mapToObj(Option::new).collect(Collectors.toList()));
+        recipe.setCocktailType(new CocktailType(recipeDto.getCocktailTypeId()));
+        recipe.setIngredientsWithQuantities(Arrays.stream(recipeDto.getCocktailIngredients()).<IngredientWithQuantity>map(val -> {
             IngredientWithQuantity ingredientWithQuantity = new IngredientWithQuantity();
             ingredientWithQuantity.setQuantity(val[1]);
-            ingredientWithQuantity.setRecipeEntity(recipeEntity);
+            ingredientWithQuantity.setrecipe(recipe);
             Ingredient ingredientById = ingredientRepository.findOne(val[0]);
             if (ingredientById == null) throw new EmptyResultDataAccessException(1);
             ingredientById.getCocktailIngredients().add(ingredientWithQuantity);
             ingredientWithQuantity.setIngredient(ingredientById);
             return ingredientWithQuantity;
         }).collect(Collectors.toList()));
-        recipeEntity.setImage(recipe.getImage());
-        recipeEntity.setThumbnail(recipe.getThumbnail());
-        return recipeEntity;
+//        recipe.setImageUrl(recipeDto.getImageUrl());
+//        recipe.setThumbnailUrl(recipeDto.getThumbnailUrl());
+        return recipe;
     }
 
 }

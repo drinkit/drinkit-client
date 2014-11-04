@@ -12,7 +12,7 @@ public class CocktailType implements Serializable {
 
     private Integer id;
     private String name;
-    private Set<RecipeEntity> recipeEntities;
+    private Set<Recipe> recipeEntities;
 
     public CocktailType() {
     }
@@ -41,11 +41,11 @@ public class CocktailType implements Serializable {
     }
 
     @OneToMany(mappedBy = "cocktailType")
-    public Set<RecipeEntity> getRecipeEntities() {
+    public Set<Recipe> getRecipeEntities() {
         return recipeEntities;
     }
 
-    public void setRecipeEntities(Set<RecipeEntity> recipeEntities) {
+    public void setRecipeEntities(Set<Recipe> recipeEntities) {
         this.recipeEntities = recipeEntities;
     }
 }

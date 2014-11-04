@@ -2,24 +2,26 @@ package ua.kiev.naiv.drinkit.cocktail.service;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface RecipeService {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    Recipe save(Recipe recipe);
+    RecipeDto save(RecipeDto recipeDto);
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(int id);
 
-    List<Recipe> findAll();
+    List<RecipeDto> findAll();
 
-    List<Recipe> findByCriteria(Criteria criteria);
+    List<RecipeDto> findByCriteria(Criteria criteria);
 
-    List<Recipe> findByRecipeNameContaining(String namePart);
+    List<RecipeDto> findByRecipeNameContaining(String namePart);
 
-    Recipe getRecipeById(int id);
+    RecipeDto getRecipeById(int id);
 
+    void saveMedia(int recipeId, byte[] image, byte[] thumbnail) throws IOException;
 }

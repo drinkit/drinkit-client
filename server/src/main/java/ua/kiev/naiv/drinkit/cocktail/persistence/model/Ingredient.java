@@ -60,7 +60,7 @@ public class Ingredient {
         this.description = description;
     }
 
-    @OneToMany(mappedBy = "cocktailIngredientId.ingredient")
+    @OneToMany(mappedBy = "recipeIngredientId.ingredient")
     public Set<IngredientWithQuantity> getCocktailIngredients() {
         return cocktailIngredients;
     }
