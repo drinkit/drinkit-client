@@ -21,10 +21,6 @@
         import models.UserRoles;
         import models.events.ViewEvent;
 
-        import mx.events.FlexEvent;
-
-        import spark.components.NavigatorContent;
-
         [Bindable]
         private var _model:CocktailModel;
 

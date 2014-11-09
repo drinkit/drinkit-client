@@ -78,7 +78,7 @@ package controllers
         {
             BrowserManager.getInstance().addEventListener(BrowserChangeEvent.BROWSER_URL_CHANGE, onURLChange);
             BrowserManager.getInstance().init("", "drinkIt - " + MainModel.BUILDER_VIEW.title);
-            checkFragments();
+//            checkFragments();
         }
 
         private function onIngredientsLoad(response:String):void
