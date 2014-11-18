@@ -2,7 +2,7 @@ language: java
 jdk:
   - oraclejdk8
 script:
-  - cd server
+#  - cd server
   - mvn verify -Ptravis-ci
 before_script:
   - mysql -e 'create database drinkit;'
