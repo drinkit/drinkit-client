@@ -121,7 +121,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>drinkit</groupId>
+                                    <groupId>guru.drinkit</groupId>
                                     <artifactId>client</artifactId>
                                     <version>${project.version}</version>
                                     <type>swf</type>
