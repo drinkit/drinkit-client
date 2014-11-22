@@ -5,6 +5,7 @@ package models
     import mx.collections.ArrayCollection;
 
 
+    [Bindable]
     public class CocktailModel extends EventDispatcher
     {
         public static const BIG_IMAGE_WIDTH:Number = 384;
@@ -12,8 +13,9 @@ package models
         public static const SMALL_IMAGE_WIDTH:Number = 132;
         public static const SMALL_IMAGE_HEIGHT:Number = 176;
 
-        public function CocktailModel()
+        public function CocktailModel(id:Number = NaN)
         {
+            this.id = id;
         }
 
         public var id:Number;

@@ -19,19 +19,17 @@ package controllers
     {
         public static const COCKTAIL_DATA_LOADED:String = "cocktailDataLoaded";
 
-        public function CocktailController(key:Number)
+        public function CocktailController()
         {
-            requestCocktailData(key);
+
         }
+
         [Bindable]
         public var model:CocktailModel;
 
         private function requestCocktailData(key:Number):void
         {
-//            var params:URLVariables = new URLVariables();
-//            params.id = key;
             var request:JSRequest = new JSRequest();
-//            request.queryParams = params.toString();
             ServiceUtil.instance.sendRequest(Services.RECIPES + key, request, onCocktailInfoLoad);
         }
 
@@ -40,6 +38,20 @@ package controllers
             model = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
             MainController.instance.setTitle(model.name);
             dispatchEvent(new Event(COCKTAIL_DATA_LOADED));
+        }
+
+        public function loadNeededInfo(prototype:CocktailModel):void
+        {
+            if (prototype.name && prototype.cocktailTypeId)
+            {
+                model = prototype;
+                MainController.instance.setTitle(model.name);
+                dispatchEvent(new Event(COCKTAIL_DATA_LOADED));
+            }
+            else
+            {
+                requestCocktailData(prototype.id);
+            }
         }
     }
 }

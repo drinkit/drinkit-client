@@ -5,6 +5,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
     <fx:Script>
         <![CDATA[
+        import models.CocktailModel;
         import models.SearchResultsModel;
 
         import spark.events.IndexChangeEvent;
@@ -18,10 +19,10 @@
         {
             if (recipesList.selectedItem)
             {
-                var cocktailId:Number = recipesList.selectedItem.id;
+                var selectedCocktail:CocktailModel = recipesList.selectedItem;
                 recipesList.selectedIndex = -1;
                 recipesList.validateProperties();
-                MainController.instance.changeView(MainModel.COCKTAIL_VIEW, cocktailId);
+                MainController.instance.changeView(MainModel.COCKTAIL_VIEW, selectedCocktail);
             }
         }
 

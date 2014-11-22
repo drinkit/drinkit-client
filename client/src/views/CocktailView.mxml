@@ -15,6 +15,8 @@
         import design.DesignModel;
 
         import models.CocktailModel;
+
+        import models.CocktailModel;
         import models.MainModel;
         import models.TagsModel;
         import models.UserInfoModel;
@@ -55,8 +57,9 @@
 
         private function onViewChanged(event:ViewEvent):void
         {
-            _controller = new CocktailController(Number(event.viewData));
+            _controller = new CocktailController();
             _controller.addEventListener(CocktailController.COCKTAIL_DATA_LOADED, onDataLoaded);
+            _controller.loadNeededInfo(CocktailModel(event.viewData));
         }
         ]]>
 	</fx:Script>
