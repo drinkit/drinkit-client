@@ -82,7 +82,7 @@
     </s:Rect>
     <s:Image width="240" height="80" left="15" verticalCenter="0" source="@Embed(source='/../assets/logo-main.png')"
              blendMode="normal" buttonMode="true" click="onLogoClick(event)"/>
-    <s:HGroup right="10" top="10" gap="10" includeIn="anonymous">
+    <s:HGroup right="20" top="15" gap="10" includeIn="anonymous">
         <s:Label text="Войти" fontSize="14" textDecoration="underline" color="0xffffff" fontFamily="CenturyGothic"
                  buttonMode="true" click="onSignInClick(event)"/>
         <s:Line xFrom="0" xTo="0" height="100%">
@@ -93,7 +93,7 @@
         <s:Label text="Зарегистрироваться" fontSize="14" textDecoration="underline" color="0xffffff"
                  fontFamily="CenturyGothic" buttonMode="true" click="onSignUpClick(event)"/>
     </s:HGroup>
-    <s:HGroup right="10" top="10" gap="10" includeIn="authorised">
+    <s:HGroup right="20" top="15" gap="10" includeIn="authorised">
         <s:Label text="{UserInfoModel.instance.displayName}" fontSize="14" textDecoration="underline" color="0xffffff"
                  fontFamily="CenturyGothic"/>
         <s:Line xFrom="0" xTo="0" height="100%">
@@ -104,5 +104,5 @@
         <s:Label text="Выйти" fontSize="14" textDecoration="underline" color="0xffffff" fontFamily="CenturyGothic"
                  buttonMode="true" click="onLogoutClick(event)"/>
     </s:HGroup>
-    <s:TextInput right="10" bottom="10" width="200" enter="onSearchEnter(event)" skinClass="design.skins.RoundTextInputSkin" />
+    <s:TextInput right="20" bottom="15" width="200" enter="onSearchEnter(event)" skinClass="design.skins.RoundTextInputSkin" />
 </s:Group>
