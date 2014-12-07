@@ -135,7 +135,7 @@
                             <components:ExtNavigationContent width="100%" height="100%" label="Коктейль" includeInBar="false">
                                 <views:CocktailView width="100%" height="100%"/>
                             </components:ExtNavigationContent>
-                            <components:ExtNavigationContent width="100%" height="100%" label="Мой бар">
+                            <components:ExtNavigationContent width="100%" height="100%" label="Мой бар" includeInBar="false">
                                 <views:MyBar width="100%" height="100%"/>
                             </components:ExtNavigationContent>
                             <components:ExtNavigationContent width="100%" height="100%" label="Админ-панель"
