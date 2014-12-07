@@ -1,4 +1,3 @@
-/.idea/
+.idea
 *.iml
-
-server/src/main/webapp/
+target
