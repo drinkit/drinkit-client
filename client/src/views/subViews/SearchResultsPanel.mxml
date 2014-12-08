@@ -4,6 +4,9 @@
 -->
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
          clipAndEnableScrolling="false">
+    <s:layout>
+        <s:VerticalLayout horizontalAlign="center" />
+    </s:layout>
     <fx:Script>
         <![CDATA[
         import controllers.MainController;
@@ -12,21 +15,66 @@
         import models.MainModel;
         import models.SearchResultsModel;
 
+        import mx.collections.ArrayCollection;
+
         import spark.events.IndexChangeEvent;
 
-        [Bindable]
-        public var model:SearchResultsModel;
+        public var itemsPerPage:uint = int.MAX_VALUE;
 
-        protected function selectCocktailHandler(event:IndexChangeEvent):void
-        {
-            if (recipesList.selectedItem)
-            {
+        private var _itemsOnPage:uint = 0;
+
+        [Bindable]
+        private var _model:SearchResultsModel;
+
+        protected function selectCocktailHandler(event:IndexChangeEvent):void {
+            if (recipesList.selectedItem) {
                 var selectedCocktail:CocktailModel = recipesList.selectedItem;
                 recipesList.selectedIndex = -1;
                 recipesList.validateProperties();
                 MainController.instance.changeView(MainModel.COCKTAIL_VIEW, selectedCocktail);
             }
         }
+
+        public function get model():SearchResultsModel
+        {
+            return _model;
+        }
+
+        public function set model(value:SearchResultsModel):void
+        {
+            _model = value;
+            _model.addEventListener(Event.CHANGE, onModelChange);
+        }
+
+        [Bindable]
+        private var _visibleRecipes:ArrayCollection;
+
+        private function onModelChange(event:Event):void
+        {
+            _itemsOnPage = itemsPerPage;
+            showItems(_itemsOnPage);
+        }
+
+        private function showItems(itemsCount:uint):void
+        {
+            loadMoreButton.visible = loadMoreButton.includeInLayout = model.cocktailsList.length > itemsCount;
+
+            if (itemsCount == 0)
+            {
+                _visibleRecipes = new ArrayCollection(model.cocktailsList.source);
+            }
+            else
+            {
+                _visibleRecipes = new ArrayCollection(model.cocktailsList.source.slice(0, _itemsOnPage - 1));
+            }
+        }
+
+        private function onLoadMoreButtonClick(event:MouseEvent):void
+        {
+            _itemsOnPage += itemsPerPage;
+            showItems(_itemsOnPage);
+        }
+
         ]]>
     </fx:Script>
     <s:Label visible="{model.isNoCocktailsFound}" width="70%" fontSize="24" textAlign="center"
@@ -36,12 +84,12 @@
              top="20"/>
     <s:List id="recipesList" left="5" borderVisible="false" width="100%" height="100%"
             change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
-            itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{model.cocktailsList}"
+            itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{_visibleRecipes}"
             visible="{!model.isNoCocktailsFound}">
         <s:layout>
             <s:TileLayout horizontalGap="11" verticalGap="11" paddingBottom="5" paddingLeft="5" paddingRight="0"
                           paddingTop="5" clipAndEnableScrolling="false"/>
         </s:layout>
     </s:List>
-
+    <s:Button id="loadMoreButton" visible="false" includeInLayout="false" label="Показать еще..." click="onLoadMoreButtonClick(event)"/>
 </s:Group>

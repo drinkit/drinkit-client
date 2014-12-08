@@ -20,7 +20,7 @@ package models
         {
             BindingUtils.bindProperty(this, "ingredientsList", IngredientsModel.instance, "ingredientsList");
             selectedIngredientsList = new ArrayList();
-            cocktailsList = new ArrayCollection();//MockData.fakeCocktails();
+            cocktailsList = new ArrayCollection();
             //
             selectedIngredientsList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
         }

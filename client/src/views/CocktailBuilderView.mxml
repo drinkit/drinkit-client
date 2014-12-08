@@ -176,7 +176,7 @@
             </s:BorderContainer>
 
         </s:VGroup>
-        <subviews:SearchResultsPanel width="100%" height="100%" model="{_model}" clipAndEnableScrolling="false" />
+        <subviews:SearchResultsPanel width="100%" height="100%" model="{_model}" clipAndEnableScrolling="false" itemsPerPage="8" />
     </s:HGroup>
 
 
