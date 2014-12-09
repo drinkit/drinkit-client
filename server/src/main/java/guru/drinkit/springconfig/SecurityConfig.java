@@ -1,5 +1,7 @@
 package guru.drinkit.springconfig;
 
+import guru.drinkit.security.CustomDigestAuthenticationEntryPoint;
+import guru.drinkit.service.impl.BasicUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -14,8 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.DigestAuthenticationFilter;
-import guru.drinkit.cocktail.service.impl.BasicUserDetailsService;
-import guru.drinkit.security.CustomDigestAuthenticationEntryPoint;
 
 import javax.annotation.Resource;
 

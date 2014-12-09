@@ -2,7 +2,7 @@ package guru.drinkit.springconfig;
 
 import com.mongodb.MongoClient;
 import com.mongodb.WriteConcern;
-import guru.drinkit.cocktail.persistence.repository.RepositoryPackage;
+import guru.drinkit.repository.RepositoryPackage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
@@ -30,7 +30,7 @@ public class MongoConfig extends AbstractMongoConfiguration{
 
     @Override
     protected String getMappingBasePackage() {
-        return "guru.drinkit.cocktail.web.dto";
+        return "guru.drinkit.cocktail.domain";
     }
 
     @Bean

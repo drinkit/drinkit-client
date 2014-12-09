@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  */
 @Configuration
 @ComponentScan({
-        "guru.drinkit.cocktail.web.controller",
+        "guru.drinkit.web.controller",
         "guru.drinkit.cocktail.common"
 })
 @EnableWebMvc
