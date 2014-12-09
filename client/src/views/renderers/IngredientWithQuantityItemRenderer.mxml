@@ -33,7 +33,7 @@
         ]]>
 	</fx:Script>
 
-    <s:Line yFrom="0" yTo="0" width="100%" visible="{_isFirstItem}">
+    <s:Line yFrom="0" yTo="0" width="100%" includeInLayout="{_isFirstItem}" visible="{_isFirstItem}">
         <s:stroke>
             <s:SolidColorStroke color="#c0c0c0" weight="1" alpha="1" />
         </s:stroke>

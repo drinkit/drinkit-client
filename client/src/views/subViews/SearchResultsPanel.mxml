@@ -2,15 +2,17 @@
 <!--
   Created by Crabar on 9/14/14.
 -->
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         clipAndEnableScrolling="false">
     <fx:Script>
         <![CDATA[
+        import controllers.MainController;
+
         import models.CocktailModel;
+        import models.MainModel;
         import models.SearchResultsModel;
 
         import spark.events.IndexChangeEvent;
-        import controllers.MainController;
-        import models.MainModel;
 
         [Bindable]
         public var model:SearchResultsModel;
@@ -25,7 +27,6 @@
                 MainController.instance.changeView(MainModel.COCKTAIL_VIEW, selectedCocktail);
             }
         }
-
         ]]>
     </fx:Script>
     <s:Label visible="{model.isNoCocktailsFound}" width="70%" fontSize="24" textAlign="center"
@@ -38,8 +39,8 @@
             itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{model.cocktailsList}"
             visible="{!model.isNoCocktailsFound}">
         <s:layout>
-            <s:TileLayout horizontalGap="10" verticalGap="10" paddingBottom="5" paddingLeft="5" paddingRight="5"
-                          paddingTop="5"/>
+            <s:TileLayout horizontalGap="11" verticalGap="11" paddingBottom="5" paddingLeft="5" paddingRight="0"
+                          paddingTop="5" clipAndEnableScrolling="false"/>
         </s:layout>
     </s:List>
 

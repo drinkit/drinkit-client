@@ -68,14 +68,13 @@
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>
 
-
     <components:ImageWithBorder id="photo" width="{CocktailModel.BIG_IMAGE_WIDTH}" height="{CocktailModel.BIG_IMAGE_HEIGHT}" borderColor="#c0c0c0" borderSize="1" />
     <s:VGroup width="100%" gap="20">
         <s:Label id="cocktailName" width="100%" styleName="cocktailNameText" fontSize="28" textAlign="center" text="{_model.name}"/>
         <s:List borderVisible="false" itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" width="100%"
                 dataProvider="{_model.ingredientWithQuantitiesProvider}">
             <s:layout>
-                <s:VerticalLayout requestedMinRowCount="1"/>
+                <s:VerticalLayout requestedMinRowCount="1" gap="10"/>
             </s:layout>
         </s:List>
         <s:TextArea id="cocktailDescription" styleName="regularText" contentBackgroundAlpha="0"
