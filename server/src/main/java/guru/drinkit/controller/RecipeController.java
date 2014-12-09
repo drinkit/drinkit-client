@@ -7,7 +7,6 @@ import guru.drinkit.common.DrinkitUtils;
 import guru.drinkit.domain.Recipe;
 import guru.drinkit.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,7 @@ public class RecipeController {
     @RequestMapping(value = "/{recipeId}", method = RequestMethod.GET)
     @ResponseBody
     public Recipe getRecipeById(@PathVariable int recipeId) {
-        return recipeService.getRecipeById(recipeId);
+        return recipeService.findById(recipeId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -82,11 +81,11 @@ public class RecipeController {
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteRecipe(@PathVariable int id) {
-        try {
+        if (recipeService.findById(id) != null) {
             DrinkitUtils.logOperation("Deleting recipe", id);
             recipeService.delete(id);
             return ResponseEntity.noContent().build();
-        } catch (EmptyResultDataAccessException e) {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

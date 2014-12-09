@@ -5,9 +5,12 @@ import com.mongodb.WriteConcern;
 import guru.drinkit.repository.RepositoryPackage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+
+import javax.annotation.Resource;
 
 /**
  * Created by pkolmykov on 12/8/2014.
@@ -15,9 +18,13 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @Configuration
 @EnableMongoRepositories(basePackageClasses = RepositoryPackage.class)
 public class MongoConfig extends AbstractMongoConfiguration{
+
+    @Resource
+    Environment env;
+
     @Override
     protected String getDatabaseName() {
-        return "world";
+        return env.getRequiredProperty("mongo.dbname");
     }
 
     @Override
@@ -30,7 +37,7 @@ public class MongoConfig extends AbstractMongoConfiguration{
 
     @Override
     protected String getMappingBasePackage() {
-        return "guru.drinkit.cocktail.domain";
+        return "guru.drinkit.domain";
     }
 
     @Bean

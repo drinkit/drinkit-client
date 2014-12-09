@@ -7,6 +7,7 @@ import guru.drinkit.springconfig.AppConfig;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +27,13 @@ public abstract class AbstractBaseTest {
     @Autowired
     private IngredientService ingredientService;
 
+    @Autowired
+    MongoTemplate mongoTemplate;
+
     @Before
     public void initTestData() {
+        System.out.println("DROP");
+        mongoTemplate.getDb().dropDatabase();
         firstIngredient = new Ingredient();
         firstIngredient.setDescription("firstIngredient");
         firstIngredient.setName("First");

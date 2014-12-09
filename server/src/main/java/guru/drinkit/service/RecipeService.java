@@ -21,7 +21,7 @@ public interface RecipeService {
 
     List<Recipe> findByRecipeNameContaining(String namePart);
 
-    Recipe getRecipeById(int id);
+    Recipe findById(int id);
 
     void saveMedia(int recipeId, byte[] image, byte[] thumbnail) throws IOException;
 }

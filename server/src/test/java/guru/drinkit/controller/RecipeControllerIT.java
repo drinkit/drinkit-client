@@ -45,13 +45,13 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 //        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
 //                .andExpect(status().isOk())
 //                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipe)));
-//        assertEquals(recipeService.getRecipeById(insertedRecipe.getId()).getViews(), views);
+//        assertEquals(recipeService.findById(insertedRecipe.getId()).getViews(), views);
 //        SecurityContextHolder.createEmptyContext();
 //        SecurityContextHolder.getContext().setAuthentication(new TestingAuthenticationToken(null, "", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))));
 //        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
 //                .andExpect(status().isOk())
 //                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipe)));
-//        assertEquals(recipeService.getRecipeById(insertedRecipe.getId()).getViews(), ++views);
+//        assertEquals(recipeService.findById(insertedRecipe.getId()).getViews(), ++views);
 //
 //    }
 
@@ -73,10 +73,10 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 
     @Test
     public void testDeleteRecipe() throws Exception {
-        assertNotNull(recipeService.getRecipeById(insertedRecipe.getId()));
+        assertNotNull(recipeService.findById(insertedRecipe.getId()));
         mockMvc.perform(delete(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
                 .andExpect(status().isNoContent());
-        assertNull(recipeService.getRecipeById(insertedRecipe.getId()));
+        assertNull(recipeService.findById(insertedRecipe.getId()));
         mockMvc.perform(delete(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
                 .andExpect(status().isNotFound());
     }
@@ -90,7 +90,7 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
                         .content(objectMapper.writeValueAsBytes(insertedRecipe))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
-        assertEquals(insertedRecipe, recipeService.getRecipeById(insertedRecipe.getId()));
+        assertEquals(insertedRecipe, recipeService.findById(insertedRecipe.getId()));
     }
 
     @Test
@@ -105,7 +105,7 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
                 .content(objectNode.toString()))
                 .andExpect(status().isNoContent());
 
-        Recipe recipe = recipeService.getRecipeById(insertedRecipe.getId());
+        Recipe recipe = recipeService.findById(insertedRecipe.getId());
         assertNotNull(recipe.getImageUrl());
         assertNotNull(recipe.getThumbnailUrl());
     }

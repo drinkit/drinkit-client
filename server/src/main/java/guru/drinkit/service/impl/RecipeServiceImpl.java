@@ -57,7 +57,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @EnableStats
     @Transactional(readOnly = true)
-    public Recipe getRecipeById(int id) {
+    public Recipe findById(int id) {
         return recipeRepository.findOne(id);
     }
 

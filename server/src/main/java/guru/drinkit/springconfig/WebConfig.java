@@ -15,8 +15,8 @@ import javax.annotation.Resource;
  */
 @Configuration
 @ComponentScan({
-        "guru.drinkit.web.controller",
-        "guru.drinkit.cocktail.common"
+        "guru.drinkit.controller",
+        "guru.drinkit.common"
 })
 @EnableWebMvc
 @EnableAspectJAutoProxy
