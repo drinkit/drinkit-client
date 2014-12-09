@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -33,13 +32,13 @@ public abstract class AbstractBaseTest {
         firstIngredient.setDescription("firstIngredient");
         firstIngredient.setName("First");
         firstIngredient.setVol(30);
-        firstIngredient = ingredientService.create(firstIngredient);
+        firstIngredient = ingredientService.save(firstIngredient);
 
         secondIngredient = new IngredientDto();
         secondIngredient.setDescription("secondIngredient");
         secondIngredient.setName("Second");
         secondIngredient.setVol(40);
-        secondIngredient = ingredientService.create(secondIngredient);
+        secondIngredient = ingredientService.save(secondIngredient);
     }
 
     protected RecipeDto createNewRecipeDto() {

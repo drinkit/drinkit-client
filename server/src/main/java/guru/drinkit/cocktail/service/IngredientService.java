@@ -11,9 +11,7 @@ public interface IngredientService {
 
     IngredientDto getIngredientById(int id);
 
-    IngredientDto create(IngredientDto ingredient);
-
-    void update(IngredientDto ingredient);
+    IngredientDto save(IngredientDto ingredient);
 
     void delete(int id) throws RecipesFoundException;
 }

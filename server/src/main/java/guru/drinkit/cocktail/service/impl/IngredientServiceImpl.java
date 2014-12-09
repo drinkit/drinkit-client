@@ -1,10 +1,6 @@
 package guru.drinkit.cocktail.service.impl;
 
 import guru.drinkit.cocktail.exception.RecipesFoundException;
-import guru.drinkit.cocktail.exception.RecordNotFoundException;
-import guru.drinkit.cocktail.mapping.DtoMapper;
-import guru.drinkit.cocktail.persistence.entity.Ingredient;
-import guru.drinkit.cocktail.persistence.entity.IngredientWithQuantity;
 import guru.drinkit.cocktail.persistence.repository.IngredientRepository;
 import guru.drinkit.cocktail.service.IngredientService;
 import guru.drinkit.cocktail.web.dto.IngredientDto;
@@ -14,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Transactional
@@ -26,49 +20,29 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Autowired
     IngredientRepository ingredientRepository;
-    @Resource
-    private DtoMapper dtoMapper;
 
     @Override
     public List<IngredientDto> getIngredients() {
-        List<Ingredient> ingredients = ingredientRepository.findAll();
-        LOGGER.info("getIngredients: found {} records", ingredients.size());
-        return dtoMapper.mapAsList(ingredients, IngredientDto.class);
+//        LOGGER.info("getIngredients: found {} records", ingredients.size());
+        return ingredientRepository.findAll();
     }
 
     @Override
     public IngredientDto getIngredientById(int id) {
-        return dtoMapper.map(ingredientRepository.findOne(id), IngredientDto.class);
+        return ingredientRepository.findOne(id);
     }
 
     @Override
-    public IngredientDto create(IngredientDto ingredientDto) {
-        if (ingredientDto.getId() != null) {
-            throw new IllegalArgumentException("create ingredient cannot have id");
-        }
-        return dtoMapper.map(ingredientRepository.saveAndFlush(
-                dtoMapper.map(ingredientDto, Ingredient.class)), IngredientDto.class);
-    }
-
-    @Override
-    public void update(IngredientDto ingredientDto) {
+    public IngredientDto save(IngredientDto ingredientDto) {
         if (ingredientDto.getId() == null) {
-            throw new IllegalArgumentException("update ingredient should have id");
+            Integer lastId = ingredientRepository.findFirstByOrderByIdDesc().getId();
+            ingredientDto.setId(lastId == null ? 1 : ++lastId);
         }
-        ingredientRepository.saveAndFlush(dtoMapper.map(ingredientDto, Ingredient.class));
+        return ingredientRepository.save(ingredientDto);
     }
 
     @Override
     public void delete(int id) throws RecipesFoundException {
-        Ingredient ingredient = ingredientRepository.findOne(id);
-        if (ingredient == null) {
-            throw new RecordNotFoundException("Ingredient not found : " + id);
-        }
-        Set<IngredientWithQuantity> cocktailIngredients = ingredient.getCocktailIngredients();
-        if (cocktailIngredients.isEmpty()) {
-            ingredientRepository.delete(id);
-        } else {
-            throw new RecipesFoundException(cocktailIngredients.size());
-        }
+        ingredientRepository.delete(id);//todo RecipesFoundException
     }
 }

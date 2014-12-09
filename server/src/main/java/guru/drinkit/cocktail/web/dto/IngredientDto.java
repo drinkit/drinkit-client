@@ -40,4 +40,14 @@ public class IngredientDto {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "IngredientDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", vol=" + vol +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

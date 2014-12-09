@@ -1,7 +1,7 @@
 package guru.drinkit.cocktail.web.controller;
 
-import guru.drinkit.cocktail.persistence.entity.User;
 import guru.drinkit.cocktail.service.impl.BasicUserDetailsService;
+import guru.drinkit.cocktail.web.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

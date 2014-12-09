@@ -1,13 +1,13 @@
 package guru.drinkit.cocktail.persistence.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import guru.drinkit.cocktail.persistence.entity.Recipe;
+import guru.drinkit.cocktail.web.dto.RecipeDto;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface RecipeRepository extends JpaRepository<Recipe, Integer>, JpaSpecificationExecutor<Recipe> {
+public interface RecipeRepository extends MongoRepository<RecipeDto, Integer>, RecipeRepositoryCustom{
 
-    List<Recipe> findByNameContaining(String namePart);
+    List<RecipeDto> findByNameContainingIgnoreCase(String namePart);
 
+    RecipeDto findFirstByOrderByIdDesc();
 }

@@ -1,41 +1,25 @@
-package guru.drinkit.cocktail.persistence.entity;
+package guru.drinkit.cocktail.web.dto;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
 
-@SuppressWarnings("unused")
-@Entity
-@Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "id"),
-        @UniqueConstraint(columnNames = "username")
-})
+/**
+ * Created by pkolmykov on 12/8/2014.
+ */
 public class User {
 
     public static final int ACCESS_LVL_USER = 9;
     public static final int ACCESS_LVL_ADMIN = 0;
 
+//        private Integer id;
     @Id
-    @GeneratedValue()
-    private Integer id;
-
-    @Column(unique = true)
     private String username;
     private String password;
     private String displayName;
     private Integer accessLevel;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getUsername() {
         return username;
     }
-
 
     public void setUsername(String username) {
         this.username = username;

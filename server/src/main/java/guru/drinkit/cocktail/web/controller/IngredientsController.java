@@ -29,7 +29,7 @@ public class IngredientsController {
     public void addNewIngredient(@RequestBody IngredientDto ingredientDto) {
         Assert.isNull(ingredientDto.getId());
         DrinkitUtils.logOperation("Creating ingredient", ingredientDto);
-        ingredientService.create(ingredientDto);
+        ingredientService.save(ingredientDto);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
@@ -37,7 +37,7 @@ public class IngredientsController {
     public void editIngredient(@RequestBody IngredientDto ingredientDto, @PathVariable int id) {
         Assert.isTrue(id == ingredientDto.getId(), "id from uri and id from json should be identical");
         DrinkitUtils.logOperation("Updating ingredient", ingredientDto);
-        ingredientService.update(ingredientDto);
+        ingredientService.save(ingredientDto);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)

@@ -3,11 +3,9 @@ package guru.drinkit.cocktail.web.controller;
 import guru.drinkit.cocktail.service.RecipeService;
 import guru.drinkit.cocktail.web.dto.IngredientDto;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import guru.drinkit.cocktail.service.IngredientService;
 import guru.drinkit.cocktail.web.dto.RecipeDto;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -26,7 +24,7 @@ public class RestEndpointsITCase extends AbstractRestMockMvc {
 
     @Test
     public void testDeleteRecipeShouldReturn409() throws Exception {
-        int ingredientId = ingredientService.create(createNewIngredient()).getId();
+        int ingredientId = ingredientService.save(createNewIngredient()).getId();
         RecipeDto newRecipeDto = createNewRecipeDto();
         newRecipeDto.setCocktailIngredients(new Integer[][]{{ingredientId, 100}});
         recipeService.save(newRecipeDto);
