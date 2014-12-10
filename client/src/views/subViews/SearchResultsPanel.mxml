@@ -5,7 +5,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
          clipAndEnableScrolling="false">
     <s:layout>
-        <s:VerticalLayout horizontalAlign="center" clipAndEnableScrolling="false"/>
+        <s:VerticalLayout horizontalAlign="center" clipAndEnableScrolling="false" paddingBottom="5"/>
     </s:layout>
     <fx:Script>
         <![CDATA[
@@ -22,12 +22,15 @@
         public var itemsPerPage:uint = int.MAX_VALUE;
 
         private var _itemsOnPage:uint = 0;
+        private var _startItemIndex:uint = 0;
 
         [Bindable]
         private var _model:SearchResultsModel;
 
-        protected function selectCocktailHandler(event:IndexChangeEvent):void {
-            if (recipesList.selectedItem) {
+        protected function selectCocktailHandler(event:IndexChangeEvent):void
+        {
+            if (recipesList.selectedItem)
+            {
                 var selectedCocktail:CocktailModel = recipesList.selectedItem;
                 recipesList.selectedIndex = -1;
                 recipesList.validateProperties();
@@ -54,12 +57,14 @@
             noResultsLabel.includeInLayout = noResultsLabel.visible = model.isNoCocktailsFound;
             recipesList.includeInLayout = recipesList.visible = !model.isNoCocktailsFound;
             _itemsOnPage = itemsPerPage;
-            showItems(_itemsOnPage);
+            showItems(_startItemIndex, _itemsOnPage);
         }
 
-        private function showItems(itemsCount:uint):void
+        private function showItems(startIndex:uint, itemsCount:uint):void
         {
-            loadMoreButton.visible = loadMoreButton.includeInLayout = model.cocktailsList.length > itemsCount;
+            controlGroup.visible = controlGroup.includeInLayout = model.cocktailsList.length > itemsCount;
+            backButton.visible = startIndex > 0;
+            forwardButton.visible = startIndex + itemsCount < model.cocktailsList.length;
 
             if (itemsCount == 0)
             {
@@ -67,16 +72,29 @@
             }
             else
             {
-                _visibleRecipes = new ArrayCollection(model.cocktailsList.source.slice(0, _itemsOnPage));
+                _visibleRecipes = new ArrayCollection(model.cocktailsList.source.slice(startIndex, startIndex + itemsCount));
             }
+
+
         }
 
-        private function onLoadMoreButtonClick(event:MouseEvent):void
+//        private function onLoadMoreButtonClick(event:MouseEvent):void
+//        {
+//            _itemsOnPage += itemsPerPage;
+//            showItems(_itemsOnPage);
+//        }
+
+        private function backButton_clickHandler(event:MouseEvent):void
         {
-            _itemsOnPage += itemsPerPage;
-            showItems(_itemsOnPage);
+            _startItemIndex -= itemsPerPage;
+            showItems(_startItemIndex, itemsPerPage);
         }
 
+        private function forwardButton_clickHandler(event:MouseEvent):void
+        {
+            _startItemIndex += itemsPerPage;
+            showItems(_startItemIndex, itemsPerPage);
+        }
         ]]>
     </fx:Script>
     <s:Label id="noResultsLabel" width="70%" fontSize="24" textAlign="center"
@@ -92,5 +110,9 @@
                           paddingTop="5" clipAndEnableScrolling="false"/>
         </s:layout>
     </s:List>
-    <s:Button id="loadMoreButton" visible="false" includeInLayout="false" label="Показать еще..." click="onLoadMoreButtonClick(event)"/>
+    <s:Group id="controlGroup" width="100%">
+        <s:Button id="backButton" left="5" label="Назад" click="backButton_clickHandler(event)"/>
+        <s:Button id="forwardButton" right="5" label="Еще коктейлей..." click="forwardButton_clickHandler(event)" />
+    </s:Group>
+    <!-- <s:Button id="loadMoreButton" visible="false" includeInLayout="false" label="Показать еще..." click="onLoadMoreButtonClick(event)"/> -->
 </s:Group>
