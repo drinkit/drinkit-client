@@ -2,12 +2,17 @@ package guru.drinkit.controller;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import guru.drinkit.domain.Recipe;
+import guru.drinkit.domain.RecipeStatistics;
+import guru.drinkit.repository.RecipesStatisticsRepository;
 import guru.drinkit.service.RecipeService;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Collections;
@@ -23,12 +28,11 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 
 
     @Autowired
-//            @Resource(name = "mockFileStoreService")
-//    @InjectMocks
-//            @Spy
+
             RecipeService recipeService;
-//    @Resource(name = "mockFileStoreService")
-//    FileStoreService fileStoreService;
+
+    @Autowired
+    RecipesStatisticsRepository recipesStatisticsRepository;
 
 
     private Recipe insertedRecipe;
@@ -39,21 +43,26 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
     }
 
 
-//    @Test//todo fix it
-//    public void testGetRecipeByIdWithStats() throws Exception {
-//        int views = insertedRecipe.getViews();
-//        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
+    @Test
+    public void testGetRecipeByIdWithStats() throws Exception {
+        Integer recipeId = insertedRecipe.getId();
+//        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + recipeId))
 //                .andExpect(status().isOk())
 //                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipe)));
-//        assertEquals(recipeService.findById(insertedRecipe.getId()).getViews(), views);
-//        SecurityContextHolder.createEmptyContext();
-//        SecurityContextHolder.getContext().setAuthentication(new TestingAuthenticationToken(null, "", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))));
-//        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + insertedRecipe.getId()))
-//                .andExpect(status().isOk())
-//                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipe)));
-//        assertEquals(recipeService.findById(insertedRecipe.getId()).getViews(), ++views);
-//
-//    }
+//        assertEquals(recipesStatisticsRepository.findOneByRecipeId
+//                (recipeId).getViews(), recipesStatisticsRepository.findOneByRecipeId(recipeId).getViews());
+//        int views = recipesStatisticsRepository.findOneByRecipeId
+//                (recipeId).getViews();
+        SecurityContextHolder.createEmptyContext();
+        SecurityContextHolder.getContext().setAuthentication(new TestingAuthenticationToken(null, "", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))));
+        mockMvc.perform(get(RESOURCE_ENDPOINT + "/" + recipeId))
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(insertedRecipe)));
+        RecipeStatistics statistics = recipesStatisticsRepository.findOneByRecipeId(recipeId);
+        assertNotNull(statistics.getLastViewed());
+        assertEquals(1, statistics.getViews());
+
+    }
 
     @Test
     public void testCreateRecipe() throws Exception {

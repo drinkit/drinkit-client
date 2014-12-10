@@ -32,7 +32,6 @@ public abstract class AbstractBaseTest {
 
     @Before
     public void initTestData() {
-        System.out.println("DROP");
         mongoTemplate.getDb().dropDatabase();
         firstIngredient = new Ingredient();
         firstIngredient.setDescription("firstIngredient");

@@ -2,11 +2,11 @@ package guru.drinkit.service.impl;
 
 import guru.drinkit.common.Criteria;
 import guru.drinkit.common.RecipeComparatorByCriteria;
-import guru.drinkit.common.aspect.EnableStats;
 import guru.drinkit.domain.Recipe;
 import guru.drinkit.repository.RecipeRepository;
 import guru.drinkit.service.FileStoreService;
 import guru.drinkit.service.RecipeService;
+import guru.drinkit.service.aspect.EnableStats;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

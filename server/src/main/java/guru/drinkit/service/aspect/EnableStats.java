@@ -1,4 +1,4 @@
-package guru.drinkit.common.aspect;
+package guru.drinkit.service.aspect;
 
 /**
  * Aspect marker for {@link StatsAspect}
