@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 
@@ -27,7 +29,7 @@ public class StatsAspect {
         if (userName != null) {
             mongoOperations.upsert(query(
                             where("recipeId").is(id).and("userId").is(userName)),
-                    new Update().inc("views", 1).currentDate("lastViewed"), RecipeStatistics.class);
+                    new Update().inc("views", 1).set("lastViewed", new Date()), RecipeStatistics.class);
         }
     }
 
