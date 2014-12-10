@@ -31,6 +31,7 @@ package controllers
             _model.id = NaN;
             createRequest.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(_model));
             createRequest.contentType = "application/json;charset=UTF-8";
+            createRequest.expectedStatus = 201;
             ServiceUtil.instance.sendRequest(Services.INGREDIENTS, createRequest, onCreateIngredient);
         }
 

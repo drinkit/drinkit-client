@@ -65,7 +65,6 @@ package controllers
             }
         }
 
-
         public function performSearch():void
         {
             var criteria:SearchParameters = new SearchParameters();

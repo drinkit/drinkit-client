@@ -3,6 +3,7 @@
  */
 package models
 {
+    import flash.events.Event;
     import flash.events.EventDispatcher;
 
     import mx.collections.ArrayCollection;
@@ -18,11 +19,22 @@ package models
         public var isNoCocktailsFound:Boolean;
 
         [Bindable(event="change")]
-        public var cocktailsList:ArrayCollection;
+        private var _cocktailsList:ArrayCollection;
 
         public function isIngredientSelected(id:Number):Boolean
         {
             return false;
+        }
+
+        public function get cocktailsList():ArrayCollection
+        {
+            return _cocktailsList;
+        }
+
+        public function set cocktailsList(value:ArrayCollection):void
+        {
+            _cocktailsList = value;
+            dispatchEvent(new Event(Event.CHANGE));
         }
     }
 }

@@ -1,0 +1,12 @@
+evaluationDependsOn("client")
+project('server') {
+    apply plugin: 'war'
+    war {
+        dependsOn ':client:createHtmlWrapper'
+        from(project(':client').compileFlex)
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}

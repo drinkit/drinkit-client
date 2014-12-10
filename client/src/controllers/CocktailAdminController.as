@@ -94,6 +94,7 @@ package controllers {
             cocktail.cocktailTypeId = _model.cocktailTypeId;
             var request:JSRequest = new JSRequest(URLRequestMethod.POST);
             request.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(cocktail));
+            request.expectedStatus = 201;
             request.contentType = "application/json;charset=UTF-8";
             ServiceUtil.instance.sendRequest(Services.RECIPES, request, onCocktailSave);
         }

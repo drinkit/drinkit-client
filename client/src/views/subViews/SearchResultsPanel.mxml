@@ -5,7 +5,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
          clipAndEnableScrolling="false">
     <s:layout>
-        <s:VerticalLayout horizontalAlign="center" />
+        <s:VerticalLayout horizontalAlign="center" clipAndEnableScrolling="false"/>
     </s:layout>
     <fx:Script>
         <![CDATA[
@@ -51,6 +51,8 @@
 
         private function onModelChange(event:Event):void
         {
+            noResultsLabel.includeInLayout = noResultsLabel.visible = model.isNoCocktailsFound;
+            recipesList.includeInLayout = recipesList.visible = !model.isNoCocktailsFound;
             _itemsOnPage = itemsPerPage;
             showItems(_itemsOnPage);
         }
@@ -65,7 +67,7 @@
             }
             else
             {
-                _visibleRecipes = new ArrayCollection(model.cocktailsList.source.slice(0, _itemsOnPage - 1));
+                _visibleRecipes = new ArrayCollection(model.cocktailsList.source.slice(0, _itemsOnPage));
             }
         }
 
@@ -77,15 +79,14 @@
 
         ]]>
     </fx:Script>
-    <s:Label visible="{model.isNoCocktailsFound}" width="70%" fontSize="24" textAlign="center"
+    <s:Label id="noResultsLabel" width="70%" fontSize="24" textAlign="center"
              styleName="regularText" horizontalCenter="0"
              maxDisplayedLines="2" paddingLeft="5" paddingRight="5"
              text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
              top="20"/>
     <s:List id="recipesList" left="5" borderVisible="false" width="100%" height="100%"
-            change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
-            itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{_visibleRecipes}"
-            visible="{!model.isNoCocktailsFound}">
+            change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false" verticalScrollPolicy="off"
+            itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{_visibleRecipes}" horizontalScrollPolicy="off">
         <s:layout>
             <s:TileLayout horizontalGap="11" verticalGap="11" paddingBottom="5" paddingLeft="5" paddingRight="0"
                           paddingTop="5" clipAndEnableScrolling="false"/>
