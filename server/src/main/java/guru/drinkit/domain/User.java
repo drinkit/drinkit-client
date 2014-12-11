@@ -1,6 +1,7 @@
 package guru.drinkit.domain;
 
-import org.springframework.data.annotation.Id;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 /**
  * Created by pkolmykov on 12/8/2014.
@@ -10,12 +11,27 @@ public class User {
     public static final int ACCESS_LVL_USER = 9;
     public static final int ACCESS_LVL_ADMIN = 0;
 
-//        private Integer id;
-    @Id
+    private ObjectId id;
     private String username;
     private String password;
     private String displayName;
     private Integer accessLevel;
+
+    public User() {
+    }
+
+    @PersistenceConstructor
+    protected User(ObjectId id, String username, String password, String displayName, Integer accessLevel) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.displayName = displayName;
+        this.accessLevel = accessLevel;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
 
     public String getUsername() {
         return username;
