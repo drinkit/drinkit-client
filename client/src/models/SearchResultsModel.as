@@ -34,6 +34,11 @@ package models
         public function set cocktailsList(value:ArrayCollection):void
         {
             _cocktailsList = value;
+            signalizeAboutChange();
+        }
+
+        public function signalizeAboutChange():void
+        {
             dispatchEvent(new Event(Event.CHANGE));
         }
     }
