@@ -1,6 +1,7 @@
 package guru.drinkit.service.impl;
 
 import guru.drinkit.common.Criteria;
+import guru.drinkit.common.DrinkitUtils;
 import guru.drinkit.common.RecipeComparatorByCriteria;
 import guru.drinkit.domain.Recipe;
 import guru.drinkit.repository.RecipeRepository;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 
@@ -31,6 +33,8 @@ public class RecipeServiceImpl implements RecipeService {
         if (recipe.getId() == null) {
             Recipe lastRecipe = recipeRepository.findFirstByOrderByIdDesc();
             recipe.setId(lastRecipe == null ? 1 : lastRecipe.getId() + 1);
+            recipe.setAddedBy(DrinkitUtils.getUserName());
+            recipe.setCreatedDate(new Date());
         }
         return recipeRepository.save(recipe);
     }

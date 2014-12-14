@@ -1,7 +1,9 @@
 package guru.drinkit.domain;
 
 import java.util.Arrays;
+import java.util.Date;
 
+@SuppressWarnings("UnusedDeclaration")
 public class Recipe {
 
     private int cocktailTypeId;
@@ -12,7 +14,27 @@ public class Recipe {
     private String imageUrl;
     private String thumbnailUrl;
     private Integer id;
+    private Date createdDate = new Date();
+    private String addedBy;
+
     //-------------------------------------------------------------------
+
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(String addedBy) {
+        this.addedBy = addedBy;
+    }
 
     public int getCocktailTypeId() {
         return cocktailTypeId;
