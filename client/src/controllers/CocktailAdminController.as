@@ -224,6 +224,7 @@ package controllers {
 
             uploadPhoto(_model.cocktailId, _model.imageData, _model.imageClipRect);
             Alert.show("Коктейль успешно сохранен.");
+            _model.clear();
         }
 
         private function cropAndSerializeCocktailImage(imageData:BitmapData, clipRect:Rectangle):Array {
