@@ -58,6 +58,7 @@
             noResultsLabel.includeInLayout = noResultsLabel.visible = model.isNoCocktailsFound;
             recipesList.includeInLayout = recipesList.visible = !model.isNoCocktailsFound;
             _itemsOnPage = itemsPerPage;
+            _startItemIndex = 0;
             showItems(_startItemIndex, _itemsOnPage);
         }
 
