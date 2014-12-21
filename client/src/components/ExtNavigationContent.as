@@ -22,8 +22,6 @@ package components
         {
             _includeInBar = value;
             dispatchEvent(new Event("labelChanged"));
-//			if (owner)
-//				ViewStack(owner).
         }
 
     }
