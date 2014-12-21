@@ -46,6 +46,7 @@
         public function set model(value:SearchResultsModel):void
         {
             _model = value;
+            noResultsLabel.visible = recipesList.visible = controlGroup.visible = true;
             _model.addEventListener(Event.CHANGE, onModelChange);
         }
 
@@ -78,15 +79,7 @@
             {
                 _visibleRecipes = new ArrayCollection(model.cocktailsList.source.slice(startIndex, startIndex + itemsCount));
             }
-
-
         }
-
-        //        private function onLoadMoreButtonClick(event:MouseEvent):void
-        //        {
-        //            _itemsOnPage += itemsPerPage;
-        //            showItems(_itemsOnPage);
-        //        }
 
         private function backButton_clickHandler(event:MouseEvent):void
         {
@@ -101,12 +94,12 @@
         }
         ]]>
     </fx:Script>
-    <s:Label id="noResultsLabel" width="70%" fontSize="24" textAlign="center"
+    <s:Label id="noResultsLabel" visible="false" width="70%" fontSize="24" textAlign="center"
              styleName="regularText" horizontalCenter="0"
              maxDisplayedLines="2" paddingLeft="5" paddingRight="5"
              text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
              top="20"/>
-    <s:List id="recipesList" left="5" borderVisible="false" width="100%"
+    <s:List id="recipesList" visible="false" left="5" borderVisible="false" width="100%"
             change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
             verticalScrollPolicy="off"
             itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{_visibleRecipes}"
@@ -116,7 +109,7 @@
                           paddingTop="5" clipAndEnableScrolling="false"/>
         </s:layout>
     </s:List>
-    <s:Group id="controlGroup" width="100%">
+    <s:Group id="controlGroup" visible="false" width="100%">
         <s:Button id="backButton" left="5" label="Назад" click="backButton_clickHandler(event)"/>
         <s:Button id="forwardButton" right="10" label="Еще коктейлей..." click="forwardButton_clickHandler(event)"/>
     </s:Group>
