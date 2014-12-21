@@ -2,7 +2,7 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
                    xmlns:flextras="spark.flextras.autoCompleteComboBox.*" xmlns:views="views.*"
                    xmlns:components="components.*" xmlns:subviews="views.subViews.*" width="1024"
-                   minHeight="768" creationComplete="creationCompleteHandler(event)"
+                   creationComplete="creationCompleteHandler(event)"
                    contentCreationComplete="bordercontainer1_contentCreationCompleteHandler(event)"
                    backgroundColor="0xffffff" borderVisible="false">
     <views:layout>
@@ -86,7 +86,7 @@
             // FIX: remove magic number!
             if (event.position > 200)
             {
-                searchPanel.y = event.position - 200;
+                searchPanel.y = event.position - 200 + 5;
             }
             else
             {

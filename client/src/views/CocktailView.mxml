@@ -60,6 +60,7 @@
             _controller = new CocktailController();
             _controller.addEventListener(CocktailController.COCKTAIL_DATA_LOADED, onDataLoaded);
             _controller.loadNeededInfo(CocktailModel(event.viewData));
+            layout.verticalScrollPosition = 0;
         }
         ]]>
 	</fx:Script>

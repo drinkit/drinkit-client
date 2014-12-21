@@ -11,6 +11,7 @@ package views
         public function ViewBase()
         {
             super();
+            minHeight = 760;
         }
     }
 }
