@@ -206,7 +206,7 @@
                 </s:BorderContainer>
             </s:VGroup>
         </s:Group>
-        <subviews:SearchResultsPanel width="100%" model="{_model}" clipAndEnableScrolling="false" itemsPerPage="20" />
+        <subviews:SearchResultsPanel width="100%" model="{_model}" clipAndEnableScrolling="false" itemsPerPage="20" recipeRendererWidth="352" />
     </s:HGroup>
 
 

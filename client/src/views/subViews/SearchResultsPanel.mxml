@@ -19,6 +19,7 @@
 
         import spark.events.IndexChangeEvent;
 
+        public var recipeRendererWidth:uint = 352;
         public var itemsPerPage:uint = int.MAX_VALUE;
 
         private var _itemsOnPage:uint = 0;
@@ -88,7 +89,7 @@
             showItems(_startItemIndex, itemsPerPage);
         }
 
-        private function forwardButton_clickHandler(event:MouseEvent):void
+        private function onForwardButtonClick(event:MouseEvent):void
         {
             _startItemIndex += itemsPerPage;
             showItems(_startItemIndex, itemsPerPage);
@@ -107,12 +108,11 @@
             horizontalScrollPolicy="off">
         <s:layout>
             <s:TileLayout horizontalGap="11" verticalGap="11" paddingBottom="7" paddingLeft="5" paddingRight="0"
-                          paddingTop="5" clipAndEnableScrolling="false"/>
+                          paddingTop="5" requestedColumnCount="2" clipAndEnableScrolling="false"/>
         </s:layout>
     </s:List>
     <s:Group id="controlGroup" visible="false" width="100%">
         <s:Button id="backButton" left="5" label="Назад" click="backButton_clickHandler(event)"/>
-        <s:Button id="forwardButton" right="10" label="Еще коктейлей..." click="forwardButton_clickHandler(event)"/>
+        <s:Button id="forwardButton" right="10" label="Еще коктейлей..." click="onForwardButtonClick(event)"/>
     </s:Group>
-    <!-- <s:Button id="loadMoreButton" visible="false" includeInLayout="false" label="Показать еще..." click="onLoadMoreButtonClick(event)"/> -->
 </s:Group>

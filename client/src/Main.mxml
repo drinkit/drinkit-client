@@ -160,8 +160,8 @@
                                                              includeInBar="{UserInfoModel.instance.role == UserRoles.ADMIN}">
                                 <views:AdminPanelView width="100%" height="100%" />
                             </components:ExtNavigationContent>
-                            <components:ExtNavigationContent width="100%" height="100%" label="Результаты поиска" includeInBar="false">
-                                <views:SearchByNameResultView width="100%" height="100%" />
+                            <components:ExtNavigationContent width="100%" label="Результаты поиска" includeInBar="false">
+                                <views:SearchByNameResultView width="100%" />
                             </components:ExtNavigationContent>
                         </mx:ViewStack>
                     </s:BorderContainer>
