@@ -26,20 +26,41 @@ package models
         {
             tagCache = {};
             //
-            addTagToCache(new tagExampleBitmap(), "Long drink", CocktailTypes.LONG_DRINK, COCKTAIL_TYPE_TAG);
-            addTagToCache(new tagExampleBitmap(), "Short drink", CocktailTypes.SHORT_DRINK, COCKTAIL_TYPE_TAG);
-            addTagToCache(new tagExampleBitmap(), "Shooter", CocktailTypes.SHOOTER, COCKTAIL_TYPE_TAG);
-            addTagToCache(new tagExampleBitmap(), "Горящий", OptionParameters.BURNING, COCKTAIL_OPTION_TAG);
-            addTagToCache(new tagExampleBitmap(), "Со льдом", OptionParameters.WITH_ICE, COCKTAIL_OPTION_TAG);
-            addTagToCache(new tagExampleBitmap(), "Проверен администрацией", OptionParameters.CHECKED, COCKTAIL_OPTION_TAG);
-            addTagToCache(new tagExampleBitmap(), "Утвержден IBA", OptionParameters.IBA, COCKTAIL_OPTION_TAG);
-            addTagToCache(new tagExampleBitmap(), "Слоеный", OptionParameters.FLACKY, COCKTAIL_OPTION_TAG);
+            addTagToCache(new longBitmap(), "Long drink", CocktailTypes.LONG_DRINK, COCKTAIL_TYPE_TAG);
+            addTagToCache(new shortBitmap(), "Short drink", CocktailTypes.SHORT_DRINK, COCKTAIL_TYPE_TAG);
+            addTagToCache(new shotBitmap(), "Shooter", CocktailTypes.SHOOTER, COCKTAIL_TYPE_TAG);
+            addTagToCache(new fireBitmap(), "Горящий", OptionParameters.BURNING, COCKTAIL_OPTION_TAG);
+            addTagToCache(new iceBitmap(), "Со льдом", OptionParameters.WITH_ICE, COCKTAIL_OPTION_TAG);
+            addTagToCache(new checkedBitmap(), "Проверен администрацией", OptionParameters.CHECKED, COCKTAIL_OPTION_TAG);
+            addTagToCache(new ibaBitmap(), "Утвержден IBA", OptionParameters.IBA, COCKTAIL_OPTION_TAG);
+            addTagToCache(new layerBitmap(), "Слоеный", OptionParameters.FLACKY, COCKTAIL_OPTION_TAG);
         }
 
         private var tagCache:Object;
 
-        [Embed(source="/../assets/tag_example.png")]
-        private var tagExampleBitmap:Class;
+        [Embed(source="/../assets/tags/fire-32.png")]
+        private var fireBitmap:Class;
+
+        [Embed(source="/../assets/tags/iba-32.png")]
+        private var ibaBitmap:Class;
+
+        [Embed(source="/../assets/tags/ice-32.png")]
+        private var iceBitmap:Class;
+
+        [Embed(source="/../assets/tags/layer-32.png")]
+        private var layerBitmap:Class;
+
+        [Embed(source="/../assets/tags/long-32.png")]
+        private var longBitmap:Class;
+
+        [Embed(source="/../assets/tags/recommend-32.png")]
+        private var checkedBitmap:Class;
+
+        [Embed(source="/../assets/tags/shooter-32.png")]
+        private var shortBitmap:Class;
+
+        [Embed(source="/../assets/tags/shot-32.png")]
+        private var shotBitmap:Class;
 
         public function getTagByIdAndType(id:Number, type:String, size:Number):Image
         {

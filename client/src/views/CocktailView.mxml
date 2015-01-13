@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-         xmlns:components="components.*" add="group1_addHandler(event)">
-    <s:layout>
-        <s:HorizontalLayout gap="5" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5"/>
-    </s:layout>
+<views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:components="components.*" xmlns:views="views.*" viewChanged="onViewChanged(event)" borderVisible="false">
+    <views:layout>
+        <s:HorizontalLayout gap="25" paddingBottom="5" paddingTop="5"/>
+    </views:layout>
 
     <fx:Style source="/design/newStyle.css"/>
 
@@ -15,11 +15,13 @@
         import design.DesignModel;
 
         import models.CocktailModel;
+
+        import models.CocktailModel;
+        import models.MainModel;
         import models.TagsModel;
-
-        import mx.events.FlexEvent;
-
-        import spark.components.NavigatorContent;
+        import models.UserInfoModel;
+        import models.UserRoles;
+        import models.events.ViewEvent;
 
         [Bindable]
         private var _model:CocktailModel;
@@ -27,39 +29,38 @@
         [Bindable]
         private var _controller:CocktailController;
 
-        protected function group1_showHandler(event:FlexEvent):void
-        {
-            _controller = new CocktailController(Number(MainController.instance.viewData));
-            _controller.addEventListener(CocktailController.COCKTAIL_DATA_LOADED, onDataLoaded);
-        }
-
-        protected function group1_addHandler(event:FlexEvent):void
-        {
-            NavigatorContent(owner).addEventListener(FlexEvent.SHOW, group1_showHandler);
-        }
-
         private function onDataLoaded(event:Event):void
         {
             _model = _controller.model;
-            //
-//				photo.source = _model.bigImage;
-//				cocktailName.text = _model.name;
-//				cocktailDescription.text = _model.description;
+            photo.source = _model.imageUrl;
             buildTags(_model.cocktailTypeId, _model.options);
         }
 
         private function buildTags(cocktailType:int, options:Array):void
         {
             tagsContainer.removeAllElements();
-            tagsContainer.addElement(TagsModel.instance.getTagByIdAndType(cocktailType, TagsModel.COCKTAIL_TYPE_TAG, 64));
+            tagsContainer.addElement(TagsModel.instance.getTagByIdAndType(cocktailType, TagsModel.COCKTAIL_TYPE_TAG, 32));
 
             if (options)
             {
                 for (var i:uint = 0; i < options.length; i++)
                 {
-                    tagsContainer.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG, 64));
+                    tagsContainer.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG, 32));
                 }
             }
+        }
+
+        private function onEditButtonClick(event:MouseEvent):void
+        {
+            MainController.instance.changeView(MainModel.ADMIN_VIEW, _model.id);
+        }
+
+        private function onViewChanged(event:ViewEvent):void
+        {
+            _controller = new CocktailController();
+            _controller.addEventListener(CocktailController.COCKTAIL_DATA_LOADED, onDataLoaded);
+            _controller.loadNeededInfo(CocktailModel(event.viewData));
+            layout.verticalScrollPosition = 0;
         }
         ]]>
 	</fx:Script>
@@ -68,24 +69,29 @@
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>
 
-    <s:BitmapImage id="photo" width="{CocktailModel.BIG_IMAGE_WIDTH}" height="{CocktailModel.BIG_IMAGE_HEIGHT}"
-                   source="{_model.bigImage}"/>
-    <s:VGroup width="100%">
-        <s:Label id="cocktailName" width="100%" fontSize="22" textAlign="center" text="{_model.name}"/>
-        <s:TextArea id="cocktailDescription" styleName="regularText" contentBackgroundAlpha="0"
-                    borderColor="{DesignModel.ORANGE_BEACH}" width="100%" height="100%"
-                    editable="false" text="{_model.description}"/>
-    </s:VGroup>
-    <s:VGroup width="384">
-        <components:GroupBox title="Ингридиенты" width="100%" borderColor="{DesignModel.ORANGE_BEACH}">
+    <components:ImageWithBorder id="photo" width="{CocktailModel.BIG_IMAGE_WIDTH}" height="{CocktailModel.BIG_IMAGE_HEIGHT}" borderColor="#c0c0c0" borderSize="1" />
+    <s:VGroup width="100%" gap="20">
+        <s:Label id="cocktailName" width="100%" styleName="cocktailNameText" fontSize="28" textAlign="center" text="{_model.name}"/>
+        <s:VGroup width="100%" gap="0">
+            <s:Group height="42" width="100%">
+                <s:Line yFrom="0" yTo="0" width="100%">
+                    <s:stroke>
+                        <s:SolidColorStroke color="#c0c0c0" weight="1" alpha="1" />
+                    </s:stroke>
+                </s:Line>
+                <s:Label left="5" text="Состав" styleName="regularText" fontSize="16" fontWeight="bold" verticalCenter="0" />
+                <s:HGroup id="tagsContainer" gap="5" right="5" height="32" verticalCenter="0" />
+            </s:Group>
             <s:List borderVisible="false" itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" width="100%"
                     dataProvider="{_model.ingredientWithQuantitiesProvider}">
                 <s:layout>
-                    <s:VerticalLayout requestedMinRowCount="1"/>
+                    <s:VerticalLayout requestedMinRowCount="1" gap="10"/>
                 </s:layout>
             </s:List>
-        </components:GroupBox>
-        <s:TileGroup id="tagsContainer" width="100%" horizontalGap="2" paddingLeft="0" paddingRight="0">
-        </s:TileGroup>
+        </s:VGroup>
+        <s:TextArea id="cocktailDescription" styleName="regularText" contentBackgroundAlpha="0"
+                    borderVisible="false" width="100%" height="100%" textAlign="left" verticalAlign="top"
+                    editable="false" text="{_model.description}" fontSize="14" />
+        <s:Button visible="{UserInfoModel.instance.role == UserRoles.ADMIN}" label="Редактировать" click="onEditButtonClick(event)" />
     </s:VGroup>
-</s:Group>
+</views:ViewBase>

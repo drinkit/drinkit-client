@@ -3,8 +3,9 @@
   Created by ypoliakov on 23.07.2014.
 -->
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-                xmlns:mx="library://ns.adobe.com/flex/mx"
-                xmlns:components="components.*" width="340" height="184" autoDrawBackground="false" buttonMode="true">
+                xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="components.*"
+                height="184" autoDrawBackground="false" buttonMode="true" clipAndEnableScrolling="false"
+                creationComplete="onCreationComplete(event)">
 
     <s:states>
         <s:State name="normal"/>
@@ -12,24 +13,22 @@
     </s:states>
     <fx:Script>
         <![CDATA[
-        import design.DesignModel;
-
         import flash.filters.BitmapFilterQuality;
 
-        import models.CocktailBuilderModel;
         import models.CocktailModel;
         import models.IngredientsModel;
+        import models.SearchResultsModel;
         import models.TagsModel;
-        import models.supportClasses.CocktailMini;
         import models.supportClasses.Ingredient;
 
         import mx.collections.ArrayList;
+        import mx.events.FlexEvent;
 
-        import views.CocktailBuilderView;
+        import views.subViews.SearchResultsPanel;
 
         [Bindable]
-        private var _cocktail:CocktailMini;
-        private var _model:CocktailBuilderModel;
+        private var _cocktail:CocktailModel;
+        private var _model:SearchResultsModel;
         private var _cornerRadius:Number = 5;
 
         override public function set data(value:Object):void
@@ -38,9 +37,9 @@
             {
                 init();
                 //
-                _cocktail = CocktailMini(value);
+                _cocktail = value as CocktailModel;
                 cocktailNameLabel.text = _cocktail.name;
-                cocktailImage.source = _cocktail.image;
+                cocktailImage.source = _cocktail.thumbnailUrl;
                 buildRecipe(_cocktail.cocktailIngredients);
                 buildTags(_cocktail.cocktailTypeId, _cocktail.options);
             }
@@ -49,19 +48,19 @@
         private function init():void
         {
             if (!_model)
-                _model = CocktailBuilderView(List(owner).document).model;
+                _model = SearchResultsPanel(List(owner).document).model;
         }
 
         private function buildTags(cocktailType:int, options:Array):void
         {
             tagsGroup.removeAllElements();
-            tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(cocktailType, TagsModel.COCKTAIL_TYPE_TAG, 24));
+            tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(cocktailType, TagsModel.COCKTAIL_TYPE_TAG, 32));
 
             if (options)
             {
                 for (var i:uint = 0; i < options.length; i++)
                 {
-                    tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG, 24));
+                    tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG, 32));
                 }
             }
         }
@@ -91,6 +90,11 @@
 
             return new ClassFactory(NonSelectedIngredientItemRenderer);
         }
+
+        private function onCreationComplete(event:FlexEvent):void
+        {
+            width = SearchResultsPanel(List(owner).document).recipeRendererWidth;
+        }
         ]]>
 
     </fx:Script>
@@ -109,7 +113,7 @@
     </s:Rect>
     <s:HGroup width="100%" height="100%" paddingBottom="4" paddingTop="4" paddingLeft="4" paddingRight="4">
         <s:Group>
-            <s:BitmapImage id="cocktailImage" source="{_cocktail.image}" width="{CocktailModel.SMALL_IMAGE_WIDTH}"
+            <s:BitmapImage id="cocktailImage" width="{CocktailModel.SMALL_IMAGE_WIDTH}"
                            height="{CocktailModel.SMALL_IMAGE_HEIGHT}"/>
             <s:Rect width="{CocktailModel.SMALL_IMAGE_WIDTH}" height="{CocktailModel.SMALL_IMAGE_HEIGHT}">
                 <s:stroke>
@@ -117,11 +121,8 @@
                 </s:stroke>
             </s:Rect>
         </s:Group>
-
-
         <s:VGroup width="100%" height="100%">
-            <s:Label id="cocktailNameLabel" width="100%" textAlign="center" fontFamily="Georgia"
-                     color="{DesignModel.VIOLET}" fontWeight="bold" fontStyle="italic" fontSize="18"/>
+            <s:Label id="cocktailNameLabel" width="100%" textAlign="center" styleName="cocktailNameText"/>
             <mx:Spacer width="100%" height="0"/>
             <s:List id="ingredientsList" mouseEnabled="false" width="100%" height="100%" fontFamily="CenturyGothic"
                     color="#1c1c1c" fontSize="14" itemRendererFunction="cocktailStructureItemRendererFunction"
@@ -130,7 +131,7 @@
                     <components:FlowLayout clipAndEnableScrolling="false"/>
                 </s:layout>
             </s:List>
-            <s:HGroup id="tagsGroup" gap="2" height="24"/>
+            <s:HGroup id="tagsGroup" gap="5" paddingBottom="4"/>
         </s:VGroup>
     </s:HGroup>
     <s:Rect includeIn="hovered" width="100%" height="100%" bottomLeftRadiusX="{_cornerRadius}"

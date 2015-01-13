@@ -6,7 +6,7 @@ package controllers
     import flash.net.URLVariables;
 
     import models.CocktailBuilderModel;
-    import models.supportClasses.CocktailMini;
+    import models.CocktailModel;
     import models.supportClasses.CocktailTypes;
     import models.supportClasses.OptionParameters;
 
@@ -65,7 +65,6 @@ package controllers
             }
         }
 
-
         public function performSearch():void
         {
             var criteria:SearchParameters = new SearchParameters();
@@ -83,8 +82,8 @@ package controllers
 
         private function onSearchComplete(response:String):void
         {
-            var res:Array = JSONInstantiator.createInstance(response, CocktailMini, false) as Array;
-            _model.isNoCocktailsFound = !res || res.length == 0
+            var res:Array = JSONInstantiator.createInstance(response, CocktailModel, false) as Array;
+            _model.isNoCocktailsFound = !res || res.length == 0;
             _model.cocktailsList = new ArrayCollection(res);
         }
     }

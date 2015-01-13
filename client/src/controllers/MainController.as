@@ -2,8 +2,11 @@ package controllers
 {
     import controllers.supportClasses.Services;
 
+    import models.CocktailModel;
+
     import models.IngredientsModel;
     import models.MainModel;
+    import models.events.ViewEvent;
     import models.supportClasses.Ingredient;
     import models.supportClasses.ViewInformation;
 
@@ -42,31 +45,20 @@ package controllers
             _model = value;
         }
 
-        public function get viewData():Object
-        {
-            if (_model)
-            {
-                var data:Object = _model.viewData;
-                _model.viewData = null;
-                return data;
-            }
-
-            return null;
-
-        }
-
-        public function changeView(view:ViewInformation, data:Object):void
+        public function changeView(view:ViewInformation, data:Object, changedByUser:Boolean = false):void
         {
             _model.currentView = view;
-            _model.viewData = data;
 
             var fragments:String = "panel=" + view.id;
 
             if (view == MainModel.COCKTAIL_VIEW)
-                fragments += ";id=" + data;
+                fragments += ";id=" + data.id;
 
             BrowserManager.getInstance().setFragment(fragments);
             setTitle(view.title);
+
+            if (!changedByUser)
+                _model.dispatchEvent(new ViewEvent(ViewEvent.VIEW_CHANGED, view.id, data));
         }
 
         public function setTitle(value:String):void
@@ -88,7 +80,7 @@ package controllers
         {
             BrowserManager.getInstance().addEventListener(BrowserChangeEvent.BROWSER_URL_CHANGE, onURLChange);
             BrowserManager.getInstance().init("", "drinkIt - " + MainModel.BUILDER_VIEW.title);
-            checkFragments();
+//            checkFragments();
         }
 
         private function onIngredientsLoad(response:String):void
@@ -106,7 +98,6 @@ package controllers
                 return;
             }
 
-
             switch (fragments.panel)
             {
                 case MainModel.BUILDER_VIEW.id:
@@ -116,10 +107,29 @@ package controllers
                 }
                 case MainModel.COCKTAIL_VIEW.id:
                 {
-                    if (fragments.hasOwnProperty("id"))
-                        changeView(MainModel.COCKTAIL_VIEW, fragments.id);
-                    else
+                    try
+                    {
+                        var id:Number = Number(fragments.id);
+                        changeView(MainModel.COCKTAIL_VIEW, new CocktailModel(id));
+                    }
+                    catch (error:Error)
+                    {
                         changeView(MainModel.BUILDER_VIEW, null);
+                    }
+
+                    break;
+                }
+                case MainModel.ADMIN_VIEW.id:
+                {
+                    try
+                    {
+                        var id:Number = Number(fragments.id);
+                        changeView(MainModel.ADMIN_VIEW, id);
+                    }
+                    catch (error:Error)
+                    {
+                        changeView(MainModel.ADMIN_VIEW, null);
+                    }
 
                     break;
                 }

@@ -46,7 +46,16 @@
     fontWeight: bold;
     fontStyle: italic;
     color: #FF6F69;
-    fontSize: 14;
+    fontSize: 14pt;
+    advancedAntiAliasing: true;
+}
+
+.cocktailNameText {
+    fontFamily: "Georgia";
+    fontWeight: bold;
+    fontStyle: italic;
+    color: #464077;
+    fontSize: 20pt;
     advancedAntiAliasing: true;
 }
 

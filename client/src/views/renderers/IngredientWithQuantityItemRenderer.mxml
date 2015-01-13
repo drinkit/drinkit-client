@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-                autoDrawBackground="false" width="100%" height="30">
+                autoDrawBackground="false" width="100%">
     <s:layout>
-        <s:HorizontalLayout paddingLeft="5" paddingRight="5" gap="5"/>
+        <s:VerticalLayout gap="10"/>
     </s:layout>
     <fx:Script>
 		<![CDATA[
         import models.IngredientsModel;
+
+        import spark.components.List;
+
+
+        [Bindable]
+        private var _isFirstItem:Boolean = false;
+
+        [Bindable]
+        private var _isLastItem:Boolean = false;
 
         override public function set data(value:Object):void
         {
@@ -16,11 +25,27 @@
             {
                 ingrName.text = IngredientsModel.instance.getIngredientNameById(data[0]);
                 ingrQuantity.text = data[1] ? data[1] + " мл" : "немного";
+                var itemIndex:int = (owner as List).dataProvider.getItemIndex(data);
+                _isFirstItem = itemIndex == 0;
+                _isLastItem = itemIndex == (owner as List).dataProvider.length - 1;
             }
         }
         ]]>
 	</fx:Script>
 
-    <s:Label id="ingrName" left="5" width="70%" textAlign="left" height="100%" verticalAlign="middle"/>
-    <s:Label id="ingrQuantity" right="5" width="30%" textAlign="right" height="100%" verticalAlign="middle"/>
+    <s:Line yFrom="0" yTo="0" width="100%" includeInLayout="{_isFirstItem}" visible="{_isFirstItem}">
+        <s:stroke>
+            <s:SolidColorStroke color="#c0c0c0" weight="1" alpha="1" />
+        </s:stroke>
+    </s:Line>
+    <s:HGroup paddingLeft="5" paddingRight="5" gap="5" width="100%">
+        <s:Label id="ingrName" left="5" width="70%" textAlign="left" height="100%" verticalAlign="middle" styleName="regularText" fontSize="14"/>
+        <s:Label id="ingrQuantity" right="5" width="30%" textAlign="right" height="100%" verticalAlign="middle" styleName="regularText" fontSize="14"/>
+    </s:HGroup>
+    <s:Line yFrom="0" yTo="0" width="100%">
+        <s:stroke>
+            <s:SolidColorStroke color="#c0c0c0" weight="1" alpha="{_isLastItem ? 1 : 0.7}"/>
+        </s:stroke>
+    </s:Line>
+
 </s:ItemRenderer>

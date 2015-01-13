@@ -2,18 +2,38 @@
 <!--
   Created by Crabar on 29.06.2014.
 -->
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-         xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:subviews="views.subViews.*">
-    <s:layout>
+<views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="views.*" xmlns:subviews="views.subViews.*"
+         viewChanged="onViewChanged(event)" borderVisible="false">
+    <views:layout>
         <s:VerticalLayout/>
-    </s:layout>
-    <s:TabBar dataProvider="{stack}" width="100%"/>
+    </views:layout>
+    <fx:Script>
+        <![CDATA[
+        import models.events.ViewEvent;
+
+
+        private function onViewChanged(event:ViewEvent):void
+        {
+            var cocktailId:Number = Number(event.viewData);
+
+            if (cocktailId && !isNaN(cocktailId))
+            {
+                adminBar.selectedIndex = 0;
+                cocktailAdminPanel.loadCocktail(cocktailId);
+            }
+        }
+
+        ]]>
+    </fx:Script>
+    <s:TabBar id="adminBar" dataProvider="{stack}" width="100%"/>
     <mx:ViewStack id="stack" width="100%" height="100%">
         <s:NavigatorContent label="Коктейли">
-            <subviews:CocktailAdminPanel width="100%" height="100%"/>
+            <subviews:CocktailAdminPanel id="cocktailAdminPanel" width="100%" height="100%"/>
         </s:NavigatorContent>
         <s:NavigatorContent label="Ингредиенты">
             <subviews:IngredientAdminPanel width="100%" height="100%"/>
         </s:NavigatorContent>
     </mx:ViewStack>
-</s:Group>
+
+</views:ViewBase>

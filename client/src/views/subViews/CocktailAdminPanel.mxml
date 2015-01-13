@@ -32,7 +32,7 @@
         private var _model:CocktailAdminModel;
         private var _controller:CocktailAdminController;
 
-        private function loadCocktail(id:Number):void
+        public function loadCocktail(id:Number):void
         {
             _controller.loadCocktailInfo(id);
         }
@@ -62,10 +62,7 @@
             var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
             var ingr:Ingredient = Ingredient(item);
 
-            if (String(ingr.name).toLowerCase().search(inputValue) > -1 && (!isIngredientSelected(ingr)))
-                return true;
-
-            return false;
+            return (String(ingr.name).toLowerCase().search(inputValue) > -1 && (!isIngredientSelected(ingr)));
         }
 
         private function creationCompleteHandler(event:FlexEvent):void
@@ -83,8 +80,13 @@
             _controller.updateImageClipRect(cocktailPhoto.photoClipRect);
         }
 
-        private function updatedSelectedType(typeId:uint):void
+        private function updatedSelectedType(typeId:int):void
         {
+            if (typeId == -1) {
+                cocktailTypesList.selectedIndex = -1;
+                return;
+            }
+
             for (var j:int = 0; j < cocktailTypesList.dataProvider.length; j++)
             {
                 var object:Object = cocktailTypesList.dataProvider.getItemAt(j);
@@ -183,7 +185,7 @@
             }
 
             cocktailPhoto.source = photo;
-            _controller.updateImage(photo);
+            _controller.updateImage(photo.bitmapData);
         }
 
         private function onCocktailTypeChange(event:IndexChangeEvent):void
@@ -218,6 +220,10 @@
         {
             _controller.deleteCocktail();
         }
+
+        private function onImageLoad(event:Event):void {
+            _controller.updateImage(cocktailPhoto.imageBitmapData);
+        }
         ]]>
     </fx:Script>
 
@@ -229,12 +235,12 @@
     </s:HGroup>
     <mx:HRule width="100%" strokeWidth="1" strokeColor="0x000000"/>
     <s:HGroup verticalAlign="middle">
-        <s:TextInput id="idInput" change="onIdInputChange(event)"/>
+        <s:TextInput id="idInput" change="onIdInputChange(event)" text="{_model.cocktailId}" prompt="id коктейля..."/>
         <s:Button label="Загрузить" click="onLoadButtonClick(event)"/>
     </s:HGroup>
     <s:Group width="100%">
         <s:HGroup left="0" verticalAlign="middle">
-            <s:TextInput id="titleInput" text="@{_model.name}"/>
+            <s:TextInput id="titleInput" text="@{_model.name}" width="300" prompt="название коктейля..."/>
             <s:CheckBox id="isDevelopCheckBox" label="в разработке"/>
         </s:HGroup>
         <s:Button label="Загрузить фото" right="0" click="onLoadPhotoButtonClick(event)"/>
@@ -242,9 +248,9 @@
     <s:HGroup width="100%" height="100%">
         <s:VGroup width="100%" height="100%">
             <s:TextArea id="descriptionInput" width="100%" textAlign="left" verticalAlign="top"
-                        text="@{_model.description}"/>
+                        text="@{_model.description}" prompt="описание коктейля..."/>
             <s:HGroup width="100%" height="100%">
-                <s:VGroup width="100%" height="100%">
+                <s:VGroup width="50%" height="100%">
                     <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="100%" height="26"
                                                        styleName="regularText"
                                                        itemRenderer="components.renderers.AutoCompleteRenderer"
@@ -265,7 +271,7 @@
                         </s:columns>
                     </s:DataGrid>
                 </s:VGroup>
-                <s:List id="cocktailTypesList" width="100%" change="onCocktailTypeChange(event)">
+                <s:List id="cocktailTypesList" width="20%" change="onCocktailTypeChange(event)">
                     <s:dataProvider>
                         <s:ArrayList>
                             <fx:Object value="{CocktailTypes.SHOOTER}" label="shooter"/>
@@ -274,7 +280,7 @@
                         </s:ArrayList>
                     </s:dataProvider>
                 </s:List>
-                <s:List id="optionsList" width="100%" allowMultipleSelection="true"
+                <s:List id="optionsList" width="30%" allowMultipleSelection="true"
                         change="onCocktailOptionsChange(event)">
                     <s:dataProvider>
                         <s:ArrayList>
@@ -289,8 +295,8 @@
             </s:HGroup>
         </s:VGroup>
         <supportclasses:CropImageContainer id="cocktailPhoto" width="{CocktailModel.BIG_IMAGE_WIDTH}"
-                                           source="{_model.image}"
+                                           source="{_model.imageUrl}"
                                            height="{CocktailModel.BIG_IMAGE_HEIGHT}" backgroundColor="0x15ffda"
-                                           clipRectChanged="onClipRectChanged(event)"/>
+                                           clipRectChanged="onClipRectChanged(event)" imageLoaded="onImageLoad(event)"/>
     </s:HGroup>
 </s:Group>
