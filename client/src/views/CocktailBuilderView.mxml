@@ -169,11 +169,11 @@
                         <s:ToggleButton label="официальный" name="{OptionParameters.IBA}" buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
                                         click="optionChangeHandler(event)"
-                                        toolTip="утвержденый международной ассоациацией барменов (IBA)"/>
+                                        toolTip="утвержденный международной ассоциацией барменов (IBA)"/>
                         <s:ToggleButton label="проверенный" name="{OptionParameters.CHECKED}" buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
                                         click="optionChangeHandler(event)"
-                                        toolTip="проверенный администрацией собственоручно"/>
+                                        toolTip="проверено администрацией собственноручно"/>
                     </s:Group>
                     <s:Line yFrom="0" yTo="0" width="100%">
                         <s:stroke>
