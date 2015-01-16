@@ -159,20 +159,20 @@
 
                         <s:ToggleButton label="горящий" name="{OptionParameters.BURNING}" buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
-                                        click="optionChangeHandler(event)" tabEnabled="false"/>
+                                        click="optionChangeHandler(event)" tabFocusEnabled="false"/>
                         <s:ToggleButton label="слоёный" name="{OptionParameters.FLACKY}" buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
-                                        click="optionChangeHandler(event)" tabEnabled="false"/>
+                                        click="optionChangeHandler(event)" tabFocusEnabled="false" />
                         <s:ToggleButton label="со льдом" name="{OptionParameters.WITH_ICE}" buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
-                                        click="optionChangeHandler(event)" tabEnabled="false"/>
+                                        click="optionChangeHandler(event)" tabFocusEnabled="false"/>
                         <s:ToggleButton label="официальный" name="{OptionParameters.IBA}" buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
-                                        click="optionChangeHandler(event)" tabEnabled="false"
+                                        click="optionChangeHandler(event)" tabFocusEnabled="false"
                                         toolTip="утвержденный международной ассоциацией барменов (IBA)"/>
                         <s:ToggleButton label="проверенный" name="{OptionParameters.CHECKED}" buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
-                                        click="optionChangeHandler(event)" tabEnabled="false"
+                                        click="optionChangeHandler(event)" tabFocusEnabled="false"
                                         toolTip="проверено администрацией собственноручно"/>
                     </s:Group>
                     <s:Line yFrom="0" yTo="0" width="100%">
