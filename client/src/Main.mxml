@@ -119,12 +119,13 @@
                           source="@Embed(source='/../assets/new-pattern.png')"/>
         </s:fill>
     </s:Rect>
+    <!--<s:Scroller id="scroller" width="100%" height="100%" skinClass="design.skins.SpeedyScrollerSkin" >-->
         <s:Group id="viewportGroup" width="100%" height="100%">
             <s:BorderContainer width="100%" minWidth="1024" borderVisible="false" backgroundAlpha="0">
                 <s:layout>
                     <s:VerticalLayout gap="0" horizontalAlign="center" paddingTop="20" paddingBottom="20" />
                 </s:layout>
-                <s:VGroup gap="0" width="1024" minHeight="600">
+                <s:VGroup gap="0" width="1024" minHeight="860">
                     <components:PageHeader />
                     <s:BorderContainer backgroundColor="0xffffff" width="100%" borderVisible="false">
                         <s:layout>
@@ -168,6 +169,7 @@
             </s:BorderContainer>
         </s:Group>
     <components:SpeedyVScrollBar viewport="{viewportGroup}" height="100%" right="0" />
+    <!--</s:Scroller>-->
 
 
 </s:Application>
