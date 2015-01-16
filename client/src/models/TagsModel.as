@@ -56,11 +56,11 @@ package models
         [Embed(source="/../assets/tags/recommend-32.png")]
         private var checkedBitmap:Class;
 
-        [Embed(source="/../assets/tags/shooter-32.png")]
-        private var shortBitmap:Class;
-
         [Embed(source="/../assets/tags/shot-32.png")]
         private var shotBitmap:Class;
+
+        [Embed(source="/../assets/tags/short-32.png")]
+        private var shortBitmap:Class;
 
         public function getTagByIdAndType(id:Number, type:String, size:Number):Image
         {

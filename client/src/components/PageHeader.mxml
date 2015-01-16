@@ -104,5 +104,5 @@
         <s:Label text="Выйти" fontSize="14" textDecoration="underline" color="0xffffff" fontFamily="CenturyGothic"
                  buttonMode="true" click="onLogoutClick(event)"/>
     </s:HGroup>
-    <s:TextInput right="20" bottom="15" width="200" enter="onSearchEnter(event)" skinClass="design.skins.RoundTextInputSkin" />
+    <s:TextInput right="20" bottom="15" width="200" enter="onSearchEnter(event)" prompt="название коктейля..." skinClass="design.skins.RoundTextInputSkin" />
 </s:Group>

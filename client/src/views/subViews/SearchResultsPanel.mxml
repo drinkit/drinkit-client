@@ -47,7 +47,7 @@
         public function set model(value:SearchResultsModel):void
         {
             _model = value;
-            noResultsLabel.visible = recipesList.visible = controlGroup.visible = true;
+//            noResultsLabel.visible = recipesList.visible = controlGroup.visible = true;
             _model.addEventListener(Event.CHANGE, onModelChange);
         }
 
@@ -56,7 +56,7 @@
 
         private function onModelChange(event:Event):void
         {
-            noResultsLabel.includeInLayout = noResultsLabel.visible = model.isNoCocktailsFound;
+            noResultsImage.visible = noResultsImage.includeInLayout = noResultsLabel.includeInLayout = noResultsLabel.visible = model.isNoCocktailsFound;
             recipesList.includeInLayout = recipesList.visible = !model.isNoCocktailsFound;
             _itemsOnPage = itemsPerPage;
             _startItemIndex = 0;
@@ -96,11 +96,12 @@
         }
         ]]>
     </fx:Script>
+    <s:BitmapImage id="noResultsImage" visible="false" horizontalAlign="center" source="@Embed(source='/../assets/sadcocktail.png')" />
     <s:Label id="noResultsLabel" visible="false" width="70%" fontSize="24" textAlign="center"
              styleName="regularText" horizontalCenter="0"
              maxDisplayedLines="2" paddingLeft="5" paddingRight="5"
              text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
-             top="20"/>
+             top="20" />
     <s:List id="recipesList" visible="false" left="5" borderVisible="false" width="100%"
             change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
             verticalScrollPolicy="off"
