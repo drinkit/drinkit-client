@@ -75,11 +75,7 @@
     <fx:Declarations>
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>
-    <s:Rect width="100%" height="100%">
-        <s:fill>
-            <s:BitmapFill source="@Embed(source='/../assets/pattern-top.png')" smooth="true" fillMode="repeat"/>
-        </s:fill>
-    </s:Rect>
+    <s:BitmapImage width="100%" height="100%" fillMode="repeat" smooth="false" source="@Embed(source='/../assets/pattern-top.png')" />
     <s:Image width="240" height="80" left="15" verticalCenter="0" source="@Embed(source='/../assets/logo-main.png')"
              blendMode="normal" buttonMode="true" click="onLogoClick(event)"/>
     <s:HGroup right="20" top="15" gap="10" includeIn="anonymous">
@@ -104,5 +100,5 @@
         <s:Label text="Выйти" fontSize="14" textDecoration="underline" color="0xffffff" fontFamily="CenturyGothic"
                  buttonMode="true" click="onLogoutClick(event)"/>
     </s:HGroup>
-    <s:TextInput right="20" bottom="15" width="200" enter="onSearchEnter(event)" skinClass="design.skins.RoundTextInputSkin" />
+    <s:TextInput right="20" bottom="15" width="200" enter="onSearchEnter(event)" prompt="название коктейля..." skinClass="design.skins.RoundTextInputSkin" />
 </s:Group>

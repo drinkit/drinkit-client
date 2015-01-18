@@ -118,13 +118,6 @@
     </build>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>org.sonatype.flexmojos</groupId>-->
-            <!--<artifactId>flexmojos-unittest-flexunit4</artifactId>-->
-            <!--<version>4.2-beta</version>-->
-            <!--<type>swc</type>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>com.adobe.flex.framework</groupId>
             <artifactId>flex-framework</artifactId>

@@ -20,8 +20,13 @@
              Firefox 3.6 focus border issues.  Initially, don't display flashContent div so it won't show 
              if JavaScript disabled.
         -->
-        <style type="text/css" media="screen"> 
-            html, body  { height:100%; }
+        <style type="text/css" media="screen">
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+            }
             body { margin:0; padding:0; overflow:auto; text-align:center; 
                    background-color: ${bgcolor}; }   
             object:focus { outline:none; }

@@ -26,6 +26,9 @@
 
         import views.subViews.SearchResultsPanel;
 
+        [Embed(source="/../assets/emptycocktail.png")]
+        private var emptyCocktail:Class;
+
         [Bindable]
         private var _cocktail:CocktailModel;
         private var _model:SearchResultsModel;
@@ -39,10 +42,18 @@
                 //
                 _cocktail = value as CocktailModel;
                 cocktailNameLabel.text = _cocktail.name;
-                cocktailImage.source = _cocktail.thumbnailUrl;
+                cocktailImage.source = cocktailThumbnail;
                 buildRecipe(_cocktail.cocktailIngredients);
                 buildTags(_cocktail.cocktailTypeId, _cocktail.options);
             }
+        }
+
+        private function get cocktailThumbnail():Object
+        {
+            if (_cocktail.thumbnailUrl && _cocktail.thumbnailUrl != "")
+                return _cocktail.thumbnailUrl;
+            else
+                return new emptyCocktail();
         }
 
         private function init():void
