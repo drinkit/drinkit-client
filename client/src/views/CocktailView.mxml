@@ -18,7 +18,7 @@
         import models.UserRoles;
         import models.events.ViewEvent;
 
-        [Embed(source="/../assets/emptycocktail.png")]
+        [Embed(source="/../assets/bigcocktail.png")]
         private var emptyCocktailImage:Class;
 
         [Bindable]
@@ -39,7 +39,7 @@
             if (_model.imageUrl && _model.imageUrl != "")
                 return _model.imageUrl;
             else
-                return null;
+                return new emptyCocktailImage();
         }
 
         private function buildTags(cocktailType:int, options:Array):void
