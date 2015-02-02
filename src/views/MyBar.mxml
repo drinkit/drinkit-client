@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:s="library://ns.adobe.com/flex/spark" xmlns:views="views.*"
+         creationComplete="onCreationComplete(event)">
+    <fx:Script>
+		<![CDATA[
+        import models.UserInfoModel;
+        import models.events.AuthEvent;
+
+        import mx.events.FlexEvent;
+
+        protected function onCreationComplete(event:FlexEvent):void
+        {
+            UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onSuccessAuth);
+            UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onLogout);
+        }
+
+        private function onSuccessAuth(event:AuthEvent):void
+        {
+            currentState = "authorised";
+        }
+
+        private function onLogout(event:AuthEvent):void
+        {
+            currentState = "anonymous";
+        }
+        ]]>
+	</fx:Script>
+    <fx:Declarations>
+        <!-- Place non-visual elements (e.g., services, value objects) here -->
+    </fx:Declarations>
+    <views:states>
+        <s:State name="anonymous"/>
+        <s:State name="authorised"/>
+    </views:states>
+    <s:Label includeIn="anonymous" text='Функция "Мой бар" доступна только для зарегистрированых пользователей.'/>
+</views:ViewBase>

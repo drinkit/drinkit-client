@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+  Created by Crabar on 9/14/14.
+-->
+<views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+                   xmlns:subviews="views.subViews.*" xmlns:views="views.*" viewChanged="onViewChanged(event)" borderVisible="false">
+
+    <fx:Script>
+    <![CDATA[
+
+        import models.SearchResultsModel;
+        import models.events.ViewEvent;
+
+        private function onViewChanged(event:ViewEvent):void
+        {
+            searchResultsPanel.model = SearchResultsModel(event.viewData);
+            searchResultsPanel.model.signalizeAboutChange();
+        }
+        ]]>
+    </fx:Script>
+    <subviews:SearchResultsPanel id="searchResultsPanel" width="100%" recipeRendererWidth="478" itemsPerPage="20" />
+</views:ViewBase>

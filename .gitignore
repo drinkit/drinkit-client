@@ -1,0 +1,7 @@
+# Build and Release Folders
+.idea
+*.iml
+target
+bin/
+bin-debug/
+bin-release/

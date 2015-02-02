@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<!--
+  Created by Crabar on 12.07.2014.
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         creationComplete="creationCompleteHandler(event)">
+    <fx:Metadata>
+        [Event(name="clipRectChanged", type="flash.events.Event")]
+        [Event(name="imageLoaded", type="flash.events.Event")]
+    </fx:Metadata>
+
+    <fx:Script>
+        <![CDATA[
+        import mx.events.FlexEvent;
+
+        [Bindable]
+        private var _source:Object;
+
+        [Bindable]
+        public var backgroundColor:uint;
+
+        [Bindable]
+        public function set source(value:Object):void
+        {
+            if (value) {
+                _source = value;
+
+                if (value is Bitmap) {
+                    determinateClipRectSize(_source.width, _source.height, width, height);
+                    dispatchEvent(new Event("clipRectChanged"));
+                }
+            }
+        }
+
+        private function determinateImageScaleFactor(width:Number, height:Number):void
+        {
+            var scaleWidthFactor:Number = width / this.width;
+            var scaleHeightFactor:Number = height / this.height;
+
+            _imageScaleFactor = Math.max(scaleWidthFactor, scaleHeightFactor);
+        }
+
+        private var _imageScaleFactor:Number = 1;
+
+        private function determinateClipRectSize(sourceWidth:Number, sourceHeight:Number, parentWidth:Number, parentHeight:Number):void
+        {
+            var scaleWidthFactor:Number = parentWidth / sourceWidth;
+            var scaleHeightFactor:Number = parentHeight / sourceHeight;
+
+            var absoluteScaleFactor:Number = Math.min(scaleWidthFactor, scaleHeightFactor);
+            _imageScaleFactor = absoluteScaleFactor;
+
+            var scaledSourceWidth:Number = absoluteScaleFactor * sourceWidth;
+            var scaledSourceHeight:Number = absoluteScaleFactor * sourceHeight;
+
+            _scaledSourceRect = new Rectangle((parentWidth - scaledSourceWidth) / 2, (parentHeight - scaledSourceHeight) / 2, scaledSourceWidth, scaledSourceHeight);
+
+            clipRect.x = _scaledSourceRect.x;
+            clipRect.y = _scaledSourceRect.y;
+
+            if (scaledSourceWidth / scaledSourceHeight > 3 / 4)
+            {
+                clipRect.height = scaledSourceHeight;
+                clipRect.width = scaledSourceHeight * 0.75;
+            }
+            else
+            {
+                clipRect.width = scaledSourceWidth;
+                clipRect.height = scaledSourceWidth / 0.75;
+            }
+
+            clipRect.validateNow();
+        }
+
+        private var _scaledSourceRect:Rectangle;
+
+        [Bindable]
+        public function get source():Object
+        {
+            return _source;
+        }
+
+        protected var _shiftX:Number;
+        protected var _shiftY:Number;
+
+        protected function onBox1MouseDown(event:MouseEvent):void
+        {
+            _shiftX = event.localX;
+            _shiftY = event.localY;
+            addEventListener(MouseEvent.MOUSE_UP, onMouseClick);
+            addEventListener(MouseEvent.MOUSE_MOVE, onMoveInParentBox1);
+        }
+
+        protected function onMoveInParentBox1(event:MouseEvent):void
+        {
+            if (!event.buttonDown)
+            {
+                removeEventListener(MouseEvent.MOUSE_UP, onMouseClick);
+                removeEventListener(MouseEvent.MOUSE_MOVE, onMoveInParentBox1);
+                return;
+            }
+
+            clipRect.x = this.mouseX - _shiftX < _scaledSourceRect.x ? _scaledSourceRect.x : this.mouseX - _shiftX + clipRect.width > _scaledSourceRect.width + _scaledSourceRect.x ? _scaledSourceRect.width + _scaledSourceRect.x - clipRect.width : this.mouseX - _shiftX;
+            clipRect.y = this.mouseY - _shiftY < _scaledSourceRect.y ? _scaledSourceRect.y : this.mouseY - _shiftY + clipRect.height > _scaledSourceRect.height + _scaledSourceRect.y ? _scaledSourceRect.height + _scaledSourceRect.y - clipRect.height : this.mouseY - _shiftY;
+        }
+
+        protected function onMouseClick(event:MouseEvent):void
+        {
+            dispatchEvent(new Event("clipRectChanged"));
+            removeEventListener(MouseEvent.MOUSE_UP, onMouseClick);
+            removeEventListener(MouseEvent.MOUSE_MOVE, onMoveInParentBox1);
+        }
+
+        public function get photoClipRect():Rectangle
+        {
+            var scaledClipRect:Rectangle = new Rectangle();
+            scaledClipRect.copyFrom(clipRect.getBounds(this));
+            scaledClipRect.x -= _scaledSourceRect.x;
+            scaledClipRect.y -= _scaledSourceRect.y;
+            scaledClipRect.x /= _imageScaleFactor;
+            scaledClipRect.y /= _imageScaleFactor;
+            scaledClipRect.width /= _imageScaleFactor;
+            scaledClipRect.height /= _imageScaleFactor;
+
+            return scaledClipRect;
+        }
+
+        public function get imageBitmapData():BitmapData {
+            return image.bitmapData;
+        }
+
+        private function creationCompleteHandler(event:FlexEvent):void
+        {
+            _scaledSourceRect = this.getRect(this);
+        }
+
+        private function onImageLoad(event:Event):void
+        {
+            dispatchEvent(new Event("imageLoaded"));
+            determinateClipRectSize(image.bitmapData.width, image.bitmapData.height, width, height);
+            dispatchEvent(new Event("clipRectChanged"));
+        }
+        ]]>
+        </fx:Script>
+
+    <s:Rect width="100%" height="100%">
+        <s:fill>
+            <s:SolidColor color="{backgroundColor}"/>
+        </s:fill>
+    </s:Rect>
+    <s:BitmapImage id="image" width="100%" height="100%" source="{source}" fillMode="scale" scaleMode="letterbox"
+                   smoothingQuality="high" smooth="true" complete="onImageLoad(event)" />
+    <s:BorderContainer id="clipRect" width="75" height="100" backgroundColor="0xffffff" backgroundAlpha="0.1"
+                       borderColor="0x000000" borderAlpha="0.8" mouseDown="onBox1MouseDown(event)"/>
+
+</s:Group>
