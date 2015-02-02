@@ -3,6 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <properties>
         <flex.version>4.6.b.23201</flex.version>
+        <documentRoot>www</documentRoot>
     </properties>
 
     <groupId>guru.drinkit</groupId>
@@ -47,10 +48,32 @@
                         <groupId>org.sonatype.flexmojos</groupId>
                         <artifactId>flexmojos-maven-plugin</artifactId>
                         <configuration>
-                            <outputDirectory>www</outputDirectory>
+                            <outputDirectory>${documentRoot}</outputDirectory>
                             <storepass></storepass>
                             <debug>false</debug>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>copy-swf-files</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <copy todir="${documentRoot}">
+                                            <fileset dir="${project.build.directory}" includes="${artifactId}*.swf">
+                                            </fileset>
+                                        </copy>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -95,6 +118,7 @@
                         <configuration>
                             <htmlName>index</htmlName>
                             <parameters>
+                                <serverRestUrl>${env.SERVER_REST_URL}}</serverRestUrl>
                                 <title>drinkIt</title>
                                 <useBrowserHistory>--</useBrowserHistory>
                             </parameters>
