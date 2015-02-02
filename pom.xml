@@ -118,7 +118,7 @@
                         <configuration>
                             <htmlName>index</htmlName>
                             <parameters>
-                                <serverRestUrl>${env.SERVER_REST_URL}}</serverRestUrl>
+                                <serverRestUrl>${env.SERVER_REST_URL}</serverRestUrl>
                                 <title>drinkIt</title>
                                 <useBrowserHistory>--</useBrowserHistory>
                             </parameters>
