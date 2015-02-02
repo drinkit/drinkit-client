@@ -5,12 +5,7 @@
         <flex.version>4.6.b.23201</flex.version>
     </properties>
 
-    <parent>
-        <artifactId>drinkit</artifactId>
-        <groupId>guru.drinkit</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-
+    <groupId>guru.drinkit</groupId>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>client</artifactId>
     <packaging>swf</packaging>
