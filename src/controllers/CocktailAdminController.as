@@ -154,6 +154,8 @@ package controllers {
                 return;
 
             _lastCocktailModel = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
+            _lastCocktailModel.imageUrl = ServiceUtil.instance.serviceAddress + _lastCocktailModel.imageUrl;
+            _lastCocktailModel.thumbnailUrl = ServiceUtil.instance.serviceAddress + _lastCocktailModel.thumbnailUrl;
             _model.cocktailId = _lastCocktailModel.id;
             _model.name = _lastCocktailModel.name;
             _model.description = _lastCocktailModel.description;
@@ -219,6 +221,8 @@ package controllers {
         private function onCocktailSave(response:String):void {
             if (response != "") {
                 _lastCocktailModel = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
+                _lastCocktailModel.imageUrl = ServiceUtil.instance.serviceAddress + _lastCocktailModel.imageUrl;
+                _lastCocktailModel.thumbnailUrl = ServiceUtil.instance.serviceAddress + _lastCocktailModel.thumbnailUrl;
                 _model.cocktailId = _lastCocktailModel.id;
             }
 

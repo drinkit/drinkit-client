@@ -41,6 +41,10 @@ package controllers
         private function onSearchEnd(response:String):void
         {
             var res:Array = JSONInstantiator.createInstance(response, CocktailModel, false) as Array;
+            res.map(function(element:CocktailModel, index:uint, array:Array):void {
+                element.imageUrl = ServiceUtil.instance.serviceAddress + element.imageUrl;
+                element.thumbnailUrl = ServiceUtil.instance.serviceAddress + element.thumbnailUrl;
+            });
             _model.isNoCocktailsFound = !res || res.length == 0;
             _model.cocktailsList = new ArrayCollection(res);
             MainController.instance.changeView(MainModel.SEARCH_BY_NAME_VIEW, _model);

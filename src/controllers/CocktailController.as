@@ -36,6 +36,8 @@ package controllers
         private function onCocktailInfoLoad(response:String):void
         {
             model = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
+            model.imageUrl = ServiceUtil.instance.serviceAddress + model.imageUrl;
+            model.thumbnailUrl = ServiceUtil.instance.serviceAddress + model.thumbnailUrl;
             MainController.instance.setTitle(model.name);
             dispatchEvent(new Event(COCKTAIL_DATA_LOADED));
         }

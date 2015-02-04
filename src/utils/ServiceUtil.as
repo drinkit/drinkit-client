@@ -128,6 +128,10 @@ package utils
             _waitingRequests[requestID] = new WaitingRequest(request, handler, errorHandler);
             return requestID;
         }
+
+        public function get serviceAddress():String {
+            return _serviceAddress;
+        }
     }
 
 
