@@ -12,6 +12,8 @@ package controllers
 
     import mx.collections.ArrayCollection;
 
+    import utils.CocktailUrlDecorator;
+
     import utils.JSONInstantiator;
     import utils.ServiceUtil;
     import utils.supportClasses.JSRequest;
@@ -84,8 +86,7 @@ package controllers
         {
             var res:Array = JSONInstantiator.createInstance(response, CocktailModel, false) as Array;
             res.map(function(element:CocktailModel, index:uint, array:Array):void {
-                element.imageUrl = ServiceUtil.instance.serviceAddress + element.imageUrl;
-                element.thumbnailUrl = ServiceUtil.instance.serviceAddress + element.thumbnailUrl;
+                element = CocktailUrlDecorator.decorate(element);
             });
             _model.isNoCocktailsFound = !res || res.length == 0;
             _model.cocktailsList = new ArrayCollection(res);

@@ -7,6 +7,8 @@ package controllers
 
     import models.CocktailModel;
 
+    import utils.CocktailUrlDecorator;
+
     import utils.JSONInstantiator;
     import utils.ServiceUtil;
     import utils.supportClasses.JSRequest;
@@ -35,9 +37,7 @@ package controllers
 
         private function onCocktailInfoLoad(response:String):void
         {
-            model = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
-            model.imageUrl = ServiceUtil.instance.serviceAddress + model.imageUrl;
-            model.thumbnailUrl = ServiceUtil.instance.serviceAddress + model.thumbnailUrl;
+            model = CocktailUrlDecorator.decorate(JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel);
             MainController.instance.setTitle(model.name);
             dispatchEvent(new Event(COCKTAIL_DATA_LOADED));
         }

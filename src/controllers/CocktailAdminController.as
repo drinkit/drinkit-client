@@ -30,6 +30,7 @@ package controllers {
     import mx.utils.Base64Encoder;
 
     import utils.ArrayUtil;
+    import utils.CocktailUrlDecorator;
     import utils.JSONInstantiator;
     import utils.JSONUtil;
     import utils.ServiceUtil;
@@ -153,9 +154,7 @@ package controllers {
             if (response == "")
                 return;
 
-            _lastCocktailModel = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
-            _lastCocktailModel.imageUrl = ServiceUtil.instance.serviceAddress + _lastCocktailModel.imageUrl;
-            _lastCocktailModel.thumbnailUrl = ServiceUtil.instance.serviceAddress + _lastCocktailModel.thumbnailUrl;
+            _lastCocktailModel = CocktailUrlDecorator.decorate(JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel);
             _model.cocktailId = _lastCocktailModel.id;
             _model.name = _lastCocktailModel.name;
             _model.description = _lastCocktailModel.description;
@@ -220,9 +219,7 @@ package controllers {
 
         private function onCocktailSave(response:String):void {
             if (response != "") {
-                _lastCocktailModel = JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel;
-                _lastCocktailModel.imageUrl = ServiceUtil.instance.serviceAddress + _lastCocktailModel.imageUrl;
-                _lastCocktailModel.thumbnailUrl = ServiceUtil.instance.serviceAddress + _lastCocktailModel.thumbnailUrl;
+                _lastCocktailModel =  CocktailUrlDecorator.decorate(JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel);
                 _model.cocktailId = _lastCocktailModel.id;
             }
 
