@@ -271,7 +271,7 @@
                         </s:columns>
                     </s:DataGrid>
                 </s:VGroup>
-                <s:List id="cocktailTypesList" width="20%" change="onCocktailTypeChange(event)">
+                <s:List id="cocktailTypesList" width="20%" change="onCocktailTypeChange(event)" requireSelection="true">
                     <s:dataProvider>
                         <s:ArrayList>
                             <fx:Object value="{CocktailTypes.SHOOTER}" label="shooter"/>
