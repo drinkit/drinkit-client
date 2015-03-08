@@ -9,6 +9,8 @@ package models
     import flash.events.EventDispatcher;
     import flash.geom.Rectangle;
 
+    import models.supportClasses.CocktailTypes;
+
     import mx.binding.utils.BindingUtils;
     import mx.collections.ArrayCollection;
     import mx.collections.ArrayList;
@@ -43,7 +45,7 @@ package models
         public var selectedOptions:Array;
 
         [Bindable]
-        public var cocktailTypeId:int;
+        public var cocktailTypeId:int = CocktailTypes.SHOOTER;
 
         [Bindable]
         public var name:String;
@@ -62,7 +64,7 @@ package models
             imageUrl = "";
             selectedIngredientsList = new ArrayList();
             imageClipRect = null;
-            cocktailTypeId = -1;
+            cocktailTypeId = CocktailTypes.SHOOTER;
             dispatchEvent(new Event("modelUpdated"));
         }
 

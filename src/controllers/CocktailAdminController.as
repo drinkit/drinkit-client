@@ -223,7 +223,10 @@ package controllers {
                 _model.cocktailId = _lastCocktailModel.id;
             }
 
-            uploadPhoto(_model.cocktailId, _model.imageData, _model.imageClipRect);
+            if (_model.imageData && _model.imageClipRect) {
+                uploadPhoto(_model.cocktailId, _model.imageData, _model.imageClipRect);
+            }
+
             Alert.show("Коктейль успешно сохранен.");
             _model.clear();
         }
