@@ -95,7 +95,7 @@
                 </s:layout>
             </s:List>
         </s:VGroup>
-        <s:TextArea id="cocktailDescription" styleName="regularText" contentBackgroundAlpha="0"
+        <s:TextArea id="cocktailDescription" styleName="regularText" contentBackgroundAlpha="0" updateComplete="event.currentTarget.heightInLines = NaN"
                     borderVisible="false" width="100%" textAlign="left" verticalAlign="top"
                     editable="false" text="{_model.description}" fontSize="14" />
         <s:Button visible="{UserInfoModel.instance.role == UserRoles.ADMIN}" label="Редактировать" click="onEditButtonClick(event)" />
