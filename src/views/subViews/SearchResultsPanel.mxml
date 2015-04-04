@@ -19,6 +19,8 @@
 
         import spark.events.IndexChangeEvent;
 
+        import views.renderers.BigFlatCocktailItemRenderer;
+
         public var recipeRendererWidth:uint = 352;
         public var itemsPerPage:uint = int.MAX_VALUE;
 
@@ -94,6 +96,13 @@
             _startItemIndex += itemsPerPage;
             showItems(_startItemIndex, itemsPerPage);
         }
+
+        private function searchResultItemRendererFunction(item:Object):IFactory
+        {
+            var classFactory:ClassFactory = new ClassFactory(BigFlatCocktailItemRenderer);
+            classFactory.properties = {width: recipeRendererWidth, maxWidth: recipeRendererWidth};
+            return classFactory;
+        }
         ]]>
     </fx:Script>
     <s:BitmapImage id="noResultsImage" visible="false" horizontalAlign="center" source="@Embed(source='/../assets/sadcocktail.png')" />
@@ -104,8 +113,7 @@
              top="20" />
     <s:List id="recipesList" visible="false" left="5" borderVisible="false" width="100%"
             change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
-            verticalScrollPolicy="off"
-            itemRenderer="views.renderers.BigFlatCocktailItemRenderer" dataProvider="{_visibleRecipes}"
+            verticalScrollPolicy="off" itemRendererFunction="searchResultItemRendererFunction" dataProvider="{_visibleRecipes}"
             horizontalScrollPolicy="off">
         <s:layout>
             <s:TileLayout horizontalGap="11" verticalGap="11" paddingBottom="7" paddingLeft="5" paddingRight="0"

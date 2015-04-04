@@ -4,8 +4,7 @@
 -->
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
                 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="components.*"
-                height="184" autoDrawBackground="false" buttonMode="true" clipAndEnableScrolling="false"
-                creationComplete="onCreationComplete(event)">
+                height="184" autoDrawBackground="false" buttonMode="true" clipAndEnableScrolling="false">
 
     <s:states>
         <s:State name="normal"/>
@@ -92,6 +91,7 @@
             }
 
             ingredientsList.dataProvider = ingredientsDataProvider;
+            ingredientsList.dataGroup.validateDisplayList();
         }
 
         private function cocktailStructureItemRendererFunction(item:Object):IFactory
@@ -102,10 +102,6 @@
             return new ClassFactory(NonSelectedIngredientItemRenderer);
         }
 
-        private function onCreationComplete(event:FlexEvent):void
-        {
-            width = SearchResultsPanel(List(owner).document).recipeRendererWidth;
-        }
         ]]>
 
     </fx:Script>
@@ -136,8 +132,8 @@
             <s:Label id="cocktailNameLabel" width="100%" textAlign="center" styleName="cocktailNameText"/>
             <mx:Spacer width="100%" height="0"/>
             <s:List id="ingredientsList" mouseEnabled="false" width="100%" height="100%" fontFamily="CenturyGothic"
-                    color="#1c1c1c" fontSize="14" itemRendererFunction="cocktailStructureItemRendererFunction"
-                    labelField="name" borderVisible="false" verticalScrollPolicy="off">
+                    color="#1c1c1c" fontSize="12" itemRendererFunction="cocktailStructureItemRendererFunction"
+                    labelField="name" borderVisible="false" verticalScrollPolicy="off" horizontalScrollPolicy="off">
                 <s:layout>
                     <components:FlowLayout clipAndEnableScrolling="false"/>
                 </s:layout>
