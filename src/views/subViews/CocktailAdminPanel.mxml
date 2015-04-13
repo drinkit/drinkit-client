@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<!--
+  Created by Crabar on 02.07.2014.
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:flextras="spark.flextras.autoCompleteComboBox.*"
+         xmlns:supportclasses="views.supportClasses.*"
+         creationComplete="creationCompleteHandler(event)">
+    <s:layout>
+        <s:VerticalLayout paddingBottom="10"/>
+    </s:layout>
+
+
+    <fx:Script>
+        <![CDATA[
+        import controllers.CocktailAdminController;
+
+        import models.CocktailAdminModel;
+        import models.CocktailModel;
+        import models.IngredientsModel;
+        import models.supportClasses.CocktailTypes;
+        import models.supportClasses.Ingredient;
+        import models.supportClasses.OptionParameters;
+
+        import mx.controls.Alert;
+        import mx.events.FlexEvent;
+
+        import spark.events.IndexChangeEvent;
+        import spark.events.TextOperationEvent;
+
+        [Bindable]
+        private var _model:CocktailAdminModel;
+        private var _controller:CocktailAdminController;
+
+        public function loadCocktail(id:Number):void
+        {
+            _controller.loadCocktailInfo(id);
+        }
+
+        private function onIngrChooseChange(event:IndexChangeEvent):void
+        {
+            if (event.newIndex >= 0)
+                _controller.addIngredientToCocktail(ingrChoose.selectedItem);
+
+            ingrChoose.selectedIndex = -1;
+            ingrChoose.validateProperties();
+        }
+
+        private function filterCBList(item:Object):Boolean
+        {
+            function isIngredientSelected(ingredient:Ingredient):Boolean
+            {
+                for (var i:uint = 0; i < _model.selectedIngredientsList.length; i++)
+                {
+                    if (_model.selectedIngredientsList.getItemAt(i).id == ingredient.id)
+                        return true;
+                }
+
+                return false;
+            }
+
+            var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
+            var ingr:Ingredient = Ingredient(item);
+
+            return (String(ingr.name).toLowerCase().search(inputValue) > -1 && (!isIngredientSelected(ingr)));
+        }
+
+        private function creationCompleteHandler(event:FlexEvent):void
+        {
+            _model = new CocktailAdminModel();
+            _controller = new CocktailAdminController(_model);
+            _model.addEventListener("modelUpdated", onModelUpdate);
+            _controller.updateImageClipRect(cocktailPhoto.photoClipRect);
+        }
+
+        private function onModelUpdate(event:Event):void
+        {
+            updatedSelectedType(_model.cocktailTypeId);
+            updateSelectedOptions(_model.selectedOptions);
+            _controller.updateImageClipRect(cocktailPhoto.photoClipRect);
+        }
+
+        private function updatedSelectedType(typeId:int):void
+        {
+            if (typeId == -1) {
+                cocktailTypesList.selectedIndex = -1;
+                return;
+            }
+
+            for (var j:int = 0; j < cocktailTypesList.dataProvider.length; j++)
+            {
+                var object:Object = cocktailTypesList.dataProvider.getItemAt(j);
+
+                if (object.value == typeId)
+                {
+                    cocktailTypesList.selectedIndex = j;
+                    return;
+                }
+            }
+        }
+
+        private function updateSelectedOptions(options:Array):void
+        {
+            var selectedIndices:Vector.<int> = new <int>[];
+
+            for (var j:int = 0; j < optionsList.dataProvider.length; j++)
+            {
+                var object:Object = optionsList.dataProvider.getItemAt(j);
+
+                if (options.indexOf(object.value) > -1)
+                    selectedIndices.push(j);
+            }
+
+            optionsList.selectedIndices = selectedIndices;
+        }
+
+        private function onSaveButtonClick(event:Event):void
+        {
+            _controller.saveCocktailToDB();
+        }
+
+        private function onCocktailOptionsChange(event:IndexChangeEvent):void
+        {
+            var selectedItems:Vector.<Object> = List(event.currentTarget).selectedItems;
+            _controller.updateOptions(selectedItems);
+        }
+
+        private function onLoadButtonClick(event:MouseEvent):void
+        {
+            loadCocktail(Number(idInput.text));
+        }
+
+        private var _photoLoader:Loader;
+        private var _fileLoad:FileReference;
+
+        private function onLoadPhotoButtonClick(event:MouseEvent):void
+        {
+            _fileLoad = new FileReference();
+            _fileLoad.addEventListener(Event.SELECT, onFileSelect);
+            _fileLoad.addEventListener(Event.CANCEL, onBrowseCancel);
+            _fileLoad.addEventListener(SecurityErrorEvent.SECURITY_ERROR,
+                    onSecurityError);
+            _fileLoad.addEventListener(IOErrorEvent.IO_ERROR, onPhotoLoadError);
+            _fileLoad.addEventListener(Event.COMPLETE, onPhotoLoaded);
+
+            _fileLoad.browse([new FileFilter("Images", "*.jpg;*.gif;*.png;*.jpeg")]);
+        }
+
+        private function onSecurityError(event:SecurityErrorEvent):void
+        {
+            trace("security error");
+        }
+
+        private function onBrowseCancel(event:Event):void
+        {
+            trace("select cancel");
+        }
+
+        private function onFileSelect(event:Event):void
+        {
+            FileReference(event.currentTarget).load();
+            trace("selected");
+        }
+
+        private function onPhotoLoadError(event:IOErrorEvent):void
+        {
+            trace(event.errorID);
+        }
+
+        private function onPhotoLoaded(event:Event):void
+        {
+            _photoLoader = new Loader();
+            _photoLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onPhotoConverted);
+            _photoLoader.loadBytes(event.currentTarget.data);
+        }
+
+        private function onPhotoConverted(event:Event):void
+        {
+            var photo:Bitmap = LoaderInfo(event.currentTarget).content as Bitmap;
+
+            if (photo.width < CocktailModel.BIG_IMAGE_WIDTH || photo.height < CocktailModel.BIG_IMAGE_HEIGHT)
+            {
+                Alert.show("Картинка слишком маленькая! Минимальный размер: " + CocktailModel.BIG_IMAGE_WIDTH + "x" + CocktailModel.BIG_IMAGE_HEIGHT);
+                return;
+            }
+
+            cocktailPhoto.source = photo;
+            _controller.updateImage(photo.bitmapData);
+        }
+
+        private function onCocktailTypeChange(event:IndexChangeEvent):void
+        {
+            _controller.setCocktailType(List(event.currentTarget).selectedItem);
+        }
+
+        private function onDataGridIngredientDeleter(event:KeyboardEvent):void
+        {
+            if (event.keyCode == Keyboard.DELETE && selectedIngredientsGrid.selectedItem)
+            {
+                _controller.removeIngredientFromCocktail(selectedIngredientsGrid.selectedItem.id);
+            }
+        }
+
+        private function onClipRectChanged(event:Event):void
+        {
+            _controller.updateImageClipRect(cocktailPhoto.photoClipRect);
+        }
+
+        private function onIdInputChange(event:TextOperationEvent):void
+        {
+            _controller.updateCocktailId(Number(idInput.text));
+        }
+
+        private function onCreateCocktailButtonClick(event:MouseEvent):void
+        {
+            _controller.saveNewCocktailToDB();
+        }
+
+        private function onDeleteClick(event:MouseEvent):void
+        {
+            _controller.deleteCocktail();
+        }
+
+        private function onImageLoad(event:Event):void {
+            _controller.updateImage(cocktailPhoto.imageBitmapData);
+        }
+        ]]>
+    </fx:Script>
+
+    <s:HGroup>
+        <s:Button label="Создать" click="onCreateCocktailButtonClick(event)"/>
+        <s:Button label="Удалить" click="onDeleteClick(event)"/>
+        <s:Spacer width="1"/>
+        <s:Button label="Сохранить" click="onSaveButtonClick(event)"/>
+    </s:HGroup>
+    <mx:HRule width="100%" strokeWidth="1" strokeColor="0x000000"/>
+    <s:HGroup verticalAlign="middle">
+        <s:TextInput id="idInput" change="onIdInputChange(event)" text="{_model.cocktailId}" prompt="id коктейля..."/>
+        <s:Button label="Загрузить" click="onLoadButtonClick(event)"/>
+    </s:HGroup>
+    <s:Group width="100%">
+        <s:HGroup left="0" verticalAlign="middle">
+            <s:TextInput id="titleInput" text="@{_model.name}" width="300" prompt="название коктейля..."/>
+            <s:CheckBox id="isDevelopCheckBox" label="в разработке"/>
+        </s:HGroup>
+        <s:Button label="Загрузить фото" right="0" click="onLoadPhotoButtonClick(event)"/>
+    </s:Group>
+    <s:HGroup width="100%" height="100%">
+        <s:VGroup width="100%" height="100%">
+            <s:TextArea id="descriptionInput" width="100%" textAlign="left" verticalAlign="top"
+                        text="@{_model.description}" prompt="описание коктейля..."/>
+            <s:HGroup width="100%" height="100%">
+                <s:VGroup width="50%" height="100%">
+                    <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="100%" height="26"
+                                                       styleName="regularText"
+                                                       itemRenderer="components.renderers.AutoCompleteRenderer"
+                                                       skinClass="design.skins.LiveSearchComboBoxSkin"
+                                                       focusSkin="{null}" focusRect="false"
+                                                       filterFunction="filterCBList"
+                                                       labelField="name" paddingLeft="0" prompt="Напишите ингредиент..."
+                                                       change="onIngrChooseChange(event)"
+                                                       dataProvider="{IngredientsModel.instance.ingredientsList}"/>
+                    <s:DataGrid id="selectedIngredientsGrid" width="100%" height="100%"
+                                dataProvider="{_model.selectedIngredientsList}"
+                                editable="true" keyUp="onDataGridIngredientDeleter(event)">
+                        <s:columns>
+                            <s:ArrayList>
+                                <s:GridColumn headerText="Название" dataField="name" editable="false"/>
+                                <s:GridColumn headerText="Количество" dataField="quantity" editable="true"/>
+                            </s:ArrayList>
+                        </s:columns>
+                    </s:DataGrid>
+                </s:VGroup>
+                <s:List id="cocktailTypesList" width="20%" change="onCocktailTypeChange(event)" requireSelection="true">
+                    <s:dataProvider>
+                        <s:ArrayList>
+                            <fx:Object value="{CocktailTypes.SHOOTER}" label="shooter"/>
+                            <fx:Object value="{CocktailTypes.SHORT_DRINK}" label="short"/>
+                            <fx:Object value="{CocktailTypes.LONG_DRINK}" label="long"/>
+                        </s:ArrayList>
+                    </s:dataProvider>
+                </s:List>
+                <s:List id="optionsList" width="30%" allowMultipleSelection="true"
+                        change="onCocktailOptionsChange(event)">
+                    <s:dataProvider>
+                        <s:ArrayList>
+                            <fx:Object value="{OptionParameters.BURNING}" label="горящий"/>
+                            <fx:Object value="{OptionParameters.CHECKED}" label="проверенный"/>
+                            <fx:Object value="{OptionParameters.FLACKY}" label="слоенный"/>
+                            <fx:Object value="{OptionParameters.IBA}" label="официальный"/>
+                            <fx:Object value="{OptionParameters.WITH_ICE}" label="со льдом"/>
+                        </s:ArrayList>
+                    </s:dataProvider>
+                </s:List>
+            </s:HGroup>
+        </s:VGroup>
+        <supportclasses:CropImageContainer id="cocktailPhoto" width="{CocktailModel.BIG_IMAGE_WIDTH}"
+                                           source="{_model.imageUrl}"
+                                           height="{CocktailModel.BIG_IMAGE_HEIGHT}" backgroundColor="0x15ffda"
+                                           clipRectChanged="onClipRectChanged(event)" imageLoaded="onImageLoad(event)"/>
+    </s:HGroup>
+</s:Group>

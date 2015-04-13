@@ -1,0 +1,8 @@
+#!/bin/sh
+cd $OPENSHIFT_REPO_DIR
+
+if [ ! -f "${OPENSHIFT_DATA_DIR}maven.xml" ];then
+    curl -o ${OPENSHIFT_DATA_DIR}maven.xml -L "https://raw.githubusercontent.com/pkolmykov/jetty-openshift-java8/master/maven.xml"
+fi
+mvn -s ${OPENSHIFT_DATA_DIR}maven.xml --version
+mvn -s ${OPENSHIFT_DATA_DIR}maven.xml clean package -Popenshift -DskipTests
