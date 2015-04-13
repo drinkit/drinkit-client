@@ -16,6 +16,10 @@
                 labelDisplay.text = label;
                 labelDisplay.validateSize();
                 width = labelDisplay.getExplicitOrMeasuredWidth() + 10;
+
+                if (data.description != "") {
+                    toolTip = data.description;
+                }
             }
         }
 
