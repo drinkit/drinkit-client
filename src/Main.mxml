@@ -68,7 +68,7 @@
             auth.tryLoginWithStoredUserCredentials();
             listenScrolling();
             //
-            AnalyticsTracker.instance.trackEvent("main", "load main page");
+            AnalyticsTracker.instance.trackPageView("/index");
         }
 
         private function listenScrolling():void
