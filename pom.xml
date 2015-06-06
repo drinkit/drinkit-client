@@ -173,13 +173,6 @@
 
         <dependency>
             <groupId>com.google.code</groupId>
-            <artifactId>gaforflash</artifactId>
-            <version>1.0.0</version>
-            <type>swc</type>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code</groupId>
             <artifactId>gua4fl</artifactId>
             <version>1.0.0</version>
             <type>swc</type>

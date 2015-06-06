@@ -18,6 +18,8 @@
         import models.UserRoles;
         import models.events.ViewEvent;
 
+        import mx.managers.BrowserManager;
+
         import utils.AnalyticsTracker;
 
         [Embed(source="/../assets/bigcocktail.png")]
@@ -70,7 +72,7 @@
             _controller.loadNeededInfo(CocktailModel(event.viewData));
             layout.verticalScrollPosition = 0;
             //
-            AnalyticsTracker.instance.trackPageView("/recipe", _model.name);
+            AnalyticsTracker.instance.trackPageView("#" + BrowserManager.getInstance().fragment, _model.name);
         }
         ]]>
 	</fx:Script>
