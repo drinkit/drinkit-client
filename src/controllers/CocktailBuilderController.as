@@ -13,7 +13,6 @@ package controllers
     import mx.collections.ArrayCollection;
 
     import utils.CocktailUrlDecorator;
-
     import utils.JSONInstantiator;
     import utils.ServiceUtil;
     import utils.supportClasses.JSRequest;
@@ -24,6 +23,7 @@ package controllers
         {
             _model = model;
         }
+
         private var _model:CocktailBuilderModel;
 
         public function addIngredientToQuery(ingr:Object):void
@@ -85,7 +85,8 @@ package controllers
         private function onSearchComplete(response:String):void
         {
             var res:Array = JSONInstantiator.createInstance(response, CocktailModel, false) as Array;
-            res.map(function(element:CocktailModel, index:uint, array:Array):void {
+            res.map(function (element:CocktailModel, index:uint, array:Array):void
+            {
                 element = CocktailUrlDecorator.decorate(element);
             });
             _model.isNoCocktailsFound = !res || res.length == 0;

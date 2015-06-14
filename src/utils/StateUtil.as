@@ -11,7 +11,8 @@ package utils
         {
             var state:State;
 
-            for (var i:int = 0; i < states.length; i++) {
+            for (var i:int = 0; i < states.length; i++)
+            {
                 state = states[i] as State;
 
                 if (state.name == stateName)

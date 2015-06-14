@@ -22,10 +22,12 @@
         [Bindable]
         public function set source(value:Object):void
         {
-            if (value) {
+            if (value)
+            {
                 _source = value;
 
-                if (value is Bitmap) {
+                if (value is Bitmap)
+                {
                     determinateClipRectSize(_source.width, _source.height, width, height);
                     dispatchEvent(new Event("clipRectChanged"));
                 }
@@ -125,7 +127,8 @@
             return scaledClipRect;
         }
 
-        public function get imageBitmapData():BitmapData {
+        public function get imageBitmapData():BitmapData
+        {
             return image.bitmapData;
         }
 
@@ -149,7 +152,7 @@
         </s:fill>
     </s:Rect>
     <s:BitmapImage id="image" width="100%" height="100%" source="{source}" fillMode="scale" scaleMode="letterbox"
-                   smoothingQuality="high" smooth="true" complete="onImageLoad(event)" />
+                   smoothingQuality="high" smooth="true" complete="onImageLoad(event)"/>
     <s:BorderContainer id="clipRect" width="75" height="100" backgroundColor="0xffffff" backgroundAlpha="0.1"
                        borderColor="0x000000" borderAlpha="0.8" mouseDown="onBox1MouseDown(event)"/>
 

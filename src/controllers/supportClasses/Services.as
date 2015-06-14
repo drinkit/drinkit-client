@@ -8,5 +8,6 @@ package controllers.supportClasses
         public static const GET_USER_INFO:String = "rest/user/getInfo";
         public static const REGISTER_USER:String = "rest/user/register";
         public static const SEARCH_BY_NAME:String = "rest/recipes/";
+        public static const STATS_VIEWS:String = "rest/stats/";
     }
 }

@@ -1,7 +1,6 @@
 package models
 {
     import flash.events.Event;
-    import flash.events.EventDispatcher;
 
     import mx.binding.utils.BindingUtils;
     import mx.collections.ArrayCollection;

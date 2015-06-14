@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <components:PopupWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
-               xmlns:s="library://ns.adobe.com/flex/spark"
-               xmlns:components="components.*"
-               close="onClose(event)" controlBarVisible="true" width="200"
-               creationComplete="onCreationComplete(event)" title="Вход" show="onShow(event)">
+                        xmlns:s="library://ns.adobe.com/flex/spark"
+                        xmlns:components="components.*"
+                        close="onClose(event)" controlBarVisible="true" width="200"
+                        creationComplete="onCreationComplete(event)" title="Вход" show="onShow(event)">
     <fx:Script>
 		<![CDATA[
         import controllers.AuthController;
@@ -21,7 +21,6 @@
         import mx.managers.PopUpManager;
 
         import spark.components.Application;
-        import spark.components.Label;
 
         private static var _loginWindow:LoginWindow;
 

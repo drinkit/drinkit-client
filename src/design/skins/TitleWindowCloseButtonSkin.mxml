@@ -11,23 +11,23 @@
 
 -->
 
-<!--- The default skin class for the close button of the Spark TitleWindow component.  
+<!--- The default skin class for the close button of the Spark TitleWindow component.
 
-     @see spark.skins.spark.TitleWindowSkin     
-     @see spark.components.TitleWindow
+ @see spark.skins.spark.TitleWindowSkin
+ @see spark.components.TitleWindow
 
-     @langversion 3.0
-     @playerversion Flash 10
-     @playerversion AIR 1.5
-     @productversion Flex 4
+ @langversion 3.0
+ @playerversion Flash 10
+ @playerversion AIR 1.5
+ @productversion Flex 4
 -->
 <s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-    xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled="0.5" buttonMode="true">
-    
+             xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled="0.5" buttonMode="true">
+
     <!-- host component -->
     <fx:Metadata>
-        <![CDATA[ 
-        /** 
+        <![CDATA[
+        /**
          * @copy spark.skins.spark.ApplicationSkin#hostComponent
          */
         [HostComponent("spark.components.Button")]
@@ -38,13 +38,16 @@
         import design.DesignModel;
 
         /* Define the skin elements that should not be colorized.
-        For closeButton, the graphics are colorized but the x is not. */
+         For closeButton, the graphics are colorized but the x is not. */
         static private const exclusions:Array = [];
 
         /**
          * @private
          */
-        override public function get colorizeExclusions():Array {return exclusions;}
+        override public function get colorizeExclusions():Array
+        {
+            return exclusions;
+        }
 
         /* Define the symbol fill items that should be colored by the "symbolColor" style. */
         static private const symbols:Array = [];
@@ -52,16 +55,19 @@
         /**
          * @private
          */
-        override public function get symbolItems():Array {return symbols}
+        override public function get symbolItems():Array
+        {
+            return symbols
+        }
     </fx:Script>
 
     <s:states>
-        <s:State name="up" />
+        <s:State name="up"/>
         <s:State name="over"/>
-        <s:State name="down" />
-        <s:State name="disabled" />
+        <s:State name="down"/>
+        <s:State name="disabled"/>
     </s:states>
-    
+
     <!--- Define the drop shadow for the close button. -->
     <s:Ellipse width="15" height="15">
         <s:fill>

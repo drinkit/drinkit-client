@@ -13,8 +13,6 @@ package controllers
     import models.UserInfoModel;
     import models.events.AuthEvent;
 
-    import mx.controls.Alert;
-
     import utils.ServiceUtil;
     import utils.URLContentTypes;
     import utils.supportClasses.JSRequest;

@@ -8,7 +8,6 @@ package controllers
     import models.CocktailModel;
 
     import utils.CocktailUrlDecorator;
-
     import utils.JSONInstantiator;
     import utils.ServiceUtil;
     import utils.supportClasses.JSRequest;
@@ -29,19 +28,6 @@ package controllers
         [Bindable]
         public var model:CocktailModel;
 
-        private function requestCocktailData(key:Number):void
-        {
-            var request:JSRequest = new JSRequest();
-            ServiceUtil.instance.sendRequest(Services.RECIPES + key, request, onCocktailInfoLoad);
-        }
-
-        private function onCocktailInfoLoad(response:String):void
-        {
-            model = CocktailUrlDecorator.decorate(JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel);
-            MainController.instance.setTitle(model.name);
-            dispatchEvent(new Event(COCKTAIL_DATA_LOADED));
-        }
-
         public function loadNeededInfo(prototype:CocktailModel):void
         {
             if (prototype.name && prototype.cocktailTypeId)
@@ -54,6 +40,19 @@ package controllers
             {
                 requestCocktailData(prototype.id);
             }
+        }
+
+        private function requestCocktailData(key:Number):void
+        {
+            var request:JSRequest = new JSRequest();
+            ServiceUtil.instance.sendRequest(Services.RECIPES + key, request, onCocktailInfoLoad);
+        }
+
+        private function onCocktailInfoLoad(response:String):void
+        {
+            model = CocktailUrlDecorator.decorate(JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel);
+            MainController.instance.setTitle(model.name);
+            dispatchEvent(new Event(COCKTAIL_DATA_LOADED));
         }
     }
 }

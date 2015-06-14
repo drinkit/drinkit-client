@@ -82,7 +82,8 @@
 
         private function updatedSelectedType(typeId:int):void
         {
-            if (typeId == -1) {
+            if (typeId == -1)
+            {
                 cocktailTypesList.selectedIndex = -1;
                 return;
             }
@@ -221,7 +222,8 @@
             _controller.deleteCocktail();
         }
 
-        private function onImageLoad(event:Event):void {
+        private function onImageLoad(event:Event):void
+        {
             _controller.updateImage(cocktailPhoto.imageBitmapData);
         }
         ]]>

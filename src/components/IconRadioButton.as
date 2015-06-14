@@ -12,6 +12,7 @@ package components
             super();
             setStyle("skinClass", Class(FlatRadioButtonSkin));
         }
+
         [Bindable]
         public var icon:Object;
     }

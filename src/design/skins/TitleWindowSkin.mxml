@@ -105,8 +105,8 @@
             var cr:Number = getStyle("cornerRadius");
             var withControls:Boolean =
                     (currentState == "disabledWithControlBar" ||
-                            currentState == "normalWithControlBar" ||
-                            currentState == "inactiveWithControlBar");
+                    currentState == "normalWithControlBar" ||
+                    currentState == "inactiveWithControlBar");
 
             if (cornerRadius != cr)
             {
@@ -159,7 +159,8 @@
     <!--- drop shadow can't be hittable so it stays sibling of other graphics @private-->
     <s:RectangularDropShadow id="dropShadow" blurX="20" blurY="20" alpha="0.32"
                              alpha.inactiveGroup="0.22" distance="11" distance.inactiveGroup="7"
-                             angle="90" color="0x000000" left="0" top="0" right="0" bottom="0" bottom.withControls="{bottomGroup.height}"/>
+                             angle="90" color="0x000000" left="0" top="0" right="0" bottom="0"
+                             bottom.withControls="{bottomGroup.height}"/>
 
     <!--- drop shadow can't be hittable so all other graphics go in this group -->
     <s:Group left="0" right="0" top="0" bottom="0">
@@ -214,7 +215,8 @@
                 <!--- layer 0: title bar fill @private -->
                 <s:Rect id="tbFill" left="0" right="0" top="0" bottom="1">
                     <s:fill>
-                        <s:BitmapFill source="@Embed(source='/../assets/pattern-top-panel.png')" fillMode="repeat" smooth="true" />
+                        <s:BitmapFill source="@Embed(source='/../assets/pattern-top-panel.png')" fillMode="repeat"
+                                      smooth="true"/>
                     </s:fill>
                 </s:Rect>
 
@@ -222,7 +224,8 @@
                 <!--- @copy spark.components.Panel#titleDisplay -->
                 <s:Label id="titleDisplay" maxDisplayedLines="1"
                          left="2" right="1" top="1" bottom="0" minHeight="40" color="0xffffff"
-                         verticalAlign="middle" textAlign="center" fontSize="18" fontWeight="bold" fontStyle="italic" fontFamily="Georgia"/>
+                         verticalAlign="middle" textAlign="center" fontSize="18" fontWeight="bold" fontStyle="italic"
+                         fontFamily="Georgia"/>
 
                 <!-- layer 4: moveArea -->
                 <!--- @copy spark.components.TitleWindow#moveArea -->

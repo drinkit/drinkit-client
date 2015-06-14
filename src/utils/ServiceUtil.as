@@ -25,10 +25,15 @@ package utils
 
             return _instance;
         }
-
-        private var _serviceAddress:String = "";
         private var _waitingRequests:Object = {};
         private var _digests:Object = {};
+
+        private var _serviceAddress:String = "";
+
+        public function get serviceAddress():String
+        {
+            return _serviceAddress;
+        }
 
         public function init(serviceAddress:String):void
         {
@@ -127,10 +132,6 @@ package utils
             var requestID:String = functionName + new Date().time.toString();
             _waitingRequests[requestID] = new WaitingRequest(request, handler, errorHandler);
             return requestID;
-        }
-
-        public function get serviceAddress():String {
-            return _serviceAddress;
         }
     }
 

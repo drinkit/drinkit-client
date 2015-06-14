@@ -60,7 +60,8 @@ package controllers
             ServiceUtil.instance.sendRequest(Services.INGREDIENTS + _model.id, deleteRequest, onDeleteIngredient, onDeleteIngredientError);
         }
 
-        private function onDeleteIngredientError(response:String):void {
+        private function onDeleteIngredientError(response:String):void
+        {
             Alert.show("Вы не можете удалить ингредиент, так как он используется в существующих коктейлях!");
         }
 

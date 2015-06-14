@@ -2,8 +2,8 @@ package models
 {
 
     import flash.events.EventDispatcher;
-    import mx.collections.ArrayCollection;
 
+    import mx.collections.ArrayCollection;
 
     [Bindable]
     public class CocktailModel extends EventDispatcher

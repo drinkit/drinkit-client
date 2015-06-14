@@ -51,6 +51,7 @@
                             <outputDirectory>${documentRoot}</outputDirectory>
                             <storepass></storepass>
                             <debug>false</debug>
+                            <optimize>true</optimize>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -91,10 +92,12 @@
                 <extensions>true</extensions>
                 <configuration>
                     <debug>true</debug>
+                    <strict>true</strict>
                     <localesCompiled>
                         <locale>ru_RU</locale>
                     </localesCompiled>
                     <outputFile>client</outputFile>
+                    <optimize>true</optimize>
                     <updateSecuritySandbox>false</updateSecuritySandbox>
                     <storepass></storepass>
                     <coverage>true</coverage>
@@ -160,6 +163,7 @@
             <version>${flex.version}</version>
             <!-- this artifact version must match the flex SDK version used in this project -->
             <classifier>11.1</classifier>
+            <scope>rsl</scope>
             <!-- the classifier specifies the target flash player major version  -->
             <type>swc</type>
         </dependency>

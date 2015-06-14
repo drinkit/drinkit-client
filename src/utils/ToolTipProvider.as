@@ -5,6 +5,16 @@ package utils
 {
     public class ToolTipProvider
     {
+        {
+            _tooltips[LONG] = "лонги";
+            _tooltips[SHORT] = "короткие";
+            _tooltips[SHOOTER] = "шоты";
+            _tooltips[CHECKED] = "провереный модераторами";
+            _tooltips[FLACKY] = "слоенный";
+            _tooltips[BURNING] = "горящий";
+            _tooltips[IBA] = "утвержденный международной ассоциацией барменов (IBA)";
+            _tooltips[WITH_ICE] = "со льдом";
+        }
         public static const LONG:String = "long";
         public static const SHORT:String = "short";
         public static const SHOOTER:String = "shooter";
@@ -13,19 +23,7 @@ package utils
         public static const BURNING:String = "burning";
         public static const IBA:String = "iba";
         public static const WITH_ICE:String = "withIce";
-
         private static var _tooltips:Object = {};
-
-        {
-            _tooltips[LONG] = "long drink";
-            _tooltips[SHORT] = "short drink";
-            _tooltips[SHOOTER] = "shooter";
-            _tooltips[CHECKED] = "провереный модераторами";
-            _tooltips[FLACKY] = "слоенный";
-            _tooltips[BURNING] = "горящий";
-            _tooltips[IBA] = "утвержденный международной ассоциацией барменов (IBA)";
-            _tooltips[WITH_ICE] = "со льдом";
-        }
 
         public static function getToolTip(key:String):String
         {

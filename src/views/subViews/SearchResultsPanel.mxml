@@ -105,15 +105,17 @@
         }
         ]]>
     </fx:Script>
-    <s:BitmapImage id="noResultsImage" visible="false" horizontalAlign="center" source="@Embed(source='/../assets/sadcocktail.png')" />
+    <s:BitmapImage id="noResultsImage" visible="false" horizontalAlign="center"
+                   source="@Embed(source='/../assets/sadcocktail.png')"/>
     <s:Label id="noResultsLabel" visible="false" width="70%" fontSize="24" textAlign="center"
              styleName="regularText" horizontalCenter="0"
              maxDisplayedLines="2" paddingLeft="5" paddingRight="5"
              text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
-             top="20" />
+             top="20"/>
     <s:List id="recipesList" visible="false" left="5" borderVisible="false" width="100%"
             change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
-            verticalScrollPolicy="off" itemRendererFunction="searchResultItemRendererFunction" dataProvider="{_visibleRecipes}"
+            verticalScrollPolicy="off" itemRendererFunction="searchResultItemRendererFunction"
+            dataProvider="{_visibleRecipes}"
             horizontalScrollPolicy="off">
         <s:layout>
             <s:TileLayout horizontalGap="11" verticalGap="11" paddingBottom="7" paddingLeft="5" paddingRight="0"

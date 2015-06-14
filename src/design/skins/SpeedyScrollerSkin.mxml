@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:components="components.*">
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+             xmlns:components="components.*">
 
     <fx:Metadata>
     <![CDATA[
@@ -15,7 +16,7 @@
         /**
          *  @private
          */
-        override public function beginHighlightBitmapCapture() : Boolean
+        override public function beginHighlightBitmapCapture():Boolean
         {
             var needUpdate:Boolean = super.beginHighlightBitmapCapture();
 
@@ -33,7 +34,7 @@
         /**
          *  @private
          */
-        override public function endHighlightBitmapCapture() : Boolean
+        override public function endHighlightBitmapCapture():Boolean
         {
             var needUpdate:Boolean = super.endHighlightBitmapCapture();
 
@@ -45,7 +46,7 @@
         ]]>
     </fx:Script>
 
-    <components:SpeedyVScrollBar id="verticalScrollBar" visible="false" />
-    <s:HScrollBar id="horizontalScrollBar" visible="false" />
+    <components:SpeedyVScrollBar id="verticalScrollBar" visible="false"/>
+    <s:HScrollBar id="horizontalScrollBar" visible="false"/>
 
 </s:SparkSkin>
