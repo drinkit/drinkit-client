@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+  Created by Crabar on 29.06.2015.
+-->
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+          xmlns:components="components.*" horizontalAlign="center">
+  <fx:Script>
+    <![CDATA[
+      import models.MyBarModel;
+
+      import mx.collections.ArrayList;
+
+      private var _model:MyBarModel;
+
+      [Bindable]
+      public var category:String;
+
+      public function set model(value:MyBarModel):void
+      {
+          _model = value;
+          _model.addEventListener(MyBarModel.MODEL_CHANGED, onModelChanged);
+      }
+
+      private function onModelChanged(event:Event):void
+      {
+          _ingredients = _model.getIngredientsByCategory(category);
+      }
+
+      [Bindable]
+      private var _ingredients:ArrayList;
+
+      ]]>
+  </fx:Script>
+
+  <s:Label text="{category}" />
+  <s:List width="100%" minWidth="200" height="100%"
+          dataProvider="{_ingredients}"
+          focusEnabled="false"
+          itemRenderer="views.renderers.IngredientItemRenderer" labelField="name"
+          borderVisible="false">
+    <s:layout>
+      <components:FlowLayout clipAndEnableScrolling="true" paddingLeft="0" paddingBottom="5"
+                             paddingRight="5" paddingTop="5"/>
+    </s:layout>
+  </s:List>
+</s:VGroup>

@@ -164,7 +164,7 @@
                             <views:CocktailView width="100%" height="100%"/>
                         </components:ExtNavigationContent>
                         <components:ExtNavigationContent width="100%" height="100%" label="Мой бар"
-                                                         includeInBar="false">
+                                                         includeInBar="{UserInfoModel.instance.role >= UserRoles.USER}">
                             <views:MyBar width="100%"/>
                         </components:ExtNavigationContent>
                         <components:ExtNavigationContent width="100%" height="100%" label="Админ-панель"

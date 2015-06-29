@@ -78,6 +78,7 @@ package controllers
             // parse response and save user info
             var responseJSON:Object = JSON.parse(response);
             UserInfoModel.instance.displayName = responseJSON.displayName;
+            UserInfoModel.instance.uid = responseJSON.uid;
             UserInfoModel.instance.role = getHighestRole(responseJSON.authorities);
             //
             storeUserCredentials(UserInfoModel.instance.email, UserInfoModel.instance.password);

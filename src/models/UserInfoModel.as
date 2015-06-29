@@ -28,6 +28,8 @@ package models
         }
 
         [Bindable]
+        public var uid:String;
+        [Bindable]
         public var displayName:String;
         [Bindable]
         public var role:uint = UserRoles.ANONYMOUS;
@@ -57,6 +59,7 @@ package models
             _email = "";
             _password = "";
             displayName = "";
+            uid = "";
             role = UserRoles.ANONYMOUS;
         }
 
