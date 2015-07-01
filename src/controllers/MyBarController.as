@@ -10,6 +10,7 @@ package controllers
     import models.MyBarModel;
     import models.UserInfoModel;
     import models.supportClasses.BarItem;
+    import models.supportClasses.BarItem;
     import models.supportClasses.Ingredient;
 
     import utils.JSONInstantiator;
@@ -30,19 +31,13 @@ package controllers
         public function requestUserIngredients():void
         {
             var request:JSRequest = new JSRequest();
-            var requestURL:String = StringUtil.insertParameters(Services.USER_BAR, {"id": UserInfoModel.instance.uid});
+            var requestURL:String = StringUtil.insertParameters(Services.USER_BAR, {"id": UserInfoModel.instance.id});
             ServiceUtil.instance.sendRequest(requestURL, request, onGetUserBar);
         }
 
         private function onGetUserBar(response:String):void
         {
-            _model.ingredients = new <BarItem>[];
-            var userIngredients:Array = JSON.parse(response) as Array;
-            for each (var ingredient:Object in userIngredients)
-            {
-                _model.ingredients.push(JSONInstantiator.createInstance(JSON.stringify(ingredient), BarItem));
-            }
-
+            _model.ingredients = Vector.<BarItem>(JSONInstantiator.createInstance(response, BarItem) as Array);
             _model.dispatchEvent(new Event(MyBarModel.MODEL_CHANGED));
         }
 

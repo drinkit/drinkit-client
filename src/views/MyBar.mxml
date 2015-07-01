@@ -4,15 +4,34 @@
                 creationComplete="onCreationComplete(event)">
     <fx:Script>
 		<![CDATA[
+        import controllers.MyBarController;
+
         import models.MyBarModel;
+        import models.UserInfoModel;
+        import models.UserRoles;
+        import models.events.AuthEvent;
 
         import mx.events.FlexEvent;
 
+        [Bindable]
         private var _model:MyBarModel;
+        private var _controller:MyBarController;
 
         protected function onCreationComplete(event:FlexEvent):void
         {
             _model = MyBarModel.instance;
+            _controller = new MyBarController(_model);
+
+            if (UserInfoModel.instance.role >= UserRoles.USER) {
+                _controller.requestUserIngredients();
+            } else {
+                UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onSuccessAuth);
+            }
+        }
+
+        private function onSuccessAuth(event:AuthEvent):void
+        {
+            _controller.requestUserIngredients();
         }
 
         ]]>

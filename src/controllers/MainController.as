@@ -84,7 +84,7 @@ package controllers
 
         private function onIngredientsLoad(response:String):void
         {
-            IngredientsModel.instance.ingredientsList = new ArrayCollection(JSONInstantiator.createInstance(response, Ingredient) as Array);
+            IngredientsModel.instance.ingredientsList = new ArrayCollection(JSONInstantiator.createInstance(response, Ingredient, false) as Array);
         }
 
         private function checkFragments():void

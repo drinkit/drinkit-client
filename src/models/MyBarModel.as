@@ -9,6 +9,8 @@ package models
 
     import mx.collections.ArrayList;
 
+    import utils.ArrayUtil;
+
     /**
      * @eventType models.MyBarModel.MODEL_CHANGED
      */
@@ -33,7 +35,7 @@ package models
 
         public function getIngredientsByCategory(category:String):ArrayList
         {
-            return new ArrayList();
+            return new ArrayList(ArrayUtil.fromVectorToArray(ingredients));
         }
 
         public function get inactiveIngredients():ArrayList
