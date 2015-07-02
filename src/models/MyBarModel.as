@@ -3,6 +3,7 @@
  */
 package models
 {
+    import flash.events.Event;
     import flash.events.EventDispatcher;
 
     import models.supportClasses.BarItem;
@@ -30,13 +31,13 @@ package models
 
         private static var _instance:MyBarModel;
 
-        public var barItems:Vector.<BarItem>;
+        private var _barItems:Vector.<BarItem>;
 
         public function getIngredientsByCategory(category:String):ArrayList
         {
             var ingredients:Array = [];
             var curIngr:Ingredient;
-            for each (var item:BarItem in barItems) {
+            for each (var item:BarItem in _barItems) {
                 if (!item.isActive) {
                    continue;
                 }
@@ -51,6 +52,15 @@ package models
         public function get inactiveIngredients():ArrayList
         {
             return new ArrayList();
+        }
+
+        public function get barItems():Vector.<BarItem> {
+            return _barItems;
+        }
+
+        public function set barItems(value:Vector.<BarItem>):void {
+            _barItems = value;
+            dispatchEvent(new Event(MyBarModel.MODEL_CHANGED));
         }
     }
 }

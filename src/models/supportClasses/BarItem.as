@@ -5,8 +5,10 @@ package models.supportClasses
 {
     public class BarItem
     {
-        public function BarItem()
+        public function BarItem(ingredientId:Number = NaN, isActive:Boolean = false)
         {
+            this.ingredientId = ingredientId;
+            this.isActive = isActive;
         }
 
         public var ingredientId:Number;

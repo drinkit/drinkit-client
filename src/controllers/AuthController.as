@@ -5,11 +5,15 @@ package controllers
 {
     import controllers.supportClasses.Services;
 
+    import models.MyBarModel;
+
     import models.UserInfoModel;
     import models.UserRoles;
     import models.events.AuthEvent;
+    import models.supportClasses.BarItem;
 
     import utils.CookieUtil;
+    import utils.JSONInstantiator;
     import utils.ServiceUtil;
     import utils.supportClasses.JSRequest;
 
@@ -78,8 +82,9 @@ package controllers
             // parse response and save user info
             var responseJSON:Object = JSON.parse(response);
             UserInfoModel.instance.displayName = responseJSON.displayName;
-            UserInfoModel.instance.id = responseJSON.uid;
+            UserInfoModel.instance.id = responseJSON.id;
             UserInfoModel.instance.role = getHighestRole(responseJSON.authorities);
+            MyBarModel.instance.barItems = Vector.<BarItem>(JSONInstantiator.createInstance(responseJSON.barItems, BarItem) as Array);
             //
             storeUserCredentials(UserInfoModel.instance.email, UserInfoModel.instance.password);
             //

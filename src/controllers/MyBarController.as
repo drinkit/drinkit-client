@@ -6,6 +6,7 @@ package controllers
     import controllers.supportClasses.Services;
 
     import flash.events.Event;
+    import flash.net.URLRequestMethod;
 
     import models.MyBarModel;
     import models.UserInfoModel;
@@ -37,12 +38,19 @@ package controllers
 
         private function onGetUserBar(response:String):void
         {
-            _model.barItems = Vector.<BarItem>(JSONInstantiator.createInstance(response, BarItem) as Array);
-            _model.dispatchEvent(new Event(MyBarModel.MODEL_CHANGED));
+
         }
 
         public function addIngredientToBar(ingredient:Ingredient):void
         {
+            var request:JSRequest = new JSRequest(URLRequestMethod.POST);
+            request.expectedStatus = 201;
+            request.bodyParams = JSON.stringify(new BarItem(ingredient.id, true));
+            var requestURL:String = StringUtil.insertParameters(Services.USER_BAR, {"id": UserInfoModel.instance.id});
+            ServiceUtil.instance.sendRequest(requestURL, request, onAddIngredient);
+        }
+
+        private function onAddIngredient(response:String):void {
             //
         }
 
