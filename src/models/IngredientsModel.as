@@ -23,18 +23,18 @@ package models
         [Bindable]
         public var ingredientsList:ArrayCollection;
 
-        public function getIngredientNameById(id:Number):String
+        public function getIngredientById(id:Number):Ingredient
         {
             if (ingredientsList)
             {
                 for (var i:uint = 0; i < ingredientsList.source.length; i++)
                 {
                     if (Ingredient(ingredientsList.source[i]).id == id)
-                        return Ingredient(ingredientsList.source[i]).name;
+                        return Ingredient(ingredientsList.source[i]);
                 }
             }
 
-            return "ХЗ";
+            return null;
         }
     }
 }

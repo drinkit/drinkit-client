@@ -6,10 +6,9 @@ package models
     import flash.events.EventDispatcher;
 
     import models.supportClasses.BarItem;
+    import models.supportClasses.Ingredient;
 
     import mx.collections.ArrayList;
-
-    import utils.ArrayUtil;
 
     /**
      * @eventType models.MyBarModel.MODEL_CHANGED
@@ -31,11 +30,22 @@ package models
 
         private static var _instance:MyBarModel;
 
-        public var ingredients:Vector.<BarItem>;
+        public var barItems:Vector.<BarItem>;
 
         public function getIngredientsByCategory(category:String):ArrayList
         {
-            return new ArrayList(ArrayUtil.fromVectorToArray(ingredients));
+            var ingredients:Array = [];
+            var curIngr:Ingredient;
+            for each (var item:BarItem in barItems) {
+                if (!item.isActive) {
+                   continue;
+                }
+                curIngr = IngredientsModel.instance.getIngredientById(item.ingredientId);
+                if (curIngr.category == category) {
+                    ingredients.push(curIngr);
+                }
+            }
+            return new ArrayList(ingredients);
         }
 
         public function get inactiveIngredients():ArrayList

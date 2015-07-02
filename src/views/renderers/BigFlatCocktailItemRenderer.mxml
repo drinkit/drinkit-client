@@ -36,10 +36,8 @@
 
         private var gapBetweenIngredients:Number = 5;
 
-        override public function set data(value:Object):void
-        {
-            if (value)
-            {
+        override public function set data(value:Object):void {
+            if (value) {
                 init();
                 //
                 _cocktail = value as CocktailModel;
@@ -54,36 +52,31 @@
             }
         }
 
-        private function get cocktailThumbnail():Object
-        {
+        private function get cocktailThumbnail():Object {
             if (_cocktail.thumbnailUrl && _cocktail.thumbnailUrl != "")
                 return _cocktail.thumbnailUrl;
             else
                 return new emptyCocktail();
         }
 
-        private function init():void
-        {
+        private function init():void {
             if (!_model)
                 _model = SearchResultsPanel(List(owner).document).model;
         }
 
-        private function buildTags(cocktailType:int, options:Array):void
-        {
+        private function buildTags(cocktailType:int, options:Array):void {
             tagsGroup.removeAllElements();
             tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(cocktailType, TagsModel.COCKTAIL_TYPE_TAG, 32));
 
-            if (options)
-            {
-                for (var i:uint = 0; i < options.length; i++)
-                {
-                    tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG, 32));
+            if (options) {
+                for (var i:uint = 0; i < options.length; i++) {
+                    tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG,
+                                                                              32));
                 }
             }
         }
 
-        private function buildRecipe(ingredients:Array):void
-        {
+        private function buildRecipe(ingredients:Array):void {
             var ingredientsDataProvider:ArrayList = new ArrayList();
 
             if (!ingredients || ingredients.length == 0)
@@ -91,9 +84,9 @@
 
             var item:Ingredient;
 
-            for (var i:uint = 0; i < ingredients.length; i++)
-            {
-                item = new Ingredient(ingredients[i][0], IngredientsModel.instance.getIngredientNameById(ingredients[i][0]).toLowerCase());
+            for (var i:uint = 0; i < ingredients.length; i++) {
+                item = new Ingredient(ingredients[i][0],
+                                      IngredientsModel.instance.getIngredientById(ingredients[i][0]).name.toLowerCase());
                 ingredientsDataProvider.addItem(item);
             }
 
@@ -103,46 +96,38 @@
             callLater(rearrangeIngredients, [ingredientsList.dataGroup]);
         }
 
-        private function rearrangeIngredients(ingredientsBlocks:DataGroup):void
-        {
+        private function rearrangeIngredients(ingredientsBlocks:DataGroup):void {
             const rendererHeight:Number = 25 + gapBetweenIngredients;
             var maxHeight:Number = ingredientsBlocks.height;
             var maxWidth:Number = ingredientsBlocks.width;
             var ingredients:Array = [];
             var newOrder:Array = [];
-            for (var j:int = 0; j < ingredientsBlocks.numElements; j++)
-            {
+            for (var j:int = 0; j < ingredientsBlocks.numElements; j++) {
                 var renderer:BaseIngredientItemRenderer = ingredientsBlocks.getElementAt(j) as BaseIngredientItemRenderer;
                 if (renderer)
                     ingredients.push(renderer);
             }
 
-            if (ingredients.length == 0)
-            {
+            if (ingredients.length == 0) {
                 return;
             }
 
             ingredients.sortOn("width", Array.NUMERIC);
             var totalHeight:Number = 0;
 
-            while (totalHeight + rendererHeight <= maxHeight && ingredients.length != 0)
-            {
+            while (totalHeight + rendererHeight <= maxHeight && ingredients.length != 0) {
                 var curRowWidth:Number = 0;
                 var rowIsNotFilled:Boolean = true;
                 var curIngredient:BaseIngredientItemRenderer = ingredients.shift();
                 newOrder.push(curIngredient);
                 curRowWidth += curIngredient.width + gapBetweenIngredients;
-                while (rowIsNotFilled)
-                {
+                while (rowIsNotFilled) {
                     var maxItem:int = -1;
                     var maxSize:Number = 0;
                     var nextIngredient:BaseIngredientItemRenderer = null;
-                    for (var i:int = 0; i < ingredients.length; i++)
-                    {
-                        if (curRowWidth + ingredients[i].width < maxWidth)
-                        {
-                            if (curRowWidth + ingredients[i].width > maxSize)
-                            {
+                    for (var i:int = 0; i < ingredients.length; i++) {
+                        if (curRowWidth + ingredients[i].width < maxWidth) {
+                            if (curRowWidth + ingredients[i].width > maxSize) {
                                 maxSize = curRowWidth + ingredients[i].width;
                                 maxItem = i;
                             }
@@ -150,13 +135,11 @@
                         }
                     }
 
-                    if (maxItem != -1)
-                    {
+                    if (maxItem != -1) {
                         newOrder.push(ingredients[maxItem]);
                         curRowWidth += ingredients[maxItem].width + gapBetweenIngredients;
                         ingredients.splice(maxItem, 1);
-                    } else
-                    {
+                    } else {
                         rowIsNotFilled = false;
                     }
                 }
@@ -166,42 +149,35 @@
 
 
             var sortedIngredients:ArrayList = new ArrayList();
-            for (var k:int = 0; k < newOrder.length; k++)
-            {
+            for (var k:int = 0; k < newOrder.length; k++) {
                 var ingredient:Ingredient = newOrder[k].data;
                 sortedIngredients.addItem(ingredient);
             }
 
             // create 3 dots data
-            if (ingredients.length > 0)
-            {
+            if (ingredients.length > 0) {
 
                 const dotsWidth:Number = 30;
                 const dotsText:String = "...";
                 var dots:Ingredient = new Ingredient(-999, "...", 0, "другие ингредиенты");
 
-                if (curRowWidth + dotsWidth <= maxWidth)
-                {
+                if (curRowWidth + dotsWidth <= maxWidth) {
                     sortedIngredients.addItem(dots);
-                } else
-                {
+                } else {
                     var deletedElement:Ingredient = sortedIngredients.getItemAt(sortedIngredients.length - 1) as Ingredient;
                     sortedIngredients.removeItemAt(sortedIngredients.length - 1);
                     sortedIngredients.addItem(dots);
                 }
 
                 dots.description = "";
-                for (var l:int = 0; l < ingredients.length; l++)
-                {
+                for (var l:int = 0; l < ingredients.length; l++) {
                     var itemRenderer:BaseIngredientItemRenderer = ingredients[l];
                     dots.description += itemRenderer.data.name + "\n";
                 }
 
-                if (deletedElement)
-                {
+                if (deletedElement) {
                     dots.description += deletedElement.name;
-                } else
-                {
+                } else {
                     dots.description = dots.description.slice(0, dots.description.length - 1);
                 }
             }
@@ -210,8 +186,7 @@
             ingredientsList.dataGroup.validateDisplayList();
         }
 
-        private function cocktailStructureItemRendererFunction(item:Object):IFactory
-        {
+        private function cocktailStructureItemRendererFunction(item:Object):IFactory {
             if (_model.isIngredientSelected(item.id))
                 return new ClassFactory(SelectedIngredientItemRenderer);
 

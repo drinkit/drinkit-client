@@ -190,7 +190,7 @@ package controllers
                 ingredient = source[i];
                 curIngredient = {
                     id: ingredient[0],
-                    name: IngredientsModel.instance.getIngredientNameById(ingredient[0]),
+                    name: IngredientsModel.instance.getIngredientById(ingredient[0]).name,
                     quantity: ingredient[1]
                 };
                 result.push(curIngredient)

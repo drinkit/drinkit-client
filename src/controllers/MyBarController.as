@@ -37,7 +37,7 @@ package controllers
 
         private function onGetUserBar(response:String):void
         {
-            _model.ingredients = Vector.<BarItem>(JSONInstantiator.createInstance(response, BarItem) as Array);
+            _model.barItems = Vector.<BarItem>(JSONInstantiator.createInstance(response, BarItem) as Array);
             _model.dispatchEvent(new Event(MyBarModel.MODEL_CHANGED));
         }
 

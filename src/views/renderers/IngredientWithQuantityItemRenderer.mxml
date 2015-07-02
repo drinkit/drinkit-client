@@ -16,13 +16,11 @@
         [Bindable]
         private var _isLastItem:Boolean = false;
 
-        override public function set data(value:Object):void
-        {
+        override public function set data(value:Object):void {
             super.data = value;
 
-            if (data)
-            {
-                ingrName.text = IngredientsModel.instance.getIngredientNameById(data[0]);
+            if (data) {
+                ingrName.text = IngredientsModel.instance.getIngredientById(data[0]).name;
                 ingrQuantity.text = data[1] ? data[1] + " мл" : "немного";
                 var itemIndex:int = (owner as List).dataProvider.getItemIndex(data);
                 _isFirstItem = itemIndex == 0;
