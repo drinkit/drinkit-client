@@ -59,6 +59,11 @@ package controllers
             //
         }
 
+        public function activateIngredient(ingredient:Ingredient):void
+        {
+            //
+        }
+
         public function removeIngredientFromBar(ingredient:Ingredient):void
         {
             //
