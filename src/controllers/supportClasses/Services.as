@@ -10,5 +10,6 @@ package controllers.supportClasses
         public static const SEARCH_BY_NAME:String = "rest/recipes/";
         public static const STATS_VIEWS:String = "rest/stats/";
         public static const USER_BAR:String = "rest/users/{id}/barItems";
+        public static const USER_BAR_INGREDIENT = "rest/users/{id}/barItems/{ingredientId}"
     }
 }
