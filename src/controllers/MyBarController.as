@@ -33,20 +33,24 @@ package controllers {
         }
 
         public function addIngredientToBar(ingredient:Ingredient):void {
+            var barItem:BarItem = new BarItem(ingredient.id, true);
             var request:JSRequest = new JSRequest(URLRequestMethod.POST);
             request.expectedStatus = 201;
-            request.bodyParams = JSON.stringify(new BarItem(ingredient.id, true));
+            request.contentType = "application/json;charset=UTF-8";
+            request.bodyParams = JSON.stringify(barItem);
             var requestURL:String = StringUtil.insertParameters(Services.USER_BAR, {"id": UserInfoModel.instance.id});
             ServiceUtil.instance.sendRequest(requestURL, request, onAddIngredient);
+            _model.addBarItemToBar(barItem);
         }
 
         private function onAddIngredient(response:String):void {
-            //
+
         }
 
         public function deactivateIngredient(ingredient:Ingredient):void {
             var request:JSRequest = new JSRequest(URLRequestMethod.PUT);
             request.expectedStatus = 204;
+            request.contentType = "application/json;charset=UTF-8";
             request.bodyParams = JSON.stringify(new BarItem(ingredient.id, false));
             var requestURL:String = StringUtil.insertParameters(Services.USER_BAR_INGREDIENT,
                     {"id": UserInfoModel.instance.id, "ingredientId": ingredient.id});
@@ -56,6 +60,7 @@ package controllers {
         public function activateIngredient(ingredient:Ingredient):void {
             var request:JSRequest = new JSRequest(URLRequestMethod.PUT);
             request.expectedStatus = 204;
+            request.contentType = "application/json;charset=UTF-8";
             request.bodyParams = JSON.stringify(new BarItem(ingredient.id, true));
             var requestURL:String = StringUtil.insertParameters(Services.USER_BAR_INGREDIENT,
                     {"id": UserInfoModel.instance.id, "ingredientId": ingredient.id});

@@ -79,12 +79,11 @@ package controllers
         {
             BrowserManager.getInstance().addEventListener(BrowserChangeEvent.BROWSER_URL_CHANGE, onURLChange);
             BrowserManager.getInstance().init("", "drinkIt - " + MainModel.BUILDER_VIEW.title);
-//            checkFragments();
         }
 
         private function onIngredientsLoad(response:String):void
         {
-            IngredientsModel.instance.ingredientsList = new ArrayCollection(JSONInstantiator.createInstance(response, Ingredient, false) as Array);
+            IngredientsModel.instance.ingredientsList = new ArrayCollection(JSONInstantiator.createInstance(response, Ingredient) as Array);
         }
 
         private function checkFragments():void
@@ -97,6 +96,8 @@ package controllers
                 return;
             }
 
+            var id:Number;
+
             switch (fragments.panel)
             {
                 case MainModel.BUILDER_VIEW.id:
@@ -108,7 +109,7 @@ package controllers
                 {
                     try
                     {
-                        var id:Number = Number(fragments.id);
+                        id = Number(fragments.id);
                         changeView(MainModel.COCKTAIL_VIEW, new CocktailModel(id));
                     }
                     catch (error:Error)
@@ -122,7 +123,7 @@ package controllers
                 {
                     try
                     {
-                        var id:Number = Number(fragments.id);
+                        id = Number(fragments.id);
                         changeView(MainModel.ADMIN_VIEW, id);
                     }
                     catch (error:Error)

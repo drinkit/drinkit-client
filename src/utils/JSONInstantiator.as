@@ -7,6 +7,10 @@ package utils
     {
         public static function createInstance(json:String, classType:Class, strict:Boolean = true):Object
         {
+            if (!json || json == "") {
+                return null;
+            }
+
             var jsonObject:Object = JSON.parse(json);
             var returnObject:Object;
 

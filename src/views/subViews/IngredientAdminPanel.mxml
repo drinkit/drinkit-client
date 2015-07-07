@@ -12,10 +12,12 @@
     <fx:Script>
         <![CDATA[
         import controllers.IngredientAdminController;
+        import controllers.supportClasses.IngredientCategories;
 
         import models.IngredientsModel;
         import models.supportClasses.Ingredient;
 
+        import mx.collections.ArrayList;
         import mx.events.FlexEvent;
 
         import spark.events.IndexChangeEvent;
@@ -24,6 +26,13 @@
         [Bindable]
         private var _model:Ingredient;
         private var _controller:IngredientAdminController;
+
+        [Bindable]
+        private var _categories:ArrayList = new ArrayList([IngredientCategories.HARD_DRINKS,
+            IngredientCategories.SOFT_DRINKS,
+            IngredientCategories.LIQUORS,
+            IngredientCategories.VIRGIN_DRINKS,
+            IngredientCategories.OTHER]);
 
         private function onCreateIngredientButtonClick(event:MouseEvent):void
         {
@@ -62,6 +71,12 @@
             var ingr:Ingredient = Ingredient(item);
             return (String(ingr.name).toLowerCase().search(inputValue) > -1);
         }
+
+        private function onCategoryChange(event:IndexChangeEvent):void
+        {
+            _model.category = categoryComboBox.selectedItem;
+        }
+
         ]]>
     </fx:Script>
 
@@ -84,7 +99,7 @@
     <mx:HRule width="100%" strokeWidth="1" strokeColor="0x000000"/>
     <s:HGroup>
         <s:TextInput id="ingredientName" text="@{_model.name}" width="300" prompt="название..."/>
-        <s:ComboBox id="categoryComboBox" prompt="категория..." />
+        <s:ComboBox id="categoryComboBox" prompt="категория..." dataProvider="{_categories}" change="onCategoryChange(event)" />
     </s:HGroup>
     <s:TextInput id="volumeInput" restrict="0-9" text="{_model.vol}" change="onVolumeChange(event)"
                  prompt="крепость..."/>

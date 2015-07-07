@@ -38,7 +38,7 @@ package models
             var ingredients:Array = [];
             var curIngr:Ingredient;
             for each (var item:BarItem in _barItems) {
-                if (!item.isActive) {
+                if (!item.active) {
                    continue;
                 }
                 curIngr = IngredientsModel.instance.getIngredientById(item.ingredientId);
@@ -61,6 +61,26 @@ package models
         public function set barItems(value:Vector.<BarItem>):void {
             _barItems = value;
             dispatchEvent(new Event(MyBarModel.MODEL_CHANGED));
+        }
+
+        public function addBarItemToBar(value:BarItem):void
+        {
+            if (value) {
+                barItems.push(value);
+                dispatchEvent(new Event(MyBarModel.MODEL_CHANGED));
+            }
+        }
+
+        public function isIngredientInBar(ingredientId:Number):Boolean
+        {
+            for (var i:int = 0; i < barItems.length; i++)
+            {
+                if (barItems[i].ingredientId == ingredientId) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

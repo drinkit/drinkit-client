@@ -5,13 +5,13 @@ package models.supportClasses
 {
     public class BarItem
     {
-        public function BarItem(ingredientId:Number = NaN, isActive:Boolean = false)
+        public function BarItem(ingredientId:Number = NaN, active:Boolean = false)
         {
             this.ingredientId = ingredientId;
-            this.isActive = isActive;
+            this.active = active;
         }
 
         public var ingredientId:Number;
-        public var isActive:Boolean;
+        public var active:Boolean;
     }
 }

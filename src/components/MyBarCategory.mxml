@@ -2,45 +2,64 @@
 <!--
   Created by Crabar on 29.06.2015.
 -->
-<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-          xmlns:components="components.*" horizontalAlign="center">
-  <fx:Script>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:components="components.*">
+    <fx:Script>
     <![CDATA[
-      import models.MyBarModel;
+        import flash.filters.BitmapFilterQuality;
 
-      import mx.collections.ArrayList;
+        import models.MyBarModel;
 
-      private var _model:MyBarModel;
+        import mx.collections.ArrayList;
 
-      [Bindable]
-      public var category:String;
+        private var _model:MyBarModel;
 
-      public function set model(value:MyBarModel):void
-      {
-          _model = value;
-          _model.addEventListener(MyBarModel.MODEL_CHANGED, onModelChanged);
-      }
+        [Bindable]
+        public var category:String;
 
-      private function onModelChanged(event:Event):void
-      {
-          _ingredients = _model.getIngredientsByCategory(category);
-      }
+        private var _cornerRadius:Number = 5;
 
-      [Bindable]
-      private var _ingredients:ArrayList;
+        public function set model(value:MyBarModel):void
+        {
+            _model = value;
+            _model.addEventListener(MyBarModel.MODEL_CHANGED, onModelChanged);
+        }
 
-      ]]>
+        private function onModelChanged(event:Event):void
+        {
+            _ingredients = _model.getIngredientsByCategory(category);
+        }
+
+        [Bindable]
+        private var _ingredients:ArrayList;
+        ]]>
   </fx:Script>
 
-  <s:Label text="{category}" />
-  <s:List width="100%" minWidth="200" height="100%"
-          dataProvider="{_ingredients}"
-          focusEnabled="false"
-          itemRenderer="views.renderers.IngredientItemRenderer" labelField="name"
-          borderVisible="false">
-    <s:layout>
-      <components:FlowLayout clipAndEnableScrolling="true" paddingLeft="0" paddingBottom="5"
-                             paddingRight="5" paddingTop="5"/>
-    </s:layout>
-  </s:List>
-</s:VGroup>
+    <s:Rect width="100%" height="100%" bottomLeftRadiusX="{_cornerRadius}" bottomLeftRadiusY="{_cornerRadius}"
+            bottomRightRadiusX="{_cornerRadius}"
+            bottomRightRadiusY="{_cornerRadius}" topLeftRadiusX="{_cornerRadius}" topLeftRadiusY="{_cornerRadius}"
+            topRightRadiusX="{_cornerRadius}"
+            topRightRadiusY="{_cornerRadius}">
+        <s:fill>
+            <s:SolidColor color="#ffffff"/>
+        </s:fill>
+        <s:filters>
+            <s:DropShadowFilter alpha="0.5" blurX="8" blurY="8" distance="3" strength="0.9"
+                                quality="{BitmapFilterQuality.HIGH}"/>
+        </s:filters>
+    </s:Rect>
+    <s:VGroup gap="10" width="100%" height="100%" paddingTop="10">
+        <s:Label width="100%" text="{category}" textAlign="center" styleName="headerPinkText"/>
+        <s:List width="100%" minWidth="200" height="100%"
+                dataProvider="{_ingredients}"
+                focusEnabled="false"
+                itemRenderer="views.renderers.IngredientItemRenderer" labelField="name"
+                borderVisible="false">
+            <s:layout>
+                <components:FlowLayout clipAndEnableScrolling="true" paddingLeft="0" paddingBottom="5"
+                                       paddingRight="5" paddingTop="5"/>
+            </s:layout>
+        </s:List>
+    </s:VGroup>
+
+</s:Group>

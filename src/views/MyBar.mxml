@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:components="components.*"
                 xmlns:s="library://ns.adobe.com/flex/spark" xmlns:views="views.*"
-                creationComplete="onCreationComplete(event)">
+                xmlns:flextras="spark.flextras.autoCompleteComboBox.*"
+                creationComplete="onCreationComplete(event)" borderVisible="false">
     <fx:Script>
 		<![CDATA[
         import controllers.MyBarController;
+        import controllers.supportClasses.IngredientCategories;
+
+        import models.IngredientsModel;
 
         import models.MyBarModel;
-        import models.UserInfoModel;
-        import models.UserRoles;
-        import models.events.AuthEvent;
+        import models.supportClasses.Ingredient;
+
+        import mx.collections.ArrayCollection;
+
+        import mx.collections.ArrayCollection;
+
+        import mx.collections.IList;
 
         import mx.events.FlexEvent;
+
+        import spark.events.IndexChangeEvent;
 
         [Bindable]
         private var _model:MyBarModel;
@@ -22,16 +32,34 @@
             _model = MyBarModel.instance;
             _controller = new MyBarController(_model);
 
-            if (UserInfoModel.instance.role >= UserRoles.USER) {
-                _controller.requestUserIngredients();
+            if (IngredientsModel.instance.ingredientsList && IngredientsModel.instance.ingredientsList.length > 0) {
+                ingrChoose.invalidateProperties();
+                ingrChoose.validateProperties();
             } else {
-                UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onSuccessAuth);
+                IngredientsModel.instance.addEventListener(IngredientsModel.INGREDIENTS_LOADED, onIngredientsLoaded);
             }
         }
 
-        private function onSuccessAuth(event:AuthEvent):void
+        private function onIngredientsLoaded(event:Event):void
         {
-            _controller.requestUserIngredients();
+            ingrChoose.invalidateProperties();
+            ingrChoose.validateProperties();
+        }
+
+        private function onIngredientsChanged(event:IndexChangeEvent):void
+        {
+            if (event.newIndex >= 0)
+                _controller.addIngredientToBar(ingrChoose.selectedItem);
+
+            ingrChoose.selectedIndex = -1;
+            ingrChoose.validateProperties();
+        }
+
+        private function filterCBList(item:Object):Boolean
+        {
+            var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
+            var ingr:Ingredient = Ingredient(item);
+            return (String(ingr.name).toLowerCase().search(inputValue) > -1 && _model.isIngredientInBar(ingr.id));
         }
 
         ]]>
@@ -40,14 +68,28 @@
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>
 
-    <s:VGroup width="100%">
-        <s:HGroup>
-            <components:MyBarCategory category="Крепкий алкоголь" model="{_model}" />
-            <components:MyBarCategory category="Ликеры" model="{_model}" />
-            <components:MyBarCategory category="Безалкогольное" model="{_model}" />
-            <components:MyBarCategory category="Прочее" model="{_model}" />
+    <s:VGroup width="100%" gap="10">
+        <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="300" height="26"
+                                           change="onIngredientsChanged(event)"
+                                           dataProvider="{new ArrayCollection(IngredientsModel.instance.ingredientsList.source)}"
+                                           filterFunction="filterCBList" styleName="regularText"
+                                           itemRenderer="components.renderers.AutoCompleteRenderer"
+                                           skinClass="design.skins.LiveSearchComboBoxSkin"
+                                           focusSkin="{null}" focusRect="false"
+                                           labelField="name" paddingLeft="0"
+                                           prompt="Добавить в бар..."/>
+        <s:HGroup width="100%" gap="10">
+            <s:VGroup width="50%" gap="10" minHeight="400">
+                <components:MyBarCategory width="100%" category="{IngredientCategories.HARD_DRINKS}" model="{_model}"/>
+                <components:MyBarCategory width="100%" category="{IngredientCategories.LIQUORS}" model="{_model}"/>
+            </s:VGroup>
+            <s:VGroup width="50%" gap="10" minHeight="400">
+                <components:MyBarCategory width="100%" category="{IngredientCategories.SOFT_DRINKS}" model="{_model}"/>
+                <components:MyBarCategory width="100%" category="{IngredientCategories.VIRGIN_DRINKS}" model="{_model}"/>
+                <components:MyBarCategory width="100%" category="{IngredientCategories.OTHER}" model="{_model}"/>
+            </s:VGroup>
         </s:HGroup>
-        <s:VGroup>
+        <s:VGroup width="100%">
 
         </s:VGroup>
     </s:VGroup>

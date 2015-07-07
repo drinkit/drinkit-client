@@ -77,14 +77,26 @@ package controllers
             return curRole;
         }
 
+        private function getUserRole(accessLevel:uint):uint
+        {
+            if (accessLevel == 0)
+                return UserRoles.ADMIN;
+
+            if (accessLevel == 9)
+                return UserRoles.USER;
+
+            return UserRoles.ANONYMOUS;
+        }
+
         private function onGetUserInfo(response:String):void
         {
             // parse response and save user info
             var responseJSON:Object = JSON.parse(response);
             UserInfoModel.instance.displayName = responseJSON.displayName;
             UserInfoModel.instance.id = responseJSON.id;
-            UserInfoModel.instance.role = getHighestRole(responseJSON.authorities);
-            MyBarModel.instance.barItems = Vector.<BarItem>(JSONInstantiator.createInstance(responseJSON.barItems, BarItem) as Array);
+            UserInfoModel.instance.role = getUserRole(responseJSON.accessLevel);
+            var barItems:Array = JSONInstantiator.createInstance(JSON.stringify(responseJSON.barItems), BarItem) as Array;
+            MyBarModel.instance.barItems = barItems ? Vector.<BarItem>(barItems) : new Vector.<BarItem>();
             //
             storeUserCredentials(UserInfoModel.instance.email, UserInfoModel.instance.password);
             //
