@@ -52,6 +52,7 @@
         private function onIngrChooseChange(event:IndexChangeEvent):void
         {
             _controller.loadIngredient(ingrChoose.selectedItem as Ingredient);
+            setCategory(_model.category);
         }
 
         private function onCreationComplete(event:FlexEvent):void
@@ -77,6 +78,18 @@
             _model.category = categoryComboBox.selectedItem;
         }
 
+        private function setCategory(category:String):void
+        {
+            for (var j:int = 0; j < _categories.length; j++)
+            {
+                if (_categories.getItemAt(j) == category) {
+                    categoryComboBox.selectedIndex = j;
+                    return;
+                }
+            }
+
+            categoryComboBox.selectedIndex = -1;
+        }
         ]]>
     </fx:Script>
 
@@ -99,7 +112,7 @@
     <mx:HRule width="100%" strokeWidth="1" strokeColor="0x000000"/>
     <s:HGroup>
         <s:TextInput id="ingredientName" text="@{_model.name}" width="300" prompt="название..."/>
-        <s:ComboBox id="categoryComboBox" prompt="категория..." dataProvider="{_categories}" change="onCategoryChange(event)" />
+        <s:ComboBox id="categoryComboBox" selectedItem="@{_model.category}" width="200" prompt="категория..." change="onCategoryChange(event)" dataProvider="{_categories}" />
     </s:HGroup>
     <s:TextInput id="volumeInput" restrict="0-9" text="{_model.vol}" change="onVolumeChange(event)"
                  prompt="крепость..."/>

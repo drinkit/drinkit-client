@@ -51,12 +51,11 @@
     <s:VGroup gap="10" width="100%" height="100%" paddingTop="10">
         <s:Label width="100%" text="{category}" textAlign="center" styleName="headerPinkText"/>
         <s:List width="100%" minWidth="200" height="100%"
-                dataProvider="{_ingredients}"
-                focusEnabled="false"
+                dataProvider="{_ingredients}" focusEnabled="false"
                 itemRenderer="views.renderers.IngredientItemRenderer" labelField="name"
                 borderVisible="false">
             <s:layout>
-                <components:FlowLayout clipAndEnableScrolling="true" paddingLeft="0" paddingBottom="5"
+                <components:FlowLayout clipAndEnableScrolling="true" paddingLeft="5" paddingBottom="5"
                                        paddingRight="5" paddingTop="5"/>
             </s:layout>
         </s:List>
