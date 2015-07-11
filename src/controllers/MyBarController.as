@@ -55,6 +55,7 @@ package controllers {
             var requestURL:String = StringUtil.insertParameters(Services.USER_BAR_INGREDIENT,
                     {"id": UserInfoModel.instance.id, "ingredientId": ingredient.id});
             ServiceUtil.instance.sendRequest(requestURL, request, onIngredientDeactivate);
+            _model.deactivateBarItem(ingredient.id);
         }
 
         public function activateIngredient(ingredient:Ingredient):void {
@@ -65,6 +66,7 @@ package controllers {
             var requestURL:String = StringUtil.insertParameters(Services.USER_BAR_INGREDIENT,
                     {"id": UserInfoModel.instance.id, "ingredientId": ingredient.id});
             ServiceUtil.instance.sendRequest(requestURL, request, onIngredientActivate);
+            _model.activateBarItem(ingredient.id);
         }
 
         private function onIngredientActivate(response:String):void {
@@ -81,6 +83,7 @@ package controllers {
             var requestURL:String = StringUtil.insertParameters(Services.USER_BAR_INGREDIENT,
                     {"id": UserInfoModel.instance.id, "ingredientId": ingredient.id});
             ServiceUtil.instance.sendRequest(requestURL, request, onIngredientRemove);
+            _model.removeItemFromBar(ingredient.id);
         }
 
         private function onIngredientRemove(response:String):void {

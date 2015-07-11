@@ -14,6 +14,7 @@ package utils
             _tooltips[BURNING] = "горящий";
             _tooltips[IBA] = "утвержденный международной ассоциацией барменов (IBA)";
             _tooltips[WITH_ICE] = "со льдом";
+            _tooltips[USER_BAR_NOT_ALLOWED] = "Эта функция доступна только зарегистрированным пользователям";
         }
         public static const LONG:String = "long";
         public static const SHORT:String = "short";
@@ -23,6 +24,7 @@ package utils
         public static const BURNING:String = "burning";
         public static const IBA:String = "iba";
         public static const WITH_ICE:String = "withIce";
+        public static const USER_BAR_NOT_ALLOWED:String = "userBarNotAllowed";
         private static var _tooltips:Object = {};
 
         public static function getToolTip(key:String):String

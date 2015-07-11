@@ -27,6 +27,7 @@ package models
             selectedIngredientsList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
         }
         public var imageData:BitmapData;
+
         [Bindable]
         public var imageUrl:String;
 
@@ -50,6 +51,9 @@ package models
 
         [Bindable]
         public var description:String;
+
+        [Bindable]
+        public var hidden:Boolean;
 
         public var imageClipRect:Rectangle;
 

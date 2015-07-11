@@ -25,6 +25,11 @@
             _model.addEventListener(MyBarModel.MODEL_CHANGED, onModelChanged);
         }
 
+        public function get model():MyBarModel
+        {
+            return _model;
+        }
+
         private function onModelChanged(event:Event):void
         {
             _ingredients = _model.getIngredientsByCategory(category);
@@ -49,10 +54,10 @@
         </s:filters>
     </s:Rect>
     <s:VGroup gap="10" width="100%" height="100%" paddingTop="10">
-        <s:Label width="100%" text="{category}" textAlign="center" styleName="headerPinkText"/>
+        <s:Label width="100%" text="{category}" textAlign="center" styleName="headerGreenText"/>
         <s:List width="100%" minWidth="200" height="100%"
                 dataProvider="{_ingredients}" focusEnabled="false"
-                itemRenderer="views.renderers.IngredientItemRenderer" labelField="name"
+                itemRenderer="views.renderers.BarCategoryIngredientItemRenderer" labelField="name"
                 borderVisible="false">
             <s:layout>
                 <components:FlowLayout clipAndEnableScrolling="true" paddingLeft="5" paddingBottom="5"

@@ -2,11 +2,16 @@
 <!--
   Created by Crabar on 07.07.2015.
 -->
-<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+                autoDrawBackground="false" height="25" minWidth="25" buttonMode="true">
 
     <fx:Style source="/design/newStyle.css"/>
     <fx:Script>
 		<![CDATA[
+        import components.MyBarCategory;
+
+        import controllers.MyBarController;
+
         import design.DesignModel;
 
         import models.supportClasses.Ingredient;
@@ -14,7 +19,8 @@
         import spark.components.List;
 
         private const cornerRadius:uint = 10;
-        private var ingredientData:Ingredient;
+        private var _ingredientData:Ingredient;
+        private var _controller:MyBarController;
 
         override public function set data(value:Object):void
         {
@@ -22,17 +28,18 @@
 
             if (data)
             {
-                ingredientData = Ingredient(data);
+                _ingredientData = Ingredient(data);
                 labelDisplay.text = label;
                 labelDisplay.validateSize();
                 width = labelDisplay.getExplicitOrMeasuredWidth() + 35;
+                _controller = new MyBarController(((owner as List).document as MyBarCategory).model);
             }
         }
 
         protected function onCloseButtonClick(event:MouseEvent):void
         {
             var parentList:List = owner as List;
-
+            _controller.deactivateIngredient(_ingredientData);
         }
 
         protected function group1_rollOverHandler(event:MouseEvent):void
@@ -67,16 +74,7 @@
                     <s:SolidColor id="closeButtonColor" color="{DesignModel.ORANGE_BEACH}"/>
                 </s:fill>
             </s:Ellipse>
-            <s:Line x="0" y="0" yFrom="4" xFrom="4" xTo="11" yTo="11">
-                <s:stroke>
-                    <s:SolidColorStroke color="0xffffff" weight="2"/>
-                </s:stroke>
-            </s:Line>
-            <s:Line x="0" y="0" yFrom="11" yTo="4" xFrom="4" xTo="11">
-                <s:stroke>
-                    <s:SolidColorStroke color="0xffffff" weight="2"/>
-                </s:stroke>
-            </s:Line>
+            <s:BitmapImage source="@Embed(source='/../assets/down_arrow.png')" x="2" y="1" />
         </s:Group>
     </s:HGroup>
 </s:ItemRenderer>

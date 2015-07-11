@@ -29,6 +29,8 @@ package models
         public function set cocktailsList(value:ArrayCollection):void
         {
             _cocktailsList = value;
+            _cocktailsList.filterFunction = filterCocktailByAccessibility;
+            _cocktailsList.refresh();
             signalizeAboutChange();
         }
 
@@ -40,6 +42,11 @@ package models
         public function signalizeAboutChange():void
         {
             dispatchEvent(new Event(Event.CHANGE));
+        }
+
+        private function filterCocktailByAccessibility(item:CocktailModel):Boolean
+        {
+            return UserInfoModel.instance.role == UserRoles.ADMIN || !item.hidden;
         }
     }
 }

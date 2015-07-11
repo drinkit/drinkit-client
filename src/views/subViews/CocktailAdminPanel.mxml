@@ -243,7 +243,7 @@
     <s:Group width="100%">
         <s:HGroup left="0" verticalAlign="middle">
             <s:TextInput id="titleInput" text="@{_model.name}" width="300" prompt="название коктейля..."/>
-            <s:CheckBox id="isDevelopCheckBox" label="в разработке"/>
+            <s:CheckBox id="isDevelopCheckBox" label="в разработке" selected="@{_model.hidden}" />
         </s:HGroup>
         <s:Button label="Загрузить фото" right="0" click="onLoadPhotoButtonClick(event)"/>
     </s:Group>

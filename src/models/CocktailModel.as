@@ -26,6 +26,7 @@ package models
         public var options:Array;
         public var imageUrl:String;
         public var thumbnailUrl:String;
+        public var hidden:Boolean;
 
         public function get ingredientWithQuantitiesProvider():ArrayCollection
         {

@@ -8,6 +8,7 @@ package controllers
     import models.CocktailBuilderModel;
     import models.CocktailModel;
     import models.supportClasses.CocktailTypes;
+    import models.supportClasses.Ingredient;
     import models.supportClasses.OptionParameters;
 
     import mx.collections.ArrayCollection;
@@ -26,9 +27,10 @@ package controllers
 
         private var _model:CocktailBuilderModel;
 
-        public function addIngredientToQuery(ingr:Object):void
+        public function addIngredientToQuery(ingr:Ingredient):void
         {
-            _model.selectedIngredientsList.addItem(ingr);
+            if (_model.selectedIngredientsList.getItemIndex(ingr) == -1)
+                _model.selectedIngredientsList.addItem(ingr);
         }
 
         public function toggleCocktailType(id:uint, selected:Boolean):void

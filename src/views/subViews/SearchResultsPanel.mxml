@@ -49,7 +49,6 @@
         public function set model(value:SearchResultsModel):void
         {
             _model = value;
-//            noResultsLabel.visible = recipesList.visible = controlGroup.visible = true;
             _model.addEventListener(Event.CHANGE, onModelChange);
         }
 
@@ -77,11 +76,11 @@
 
             if (itemsCount == 0)
             {
-                _visibleRecipes = new ArrayCollection(model.cocktailsList.source);
+                _visibleRecipes = model.cocktailsList;
             }
             else
             {
-                _visibleRecipes = new ArrayCollection(model.cocktailsList.source.slice(startIndex, startIndex + itemsCount));
+                _visibleRecipes = new ArrayCollection(model.cocktailsList.toArray().slice(startIndex, startIndex + itemsCount));
             }
         }
 

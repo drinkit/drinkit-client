@@ -16,6 +16,10 @@
         import design.DesignModel;
 
         import models.CocktailBuilderModel;
+        import models.IngredientsModel;
+        import models.MyBarModel;
+        import models.UserInfoModel;
+        import models.UserRoles;
         import models.supportClasses.CocktailTypes;
         import models.supportClasses.Ingredient;
         import models.supportClasses.OptionParameters;
@@ -71,10 +75,16 @@
             _model.addEventListener(CocktailBuilderModel.SELECTED_INGREDIENTS_CHANGED, selectedIngredientsChangeHandler);
             _controller = new CocktailBuilderController(_model);
             _controller.performSearch();
+            IngredientsModel.instance.addEventListener(IngredientsModel.INGREDIENTS_LOADED, onIngredientsLoaded);
             //
             MainController.instance.requestIngredients();
             //
             (FlexGlobals.topLevelApplication as Application).addEventListener(ScrollEvent.SCROLL, onScroll);
+        }
+
+        private function onIngredientsLoaded(event:Event):void
+        {
+            _model.ingredientsList.filterFunction = filterCBList;
         }
 
         private function onScroll(event:ScrollEvent):void
@@ -130,6 +140,21 @@
             _model.selectedIngredientsList.removeAll();
             //
             _controller.performSearch();
+        }
+
+        private function onAddBarIngredientsButtonClick(event:MouseEvent):void
+        {
+            if (!MyBarModel.instance.activeIngredients) {
+                return;
+            }
+
+            for (var j:int = 0; j < MyBarModel.instance.activeIngredients.length; j++)
+            {
+                var ingredient:Ingredient = MyBarModel.instance.activeIngredients.getItemAt(j) as Ingredient;
+                _controller.addIngredientToQuery(ingredient);
+            }
+
+            ingrChoose.validateProperties();
         }
         ]]>
 	</fx:Script>
@@ -225,6 +250,11 @@
                                                        paddingRight="5" paddingTop="5"/>
                             </s:layout>
                         </s:List>
+                        <s:Label text="Добавить ингредиенты из бара" fontSize="14" textDecoration="underline"
+                                 buttonMode="{UserInfoModel.instance.role >= UserRoles.USER}"
+                                 fontFamily="CenturyGothic" click="onAddBarIngredientsButtonClick(event)"
+                                 enabled="{UserInfoModel.instance.role >= UserRoles.USER}"
+                                 toolTip="{UserInfoModel.instance.role == UserRoles.ANONYMOUS ? ToolTipProvider.getToolTip(ToolTipProvider.USER_BAR_NOT_ALLOWED) : ''}"/>
                         <s:Label text="Сбросить фильтры" fontSize="14" textDecoration="underline" buttonMode="true"
                                  fontFamily="CenturyGothic" click="onResetButtonClick(event)"/>
                     </s:VGroup>

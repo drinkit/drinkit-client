@@ -1,5 +1,7 @@
 package utils
 {
+    import com.adobe.crypto.MD5;
+
     import components.LoginWindow;
 
     import flash.events.EventDispatcher;
@@ -129,7 +131,7 @@ package utils
 
         private function prepareRequest(functionName:String, request:JSRequest, handler:Function, errorHandler:Function):String
         {
-            var requestID:String = functionName + new Date().time.toString();
+            var requestID:String =  MD5.hash(functionName + new Date().time.toString() + request.bodyParams + request.queryParams);
             _waitingRequests[requestID] = new WaitingRequest(request, handler, errorHandler);
             return requestID;
         }

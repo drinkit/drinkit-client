@@ -7,11 +7,11 @@ package utils
     {
         public static function insertParameters(value:String, params:Object):String
         {
-            var res:String = "";
+            var res:String = value;
 
             for (var param:String in params) {
-                if (value.indexOf("{" + param + "}") >= 0) {
-                    res = value.replace("{" + param + "}", params[param]);
+                if (res.indexOf("{" + param + "}") >= 0) {
+                    res = res.replace("{" + param + "}", params[param]);
                 }
             }
 
