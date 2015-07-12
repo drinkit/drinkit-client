@@ -2,7 +2,7 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:components="components.*"
                 xmlns:s="library://ns.adobe.com/flex/spark" xmlns:views="views.*"
                 xmlns:flextras="spark.flextras.autoCompleteComboBox.*"
-                creationComplete="onCreationComplete(event)" borderVisible="false">
+                creationComplete="onCreationComplete(event)" borderVisible="false" viewChanged="onViewChanged(event)">
     <fx:Script>
 		<![CDATA[
         import controllers.MyBarController;
@@ -12,13 +12,17 @@
 
         import models.IngredientsModel;
         import models.MyBarModel;
+        import models.events.ViewEvent;
         import models.supportClasses.Ingredient;
 
         import mx.collections.ArrayCollection;
         import mx.collections.ArrayList;
         import mx.events.FlexEvent;
+        import mx.managers.BrowserManager;
 
         import spark.events.IndexChangeEvent;
+
+        import utils.AnalyticsTracker;
 
         [Bindable]
         private var _model:MyBarModel;
@@ -73,6 +77,11 @@
             var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
             var ingr:Ingredient = Ingredient(item);
             return (String(ingr.name).toLowerCase().search(inputValue) > -1 && !_model.isIngredientInBar(ingr.id));
+        }
+
+        private function onViewChanged(event:ViewEvent):void
+        {
+            AnalyticsTracker.instance.trackPageView("#" + BrowserManager.getInstance().fragment, "Мой бар");
         }
         ]]>
 	</fx:Script>
