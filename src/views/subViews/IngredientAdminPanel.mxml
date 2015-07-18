@@ -112,7 +112,7 @@
     <mx:HRule width="100%" strokeWidth="1" strokeColor="0x000000"/>
     <s:HGroup>
         <s:TextInput id="ingredientName" text="@{_model.name}" width="300" prompt="название..."/>
-        <s:ComboBox id="categoryComboBox" selectedItem="@{_model.category}" width="200" prompt="категория..." change="onCategoryChange(event)" dataProvider="{_categories}" />
+        <s:ComboBox id="categoryComboBox" selectedItem="@{_model.category}" width="300" prompt="категория..." change="onCategoryChange(event)" dataProvider="{_categories}" />
     </s:HGroup>
     <s:TextInput id="volumeInput" restrict="0-9" text="{_model.vol}" change="onVolumeChange(event)"
                  prompt="крепость..."/>

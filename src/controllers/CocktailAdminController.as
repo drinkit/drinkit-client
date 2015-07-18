@@ -100,7 +100,7 @@ package controllers
             cocktail.thumbnailFileName = "";
             cocktail.description = _model.description;
             cocktail.options = _model.selectedOptions;
-            cocktail.hidden = _model.hidden;
+            cocktail.published = _model.published;
             cocktail.cocktailIngredients = convertSelectedIngredientsToIngredientsWithQuantities(_model.selectedIngredientsList);
             cocktail.cocktailTypeId = _model.cocktailTypeId;
             var request:JSRequest = new JSRequest(URLRequestMethod.POST);
@@ -120,7 +120,7 @@ package controllers
             cocktail.name = _model.name;
             cocktail.description = _model.description;
             cocktail.options = _model.selectedOptions;
-            cocktail.hidden = _model.hidden;
+            cocktail.published = _model.published;
             cocktail.cocktailIngredients = convertSelectedIngredientsToIngredientsWithQuantities(_model.selectedIngredientsList);
             cocktail.cocktailTypeId = _model.cocktailTypeId;
             var request:JSRequest = new JSRequest(URLRequestMethod.PUT);
@@ -176,7 +176,7 @@ package controllers
             _model.description = _lastCocktailModel.description;
             _model.cocktailTypeId = _lastCocktailModel.cocktailTypeId;
             _model.selectedOptions = _lastCocktailModel.options;
-            _model.hidden = _lastCocktailModel.hidden;
+            _model.published = _lastCocktailModel.published;
             _model.imageUrl = _lastCocktailModel.imageUrl;
             _model.selectedIngredientsList = convertIngredientsWithQuantitiesToSelectedIngredients(_lastCocktailModel.cocktailIngredients);
             _model.dispatchEvent(new Event("modelUpdated"));

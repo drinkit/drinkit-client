@@ -20,6 +20,7 @@
         import models.MyBarModel;
         import models.UserInfoModel;
         import models.UserRoles;
+        import models.events.AuthEvent;
         import models.supportClasses.CocktailTypes;
         import models.supportClasses.Ingredient;
         import models.supportClasses.OptionParameters;
@@ -80,6 +81,16 @@
             MainController.instance.requestIngredients();
             //
             (FlexGlobals.topLevelApplication as Application).addEventListener(ScrollEvent.SCROLL, onScroll);
+            UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onAuthChanged);
+            UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onAuthChanged);
+        }
+
+        private function onAuthChanged(event:AuthEvent):void
+        {
+            if (_model.cocktailsList) {
+                _model.cocktailsList.refresh();
+                _model.signalizeAboutChange();
+            }
         }
 
         private function onIngredientsLoaded(event:Event):void

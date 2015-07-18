@@ -46,7 +46,7 @@ package models
 
         private function filterCocktailByAccessibility(item:CocktailModel):Boolean
         {
-            return UserInfoModel.instance.role == UserRoles.ADMIN || !item.hidden;
+            return UserInfoModel.instance.role == UserRoles.ADMIN || item.published;
         }
     }
 }

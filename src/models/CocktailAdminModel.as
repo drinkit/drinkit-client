@@ -53,7 +53,7 @@ package models
         public var description:String;
 
         [Bindable]
-        public var hidden:Boolean;
+        public var published:Boolean;
 
         public var imageClipRect:Rectangle;
 
