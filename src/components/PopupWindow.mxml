@@ -21,7 +21,7 @@
             errorMessage.text = text;
             errorMessage.styleName = "regularText";
             errorMessage.setStyle("color", DesignModel.ORANGE_BEACH);
-            errorMessage.setStyle("fontSize", 12);
+            errorMessage.setStyle("fontSize", 14);
             errorMessage.width = contentGroup.width - 10;
             errorMessage.maxDisplayedLines = 3;
             controlBarContent = [errorMessage];
