@@ -13,6 +13,13 @@
         import controllers.CocktailController;
         import controllers.MainController;
 
+        import flashx.textLayout.conversion.ITextImporter;
+
+        import flashx.textLayout.conversion.TextConverter;
+        import flashx.textLayout.elements.Configuration;
+        import flashx.textLayout.elements.IConfiguration;
+        import flashx.textLayout.formats.TextLayoutFormat;
+
         import models.CocktailModel;
         import models.MainModel;
         import models.TagsModel;
@@ -39,6 +46,19 @@
             _model = _controller.model;
             photo.source = cocktailImage;
             buildTags(_model.cocktailTypeId, _model.options);
+            buildDescription(_model.description);
+        }
+
+        private function buildDescription(description:String):void
+        {
+            var config:Configuration = new Configuration();
+            var format:TextLayoutFormat = new TextLayoutFormat(config.textFlowInitialFormat);
+            format.whiteSpaceCollapse = "preserve";
+            config.textFlowInitialFormat = format;
+            var preservingHTMLImporter:ITextImporter =
+                    TextConverter.getImporter(TextConverter.TEXT_FIELD_HTML_FORMAT, config);
+            preservingHTMLImporter.throwOnError = false;
+            cocktailDescription.textFlow = preservingHTMLImporter.importToFlow(description);
         }
 
         private function get cocktailImage():Object
@@ -111,7 +131,7 @@
         <s:TextArea id="cocktailDescription" styleName="regularText" contentBackgroundAlpha="0"
                     updateComplete="event.currentTarget.heightInLines = NaN"
                     borderVisible="false" width="100%" textAlign="left" verticalAlign="top"
-                    editable="false" text="{_model.description}" fontSize="14"/>
+                    editable="false" fontSize="14"/>
         <s:Button visible="{UserInfoModel.instance.role == UserRoles.ADMIN}" label="Редактировать"
                   click="onEditButtonClick(event)"/>
     </s:VGroup>
