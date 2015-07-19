@@ -95,8 +95,12 @@ package controllers
             UserInfoModel.instance.displayName = responseJSON.displayName;
             UserInfoModel.instance.id = responseJSON.id;
             UserInfoModel.instance.role = getUserRole(responseJSON.accessLevel);
-            var barItems:Array = JSONInstantiator.createInstance(JSON.stringify(responseJSON.barItems), BarItem) as Array;
-            MyBarModel.instance.barItems = barItems ? Vector.<BarItem>(barItems) : new Vector.<BarItem>();
+            if (responseJSON.barItems) {
+                var barItems:Array = JSONInstantiator.createInstance(JSON.stringify(responseJSON.barItems), BarItem) as Array;
+                MyBarModel.instance.barItems = Vector.<BarItem>(barItems);
+            } else {
+                MyBarModel.instance.barItems = new Vector.<BarItem>();
+            }
             //
             storeUserCredentials(UserInfoModel.instance.email, UserInfoModel.instance.password);
             //
