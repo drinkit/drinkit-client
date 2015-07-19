@@ -21,11 +21,6 @@ package models
         [Bindable(event="change")]
         private var _cocktailsList:ArrayCollection;
 
-        public function isIngredientSelected(id:Number):Boolean
-        {
-            return false;
-        }
-
         public function get cocktailsList():ArrayCollection
         {
             return _cocktailsList;
@@ -34,12 +29,24 @@ package models
         public function set cocktailsList(value:ArrayCollection):void
         {
             _cocktailsList = value;
+            _cocktailsList.filterFunction = filterCocktailByAccessibility;
+            _cocktailsList.refresh();
             signalizeAboutChange();
+        }
+
+        public function isIngredientSelected(id:Number):Boolean
+        {
+            return false;
         }
 
         public function signalizeAboutChange():void
         {
             dispatchEvent(new Event(Event.CHANGE));
+        }
+
+        private function filterCocktailByAccessibility(item:CocktailModel):Boolean
+        {
+            return UserInfoModel.instance.role == UserRoles.ADMIN || item.published;
         }
     }
 }

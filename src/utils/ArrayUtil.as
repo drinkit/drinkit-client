@@ -5,16 +5,11 @@ package utils
 {
     public class ArrayUtil
     {
-        public static function fromVectorToArray(source:Vector.<*>):Array
+        public static function fromVectorToArray(sourceVector:*):Array
         {
-            var result:Array = [];
-
-            for (var i:int = 0; i < source.length; i++)
-            {
-                result[result.length] = source[i];
-            }
-
-            return result;
+            var ret:Array = [];
+            for each (var elem:* in sourceVector) ret.push(elem);
+            return ret;
         }
     }
 }

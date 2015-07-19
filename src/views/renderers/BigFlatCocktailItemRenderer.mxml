@@ -22,10 +22,6 @@
 
         import mx.collections.ArrayList;
 
-        import mx.collections.ArrayList;
-        import mx.events.FlexEvent;
-        import mx.events.ResizeEvent;
-
         import spark.components.DataGroup;
 
         import views.subViews.SearchResultsPanel;
@@ -45,8 +41,8 @@
             if (value)
             {
                 init();
-                //
                 _cocktail = value as CocktailModel;
+                devModeLabel.visible = !_cocktail.published;
                 cocktailNameLabel.text = _cocktail.name;
                 cocktailNameLabel.validateNow();
                 validateDisplayList();
@@ -81,7 +77,8 @@
             {
                 for (var i:uint = 0; i < options.length; i++)
                 {
-                    tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG, 32));
+                    tagsGroup.addElement(TagsModel.instance.getTagByIdAndType(options[i], TagsModel.COCKTAIL_OPTION_TAG,
+                            32));
                 }
             }
         }
@@ -97,7 +94,8 @@
 
             for (var i:uint = 0; i < ingredients.length; i++)
             {
-                item = new Ingredient(ingredients[i][0], IngredientsModel.instance.getIngredientNameById(ingredients[i][0]).toLowerCase());
+                item = new Ingredient(ingredients[i][0],
+                        IngredientsModel.instance.getIngredientById(ingredients[i][0]).name.toLowerCase());
                 ingredientsDataProvider.addItem(item);
             }
 
@@ -121,7 +119,8 @@
                     ingredients.push(renderer);
             }
 
-            if (ingredients.length == 0) {
+            if (ingredients.length == 0)
+            {
                 return;
             }
 
@@ -144,7 +143,8 @@
                     {
                         if (curRowWidth + ingredients[i].width < maxWidth)
                         {
-                            if (curRowWidth + ingredients[i].width > maxSize) {
+                            if (curRowWidth + ingredients[i].width > maxSize)
+                            {
                                 maxSize = curRowWidth + ingredients[i].width;
                                 maxItem = i;
                             }
@@ -167,7 +167,6 @@
             }
 
 
-
             var sortedIngredients:ArrayList = new ArrayList();
             for (var k:int = 0; k < newOrder.length; k++)
             {
@@ -176,15 +175,18 @@
             }
 
             // create 3 dots data
-            if (ingredients.length > 0) {
+            if (ingredients.length > 0)
+            {
 
                 const dotsWidth:Number = 30;
                 const dotsText:String = "...";
                 var dots:Ingredient = new Ingredient(-999, "...", 0, "другие ингредиенты");
 
-                if (curRowWidth + dotsWidth <= maxWidth) {
+                if (curRowWidth + dotsWidth <= maxWidth)
+                {
                     sortedIngredients.addItem(dots);
-                } else {
+                } else
+                {
                     var deletedElement:Ingredient = sortedIngredients.getItemAt(sortedIngredients.length - 1) as Ingredient;
                     sortedIngredients.removeItemAt(sortedIngredients.length - 1);
                     sortedIngredients.addItem(dots);
@@ -197,9 +199,11 @@
                     dots.description += itemRenderer.data.name + "\n";
                 }
 
-                if (deletedElement) {
+                if (deletedElement)
+                {
                     dots.description += deletedElement.name;
-                } else {
+                } else
+                {
                     dots.description = dots.description.slice(0, dots.description.length - 1);
                 }
             }
@@ -215,7 +219,6 @@
 
             return new ClassFactory(NonSelectedIngredientItemRenderer);
         }
-
         ]]>
 
     </fx:Script>
@@ -241,6 +244,7 @@
                     <s:SolidColorStroke color="#e0e0e0" weight="1"/>
                 </s:stroke>
             </s:Rect>
+            <s:Label id="devModeLabel" text="DEV MODE" color="#c02c31" fontSize="14" x="10" y="10" />
         </s:Group>
         <s:VGroup width="100%" height="100%">
             <s:Label id="cocktailNameLabel" width="100%" textAlign="center" styleName="cocktailNameText"/>
@@ -249,7 +253,8 @@
                     color="#1c1c1c" fontSize="12" itemRendererFunction="cocktailStructureItemRendererFunction"
                     labelField="name" borderVisible="false" verticalScrollPolicy="off" horizontalScrollPolicy="off">
                 <s:layout>
-                    <components:FlowLayout clipAndEnableScrolling="false" horizontalGap="{gapBetweenIngredients}" verticalGap="{gapBetweenIngredients}"/>
+                    <components:FlowLayout clipAndEnableScrolling="false" horizontalGap="{gapBetweenIngredients}"
+                                           verticalGap="{gapBetweenIngredients}"/>
                 </s:layout>
             </s:List>
             <s:HGroup id="tagsGroup" gap="5" paddingBottom="4"/>

@@ -8,6 +8,7 @@ package utils.supportClasses
         {
             _method = method;
         }
+
         public var queryParams:String;
         public var bodyParams:String;
         public var contentType:String;

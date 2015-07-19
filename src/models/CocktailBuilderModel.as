@@ -1,7 +1,6 @@
 package models
 {
     import flash.events.Event;
-    import flash.events.EventDispatcher;
 
     import mx.binding.utils.BindingUtils;
     import mx.collections.ArrayCollection;
@@ -9,7 +8,7 @@ package models
     import mx.events.CollectionEvent;
 
     /**
-     * @eventType controllers.CocktailController.COCKTAIL_DATA_LOADED
+     * @eventType models.CocktailBuilderModel.SELECTED_INGREDIENTS_CHANGED
      */
     [Event(name="selectedIngredientsChanged", type="flash.events.Event")]
     public class CocktailBuilderModel extends SearchResultsModel

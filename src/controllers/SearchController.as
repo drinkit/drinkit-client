@@ -8,17 +8,13 @@ package controllers
     import flash.net.URLVariables;
 
     import models.CocktailModel;
-
     import models.MainModel;
-
     import models.SearchResultsModel;
 
     import mx.collections.ArrayCollection;
 
     import utils.CocktailUrlDecorator;
-
     import utils.JSONInstantiator;
-
     import utils.ServiceUtil;
     import utils.supportClasses.JSRequest;
 
@@ -43,7 +39,8 @@ package controllers
         private function onSearchEnd(response:String):void
         {
             var res:Array = JSONInstantiator.createInstance(response, CocktailModel, false) as Array;
-            res.map(function(element:CocktailModel, index:uint, array:Array):void {
+            res.map(function (element:CocktailModel, index:uint, array:Array):void
+            {
                 CocktailUrlDecorator.decorate(element);
             });
             _model.isNoCocktailsFound = !res || res.length == 0;

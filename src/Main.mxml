@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-               xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="views.*" xmlns:components="components.*"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:views="views.*" xmlns:components="components.*"
                creationPolicy="all" usePreloader="true" preloader="design.SplashScreen"
                applicationComplete="onApplicationCreationComplete(event)"
                preinitialize="onPreinitialize(event)">
     <s:layout>
-        <s:BasicLayout />
+        <s:BasicLayout/>
     </s:layout>
     <fx:Style source="/design/main_style.css"/>
     <fx:Style source="/design/newStyle.css"/>
@@ -26,11 +27,13 @@
 
         import mx.events.FlexEvent;
         import mx.events.PropertyChangeEvent;
+        import mx.events.ResizeEvent;
         import mx.events.ScrollEvent;
         import mx.managers.ToolTipManager;
 
         import spark.events.IndexChangeEvent;
 
+        import utils.AnalyticsTracker;
         import utils.ServiceUtil;
 
         import views.ViewBase;
@@ -63,6 +66,8 @@
             var auth:AuthController = new AuthController();
             auth.tryLoginWithStoredUserCredentials();
             listenScrolling();
+            //
+            AnalyticsTracker.instance.trackPageView("/#");
         }
 
         private function listenScrolling():void
@@ -106,11 +111,15 @@
         {
             readFlashVars();
         }
+
+        private function onResize(event:ResizeEvent):void
+        {
+            speedyVScrollBar.value = 0;
+        }
         ]]>
 
 	</fx:Script>
     <fx:Declarations>
-
     </fx:Declarations>
 
     <s:Rect width="100%" height="100%">
@@ -119,57 +128,58 @@
                           source="@Embed(source='/../assets/new-pattern.png')"/>
         </s:fill>
     </s:Rect>
-    <!--<s:Scroller id="scroller" width="100%" height="100%" skinClass="design.skins.SpeedyScrollerSkin" >-->
-        <s:Group id="viewportGroup" width="100%" height="100%">
-            <s:BorderContainer width="100%" minWidth="1024" borderVisible="false" backgroundAlpha="0">
-                <s:layout>
-                    <s:VerticalLayout gap="0" horizontalAlign="center" paddingTop="20" paddingBottom="20" />
-                </s:layout>
-                <s:VGroup gap="0" width="1024" minHeight="860">
-                    <components:PageHeader />
-                    <s:BorderContainer backgroundColor="0xffffff" width="100%" borderVisible="false">
-                        <s:layout>
-                            <s:VerticalLayout paddingLeft="20" paddingTop="10" paddingRight="20" gap="5" clipAndEnableScrolling="false"/>
-                        </s:layout>
-                        <s:TabBar id="menu" height="50" dataProvider="{viewstack1}" focusEnabled="false"
-                                  hasFocusableChildren="false"
-                                  change="onPageChange(event)" skinClass="design.skins.tabbar.SimpleTabBarSkin"/>
-                        <s:Group width="100%" height="10">
-                            <s:Line top="0" left="0" right="0" yFrom="0" yTo="0">
-                                <s:stroke>
-                                    <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
-                                </s:stroke>
-                            </s:Line>
-                            <s:Line top="3" left="0" right="0" yFrom="0" yTo="0">
-                                <s:stroke>
-                                    <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
-                                </s:stroke>
-                            </s:Line>
-                        </s:Group>
-                        <mx:ViewStack id="viewstack1" width="100%" resizeToContent="true">
-                            <components:ExtNavigationContent width="100%" label="Конструктор">
-                                <views:CocktailBuilderView id="builderView" width="100%"/>
-                            </components:ExtNavigationContent>
-                            <components:ExtNavigationContent width="100%" height="100%" label="Коктейль" includeInBar="false">
-                                <views:CocktailView width="100%" height="100%" />
-                            </components:ExtNavigationContent>
-                            <components:ExtNavigationContent width="100%" height="100%" label="Мой бар" includeInBar="false">
-                                <views:MyBar width="100%" />
-                            </components:ExtNavigationContent>
-                            <components:ExtNavigationContent width="100%" height="100%" label="Админ-панель"
-                                                             includeInBar="{UserInfoModel.instance.role == UserRoles.ADMIN}">
-                                <views:AdminPanelView width="100%" height="100%" />
-                            </components:ExtNavigationContent>
-                            <components:ExtNavigationContent width="100%" label="Результаты поиска" includeInBar="false">
-                                <views:SearchByNameResultView width="100%" />
-                            </components:ExtNavigationContent>
-                        </mx:ViewStack>
-                    </s:BorderContainer>
-                </s:VGroup>
-            </s:BorderContainer>
-        </s:Group>
-    <components:SpeedyVScrollBar viewport="{viewportGroup}" height="100%" right="0" />
-    <!--</s:Scroller>-->
+    <s:Group id="viewportGroup" width="100%" height="100%">
+        <s:BorderContainer width="100%" minWidth="1024" borderVisible="false" backgroundAlpha="0">
+            <s:layout>
+                <s:VerticalLayout gap="0" horizontalAlign="center" paddingTop="20" paddingBottom="20"/>
+            </s:layout>
+            <s:VGroup gap="0" width="1024" minHeight="860">
+                <components:PageHeader/>
+                <s:BorderContainer backgroundColor="0xffffff" width="100%" borderVisible="false">
+                    <s:layout>
+                        <s:VerticalLayout paddingLeft="20" paddingTop="10" paddingRight="20" gap="5"
+                                          clipAndEnableScrolling="false"/>
+                    </s:layout>
+                    <s:TabBar id="menu" height="50" dataProvider="{viewstack1}" focusEnabled="false"
+                              hasFocusableChildren="false"
+                              change="onPageChange(event)" skinClass="design.skins.tabbar.SimpleTabBarSkin"/>
+                    <s:Group width="100%" height="10">
+                        <s:Line top="0" left="0" right="0" yFrom="0" yTo="0">
+                            <s:stroke>
+                                <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
+                            </s:stroke>
+                        </s:Line>
+                        <s:Line top="3" left="0" right="0" yFrom="0" yTo="0">
+                            <s:stroke>
+                                <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
+                            </s:stroke>
+                        </s:Line>
+                    </s:Group>
+                    <mx:ViewStack id="viewstack1" width="100%" resizeToContent="true" resize="onResize(event)">
+                        <components:ExtNavigationContent width="100%" label="Конструктор">
+                            <views:CocktailBuilderView id="builderView" width="100%"/>
+                        </components:ExtNavigationContent>
+                        <components:ExtNavigationContent width="100%" height="100%" label="Коктейль"
+                                                         includeInBar="false">
+                            <views:CocktailView width="100%" height="100%"/>
+                        </components:ExtNavigationContent>
+                        <components:ExtNavigationContent width="100%" height="100%" label="Мой бар"
+                                                         includeInBar="{UserInfoModel.instance.role >= UserRoles.USER}">
+                            <views:MyBar width="100%"/>
+                        </components:ExtNavigationContent>
+                        <components:ExtNavigationContent width="100%" height="100%" label="Админ-панель"
+                                                         includeInBar="{UserInfoModel.instance.role == UserRoles.ADMIN}">
+                            <views:AdminPanelView width="100%" height="100%"/>
+                        </components:ExtNavigationContent>
+                        <components:ExtNavigationContent width="100%" label="Результаты поиска" includeInBar="false">
+                            <views:SearchByNameResultView width="100%"/>
+                        </components:ExtNavigationContent>
+                    </mx:ViewStack>
+                </s:BorderContainer>
+            </s:VGroup>
+        </s:BorderContainer>
+    </s:Group>
+    <components:SpeedyVScrollBar id="speedyVScrollBar" viewport="{viewportGroup}" height="100%" right="0"/>
 
 
 </s:Application>

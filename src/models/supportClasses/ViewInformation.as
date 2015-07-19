@@ -9,6 +9,7 @@ package models.supportClasses
             this.id = id;
             this.title = title;
         }
+
         [Bindable]
         public var id:int;
         public var title:String;

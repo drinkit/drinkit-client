@@ -3,7 +3,6 @@
  */
 package models
 {
-    import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.events.Event;
     import flash.events.EventDispatcher;
@@ -19,7 +18,6 @@ package models
     [Event(name="modelUpdated", type="flash.events.Event")]
     public class CocktailAdminModel extends EventDispatcher
     {
-        public var imageData:BitmapData;
         public function CocktailAdminModel()
         {
             BindingUtils.bindProperty(this, "ingredientsList", IngredientsModel.instance, "ingredientsList");
@@ -28,6 +26,7 @@ package models
             //
             selectedIngredientsList.addEventListener(CollectionEvent.COLLECTION_CHANGE, onIngredientsQueryListChange);
         }
+        public var imageData:BitmapData;
 
         [Bindable]
         public var imageUrl:String;
@@ -52,6 +51,9 @@ package models
 
         [Bindable]
         public var description:String;
+
+        [Bindable]
+        public var published:Boolean;
 
         public var imageClipRect:Rectangle;
 

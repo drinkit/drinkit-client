@@ -24,7 +24,9 @@
                    xmlns:s="library://ns.adobe.com/flex/spark"
                    xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
                    minWidth="21" minHeight="36"
-                   alpha.disabled="0.5">
+                   alpha.disabled="0.5"
+                   iconGroupPaddingLeft="2"
+                   iconGroupPaddingRight="5">
 
     <fx:Metadata>
         <![CDATA[

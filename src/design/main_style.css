@@ -18,7 +18,7 @@ s|TabBar {
 }
 
 s|Button {
-    cornerRadius: 3;
+    cornerRadius: 3px;
     skinClass: ClassReference("design.skins.FlatButtonSkin");
 }
 

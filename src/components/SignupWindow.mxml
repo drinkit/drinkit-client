@@ -119,22 +119,23 @@
 
     <fx:Declarations>
         <fx:Array id="validators">
-            <mx:StringValidator required="true" source="{displayNameInput}" property="text" />
-            <mx:EmailValidator required="true" source="{emailInput}" property="text" />
-            <mx:StringValidator required="true" source="{passwordInput}" property="text" />
+            <mx:StringValidator required="true" source="{displayNameInput}" property="text"/>
+            <mx:EmailValidator required="true" source="{emailInput}" property="text"/>
+            <mx:StringValidator required="true" source="{passwordInput}" property="text"/>
             <utils:MatchValidator required="true" source="{repeatPasswordInput}" property="text"
                                   matchSource="{passwordInput}" matchProperty="text"
-                                  noMatchError="Пароли должны совпадать." triggerEvent="{TextOperationEvent.CHANGE}" />
+                                  noMatchError="Пароли должны совпадать." triggerEvent="{TextOperationEvent.CHANGE}"/>
         </fx:Array>
     </fx:Declarations>
 
-    <s:TextInput id="displayNameInput" width="100%" height="36" prompt="Отображаемое имя..." />
+    <s:TextInput id="displayNameInput" width="100%" height="36" prompt="Отображаемое имя..."/>
     <s:TextInput id="emailInput" width="100%" height="36" prompt="Электронный адрес..."/>
-    <s:TextInput id="passwordInput" width="100%" height="36" displayAsPassword="true" prompt="Пароль..." />
-    <s:TextInput id="repeatPasswordInput" width="100%" height="36" displayAsPassword="true" prompt="Повторите пароль..." />
+    <s:TextInput id="passwordInput" width="100%" height="36" displayAsPassword="true" prompt="Пароль..."/>
+    <s:TextInput id="repeatPasswordInput" width="100%" height="36" displayAsPassword="true"
+                 prompt="Повторите пароль..."/>
     <s:Button label="Зарегистрироваться" click="onSignUpButtonClick(event)" width="100%"/>
     <s:HGroup verticalAlign="middle" width="100%">
-        <s:Label text="Уже есть аккаунт?" styleName="regularText" />
-        <s:Button label="Вход" click="onGoToLoginClick(event)" width="100%" />
+        <s:Label text="Уже есть аккаунт?" styleName="regularText"/>
+        <s:Button label="Вход" click="onGoToLoginClick(event)" width="100%"/>
     </s:HGroup>
 </components:PopupWindow>

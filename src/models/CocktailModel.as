@@ -2,8 +2,8 @@ package models
 {
 
     import flash.events.EventDispatcher;
-    import mx.collections.ArrayCollection;
 
+    import mx.collections.ArrayCollection;
 
     [Bindable]
     public class CocktailModel extends EventDispatcher
@@ -26,6 +26,7 @@ package models
         public var options:Array;
         public var imageUrl:String;
         public var thumbnailUrl:String;
+        public var published:Boolean;
 
         public function get ingredientWithQuantitiesProvider():ArrayCollection
         {

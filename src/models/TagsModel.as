@@ -7,6 +7,8 @@ package models
 
     import spark.components.Image;
 
+    import utils.ToolTipProvider;
+
     public class TagsModel
     {
         public static const COCKTAIL_OPTION_TAG:String = "cocktailOptionTag";
@@ -26,14 +28,14 @@ package models
         {
             tagCache = {};
             //
-            addTagToCache(new longBitmap(), "Long drink", CocktailTypes.LONG_DRINK, COCKTAIL_TYPE_TAG);
-            addTagToCache(new shortBitmap(), "Short drink", CocktailTypes.SHORT_DRINK, COCKTAIL_TYPE_TAG);
-            addTagToCache(new shotBitmap(), "Shooter", CocktailTypes.SHOOTER, COCKTAIL_TYPE_TAG);
-            addTagToCache(new fireBitmap(), "Горящий", OptionParameters.BURNING, COCKTAIL_OPTION_TAG);
-            addTagToCache(new iceBitmap(), "Со льдом", OptionParameters.WITH_ICE, COCKTAIL_OPTION_TAG);
-            addTagToCache(new checkedBitmap(), "Проверен администрацией", OptionParameters.CHECKED, COCKTAIL_OPTION_TAG);
-            addTagToCache(new ibaBitmap(), "Утвержден IBA", OptionParameters.IBA, COCKTAIL_OPTION_TAG);
-            addTagToCache(new layerBitmap(), "Слоеный", OptionParameters.FLACKY, COCKTAIL_OPTION_TAG);
+            addTagToCache(new longBitmap(), ToolTipProvider.getToolTip(ToolTipProvider.LONG), CocktailTypes.LONG_DRINK, COCKTAIL_TYPE_TAG);
+            addTagToCache(new shortBitmap(), ToolTipProvider.getToolTip(ToolTipProvider.SHORT), CocktailTypes.SHORT_DRINK, COCKTAIL_TYPE_TAG);
+            addTagToCache(new shotBitmap(), ToolTipProvider.getToolTip(ToolTipProvider.SHOOTER), CocktailTypes.SHOOTER, COCKTAIL_TYPE_TAG);
+            addTagToCache(new fireBitmap(), ToolTipProvider.getToolTip(ToolTipProvider.BURNING), OptionParameters.BURNING, COCKTAIL_OPTION_TAG);
+            addTagToCache(new iceBitmap(), ToolTipProvider.getToolTip(ToolTipProvider.WITH_ICE), OptionParameters.WITH_ICE, COCKTAIL_OPTION_TAG);
+            addTagToCache(new checkedBitmap(), ToolTipProvider.getToolTip(ToolTipProvider.CHECKED), OptionParameters.CHECKED, COCKTAIL_OPTION_TAG);
+            addTagToCache(new ibaBitmap(), ToolTipProvider.getToolTip(ToolTipProvider.IBA), OptionParameters.IBA, COCKTAIL_OPTION_TAG);
+            addTagToCache(new layerBitmap(), ToolTipProvider.getToolTip(ToolTipProvider.FLACKY), OptionParameters.FLACKY, COCKTAIL_OPTION_TAG);
         }
 
         private var tagCache:Object;

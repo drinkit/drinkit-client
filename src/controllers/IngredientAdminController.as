@@ -49,6 +49,7 @@ package controllers
             _model.id = ingredient.id;
             _model.name = ingredient.name;
             _model.description = ingredient.description;
+            _model.category = ingredient.category;
             _model.vol = ingredient.vol;
         }
 
@@ -60,7 +61,8 @@ package controllers
             ServiceUtil.instance.sendRequest(Services.INGREDIENTS + _model.id, deleteRequest, onDeleteIngredient, onDeleteIngredientError);
         }
 
-        private function onDeleteIngredientError(response:String):void {
+        private function onDeleteIngredientError(response:String):void
+        {
             Alert.show("Вы не можете удалить ингредиент, так как он используется в существующих коктейлях!");
         }
 

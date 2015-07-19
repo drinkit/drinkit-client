@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-                   xmlns:flextras="spark.flextras.autoCompleteComboBox.*" xmlns:views="views.*"
-                   xmlns:components="components.*" xmlns:subviews="views.subViews.*" width="1024"
-                   creationComplete="creationCompleteHandler(event)"
-                   contentCreationComplete="bordercontainer1_contentCreationCompleteHandler(event)"
-                   backgroundColor="0xffffff" borderVisible="false">
+                xmlns:flextras="spark.flextras.autoCompleteComboBox.*" xmlns:views="views.*"
+                xmlns:components="components.*" xmlns:subviews="views.subViews.*" width="1024"
+                creationComplete="creationCompleteHandler(event)"
+                contentCreationComplete="bordercontainer1_contentCreationCompleteHandler(event)"
+                backgroundColor="0xffffff" borderVisible="false">
     <views:layout>
         <s:VerticalLayout clipAndEnableScrolling="false"/>
     </views:layout>
@@ -16,22 +16,23 @@
         import design.DesignModel;
 
         import models.CocktailBuilderModel;
+        import models.IngredientsModel;
+        import models.MyBarModel;
+        import models.UserInfoModel;
+        import models.UserRoles;
+        import models.events.AuthEvent;
         import models.supportClasses.CocktailTypes;
         import models.supportClasses.Ingredient;
         import models.supportClasses.OptionParameters;
 
         import mx.core.FlexGlobals;
-
-
         import mx.events.FlexEvent;
-
         import mx.events.ScrollEvent;
 
         import spark.components.Application;
-
-
-
         import spark.events.IndexChangeEvent;
+
+        import utils.ToolTipProvider;
 
         private var _searchPanelStartOffset:Number;
 
@@ -75,10 +76,26 @@
             _model.addEventListener(CocktailBuilderModel.SELECTED_INGREDIENTS_CHANGED, selectedIngredientsChangeHandler);
             _controller = new CocktailBuilderController(_model);
             _controller.performSearch();
+            IngredientsModel.instance.addEventListener(IngredientsModel.INGREDIENTS_LOADED, onIngredientsLoaded);
             //
             MainController.instance.requestIngredients();
             //
             (FlexGlobals.topLevelApplication as Application).addEventListener(ScrollEvent.SCROLL, onScroll);
+            UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onAuthChanged);
+            UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onAuthChanged);
+        }
+
+        private function onAuthChanged(event:AuthEvent):void
+        {
+            if (_model.cocktailsList) {
+                _model.cocktailsList.refresh();
+                _model.signalizeAboutChange();
+            }
+        }
+
+        private function onIngredientsLoaded(event:Event):void
+        {
+            _model.ingredientsList.filterFunction = filterCBList;
         }
 
         private function onScroll(event:ScrollEvent):void
@@ -117,6 +134,39 @@
             _searchPanelStartOffset = searchPanel.localToGlobal(new Point(0, searchPanel.y)).y;
         }
 
+        private function onResetButtonClick(event:MouseEvent):void
+        {
+            longDrinkButton.selected = false;
+            shortDrinkButton.selected = false;
+            shooterDrinkButton.selected = false;
+            _model.selectedCocktailTypes = [];
+            //
+            burnButton.selected = false;
+            flackyButton.selected = false;
+            iceButton.selected = false;
+            ibaButton.selected = false;
+            checkedButton.selected = false;
+            _model.selectedOptions = [];
+            //
+            _model.selectedIngredientsList.removeAll();
+            //
+            _controller.performSearch();
+        }
+
+        private function onAddBarIngredientsButtonClick(event:MouseEvent):void
+        {
+            if (!MyBarModel.instance.activeIngredients) {
+                return;
+            }
+
+            for (var j:int = 0; j < MyBarModel.instance.activeIngredients.length; j++)
+            {
+                var ingredient:Ingredient = MyBarModel.instance.activeIngredients.getItemAt(j) as Ingredient;
+                _controller.addIngredientToQuery(ingredient);
+            }
+
+            ingrChoose.validateProperties();
+        }
         ]]>
 	</fx:Script>
     <fx:Declarations>
@@ -132,15 +182,18 @@
                     <s:Label text="Формат коктейля" styleName="headerGreenText" width="100%" textAlign="center"/>
                     <s:Spacer width="100%" height="5"/>
                     <s:HGroup id="cocktailTypesGroup" width="100%" gap="15" horizontalAlign="center">
-                        <s:ToggleButton width="64" height="64" name="{CocktailTypes.LONG_DRINK}"
+                        <s:ToggleButton id="longDrinkButton" width="64" height="64" name="{CocktailTypes.LONG_DRINK}"
                                         change="cocktailTypeChangeHandler(event)"
-                                        icon="@Embed(source='/../assets/long-64.png')" toolTip="Long drink"/>
-                        <s:ToggleButton width="64" height="64" name="{CocktailTypes.SHORT_DRINK}"
+                                        icon="@Embed(source='/../assets/long-64.png')"
+                                        toolTip="{ToolTipProvider.getToolTip(ToolTipProvider.LONG)}"/>
+                        <s:ToggleButton id="shortDrinkButton" width="64" height="64" name="{CocktailTypes.SHORT_DRINK}"
                                         change="cocktailTypeChangeHandler(event)"
-                                        icon="@Embed(source='/../assets/short-64.png')" toolTip="Short drink"/>
-                        <s:ToggleButton width="64" height="64" name="{CocktailTypes.SHOOTER}"
+                                        icon="@Embed(source='/../assets/short-64.png')"
+                                        toolTip="{ToolTipProvider.getToolTip(ToolTipProvider.SHORT)}"/>
+                        <s:ToggleButton id="shooterDrinkButton" width="64" height="64" name="{CocktailTypes.SHOOTER}"
                                         change="cocktailTypeChangeHandler(event)"
-                                        icon="@Embed(source='/../assets/shooter-64.png')" toolTip="Shooter"/>
+                                        icon="@Embed(source='/../assets/shooter-64.png')"
+                                        toolTip="{ToolTipProvider.getToolTip(ToolTipProvider.SHOOTER)}"/>
                     </s:HGroup>
                     <s:Spacer width="100%" height="0"/>
                     <s:Line yFrom="0" yTo="0" width="100%">
@@ -157,23 +210,28 @@
                                                    paddingTop="5"/>
                         </s:layout>
 
-                        <s:ToggleButton label="горящий" name="{OptionParameters.BURNING}" buttonMode="true"
+                        <s:ToggleButton id="burnButton" label="горящий" name="{OptionParameters.BURNING}"
+                                        buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
                                         click="optionChangeHandler(event)" tabFocusEnabled="false"/>
-                        <s:ToggleButton label="слоёный" name="{OptionParameters.FLACKY}" buttonMode="true"
-                                        skinClass="design.skins.OptionLabelSkin"
-                                        click="optionChangeHandler(event)" tabFocusEnabled="false" />
-                        <s:ToggleButton label="со льдом" name="{OptionParameters.WITH_ICE}" buttonMode="true"
+                        <s:ToggleButton id="flackyButton" label="слоёный" name="{OptionParameters.FLACKY}"
+                                        buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
                                         click="optionChangeHandler(event)" tabFocusEnabled="false"/>
-                        <s:ToggleButton label="официальный" name="{OptionParameters.IBA}" buttonMode="true"
+                        <s:ToggleButton id="iceButton" label="со льдом" name="{OptionParameters.WITH_ICE}"
+                                        buttonMode="true"
+                                        skinClass="design.skins.OptionLabelSkin"
+                                        click="optionChangeHandler(event)" tabFocusEnabled="false"/>
+                        <s:ToggleButton id="ibaButton" label="официальный" name="{OptionParameters.IBA}"
+                                        buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
                                         click="optionChangeHandler(event)" tabFocusEnabled="false"
-                                        toolTip="утвержденный международной ассоциацией барменов (IBA)"/>
-                        <s:ToggleButton label="проверенный" name="{OptionParameters.CHECKED}" buttonMode="true"
+                                        toolTip="{ToolTipProvider.getToolTip(ToolTipProvider.IBA)}"/>
+                        <s:ToggleButton id="checkedButton" label="проверенный" name="{OptionParameters.CHECKED}"
+                                        buttonMode="true"
                                         skinClass="design.skins.OptionLabelSkin"
                                         click="optionChangeHandler(event)" tabFocusEnabled="false"
-                                        toolTip="проверено администрацией собственноручно"/>
+                                        toolTip="{ToolTipProvider.getToolTip(ToolTipProvider.CHECKED)}"/>
                     </s:Group>
                     <s:Line yFrom="0" yTo="0" width="100%">
                         <s:stroke>
@@ -193,7 +251,8 @@
                                                            focusSkin="{null}" focusRect="false"
                                                            labelField="name" paddingLeft="0"
                                                            prompt="Напишите ингредиент..."/>
-                        <s:List width="100%" minWidth="200" height="100%" dataProvider="{_model.selectedIngredientsList}"
+                        <s:List width="100%" minWidth="200" height="100%"
+                                dataProvider="{_model.selectedIngredientsList}"
                                 focusEnabled="false"
                                 itemRenderer="views.renderers.IngredientItemRenderer" labelField="name"
                                 borderVisible="false">
@@ -202,12 +261,19 @@
                                                        paddingRight="5" paddingTop="5"/>
                             </s:layout>
                         </s:List>
+                        <s:Label text="Добавить ингредиенты из бара" fontSize="14" textDecoration="underline"
+                                 buttonMode="{UserInfoModel.instance.role >= UserRoles.USER}"
+                                 fontFamily="CenturyGothic" click="onAddBarIngredientsButtonClick(event)"
+                                 enabled="{UserInfoModel.instance.role >= UserRoles.USER}"
+                                 toolTip="{UserInfoModel.instance.role == UserRoles.ANONYMOUS ? ToolTipProvider.getToolTip(ToolTipProvider.USER_BAR_NOT_ALLOWED) : ''}"/>
+                        <s:Label text="Сбросить фильтры" fontSize="14" textDecoration="underline" buttonMode="true"
+                                 fontFamily="CenturyGothic" click="onResetButtonClick(event)"/>
                     </s:VGroup>
                 </s:BorderContainer>
             </s:VGroup>
         </s:Group>
-        <subviews:SearchResultsPanel width="100%" model="{_model}" clipAndEnableScrolling="false" itemsPerPage="20" recipeRendererWidth="352" />
+        <subviews:SearchResultsPanel width="100%" model="{_model}" clipAndEnableScrolling="false" itemsPerPage="20"
+                                     recipeRendererWidth="352"/>
     </s:HGroup>
-
 
 </views:ViewBase>

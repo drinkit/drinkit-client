@@ -25,14 +25,14 @@ package models.events
 
         private var _viewId:uint;
 
-        override public function clone():Event
-        {
-            return new ViewEvent(type, viewId, viewData, bubbles, cancelable);
-        }
-
         public function get viewId():uint
         {
             return _viewId;
+        }
+
+        override public function clone():Event
+        {
+            return new ViewEvent(type, viewId, viewData, bubbles, cancelable);
         }
     }
 }

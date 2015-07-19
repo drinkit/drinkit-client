@@ -7,21 +7,12 @@ package design
     import flash.display.Sprite;
     import flash.events.Event;
     import flash.events.ProgressEvent;
-    import flash.events.TimerEvent;
-    import flash.utils.Timer;
 
     import mx.events.FlexEvent;
-
-    import mx.graphics.BitmapFillMode;
     import mx.preloaders.IPreloaderDisplay;
-
-    import spark.primitives.BitmapImage;
 
     public class SplashScreen extends Sprite implements IPreloaderDisplay
     {
-        [Embed(source="/../assets/new-pattern.png")]
-        private var splashImage:Class;
-
         public function SplashScreen()
         {
             super();
@@ -29,6 +20,8 @@ package design
 //            fillMode = BitmapFillMode.REPEAT;
 //            alpha = 0.7;
         }
+        [Embed(source="/../assets/new-pattern.png")]
+        private var splashImage:Class;
 
         public function get backgroundAlpha():Number
         {
@@ -78,30 +71,7 @@ package design
                     FlexEvent.INIT_COMPLETE, handleInitComplete);
         }
 
-        private function handleProgress(event:ProgressEvent):void {}
-        private function handleComplete(event:Event):void {}
-        private function handleInitProgress(event:Event):void {}
-
-        private function handleInitComplete(event:Event):void {
-            dispatchComplete();
-        }
-
-        private function dispatchComplete():void {
-            dispatchEvent(new Event(Event.COMPLETE));
-        }
-
-        public function get stageHeight():Number
-        {
-            return _stageHeight;
-        }
-
         private var _stageWidth:Number;
-        private var _stageHeight:Number;
-
-        public function set stageHeight(value:Number):void
-        {
-            _stageHeight = value;
-        }
 
         public function get stageWidth():Number
         {
@@ -113,6 +83,18 @@ package design
             _stageWidth = value;
         }
 
+        private var _stageHeight:Number;
+
+        public function get stageHeight():Number
+        {
+            return _stageHeight;
+        }
+
+        public function set stageHeight(value:Number):void
+        {
+            _stageHeight = value;
+        }
+
         public function initialize():void
         {
             alpha = 0.7;
@@ -120,6 +102,28 @@ package design
             graphics.beginBitmapFill(splash.bitmapData, null, true, false);
             graphics.drawRect(0, 0, stageWidth, stageHeight);
             graphics.endFill();
+        }
+
+        private function dispatchComplete():void
+        {
+            dispatchEvent(new Event(Event.COMPLETE));
+        }
+
+        private function handleProgress(event:ProgressEvent):void
+        {
+        }
+
+        private function handleComplete(event:Event):void
+        {
+        }
+
+        private function handleInitProgress(event:Event):void
+        {
+        }
+
+        private function handleInitComplete(event:Event):void
+        {
+            dispatchComplete();
         }
     }
 }

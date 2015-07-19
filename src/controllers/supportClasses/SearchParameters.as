@@ -5,6 +5,7 @@ package controllers.supportClasses
         public function SearchParameters()
         {
         }
+
         public var cocktailTypes:Array;
         public var ingredients:Array;
         public var options:Array;

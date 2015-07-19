@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testrun name="">
-    <testsuite name="Default Test Suite" project="drinkIt">
-        <testsuite name="tests:CocktailBuilderControllerTest" type="testsuiteclass"/>
-        <testsuite name="tests:TagsModelTest" type="testsuiteclass"/>
-        <testsuite name="tests:MainControllerTest" type="testsuiteclass"/>
-    </testsuite>
-    <portNumber value="8765"/>
-</testrun>

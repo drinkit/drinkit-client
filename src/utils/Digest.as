@@ -39,9 +39,11 @@ package utils
 
             // Remove the realm to get just the uri
             var uri:String = "";
-            digest = {"name": "Authorization",
+            digest = {
+                "name": "Authorization",
                 "value": "Digest " + "username=\"" + _login /* Username we are using to gain access. */ + "\", " + "realm=\"" + responseObject.realm /* Same value we got from the server.    */ + "\", " + "nonce=\"" + responseObject.nonce /* Same value we got from the server.    */ + "\", " + "uri=\"" + uri /* URI that we are attempting to access. */ + "\", " + // TODO URI?! vs URL?!
-                        "qop=" + qop /* QOP as decided upon above.            */ + ", " + "nc=" + nc /* Nonce Count as decided upon above.    */ + ", " + "cnonce=\"" + cnonce /* Client generated nonce value.         */ + "\", " + "response=\"" + this.generateResponse(responseObject, qop, nc, cnonce, uri) /* Generate a hashed response based on HTTP Digest specifications. */ + "\", " + "opaque=\"" + responseObject.opaque /* Same value we got from the server.    */ + "\""};
+                "qop=" + qop /* QOP as decided upon above.            */ + ", " + "nc=" + nc /* Nonce Count as decided upon above.    */ + ", " + "cnonce=\"" + cnonce /* Client generated nonce value.         */ + "\", " + "response=\"" + this.generateResponse(responseObject, qop, nc, cnonce, uri) /* Generate a hashed response based on HTTP Digest specifications. */ + "\", " + "opaque=\"" + responseObject.opaque /* Same value we got from the server.    */ + "\""
+            };
 
             return digest;
         }
