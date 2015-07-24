@@ -22,15 +22,12 @@
         [Bindable]
         public function set source(value:Object):void
         {
-            if (value)
-            {
-                _source = value;
+            _source = value;
 
-                if (value is Bitmap)
-                {
-                    determinateClipRectSize(_source.width, _source.height, width, height);
-                    dispatchEvent(new Event("clipRectChanged"));
-                }
+            if (_source && _source is Bitmap)
+            {
+                determinateClipRectSize(_source.width, _source.height, width, height);
+                dispatchEvent(new Event("clipRectChanged"));
             }
         }
 

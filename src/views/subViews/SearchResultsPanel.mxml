@@ -117,8 +117,8 @@
             dataProvider="{_visibleRecipes}"
             horizontalScrollPolicy="off">
         <s:layout>
-            <s:TileLayout horizontalGap="11" verticalGap="11" paddingBottom="7" paddingLeft="5" paddingRight="0"
-                          paddingTop="5" requestedColumnCount="2" clipAndEnableScrolling="false"/>
+            <s:TileLayout horizontalGap="11" verticalGap="11" paddingBottom="7" paddingLeft="5" paddingRight="0" rowHeight="184" columnWidth="{recipeRendererWidth}"
+                          paddingTop="5" requestedColumnCount="2" clipAndEnableScrolling="false" useVirtualLayout="true" />
         </s:layout>
     </s:List>
     <s:Group id="controlGroup" visible="false" width="100%">

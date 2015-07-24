@@ -15,6 +15,7 @@ package controllers
 
     import utils.CocktailUrlDecorator;
     import utils.JSONInstantiator;
+    import utils.PerformanceAnalyzer;
     import utils.ServiceUtil;
     import utils.supportClasses.JSRequest;
 

@@ -73,8 +73,10 @@ package models
                 {
                     continue;
                 }
+
                 curIngr = IngredientsModel.instance.getIngredientById(item.ingredientId);
-                if (curIngr.category == category)
+
+                if (curIngr && curIngr.category == category)
                 {
                     ingredients.push(curIngr);
                 }
