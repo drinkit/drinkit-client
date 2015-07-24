@@ -8,6 +8,8 @@ package models
 
     import mx.collections.ArrayCollection;
 
+    import utils.PerformanceAnalyzer;
+
     [Event(name="change", type="flash.events.Event")]
     public class SearchResultsModel extends EventDispatcher
     {

@@ -3,8 +3,8 @@
   Created by ypoliakov on 23.07.2014.
 -->
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-                xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="components.*"
-                height="184" autoDrawBackground="false" buttonMode="true" clipAndEnableScrolling="false">
+                xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="components.*" height="184"
+                autoDrawBackground="false" buttonMode="true" clipAndEnableScrolling="false">
 
     <s:states>
         <s:State name="normal"/>
@@ -32,9 +32,9 @@
         [Bindable]
         private var _cocktail:CocktailModel;
         private var _model:SearchResultsModel;
-        private var _cornerRadius:Number = 5;
+        private const _cornerRadius:Number = 5;
 
-        private var gapBetweenIngredients:Number = 5;
+        private const gapBetweenIngredients:Number = 5;
 
         override public function set data(value:Object):void
         {
@@ -46,7 +46,6 @@
                 cocktailNameLabel.text = _cocktail.name;
                 cocktailNameLabel.validateNow();
                 validateDisplayList();
-                validateSize(true);
                 validateNow();
                 cocktailImage.source = cocktailThumbnail;
                 buildRecipe(_cocktail.cocktailIngredients);
@@ -254,7 +253,7 @@
                     labelField="name" borderVisible="false" verticalScrollPolicy="off" horizontalScrollPolicy="off">
                 <s:layout>
                     <components:FlowLayout clipAndEnableScrolling="false" horizontalGap="{gapBetweenIngredients}"
-                                           verticalGap="{gapBetweenIngredients}"/>
+                                           verticalGap="{gapBetweenIngredients}" useVirtualLayout="true"/>
                 </s:layout>
             </s:List>
             <s:HGroup id="tagsGroup" gap="5" paddingBottom="4"/>

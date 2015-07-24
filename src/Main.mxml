@@ -2,7 +2,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
                xmlns:mx="library://ns.adobe.com/flex/mx"
                xmlns:views="views.*" xmlns:components="components.*"
-               creationPolicy="all" usePreloader="true" preloader="design.SplashScreen"
+               creationPolicy="auto" usePreloader="true" preloader="design.SplashScreen"
                applicationComplete="onApplicationCreationComplete(event)"
                preinitialize="onPreinitialize(event)">
     <s:layout>
@@ -51,8 +51,14 @@
         [Bindable]
         private var _model:MainModel;
 
+        private function showInitTime():void {
+            // Record the number of ms since the player was initialized.
+            trace("App startup: " + getTimer() + " ms");
+        }
+
         protected function onApplicationCreationComplete(event:FlexEvent):void
         {
+            showInitTime();
             ToolTipManager.showDelay = 300;
             //
             _model = new MainModel();
@@ -87,6 +93,9 @@
         {
             menu.selectedIndex = event.viewId;
             var viewContainer:ExtNavigationContent = viewstack1.getChildAt(event.viewId) as ExtNavigationContent;
+            if (viewContainer.numElements == 0) {
+                viewContainer.createDeferredContent();
+            }
             var view:ViewBase = viewContainer.getElementAt(0) as ViewBase;
             view.dispatchEvent(event);
         }

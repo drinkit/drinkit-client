@@ -47,6 +47,7 @@
             photo.source = cocktailImage;
             buildTags(_model.cocktailTypeId, _model.options);
             buildDescription(_model.description);
+            AnalyticsTracker.instance.trackPageView("#" + BrowserManager.getInstance().fragment, _model.name);
         }
 
         private function buildDescription(description:String):void
@@ -95,7 +96,6 @@
             _controller.loadNeededInfo(CocktailModel(event.viewData));
             layout.verticalScrollPosition = 0;
             //
-            AnalyticsTracker.instance.trackPageView("#" + BrowserManager.getInstance().fragment, _model.name);
             StatsTracker.instance.recipeWasShowed(CocktailModel(event.viewData).id);
         }
         ]]>

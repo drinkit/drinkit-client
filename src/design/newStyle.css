@@ -3,7 +3,7 @@
 @namespace mx "library://ns.adobe.com/flex/mx";
 
 @font-face {
-    src: url("/../assets/fonts/GOTHIC.TTF");
+    src: url("/../assets/fonts/CenturyGothic.ttf");
     fontFamily: "CenturyGothic";
     fontStyle: normal;
     advancedAntiAliasing: true;
@@ -11,7 +11,7 @@
 }
 
 @font-face {
-    src: url("/../assets/fonts/GOTHICI.TTF");
+    src: url("/../assets/fonts/CenturyGothic-Italic.ttf");
     fontFamily: "CenturyGothic";
     fontStyle: italic;
     advancedAntiAliasing: true;
@@ -19,7 +19,7 @@
 }
 
 @font-face {
-    src: url("/../assets/fonts/GOTHICB.TTF");
+    src: url("/../assets/fonts/CenturyGothic-Bold.ttf");
     fontFamily: "CenturyGothic";
     fontWeight: bold;
     advancedAntiAliasing: true;
@@ -27,7 +27,7 @@
 }
 
 @font-face {
-    src: url("/../assets/fonts/GEORGIAZ.TTF");
+    src: url("/../assets/fonts/Georgia-BoldItalic.ttf");
     fontFamily: "Georgia";
     fontStyle: italic;
     fontWeight: bold;
