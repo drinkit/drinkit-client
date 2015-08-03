@@ -27,6 +27,7 @@ s|TextInput {
     fontFamily: "CenturyGothic";
     paddingLeft: 5;
     height: 25;
+    focusSkin: ClassReference("design.skins.TextInputFocusSkin");
 }
 
 s|TitleWindow {
