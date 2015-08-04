@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!--
+  Created by Crabar on 11.07.2015.
+-->
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+                autoDrawBackground="false" height="25" minWidth="25" buttonMode="true">
+
+    <fx:Style source="/design/newStyle.css"/>
+
+    <fx:Script>
+		<![CDATA[
+
+        import controllers.MyBarController;
+
+        import design.DesignModel;
+
+        import models.supportClasses.Ingredient;
+
+        import spark.components.List;
+
+        import views.MyBar;
+
+        private const cornerRadius:uint = 10;
+        private var _ingredientData:Ingredient;
+        private var _controller:MyBarController;
+
+        override public function set data(value:Object):void
+        {
+            super.data = value;
+
+            if (data)
+            {
+                _ingredientData = Ingredient(data);
+                labelDisplay.text = label;
+                labelDisplay.validateSize();
+                width = labelDisplay.getExplicitOrMeasuredWidth() + 50;
+                _controller = new MyBarController(((owner as List).document as MyBar).model);
+            }
+        }
+
+        protected function onCloseButtonClick(event:MouseEvent):void
+        {
+            var parentList:List = owner as List;
+            _controller.removeIngredientFromBar(_ingredientData);
+        }
+
+        protected function onButtonRollOver(event:MouseEvent):void
+        {
+            var color:SolidColor = event.currentTarget.getElementAt(0).fill as SolidColor;
+            color.color = DesignModel.LIGHT_PINK;
+        }
+
+        protected function onButtonRollOut(event:MouseEvent):void
+        {
+            var color:SolidColor = event.currentTarget.getElementAt(0).fill as SolidColor;
+            color.color = DesignModel.ORANGE_BEACH;
+        }
+
+        private function onRestoreButtonClick(event:MouseEvent):void
+        {
+            _controller.activateIngredient(_ingredientData);
+        }
+        ]]>
+	</fx:Script>
+
+
+    <s:Rect width="100%" height="100%" bottomLeftRadiusX="{cornerRadius}" bottomLeftRadiusY="{cornerRadius}"
+            bottomRightRadiusX="{cornerRadius}"
+            bottomRightRadiusY="{cornerRadius}" topLeftRadiusX="{cornerRadius}" topLeftRadiusY="{cornerRadius}"
+            topRightRadiusX="{cornerRadius}"
+            topRightRadiusY="{cornerRadius}">
+        <s:fill>
+            <s:SolidColor color="{DesignModel.ORANGE_BEACH}"/>
+        </s:fill>
+    </s:Rect>
+    <s:HGroup paddingLeft="10" height="100%" verticalAlign="middle" paddingTop="0">
+        <s:Label id="labelDisplay" color="0xffffff" horizontalCenter="0" mouseEnabled="true" paddingBottom="-1"
+                 styleName="regularText"/>
+        <s:HGroup gap="1">
+            <s:Group width="15" height="15" click="onRestoreButtonClick(event)" rollOver="onButtonRollOver(event)"
+                     rollOut="onButtonRollOut(event)">
+                <s:Ellipse width="15" height="15">
+                    <s:fill>
+                        <s:SolidColor id="restoreButtonColor" color="{DesignModel.ORANGE_BEACH}"/>
+                    </s:fill>
+                </s:Ellipse>
+                <s:BitmapImage source="@Embed(source='/../assets/up_arrow.png')" x="2" y="1" />
+            </s:Group>
+            <s:Group width="15" height="15" click="onCloseButtonClick(event)" rollOver="onButtonRollOver(event)"
+                     rollOut="onButtonRollOut(event)">
+                <s:Ellipse width="15" height="15">
+                    <s:fill>
+                        <s:SolidColor id="closeButtonColor" color="{DesignModel.ORANGE_BEACH}"/>
+                    </s:fill>
+                </s:Ellipse>
+                <s:Line x="0" y="0" yFrom="4" xFrom="4" xTo="11" yTo="11">
+                    <s:stroke>
+                        <s:SolidColorStroke color="0xffffff" weight="2"/>
+                    </s:stroke>
+                </s:Line>
+                <s:Line x="0" y="0" yFrom="11" yTo="4" xFrom="4" xTo="11">
+                    <s:stroke>
+                        <s:SolidColorStroke color="0xffffff" weight="2"/>
+                    </s:stroke>
+                </s:Line>
+            </s:Group>
+        </s:HGroup>
+    </s:HGroup>
+</s:ItemRenderer>

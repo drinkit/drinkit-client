@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:components="components.*"
+                xmlns:s="library://ns.adobe.com/flex/spark" xmlns:views="views.*"
+                xmlns:flextras="spark.flextras.autoCompleteComboBox.*"
+                creationComplete="onCreationComplete(event)" borderVisible="false" viewChanged="onViewChanged(event)">
+    <fx:Script>
+		<![CDATA[
+        import controllers.MyBarController;
+        import controllers.supportClasses.IngredientCategories;
+
+        import flash.filters.BitmapFilterQuality;
+
+        import models.IngredientsModel;
+        import models.MyBarModel;
+        import models.events.ViewEvent;
+        import models.supportClasses.Ingredient;
+
+        import mx.collections.ArrayCollection;
+        import mx.collections.ArrayList;
+        import mx.events.FlexEvent;
+        import mx.managers.BrowserManager;
+
+        import spark.events.IndexChangeEvent;
+
+        import utils.AnalyticsTracker;
+
+        [Bindable]
+        private var _model:MyBarModel;
+        private var _controller:MyBarController;
+
+        protected function onCreationComplete(event:FlexEvent):void
+        {
+            _model = MyBarModel.instance;
+            _model.addEventListener(MyBarModel.MODEL_CHANGED, onMyBarChanged);
+            _controller = new MyBarController(_model);
+
+            if (IngredientsModel.instance.ingredientsList && IngredientsModel.instance.ingredientsList.length > 0)
+            {
+                ingrChoose.dataProvider = new ArrayCollection(IngredientsModel.instance.ingredientsList.source);
+            } else
+            {
+                IngredientsModel.instance.addEventListener(IngredientsModel.INGREDIENTS_LOADED, onIngredientsLoaded);
+            }
+        }
+
+        public function get model():MyBarModel
+        {
+            return _model;
+        }
+
+        private function onMyBarChanged(event:Event):void
+        {
+            (ingrChoose.dataProvider as ArrayCollection).filterFunction = filterCBList;
+            (ingrChoose.dataProvider as ArrayCollection).refresh();
+            _endedIngredients = _model.inactiveIngredients;
+        }
+
+        [Bindable]
+        private var _endedIngredients:ArrayList;
+
+        private function onIngredientsLoaded(event:Event):void
+        {
+            ingrChoose.dataProvider = new ArrayCollection(IngredientsModel.instance.ingredientsList.source);
+        }
+
+        private function onIngredientsChanged(event:IndexChangeEvent):void
+        {
+            if (event.newIndex >= 0)
+                _controller.addIngredientToBar(ingrChoose.selectedItem);
+
+            ingrChoose.selectedIndex = -1;
+            ingrChoose.validateProperties();
+        }
+
+        private function filterCBList(item:Object):Boolean
+        {
+            var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
+            var ingr:Ingredient = Ingredient(item);
+            return (String(ingr.name).toLowerCase().search(inputValue) > -1 && !_model.isIngredientInBar(ingr.id));
+        }
+
+        private function onViewChanged(event:ViewEvent):void
+        {
+            AnalyticsTracker.instance.trackPageView("#" + BrowserManager.getInstance().fragment, "Мой бар");
+        }
+        ]]>
+	</fx:Script>
+    <fx:Declarations>
+        <!-- Place non-visual elements (e.g., services, value objects) here -->
+    </fx:Declarations>
+
+    <s:VGroup width="100%" gap="15">
+        <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="300" height="26"
+                                           change="onIngredientsChanged(event)"
+                                           filterFunction="filterCBList" styleName="regularText"
+                                           itemRenderer="components.renderers.AutoCompleteRenderer"
+                                           skinClass="design.skins.LiveSearchComboBoxSkin"
+                                           focusSkin="{null}" focusRect="false"
+                                           labelField="name" paddingLeft="0"
+                                           prompt="Добавить в бар..."/>
+        <s:HGroup width="100%" gap="10">
+            <s:VGroup width="50%" gap="10" minHeight="400">
+                <components:MyBarCategory width="100%" height="100%" category="{IngredientCategories.HARD_DRINKS}"
+                                          model="{_model}"/>
+                <components:MyBarCategory width="100%" height="100%" category="{IngredientCategories.LIQUORS}"
+                                          model="{_model}"/>
+            </s:VGroup>
+            <s:VGroup width="50%" gap="10" minHeight="400">
+                <components:MyBarCategory width="100%" height="100%" category="{IngredientCategories.SOFT_DRINKS}"
+                                          model="{_model}"/>
+                <components:MyBarCategory width="100%" height="100%" category="{IngredientCategories.VIRGIN_DRINKS}"
+                                          model="{_model}"/>
+                <components:MyBarCategory width="100%" height="100%" category="{IngredientCategories.OTHER}"
+                                          model="{_model}"/>
+            </s:VGroup>
+        </s:HGroup>
+        <s:Group width="100%" minHeight="200">
+            <s:Rect width="100%" height="100%" bottomLeftRadiusX="5" bottomLeftRadiusY="5"
+                    bottomRightRadiusX="5"
+                    bottomRightRadiusY="5" topLeftRadiusX="5" topLeftRadiusY="5"
+                    topRightRadiusX="5"
+                    topRightRadiusY="5">
+                <s:fill>
+                    <s:SolidColor color="#ffffff"/>
+                </s:fill>
+                <s:filters>
+                    <s:DropShadowFilter alpha="0.5" blurX="8" blurY="8" distance="3" strength="0.9"
+                                        quality="{BitmapFilterQuality.HIGH}"/>
+                </s:filters>
+            </s:Rect>
+            <s:VGroup gap="10" width="100%" height="100%" paddingTop="10">
+                <s:Label width="100%" text="Закончились" textAlign="center" styleName="headerGreenText"/>
+                <s:List width="100%" minWidth="200" height="100%"
+                        dataProvider="{_endedIngredients}" focusEnabled="false"
+                        itemRenderer="views.renderers.EndedIngredientItemRenderer" labelField="name"
+                        borderVisible="false">
+                    <s:layout>
+                        <components:FlowLayout clipAndEnableScrolling="true" paddingLeft="5" paddingBottom="5"
+                                               paddingRight="5" paddingTop="5"/>
+                    </s:layout>
+                </s:List>
+            </s:VGroup>
+        </s:Group>
+    </s:VGroup>
+</views:ViewBase>

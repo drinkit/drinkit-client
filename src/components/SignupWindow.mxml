@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<components:PopupWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+                        xmlns:s="library://ns.adobe.com/flex/spark"
+                        xmlns:components="components.*"
+                        xmlns:mx="library://ns.adobe.com/flex/mx"
+                        xmlns:utils="utils.*" title="Регистрация" creationPolicy="all" show="onShow(event)"
+                        close="onClose(event)" width="200" creationComplete="onCreationComplete(event)">
+
+    <components:layout>
+        <s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center"/>
+    </components:layout>
+
+    <fx:Script>
+		<![CDATA[
+        import controllers.SignUpController;
+
+        import models.UserInfoModel;
+        import models.events.AuthEvent;
+
+        import mx.core.FlexGlobals;
+        import mx.events.CloseEvent;
+        import mx.events.FlexEvent;
+        import mx.managers.PopUpManager;
+        import mx.validators.Validator;
+
+        import spark.components.Application;
+        import spark.events.TextOperationEvent;
+
+        private static var _signUpWindow:SignupWindow;
+        private var _signUpController:SignUpController;
+
+        protected function onSignUpButtonClick(event:MouseEvent):void
+        {
+            if (validateForm())
+                _signUpController.registerUser(emailInput.text, passwordInput.text, displayNameInput.text);
+        }
+
+        private function validateInput(inputField:TextInput):Boolean
+        {
+            if (inputField.errorString != "")
+            {
+                showErrorImmediately(inputField);
+                inputField.setFocus();
+                return false;
+            }
+
+            return true;
+        }
+
+        private function validateForm():Boolean
+        {
+            Validator.validateAll(validators);
+
+            var result:Boolean = true;
+
+            result = result && validateInput(displayNameInput);
+            result = result && validateInput(emailInput);
+            result = result && validateInput(passwordInput);
+            result = result && validateInput(repeatPasswordInput);
+
+            return result;
+        }
+
+        public static function show():void
+        {
+            if (!_signUpWindow)
+                _signUpWindow = new SignupWindow();
+
+            _signUpWindow.clearData();
+            PopUpManager.addPopUp(_signUpWindow, Application(FlexGlobals.topLevelApplication), true);
+            PopUpManager.centerPopUp(_signUpWindow);
+        }
+
+        public static function close():void
+        {
+            PopUpManager.removePopUp(_signUpWindow);
+        }
+
+        private function clearData():void
+        {
+            if (displayNameInput)
+            {
+                displayNameInput.text = "";
+                emailInput.text = "";
+                passwordInput.text = "";
+                repeatPasswordInput.text = "";
+            }
+        }
+
+        protected function onShow(event:FlexEvent):void
+        {
+            hideErrorMessage();
+            clearData();
+        }
+
+        protected function onClose(event:CloseEvent):void
+        {
+            close();
+        }
+
+        private function onGoToLoginClick(event:MouseEvent):void
+        {
+            close();
+            LoginWindow.show();
+        }
+
+        private function onCreationComplete(event:FlexEvent):void
+        {
+            _signUpController = new SignUpController();
+            UserInfoModel.instance.addEventListener(AuthEvent.SIGNUP_ERROR, onSignUpError);
+        }
+
+        private function onSignUpError(event:AuthEvent):void
+        {
+            showErrorMessage("На этот e-mail уже зарегистрирован пользователь");
+        }
+        ]]>
+	</fx:Script>
+
+    <fx:Declarations>
+        <fx:Array id="validators">
+            <mx:StringValidator required="true" source="{displayNameInput}" property="text"/>
+            <mx:EmailValidator required="true" source="{emailInput}" property="text"/>
+            <mx:StringValidator required="true" source="{passwordInput}" property="text"/>
+            <utils:MatchValidator required="true" source="{repeatPasswordInput}" property="text"
+                                  matchSource="{passwordInput}" matchProperty="text"
+                                  noMatchError="Пароли должны совпадать." triggerEvent="{TextOperationEvent.CHANGE}"/>
+        </fx:Array>
+    </fx:Declarations>
+
+    <s:TextInput id="displayNameInput" width="100%" height="36" prompt="Отображаемое имя..."/>
+    <s:TextInput id="emailInput" width="100%" height="36" prompt="Электронный адрес..."/>
+    <s:TextInput id="passwordInput" width="100%" height="36" displayAsPassword="true" prompt="Пароль..."/>
+    <s:TextInput id="repeatPasswordInput" width="100%" height="36" displayAsPassword="true"
+                 prompt="Повторите пароль..."/>
+    <s:Button label="Зарегистрироваться" click="onSignUpButtonClick(event)" width="100%"/>
+    <s:HGroup verticalAlign="middle" width="100%">
+        <s:Label text="Уже есть аккаунт?" styleName="regularText"/>
+        <s:Button label="Вход" click="onGoToLoginClick(event)" width="100%"/>
+    </s:HGroup>
+</components:PopupWindow>

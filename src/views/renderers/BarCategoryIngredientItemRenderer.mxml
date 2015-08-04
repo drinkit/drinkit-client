@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+  Created by Crabar on 07.07.2015.
+-->
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+                autoDrawBackground="false" height="25" minWidth="25" buttonMode="true">
+
+    <fx:Style source="/design/newStyle.css"/>
+    <fx:Script>
+		<![CDATA[
+        import components.MyBarCategory;
+
+        import controllers.MyBarController;
+
+        import design.DesignModel;
+
+        import models.supportClasses.Ingredient;
+
+        import spark.components.List;
+
+        private const cornerRadius:uint = 10;
+        private var _ingredientData:Ingredient;
+        private var _controller:MyBarController;
+
+        override public function set data(value:Object):void
+        {
+            super.data = value;
+
+            if (data)
+            {
+                _ingredientData = Ingredient(data);
+                labelDisplay.text = label;
+                labelDisplay.validateSize();
+                width = labelDisplay.getExplicitOrMeasuredWidth() + 35;
+                _controller = new MyBarController(((owner as List).document as MyBarCategory).model);
+            }
+        }
+
+        protected function onCloseButtonClick(event:MouseEvent):void
+        {
+            var parentList:List = owner as List;
+            _controller.deactivateIngredient(_ingredientData);
+        }
+
+        protected function group1_rollOverHandler(event:MouseEvent):void
+        {
+            closeButtonColor.color = DesignModel.LIGHT_PINK;
+        }
+
+        protected function group1_rollOutHandler(event:MouseEvent):void
+        {
+            closeButtonColor.color = DesignModel.ORANGE_BEACH;
+        }
+        ]]>
+	</fx:Script>
+
+
+    <s:Rect width="100%" height="100%" bottomLeftRadiusX="{cornerRadius}" bottomLeftRadiusY="{cornerRadius}"
+            bottomRightRadiusX="{cornerRadius}"
+            bottomRightRadiusY="{cornerRadius}" topLeftRadiusX="{cornerRadius}" topLeftRadiusY="{cornerRadius}"
+            topRightRadiusX="{cornerRadius}"
+            topRightRadiusY="{cornerRadius}">
+        <s:fill>
+            <s:SolidColor color="{DesignModel.ORANGE_BEACH}"/>
+        </s:fill>
+    </s:Rect>
+    <s:HGroup paddingLeft="10" height="100%" verticalAlign="middle" paddingTop="0">
+        <s:Label id="labelDisplay" color="0xffffff" horizontalCenter="0" mouseEnabled="true" paddingBottom="-1"
+                 styleName="regularText"/>
+        <s:Group width="15" height="15" click="onCloseButtonClick(event)" rollOver="group1_rollOverHandler(event)"
+                 rollOut="group1_rollOutHandler(event)">
+            <s:Ellipse width="15" height="15">
+                <s:fill>
+                    <s:SolidColor id="closeButtonColor" color="{DesignModel.ORANGE_BEACH}"/>
+                </s:fill>
+            </s:Ellipse>
+            <s:BitmapImage source="@Embed(source='/../assets/down_arrow.png')" x="2" y="1" />
+        </s:Group>
+    </s:HGroup>
+</s:ItemRenderer>

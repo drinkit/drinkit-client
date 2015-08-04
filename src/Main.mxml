@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:views="views.*" xmlns:components="components.*"
+               creationPolicy="auto" usePreloader="true" preloader="design.SplashScreen"
+               applicationComplete="onApplicationCreationComplete(event)"
+               preinitialize="onPreinitialize(event)">
+    <s:layout>
+        <s:BasicLayout/>
+    </s:layout>
+    <fx:Style source="/design/main_style.css"/>
+    <fx:Style source="/design/newStyle.css"/>
+    <fx:Script>
+		<![CDATA[
+        import components.SpeedyVScrollBar;
+
+        import controllers.AuthController;
+        import controllers.MainController;
+
+        import design.DesignModel;
+
+        import models.MainModel;
+        import models.UserInfoModel;
+        import models.UserRoles;
+        import models.events.AuthEvent;
+        import models.events.ViewEvent;
+
+        import mx.events.FlexEvent;
+        import mx.events.PropertyChangeEvent;
+        import mx.events.ResizeEvent;
+        import mx.events.ScrollEvent;
+        import mx.managers.ToolTipManager;
+
+        import spark.events.IndexChangeEvent;
+
+        import utils.AnalyticsTracker;
+        import utils.ServiceUtil;
+
+        import views.ViewBase;
+
+        public const darkGreen:uint = DesignModel.DARK_GREEN;
+
+        public const sandBeach:uint = DesignModel.SAND_BEACH;
+
+        public const lightPink:uint = DesignModel.LIGHT_PINK;
+
+        public const orangeBeach:uint = DesignModel.ORANGE_BEACH;
+
+        public const lightGreen:uint = DesignModel.LIGHT_GREEN;
+
+        [Bindable]
+        private var _model:MainModel;
+
+        private function showInitTime():void {
+            // Record the number of ms since the player was initialized.
+            trace("App startup: " + getTimer() + " ms");
+        }
+
+        protected function onApplicationCreationComplete(event:FlexEvent):void
+        {
+            showInitTime();
+            ToolTipManager.showDelay = 300;
+            //
+            _model = new MainModel();
+            _model.addEventListener(ViewEvent.VIEW_CHANGED, onViewChanged);
+            MainController.instance.model = _model;
+            MainController.instance.initBrowserEngine();
+            readFlashVars();
+            UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onAuthChange);
+            UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onAuthChange);
+            //
+            var auth:AuthController = new AuthController();
+            auth.tryLoginWithStoredUserCredentials();
+            listenScrolling();
+            //
+            AnalyticsTracker.instance.trackPageView("/#");
+        }
+
+        private function listenScrolling():void
+        {
+            viewportGroup.addEventListener(PropertyChangeEvent.PROPERTY_CHANGE, onScroll);
+        }
+
+        private function onScroll(event:PropertyChangeEvent):void
+        {
+            if (event.property == "verticalScrollPosition")
+            {
+                dispatchEvent(new ScrollEvent(ScrollEvent.SCROLL, false, false, null, Number(event.newValue)));
+            }
+        }
+
+        private function onViewChanged(event:ViewEvent):void
+        {
+            menu.selectedIndex = event.viewId;
+            var viewContainer:ExtNavigationContent = viewstack1.getChildAt(event.viewId) as ExtNavigationContent;
+            if (viewContainer.numElements == 0) {
+                viewContainer.createDeferredContent();
+            }
+            var view:ViewBase = viewContainer.getElementAt(0) as ViewBase;
+            view.dispatchEvent(event);
+        }
+
+        private function onAuthChange(event:AuthEvent):void
+        {
+            menu.validateNow();
+        }
+
+        private function readFlashVars():void
+        {
+            if (parameters.hasOwnProperty("serviceAddress"))
+                ServiceUtil.instance.init(parameters.serviceAddress);
+        }
+
+        protected function onPageChange(event:IndexChangeEvent):void
+        {
+            MainController.instance.changeView(MainModel.VIEWS[event.newIndex], null);
+        }
+
+        protected function onPreinitialize(event:FlexEvent):void
+        {
+            readFlashVars();
+        }
+
+        private function onResize(event:ResizeEvent):void
+        {
+            speedyVScrollBar.value = 0;
+        }
+        ]]>
+
+	</fx:Script>
+    <fx:Declarations>
+    </fx:Declarations>
+
+    <s:Rect width="100%" height="100%">
+        <s:fill>
+            <s:BitmapFill scaleX="1" scaleY="1" fillMode="repeat" alpha="0.7"
+                          source="@Embed(source='/../assets/new-pattern.png')"/>
+        </s:fill>
+    </s:Rect>
+    <s:Group id="viewportGroup" width="100%" height="100%">
+        <s:BorderContainer width="100%" minWidth="1024" borderVisible="false" backgroundAlpha="0">
+            <s:layout>
+                <s:VerticalLayout gap="0" horizontalAlign="center" paddingTop="20" paddingBottom="20"/>
+            </s:layout>
+            <s:VGroup gap="0" width="1024" minHeight="860">
+                <components:PageHeader/>
+                <s:BorderContainer backgroundColor="0xffffff" width="100%" borderVisible="false">
+                    <s:layout>
+                        <s:VerticalLayout paddingLeft="20" paddingTop="10" paddingRight="20" gap="5"
+                                          clipAndEnableScrolling="false"/>
+                    </s:layout>
+                    <s:TabBar id="menu" height="50" dataProvider="{viewstack1}" focusEnabled="false"
+                              hasFocusableChildren="false"
+                              change="onPageChange(event)" skinClass="design.skins.tabbar.SimpleTabBarSkin"/>
+                    <s:Group width="100%" height="10">
+                        <s:Line top="0" left="0" right="0" yFrom="0" yTo="0">
+                            <s:stroke>
+                                <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
+                            </s:stroke>
+                        </s:Line>
+                        <s:Line top="3" left="0" right="0" yFrom="0" yTo="0">
+                            <s:stroke>
+                                <s:SolidColorStroke color="{DesignModel.LIGHT_GREEN}" weight="1" alpha="0.7"/>
+                            </s:stroke>
+                        </s:Line>
+                    </s:Group>
+                    <mx:ViewStack id="viewstack1" width="100%" resizeToContent="true" resize="onResize(event)">
+                        <components:ExtNavigationContent width="100%" label="Конструктор">
+                            <views:CocktailBuilderView id="builderView" width="100%"/>
+                        </components:ExtNavigationContent>
+                        <components:ExtNavigationContent width="100%" height="100%" label="Коктейль"
+                                                         includeInBar="false">
+                            <views:CocktailView width="100%" height="100%"/>
+                        </components:ExtNavigationContent>
+                        <components:ExtNavigationContent width="100%" height="100%" label="Мой бар"
+                                                         includeInBar="{UserInfoModel.instance.role >= UserRoles.USER}">
+                            <views:MyBar width="100%"/>
+                        </components:ExtNavigationContent>
+                        <components:ExtNavigationContent width="100%" height="100%" label="Админ-панель"
+                                                         includeInBar="{UserInfoModel.instance.role == UserRoles.ADMIN}">
+                            <views:AdminPanelView width="100%" height="100%"/>
+                        </components:ExtNavigationContent>
+                        <components:ExtNavigationContent width="100%" label="Результаты поиска" includeInBar="false">
+                            <views:SearchByNameResultView width="100%"/>
+                        </components:ExtNavigationContent>
+                    </mx:ViewStack>
+                </s:BorderContainer>
+            </s:VGroup>
+        </s:BorderContainer>
+    </s:Group>
+    <components:SpeedyVScrollBar id="speedyVScrollBar" viewport="{viewportGroup}" height="100%" right="0"/>
+
+
+</s:Application>

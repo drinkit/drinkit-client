@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!--
+  Created by Crabar on 9/14/14.
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+         clipAndEnableScrolling="false">
+    <s:layout>
+        <s:VerticalLayout horizontalAlign="center" clipAndEnableScrolling="false" paddingBottom="5"/>
+    </s:layout>
+    <fx:Script>
+        <![CDATA[
+        import controllers.MainController;
+
+        import models.CocktailModel;
+        import models.MainModel;
+        import models.SearchResultsModel;
+
+        import mx.collections.ArrayCollection;
+
+        import spark.events.IndexChangeEvent;
+
+        import views.renderers.BigFlatCocktailItemRenderer;
+
+        public var recipeRendererWidth:uint = 352;
+        public var itemsPerPage:uint = int.MAX_VALUE;
+
+        private var _itemsOnPage:uint = 0;
+        private var _startItemIndex:uint = 0;
+
+        [Bindable]
+        private var _model:SearchResultsModel;
+
+        protected function selectCocktailHandler(event:IndexChangeEvent):void
+        {
+            if (recipesList.selectedItem)
+            {
+                var selectedCocktail:CocktailModel = recipesList.selectedItem;
+                recipesList.selectedIndex = -1;
+                recipesList.validateProperties();
+                MainController.instance.changeView(MainModel.COCKTAIL_VIEW, selectedCocktail);
+            }
+        }
+
+        public function get model():SearchResultsModel
+        {
+            return _model;
+        }
+
+        public function set model(value:SearchResultsModel):void
+        {
+            _model = value;
+            _model.addEventListener(Event.CHANGE, onModelChange);
+        }
+
+        [Bindable]
+        private var _visibleRecipes:ArrayCollection;
+
+        private function onModelChange(event:Event):void
+        {
+            noResultsImage.visible = noResultsImage.includeInLayout = noResultsLabel.includeInLayout = noResultsLabel.visible = model.isNoCocktailsFound;
+            recipesList.includeInLayout = recipesList.visible = !model.isNoCocktailsFound;
+            _itemsOnPage = itemsPerPage;
+            _startItemIndex = 0;
+            showItems(_startItemIndex, _itemsOnPage);
+        }
+
+        private function showItems(startIndex:uint, itemsCount:uint):void
+        {
+            if (!model.cocktailsList)
+            {
+                return;
+            }
+            controlGroup.visible = controlGroup.includeInLayout = model.cocktailsList.length > itemsCount;
+            backButton.visible = startIndex > 0;
+            forwardButton.visible = startIndex + itemsCount < model.cocktailsList.length;
+
+            if (itemsCount == 0)
+            {
+                _visibleRecipes = model.cocktailsList;
+            }
+            else
+            {
+                _visibleRecipes = new ArrayCollection(model.cocktailsList.toArray().slice(startIndex, startIndex + itemsCount));
+            }
+        }
+
+        private function backButton_clickHandler(event:MouseEvent):void
+        {
+            _startItemIndex -= itemsPerPage;
+            showItems(_startItemIndex, itemsPerPage);
+        }
+
+        private function onForwardButtonClick(event:MouseEvent):void
+        {
+            _startItemIndex += itemsPerPage;
+            showItems(_startItemIndex, itemsPerPage);
+        }
+
+        private function searchResultItemRendererFunction(item:Object):IFactory
+        {
+            var classFactory:ClassFactory = new ClassFactory(BigFlatCocktailItemRenderer);
+            classFactory.properties = {width: recipeRendererWidth, maxWidth: recipeRendererWidth};
+            return classFactory;
+        }
+        ]]>
+    </fx:Script>
+    <s:BitmapImage id="noResultsImage" visible="false" horizontalAlign="center"
+                   source="@Embed(source='/../assets/sadcocktail.png')"/>
+    <s:Label id="noResultsLabel" visible="false" width="70%" fontSize="24" textAlign="center"
+             styleName="regularText" horizontalCenter="0"
+             maxDisplayedLines="2" paddingLeft="5" paddingRight="5"
+             text="Коктейлей по заданным критериям не найдено... Нам очень жаль :("
+             top="20"/>
+    <s:List id="recipesList" visible="false" left="5" borderVisible="false" width="100%"
+            change="selectCocktailHandler(event)" contentBackgroundAlpha="0" focusEnabled="false"
+            verticalScrollPolicy="off" itemRendererFunction="searchResultItemRendererFunction"
+            dataProvider="{_visibleRecipes}"
+            horizontalScrollPolicy="off">
+        <s:layout>
+            <s:TileLayout horizontalGap="11" verticalGap="11" paddingBottom="7" paddingLeft="5" paddingRight="0" rowHeight="184" columnWidth="{recipeRendererWidth}"
+                          paddingTop="5" requestedColumnCount="2" clipAndEnableScrolling="false" useVirtualLayout="true" />
+        </s:layout>
+    </s:List>
+    <s:Group id="controlGroup" visible="false" width="100%">
+        <s:Button id="backButton" left="5" label="Назад" click="backButton_clickHandler(event)"/>
+        <s:Button id="forwardButton" right="10" label="Еще коктейлей..." click="onForwardButtonClick(event)"/>
+    </s:Group>
+</s:Group>
