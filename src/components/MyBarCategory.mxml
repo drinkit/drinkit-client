@@ -23,6 +23,7 @@
         {
             _model = value;
             _model.addEventListener(MyBarModel.MODEL_CHANGED, onModelChanged);
+            _ingredients = _model.getIngredientsByCategory(category);
         }
 
         public function get model():MyBarModel

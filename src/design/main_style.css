@@ -20,6 +20,8 @@ s|TabBar {
 s|Button {
     cornerRadius: 3px;
     skinClass: ClassReference("design.skins.FlatButtonSkin");
+    chromeColor: #bbd2c7;
+    color: #00ac8d;
 }
 
 s|TextInput {
@@ -27,6 +29,7 @@ s|TextInput {
     fontFamily: "CenturyGothic";
     paddingLeft: 5;
     height: 25;
+    focusSkin: ClassReference("design.skins.TextInputFocusSkin");
 }
 
 s|TitleWindow {

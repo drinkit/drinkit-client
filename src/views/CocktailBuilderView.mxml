@@ -247,8 +247,7 @@
                                                            dataProvider="{_model.ingredientsList}"
                                                            filterFunction="filterCBList" styleName="regularText"
                                                            itemRenderer="components.renderers.AutoCompleteRenderer"
-                                                           skinClass="design.skins.LiveSearchComboBoxSkin"
-                                                           focusSkin="{null}" focusRect="false"
+                                                           skinClass="design.skins.LiveSearchComboBoxSkin"                                                           
                                                            labelField="name" paddingLeft="0"
                                                            prompt="Напишите ингредиент..."/>
                         <s:List width="100%" minWidth="200" height="100%"
