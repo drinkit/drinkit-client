@@ -120,9 +120,9 @@
                      prompt="Пароль..." keyDown="onKeyDown(event)"/>
         <s:Button width="100%" label="Войти" click="onBasicLoginClick(event)"/>
         <s:HGroup width="100%">
-            <s:Button name="{SocialNets.GOOGLE}" chromeColor="#cc3732" color="white" label="Google" click="onSocialLoginClick(event)" />
-            <s:Button name="{SocialNets.VKONTAKTE}" chromeColor="#4C75A3" color="white" label="ВКонтакте" click="onSocialLoginClick(event)" />
-            <s:Button name="{SocialNets.FACEBOOK}" chromeColor="#3B5998" color="white" label="Facebook" click="onSocialLoginClick(event)" />
+            <s:Button name="{SocialNets.GOOGLE}"  focusThickness="0" chromeColor="#cc3732" color="white" label="Google" click="onSocialLoginClick(event)" />
+            <s:Button name="{SocialNets.VKONTAKTE}" focusThickness="0" chromeColor="#4C75A3" color="white" label="ВКонтакте" click="onSocialLoginClick(event)" />
+            <s:Button name="{SocialNets.FACEBOOK}"  focusThickness="0" chromeColor="#3B5998" color="white" label="Facebook" click="onSocialLoginClick(event)" />
         </s:HGroup>
         <s:Button width="100%" label="Зарегистрироваться" click="onSignUpButtonClick(event)"/>
     </s:VGroup>

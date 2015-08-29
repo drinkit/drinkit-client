@@ -69,6 +69,10 @@
             var cr:Number = getStyle("cornerRadius");
             (labelDisplay as Label).setStyle("color", hostComponent.getStyle("color"));
 
+            if (hostComponent.getStyle("focusThickness") == 0) {
+                (body.stroke as SolidColorStroke).alpha = 0;
+            }
+
             if (cornerRadius != cr)
             {
                 cornerRadius = cr;
@@ -92,7 +96,7 @@
 
     <s:Rect id="body" left="0" right="0" top="0" bottom="0">
         <s:stroke>
-            <s:SolidColorStroke weight="1" color.up="{hostComponent.getStyle('chromeColor')}" color.down="0x78a590" color.over="0xbbd2c7"
+            <s:SolidColorStroke weight="1" color.up="0xbbd2c7" color.down="0x78a590" color.over="0xbbd2c7"
                                 color.disabled="0xc0c0c0"/>
         </s:stroke>
         <s:fill>

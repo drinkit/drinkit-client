@@ -5,7 +5,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:flextras="spark.flextras.autoCompleteComboBox.*"
          xmlns:supportclasses="views.supportClasses.*"
-         creationComplete="creationCompleteHandler(event)">
+         preinitialize="onPreinitialize(event)" creationComplete="onCreationComplete(event)">
     <s:layout>
         <s:VerticalLayout paddingBottom="10"/>
     </s:layout>
@@ -32,13 +32,11 @@
         private var _model:CocktailAdminModel;
         private var _controller:CocktailAdminController;
 
-        public function loadCocktail(id:Number):void
-        {
+        public function loadCocktail(id:Number):void {
             _controller.loadCocktailInfo(id);
         }
 
-        private function onIngrChooseChange(event:IndexChangeEvent):void
-        {
+        private function onIngrChooseChange(event:IndexChangeEvent):void {
             if (event.newIndex >= 0)
                 _controller.addIngredientToCocktail(ingrChoose.selectedItem);
 
@@ -46,12 +44,9 @@
             ingrChoose.validateProperties();
         }
 
-        private function filterCBList(item:Object):Boolean
-        {
-            function isIngredientSelected(ingredient:Ingredient):Boolean
-            {
-                for (var i:uint = 0; i < _model.selectedIngredientsList.length; i++)
-                {
+        private function filterCBList(item:Object):Boolean {
+            function isIngredientSelected(ingredient:Ingredient):Boolean {
+                for (var i:uint = 0; i < _model.selectedIngredientsList.length; i++) {
                     if (_model.selectedIngredientsList.getItemAt(i).id == ingredient.id)
                         return true;
                 }
@@ -65,47 +60,38 @@
             return (String(ingr.name).toLowerCase().search(inputValue) > -1 && (!isIngredientSelected(ingr)));
         }
 
-        private function creationCompleteHandler(event:FlexEvent):void
-        {
+        private function onPreinitialize(event:FlexEvent):void {
             _model = new CocktailAdminModel();
             _controller = new CocktailAdminController(_model);
             _model.addEventListener("modelUpdated", onModelUpdate);
-            _controller.updateImageClipRect(cocktailPhoto.photoClipRect);
         }
 
-        private function onModelUpdate(event:Event):void
-        {
+        private function onModelUpdate(event:Event):void {
             updatedSelectedType(_model.cocktailTypeId);
             updateSelectedOptions(_model.selectedOptions);
             _controller.updateImageClipRect(cocktailPhoto.photoClipRect);
         }
 
-        private function updatedSelectedType(typeId:int):void
-        {
-            if (typeId == -1)
-            {
+        private function updatedSelectedType(typeId:int):void {
+            if (typeId == -1) {
                 cocktailTypesList.selectedIndex = -1;
                 return;
             }
 
-            for (var j:int = 0; j < cocktailTypesList.dataProvider.length; j++)
-            {
+            for (var j:int = 0; j < cocktailTypesList.dataProvider.length; j++) {
                 var object:Object = cocktailTypesList.dataProvider.getItemAt(j);
 
-                if (object.value == typeId)
-                {
+                if (object.value == typeId) {
                     cocktailTypesList.selectedIndex = j;
                     return;
                 }
             }
         }
 
-        private function updateSelectedOptions(options:Array):void
-        {
+        private function updateSelectedOptions(options:Array):void {
             var selectedIndices:Vector.<int> = new <int>[];
 
-            for (var j:int = 0; j < optionsList.dataProvider.length; j++)
-            {
+            for (var j:int = 0; j < optionsList.dataProvider.length; j++) {
                 var object:Object = optionsList.dataProvider.getItemAt(j);
 
                 if (options.indexOf(object.value) > -1)
@@ -115,27 +101,23 @@
             optionsList.selectedIndices = selectedIndices;
         }
 
-        private function onSaveButtonClick(event:Event):void
-        {
+        private function onSaveButtonClick(event:Event):void {
             _controller.saveCocktailToDB();
         }
 
-        private function onCocktailOptionsChange(event:IndexChangeEvent):void
-        {
+        private function onCocktailOptionsChange(event:IndexChangeEvent):void {
             var selectedItems:Vector.<Object> = List(event.currentTarget).selectedItems;
             _controller.updateOptions(selectedItems);
         }
 
-        private function onLoadButtonClick(event:MouseEvent):void
-        {
+        private function onLoadButtonClick(event:MouseEvent):void {
             loadCocktail(Number(idInput.text));
         }
 
         private var _photoLoader:Loader;
         private var _fileLoad:FileReference;
 
-        private function onLoadPhotoButtonClick(event:MouseEvent):void
-        {
+        private function onLoadPhotoButtonClick(event:MouseEvent):void {
             _fileLoad = new FileReference();
             _fileLoad.addEventListener(Event.SELECT, onFileSelect);
             _fileLoad.addEventListener(Event.CANCEL, onBrowseCancel);
@@ -147,40 +129,33 @@
             _fileLoad.browse([new FileFilter("Images", "*.jpg;*.gif;*.png;*.jpeg")]);
         }
 
-        private function onSecurityError(event:SecurityErrorEvent):void
-        {
+        private function onSecurityError(event:SecurityErrorEvent):void {
             trace("security error");
         }
 
-        private function onBrowseCancel(event:Event):void
-        {
+        private function onBrowseCancel(event:Event):void {
             trace("select cancel");
         }
 
-        private function onFileSelect(event:Event):void
-        {
+        private function onFileSelect(event:Event):void {
             FileReference(event.currentTarget).load();
             trace("selected");
         }
 
-        private function onPhotoLoadError(event:IOErrorEvent):void
-        {
+        private function onPhotoLoadError(event:IOErrorEvent):void {
             trace(event.errorID);
         }
 
-        private function onPhotoLoaded(event:Event):void
-        {
+        private function onPhotoLoaded(event:Event):void {
             _photoLoader = new Loader();
             _photoLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onPhotoConverted);
             _photoLoader.loadBytes(event.currentTarget.data);
         }
 
-        private function onPhotoConverted(event:Event):void
-        {
+        private function onPhotoConverted(event:Event):void {
             var photo:Bitmap = LoaderInfo(event.currentTarget).content as Bitmap;
 
-            if (photo.width < CocktailModel.BIG_IMAGE_WIDTH || photo.height < CocktailModel.BIG_IMAGE_HEIGHT)
-            {
+            if (photo.width < CocktailModel.BIG_IMAGE_WIDTH || photo.height < CocktailModel.BIG_IMAGE_HEIGHT) {
                 Alert.show("Картинка слишком маленькая! Минимальный размер: " + CocktailModel.BIG_IMAGE_WIDTH + "x" + CocktailModel.BIG_IMAGE_HEIGHT);
                 return;
             }
@@ -189,42 +164,38 @@
             _controller.updateImage(photo.bitmapData);
         }
 
-        private function onCocktailTypeChange(event:IndexChangeEvent):void
-        {
+        private function onCocktailTypeChange(event:IndexChangeEvent):void {
             _controller.setCocktailType(List(event.currentTarget).selectedItem);
         }
 
-        private function onDataGridIngredientDeleter(event:KeyboardEvent):void
-        {
-            if (event.keyCode == Keyboard.DELETE && selectedIngredientsGrid.selectedItem)
-            {
+        private function onDataGridIngredientDeleter(event:KeyboardEvent):void {
+            if (event.keyCode == Keyboard.DELETE && selectedIngredientsGrid.selectedItem) {
                 _controller.removeIngredientFromCocktail(selectedIngredientsGrid.selectedItem.id);
             }
         }
 
-        private function onClipRectChanged(event:Event):void
-        {
+        private function onClipRectChanged(event:Event):void {
             _controller.updateImageClipRect(cocktailPhoto.photoClipRect);
         }
 
-        private function onIdInputChange(event:TextOperationEvent):void
-        {
+        private function onIdInputChange(event:TextOperationEvent):void {
             _controller.updateCocktailId(Number(idInput.text));
         }
 
-        private function onCreateCocktailButtonClick(event:MouseEvent):void
-        {
+        private function onCreateCocktailButtonClick(event:MouseEvent):void {
             _controller.saveNewCocktailToDB();
         }
 
-        private function onDeleteClick(event:MouseEvent):void
-        {
+        private function onDeleteClick(event:MouseEvent):void {
             _controller.deleteCocktail();
         }
 
-        private function onImageLoad(event:Event):void
-        {
+        private function onImageLoad(event:Event):void {
             _controller.updateImage(cocktailPhoto.imageBitmapData);
+        }
+
+        private function onCreationComplete(event:FlexEvent):void {
+            _controller.updateImageClipRect(cocktailPhoto.photoClipRect);
         }
         ]]>
     </fx:Script>
