@@ -20,8 +20,8 @@
             super.data = value;
 
             if (data) {
-                ingrName.text = IngredientsModel.instance.getIngredientById(data[0]).name;
-                ingrQuantity.text = data[1] ? data[1] + " мл" : "немного";
+                ingrName.text = IngredientsModel.instance.getIngredientById(data.ingredientId).name;
+                ingrQuantity.text = data.quantity ? data.quantity + " мл" : "немного";
                 var itemIndex:int = (owner as List).dataProvider.getItemIndex(data);
                 _isFirstItem = itemIndex == 0;
                 _isLastItem = itemIndex == (owner as List).dataProvider.length - 1;
