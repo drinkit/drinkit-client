@@ -84,7 +84,7 @@
             var item:Ingredient;
 
             for (var i:uint = 0; i < ingredients.length; i++) {
-                item = new Ingredient(ingredients[i][0],
+                item = new Ingredient(ingredients[i].ingredientId,
                         IngredientsModel.instance.getIngredientById(ingredients[i].ingredientId).name.toLowerCase());
                 ingredientsDataProvider.addItem(item);
             }
