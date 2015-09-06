@@ -250,7 +250,7 @@
                                                            skinClass="design.skins.LiveSearchComboBoxSkin"                                                           
                                                            labelField="name" paddingLeft="0"
                                                            prompt="Напишите ингредиент..."/>
-                        <s:List width="100%" minWidth="200" height="100%"
+                        <s:List width="100%" minWidth="200" maxHeight="300"
                                 dataProvider="{_model.selectedIngredientsList}"
                                 focusEnabled="false"
                                 itemRenderer="views.renderers.IngredientItemRenderer" labelField="name"

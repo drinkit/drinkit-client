@@ -86,7 +86,7 @@
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>
 
-    <s:VGroup width="100%" gap="15">
+    <s:VGroup width="100%" gap="15" paddingLeft="7" paddingRight="7">
         <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="300" height="26"
                                            change="onIngredientsChanged(event)"
                                            filterFunction="filterCBList" styleName="regularText"
