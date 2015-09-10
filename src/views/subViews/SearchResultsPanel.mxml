@@ -21,7 +21,8 @@
 
         import views.renderers.BigFlatCocktailItemRenderer;
 
-        public var recipeRendererWidth:uint = 352;
+        [Bindable]
+        public var recipeRendererWidth:uint = 400;
         public var itemsPerPage:uint = int.MAX_VALUE;
 
         private var _itemsOnPage:uint = 0;

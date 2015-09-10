@@ -14,6 +14,8 @@
 		<![CDATA[
         import controllers.SignUpController;
 
+        import design.DesignModel;
+
         import models.UserInfoModel;
         import models.events.AuthEvent;
 
@@ -89,7 +91,7 @@
 
         protected function onShow(event:FlexEvent):void
         {
-            hideErrorMessage();
+            hideErrorMessage(errorLabel);
             clearData();
         }
 
@@ -112,7 +114,7 @@
 
         private function onSignUpError(event:AuthEvent):void
         {
-            showErrorMessage("На этот e-mail уже зарегистрирован пользователь");
+            showErrorMessage("На этот e-mail уже зарегистрирован пользователь", errorLabel);
         }
         ]]>
 	</fx:Script>
@@ -133,6 +135,7 @@
     <s:TextInput id="passwordInput" width="100%" height="36" displayAsPassword="true" prompt="Пароль..."/>
     <s:TextInput id="repeatPasswordInput" width="100%" height="36" displayAsPassword="true"
                  prompt="Повторите пароль..."/>
+    <s:Label id="errorLabel" visible="false" includeInLayout="false" color="{DesignModel.ORANGE_BEACH}" />
     <s:Button label="Зарегистрироваться" click="onSignUpButtonClick(event)" width="100%"/>
     <s:HGroup verticalAlign="middle" width="100%">
         <s:Label text="Уже есть аккаунт?" styleName="regularText"/>
