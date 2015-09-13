@@ -235,7 +235,7 @@
                                                            itemRenderer="components.renderers.AutoCompleteRenderer"
                                                            skinClass="design.skins.LiveSearchComboBoxSkin"                                                           
                                                            labelField="name" paddingLeft="0"
-                                                           prompt="Напишите ингредиент..."/>
+                                                           prompt="напишите ингредиент..."/>
                         <s:List width="100%" minWidth="200" maxHeight="250" hasFocusableChildren="false"
                                 dataProvider="{_model.selectedIngredientsList}" focusEnabled="false"
                                 itemRenderer="views.renderers.IngredientItemRenderer" labelField="name"
