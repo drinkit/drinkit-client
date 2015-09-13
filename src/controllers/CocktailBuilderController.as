@@ -111,5 +111,10 @@ import utils.CocktailUrlDecorator;
             _model.isNoCocktailsFound = !res || res.length == 0;
             _model.cocktailsList = new ArrayCollection(res);
         }
+
+        public function removeIngredientFromQuery(ingredientData:Ingredient):void {
+            if (_model.selectedIngredientsList.getItemIndex(ingredientData) >= 0)
+                _model.selectedIngredientsList.removeItem(ingredientData);
+        }
     }
 }

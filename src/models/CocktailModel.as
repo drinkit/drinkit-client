@@ -4,8 +4,9 @@ package models
     import flash.events.EventDispatcher;
 
     import mx.collections.ArrayCollection;
+import mx.collections.ArrayList;
 
-    [Bindable]
+[Bindable]
     public class CocktailModel extends EventDispatcher
     {
         public static const BIG_IMAGE_WIDTH:Number = 384;
@@ -22,15 +23,26 @@ package models
         public var name:String;
         public var description:String;
         public var cocktailTypeId:int;
-        public var ingredientsWithQuantities:Array;
+        private var _ingredientsWithQuantities:Array;
         public var options:Array;
         public var imageUrl:String;
         public var thumbnailUrl:String;
         public var published:Boolean;
 
-        public function get ingredientsWithQuantitiesProvider():ArrayCollection
+        [Bindable]
+        public function get ingredientsWithQuantitiesProvider():ArrayList
         {
-            return new ArrayCollection(ingredientsWithQuantities);
+            return new ArrayList(_ingredientsWithQuantities);
+        }
+
+        public function get ingredientsWithQuantities():Array {
+            return _ingredientsWithQuantities;
+        }
+
+        public function set ingredientsWithQuantities(value:Array):void {
+            if (value) {
+                _ingredientsWithQuantities = value.sortOn("quantity", Array.NUMERIC | Array.DESCENDING);
+            }
         }
     }
 }
