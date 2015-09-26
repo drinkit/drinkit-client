@@ -68,7 +68,7 @@
         <s:Label id="labelDisplay" color="0xffffff" horizontalCenter="0" mouseEnabled="true" paddingBottom="-1"
                  styleName="regularText"/>
         <s:Group width="15" height="15" click="onCloseButtonClick(event)" rollOver="group1_rollOverHandler(event)"
-                 rollOut="group1_rollOutHandler(event)">
+                 rollOut="group1_rollOutHandler(event)" toolTip="закончилось">
             <s:Ellipse width="15" height="15">
                 <s:fill>
                     <s:SolidColor id="closeButtonColor" color="{DesignModel.ORANGE_BEACH}"/>
