@@ -108,8 +108,8 @@
     <components:ImageWithBorder id="photo" width="{CocktailModel.BIG_IMAGE_WIDTH}"
                                 height="{CocktailModel.BIG_IMAGE_HEIGHT}" borderColor="#c0c0c0" borderSize="1"/>
     <s:VGroup width="100%" gap="20">
-        <s:Label id="cocktailName" width="100%" styleName="cocktailNameText" fontSize="28" textAlign="center"
-                 text="{_model.name}"/>
+        <s:RichEditableText id="cocktailName" width="100%" styleName="cocktailNameText" fontSize="28" textAlign="center"
+                 text="{_model.name}" selectable="true" editable="false" />
         <s:VGroup width="100%" gap="0">
             <s:Group height="42" width="100%">
                 <s:Line yFrom="0" yTo="0" width="100%">
@@ -122,7 +122,7 @@
                 <s:HGroup id="tagsContainer" gap="5" right="5" height="32" verticalCenter="0"/>
             </s:Group>
             <s:List borderVisible="false" itemRenderer="views.renderers.IngredientWithQuantityItemRenderer" width="100%"
-                    dataProvider="{_model.ingredientWithQuantitiesProvider}">
+                    dataProvider="{_model.ingredientsWithQuantitiesProvider}">
                 <s:layout>
                     <s:VerticalLayout requestedMinRowCount="1" gap="0"/>
                 </s:layout>

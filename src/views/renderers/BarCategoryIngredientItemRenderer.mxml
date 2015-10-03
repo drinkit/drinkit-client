@@ -68,13 +68,13 @@
         <s:Label id="labelDisplay" color="0xffffff" horizontalCenter="0" mouseEnabled="true" paddingBottom="-1"
                  styleName="regularText"/>
         <s:Group width="15" height="15" click="onCloseButtonClick(event)" rollOver="group1_rollOverHandler(event)"
-                 rollOut="group1_rollOutHandler(event)">
+                 rollOut="group1_rollOutHandler(event)" toolTip="закончилось">
             <s:Ellipse width="15" height="15">
                 <s:fill>
                     <s:SolidColor id="closeButtonColor" color="{DesignModel.ORANGE_BEACH}"/>
                 </s:fill>
             </s:Ellipse>
-            <s:BitmapImage source="@Embed(source='/../assets/down_arrow.png')" x="2" y="1" />
+            <s:BitmapImage source="@Embed(source='/../assets/down_arrow.png')" />
         </s:Group>
     </s:HGroup>
 </s:ItemRenderer>

@@ -28,43 +28,42 @@
         private var _model:MyBarModel;
         private var _controller:MyBarController;
 
-        protected function onCreationComplete(event:FlexEvent):void
-        {
+        protected function onCreationComplete(event:FlexEvent):void {
             _model = MyBarModel.instance;
             _model.addEventListener(MyBarModel.MODEL_CHANGED, onMyBarChanged);
             _controller = new MyBarController(_model);
 
-            if (IngredientsModel.instance.ingredientsList && IngredientsModel.instance.ingredientsList.length > 0)
-            {
+            if (IngredientsModel.instance.ingredientsList && IngredientsModel.instance.ingredientsList.length > 0) {
                 ingrChoose.dataProvider = new ArrayCollection(IngredientsModel.instance.ingredientsList.source);
-            } else
-            {
+            } else {
                 IngredientsModel.instance.addEventListener(IngredientsModel.INGREDIENTS_LOADED, onIngredientsLoaded);
             }
+
+            refreshMyBar();
         }
 
-        public function get model():MyBarModel
-        {
+        public function get model():MyBarModel {
             return _model;
         }
 
-        private function onMyBarChanged(event:Event):void
-        {
+        private function refreshMyBar():void {
             (ingrChoose.dataProvider as ArrayCollection).filterFunction = filterCBList;
             (ingrChoose.dataProvider as ArrayCollection).refresh();
             _endedIngredients = _model.inactiveIngredients;
         }
 
+        private function onMyBarChanged(event:Event):void {
+            refreshMyBar();
+        }
+
         [Bindable]
         private var _endedIngredients:ArrayList;
 
-        private function onIngredientsLoaded(event:Event):void
-        {
+        private function onIngredientsLoaded(event:Event):void {
             ingrChoose.dataProvider = new ArrayCollection(IngredientsModel.instance.ingredientsList.source);
         }
 
-        private function onIngredientsChanged(event:IndexChangeEvent):void
-        {
+        private function onIngredientsChanged(event:IndexChangeEvent):void {
             if (event.newIndex >= 0)
                 _controller.addIngredientToBar(ingrChoose.selectedItem);
 
@@ -72,15 +71,13 @@
             ingrChoose.validateProperties();
         }
 
-        private function filterCBList(item:Object):Boolean
-        {
+        private function filterCBList(item:Object):Boolean {
             var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
             var ingr:Ingredient = Ingredient(item);
             return (String(ingr.name).toLowerCase().search(inputValue) > -1 && !_model.isIngredientInBar(ingr.id));
         }
 
-        private function onViewChanged(event:ViewEvent):void
-        {
+        private function onViewChanged(event:ViewEvent):void {
             AnalyticsTracker.instance.trackPageView("#" + BrowserManager.getInstance().fragment, "Мой бар");
         }
         ]]>
@@ -89,7 +86,7 @@
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>
 
-    <s:VGroup width="100%" gap="15">
+    <s:VGroup width="100%" gap="15" paddingLeft="7" paddingRight="7">
         <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="300" height="26"
                                            change="onIngredientsChanged(event)"
                                            filterFunction="filterCBList" styleName="regularText"
@@ -128,7 +125,7 @@
                                         quality="{BitmapFilterQuality.HIGH}"/>
                 </s:filters>
             </s:Rect>
-            <s:VGroup gap="10" width="100%" height="100%" paddingTop="10">
+            <s:VGroup gap="10" width="100%" height="100%" paddingTop="10" paddingBottom="5">
                 <s:Label width="100%" text="Закончились" textAlign="center" styleName="headerGreenText"/>
                 <s:List width="100%" minWidth="200" height="100%"
                         dataProvider="{_endedIngredients}" focusEnabled="false"

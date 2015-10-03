@@ -81,13 +81,6 @@
     <s:HGroup right="20" top="15" gap="10" includeIn="anonymous">
         <s:Label text="Войти" fontSize="14" textDecoration="underline" color="0xffffff" fontFamily="CenturyGothic"
                  buttonMode="true" click="onSignInClick(event)"/>
-        <s:Line xFrom="0" xTo="0" height="100%">
-            <s:stroke>
-                <s:SolidColorStroke weight="1" color="0xffffff"/>
-            </s:stroke>
-        </s:Line>
-        <s:Label text="Зарегистрироваться" fontSize="14" textDecoration="underline" color="0xffffff"
-                 fontFamily="CenturyGothic" buttonMode="true" click="onSignUpClick(event)"/>
     </s:HGroup>
     <s:HGroup right="20" top="15" gap="10" includeIn="authorised">
         <s:Label text="{UserInfoModel.instance.displayName}" fontSize="14" textDecoration="underline" color="0xffffff"

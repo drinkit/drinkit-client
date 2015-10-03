@@ -78,16 +78,16 @@
                  styleName="regularText"/>
         <s:HGroup gap="1">
             <s:Group width="15" height="15" click="onRestoreButtonClick(event)" rollOver="onButtonRollOver(event)"
-                     rollOut="onButtonRollOut(event)">
+                     rollOut="onButtonRollOut(event)" toolTip="вернуть в мой бар">
                 <s:Ellipse width="15" height="15">
                     <s:fill>
                         <s:SolidColor id="restoreButtonColor" color="{DesignModel.ORANGE_BEACH}"/>
                     </s:fill>
                 </s:Ellipse>
-                <s:BitmapImage source="@Embed(source='/../assets/up_arrow.png')" x="2" y="1" />
+                <s:BitmapImage source="@Embed(source='/../assets/up_arrow.png')" />
             </s:Group>
             <s:Group width="15" height="15" click="onCloseButtonClick(event)" rollOver="onButtonRollOver(event)"
-                     rollOut="onButtonRollOut(event)">
+                     rollOut="onButtonRollOut(event)" toolTip="удалить из моего бара">
                 <s:Ellipse width="15" height="15">
                     <s:fill>
                         <s:SolidColor id="closeButtonColor" color="{DesignModel.ORANGE_BEACH}"/>

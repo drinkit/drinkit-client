@@ -31,6 +31,9 @@ package utils
 
         private static function createSingleObject(singleJSONObject:Object, classType:Class, strict:Boolean):Object
         {
+            if (!singleJSONObject)
+                return null;
+
             var returnObject:Object = new classType();
             var propertyMap:XML = describeType(returnObject);
             var propertyTypeClass:Class;

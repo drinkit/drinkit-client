@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <components:PopupWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
                         xmlns:s="library://ns.adobe.com/flex/spark"
-                        xmlns:components="components.*"
+                        xmlns:components="components.*" xmlns:validators="utils.validators.*"
                         close="onClose(event)" controlBarVisible="true"
                         creationComplete="onCreationComplete(event)" title="Вход" show="onShow(event)">
     <fx:Script>
@@ -12,6 +12,8 @@
         import controllers.SignUpController;
         import controllers.supportClasses.SocialNets;
 
+        import design.DesignModel;
+
         import models.UserInfoModel;
         import models.events.AuthEvent;
 
@@ -19,6 +21,7 @@
         import mx.events.CloseEvent;
         import mx.events.FlexEvent;
         import mx.managers.PopUpManager;
+        import mx.validators.Validator;
 
         import spark.components.Application;
 
@@ -81,12 +84,30 @@
 
         private function onAuthError(event:AuthEvent):void
         {
-            showErrorMessage("Неправильный электронный адрес или пароль");
+            showErrorMessage("Неправильный электронный адрес или пароль", errorLabel);
         }
 
         protected function onBasicLoginClick(event:MouseEvent):void
         {
-            _authController.login(userLogin.text, userPassword.text);
+            if (validateForm())
+                _authController.login(userLogin.text, userPassword.text);
+        }
+
+        private function validateInput(inputField:TextInput):Boolean {
+            if (inputField.errorString != "") {
+                showErrorImmediately(inputField);
+                inputField.setFocus();
+                return false;
+            }
+
+            return true;
+        }
+
+        private function validateForm():Boolean {
+            Validator.validateAll(validators);
+            var result:Boolean = true;
+            result = result && validateInput(userLogin);
+            return result;
         }
 
         protected function onSignUpButtonClick(event:MouseEvent):void
@@ -97,6 +118,10 @@
 
         protected function onKeyDown(event:KeyboardEvent):void
         {
+            if (errorLabel.visible) {
+                hideErrorMessage(errorLabel);
+            }
+
             if (event.keyCode == Keyboard.ENTER)
             {
                 _authController.login(userLogin.text, userPassword.text);
@@ -105,23 +130,27 @@
 
         private function onShow(event:FlexEvent):void
         {
-            _loginWindow.hideErrorMessage();
+            hideErrorMessage(errorLabel);
         }
         ]]>
 	</fx:Script>
 
     <fx:Declarations>
-        <!-- Place non-visual elements (e.g., services, value objects) here -->
+        <fx:Array id="validators">
+            <validators:ExEmailValidator required="true" source="{userLogin}" property="text"/>
+        </fx:Array>
     </fx:Declarations>
     <s:VGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center" width="100%">
         <s:TextInput id="userLogin" width="100%" height="36" borderVisible="true" horizontalCenter="0"
                      prompt="Электронный адрес..." textAlign="left" keyDown="onKeyDown(event)"/>
         <s:TextInput id="userPassword" width="100%" height="36" displayAsPassword="true"
                      prompt="Пароль..." keyDown="onKeyDown(event)"/>
+        <s:Label id="errorLabel" includeInLayout="false" visible="false" color="{DesignModel.ORANGE_BEACH}" />
         <s:Button width="100%" label="Войти" click="onBasicLoginClick(event)"/>
         <s:HGroup width="100%">
-            <s:Button name="{SocialNets.VKONTAKTE}" icon="@Embed(source='/../assets/vk.png')" label="ВКонтакте" click="onSocialLoginClick(event)" />
-            <s:Button name="{SocialNets.FACEBOOK}"  icon="@Embed(source='/../assets/facebook.png')" label="Facebook" click="onSocialLoginClick(event)" />
+            <s:Button name="{SocialNets.GOOGLE}"  focusThickness="0" chromeColor="#cc3732" color="white" label="Google" click="onSocialLoginClick(event)" />
+            <s:Button name="{SocialNets.VKONTAKTE}" focusThickness="0" chromeColor="#4C75A3" color="white" label="ВКонтакте" click="onSocialLoginClick(event)" />
+            <s:Button name="{SocialNets.FACEBOOK}"  focusThickness="0" chromeColor="#3B5998" color="white" label="Facebook" click="onSocialLoginClick(event)" />
         </s:HGroup>
         <s:Button width="100%" label="Зарегистрироваться" click="onSignUpButtonClick(event)"/>
     </s:VGroup>

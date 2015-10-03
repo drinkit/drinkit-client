@@ -67,6 +67,11 @@
         override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
         {
             var cr:Number = getStyle("cornerRadius");
+            (labelDisplay as Label).setStyle("color", hostComponent.getStyle("color"));
+
+            if (hostComponent.getStyle("focusThickness") == 0) {
+                (body.stroke as SolidColorStroke).alpha = 0;
+            }
 
             if (cornerRadius != cr)
             {
@@ -81,7 +86,7 @@
         ]]>
     </fx:Script>
 
-    <!-- states -->
+    <!-- states  -->
     <s:states>
         <s:State name="up"/>
         <s:State name="over"/>
@@ -103,7 +108,7 @@
              maxDisplayedLines="-1"
              horizontalCenter="0" verticalCenter="1" verticalAlign="middle"
              left="10" right="10" top="2" bottom="2" fontSize="14" fontWeight="bold"
-             fontFamily="CenturyGothic" color="0x00ac8d" color.disabled="0xa5a5a5">
+             fontFamily="CenturyGothic" color.disabled="0xa5a5a5">
     </s:Label>
 
 </s:SparkButtonSkin>

@@ -6,6 +6,8 @@
     <fx:Style source="/design/newStyle.css"/>
     <fx:Script>
 		<![CDATA[
+        import controllers.CocktailBuilderController;
+
         import design.DesignModel;
 
         import models.supportClasses.Ingredient;
@@ -31,7 +33,8 @@
         protected function onCloseButtonClick(event:MouseEvent):void
         {
             var parentList:List = owner as List;
-            parentList.dataProvider.removeItemAt(parentList.dataProvider.getItemIndex(data))
+            (parentList.document.controller as CocktailBuilderController).removeIngredientFromQuery(ingredientData);
+            (parentList.document.controller as CocktailBuilderController).performSearch();
         }
 
         protected function group1_rollOverHandler(event:MouseEvent):void
