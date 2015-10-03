@@ -3,13 +3,14 @@ package models.supportClasses
     [Bindable]
     public class Ingredient
     {
-        public function Ingredient(aId:Number = NaN, aName:String = "", aVol:uint = 0, aDescription:String = "", aCategory:String = "")
+        public function Ingredient(id:Number = NaN, name:String = "", vol:uint = 0, description:String = "", category:String = "", alias:Array = null)
         {
-            id = aId;
-            name = aName;
-            vol = aVol;
-            description = aDescription;
-            category = aCategory;
+            this.id = id;
+            this.name = name;
+            this.vol = vol;
+            this.description = description;
+            this.category = category;
+            this.alias = alias ? alias : [];
         }
 
         public var id:Number;
@@ -17,5 +18,6 @@ package models.supportClasses
         public var vol:uint;
         public var description:String;
         public var category:String;
+        public var alias:Array;
     }
 }

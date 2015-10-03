@@ -22,6 +22,7 @@
         import models.UserRoles;
         import models.events.AuthEvent;
         import models.supportClasses.CocktailTypes;
+        import models.supportClasses.FakeIngredient;
         import models.supportClasses.Ingredient;
         import models.supportClasses.OptionParameters;
 
@@ -53,7 +54,8 @@
 
         protected function onIngredientsChanged(event:IndexChangeEvent):void {
             if (event.newIndex >= 0) {
-                _controller.addIngredientToQuery(ingrChoose.selectedItem);
+                var ingredient:Ingredient = IngredientsModel.instance.getIngredientById(ingrChoose.selectedItem.groupId);
+                _controller.addIngredientToQuery(ingredient);
                 ingrChoose.selectedIndex = -1;
                 ingrChoose.validateProperties();
                 focusManager.setFocus(ingrChoose.textInput);
@@ -63,17 +65,14 @@
             }
         }
 
-
         private function filterCBList(item:Object):Boolean {
             var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
-            var ingr:Ingredient = Ingredient(item);
+            var ingr:FakeIngredient = FakeIngredient(item);
             return (String(ingr.name).toLowerCase().search(inputValue) > -1 && (_model.selectedIngredientsList.getItemIndex(item) == -1));
         }
 
         protected function creationCompleteHandler(event:FlexEvent):void {
             _model = new CocktailBuilderModel();
-            _model.addEventListener(CocktailBuilderModel.SELECTED_INGREDIENTS_CHANGED,
-                                    selectedIngredientsChangeHandler);
             _controller = new CocktailBuilderController(_model);
             IngredientsModel.instance.addEventListener(IngredientsModel.INGREDIENTS_LOADED, onIngredientsLoaded);
             //
@@ -106,9 +105,6 @@
             }
         }
 
-        private function selectedIngredientsChangeHandler(event:Event):void {
-//            _controller.performSearch();
-        }
 
         protected function cocktailTypeChangeHandler(event:Event):void {
             _controller.toggleCocktailType(uint(event.currentTarget.name), event.currentTarget.selected);
@@ -234,7 +230,7 @@
                                                            filterFunction="filterCBList" styleName="regularText"
                                                            itemRenderer="components.renderers.AutoCompleteRenderer"
                                                            skinClass="design.skins.LiveSearchComboBoxSkin"                                                           
-                                                           labelField="name" paddingLeft="0"
+                                                           labelField="caption" paddingLeft="0"
                                                            prompt="напишите ингредиент..."/>
                         <s:List width="100%" minWidth="200" maxHeight="250" hasFocusableChildren="false"
                                 dataProvider="{_model.selectedIngredientsList}" focusEnabled="false"

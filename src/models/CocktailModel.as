@@ -6,7 +6,7 @@ package models
     import mx.collections.ArrayCollection;
 import mx.collections.ArrayList;
 
-[Bindable]
+    [Bindable]
     public class CocktailModel extends EventDispatcher
     {
         public static const BIG_IMAGE_WIDTH:Number = 384;
@@ -29,7 +29,6 @@ import mx.collections.ArrayList;
         public var thumbnailUrl:String;
         public var published:Boolean;
 
-        [Bindable]
         public function get ingredientsWithQuantitiesProvider():ArrayList
         {
             return new ArrayList(_ingredientsWithQuantities);
