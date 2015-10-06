@@ -125,6 +125,7 @@ in accordance with the terms of the license agreement accompanying it.
                  verticalCenter="1"
                  buttonMode="true" width="100%" height="100%" color.up="{DesignModel.ORANGE_BEACH}"
                  color.selectedStates="{DesignModel.VIOLET}"
+                 color.downStates="{DesignModel.VIOLET}"
                  color.over="0xfece64">
         </s:Label>
 

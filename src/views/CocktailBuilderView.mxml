@@ -2,12 +2,15 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
                 xmlns:flextras="spark.flextras.autoCompleteComboBox.*" xmlns:views="views.*"
                 xmlns:components="components.*" xmlns:subviews="views.subViews.*" width="1024"
-                creationComplete="creationCompleteHandler(event)"
+                creationComplete="creationCompleteHandler(event)" mouseFocusEnabled="true"
                 contentCreationComplete="bordercontainer1_contentCreationCompleteHandler(event)"
                 backgroundColor="0xffffff" borderVisible="false">
     <views:layout>
         <s:VerticalLayout clipAndEnableScrolling="false"/>
     </views:layout>
+    <fx:Metadata>
+        [Event(type="flash.events.Event", name="pageChanged")]
+    </fx:Metadata>
     <fx:Script>
 		<![CDATA[
         import controllers.CocktailBuilderController;
@@ -149,6 +152,9 @@
             _controller.performSearch();
         }
 
+        private function onPageChanged(event:Event):void {
+            dispatchEvent(event);
+        }
         ]]>
 	</fx:Script>
     <fx:Declarations>
@@ -252,7 +258,7 @@
             </s:VGroup>
         </s:Group>
         <subviews:SearchResultsPanel width="100%" model="{_model}" clipAndEnableScrolling="false" itemsPerPage="20"
-                                     recipeRendererWidth="352"/>
+                                     recipeRendererWidth="352" pageChanged="onPageChanged(event)"/>
     </s:HGroup>
 
 </views:ViewBase>

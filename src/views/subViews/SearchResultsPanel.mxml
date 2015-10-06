@@ -7,6 +7,9 @@
     <s:layout>
         <s:VerticalLayout horizontalAlign="center" clipAndEnableScrolling="false" paddingBottom="5"/>
     </s:layout>
+    <fx:Metadata>
+        [Event(type="flash.events.Event", name="pageChanged")]
+    </fx:Metadata>
     <fx:Script>
         <![CDATA[
         import controllers.MainController;
@@ -85,16 +88,18 @@
             }
         }
 
-        private function backButton_clickHandler(event:MouseEvent):void
+        private function onBackwardButtonClick(event:MouseEvent):void
         {
             _startItemIndex -= itemsPerPage;
             showItems(_startItemIndex, itemsPerPage);
+            dispatchEvent(new Event("pageChanged"));
         }
 
         private function onForwardButtonClick(event:MouseEvent):void
         {
             _startItemIndex += itemsPerPage;
             showItems(_startItemIndex, itemsPerPage);
+            dispatchEvent(new Event("pageChanged"));
         }
 
         private function searchResultItemRendererFunction(item:Object):IFactory
@@ -123,7 +128,7 @@
         </s:layout>
     </s:List>
     <s:Group id="controlGroup" visible="false" width="100%">
-        <s:Button id="backButton" left="5" label="Назад" click="backButton_clickHandler(event)"/>
+        <s:Button id="backButton" left="5" label="Назад" click="onBackwardButtonClick(event)"/>
         <s:Button id="forwardButton" right="10" label="Еще коктейлей..." click="onForwardButtonClick(event)"/>
     </s:Group>
 </s:Group>
