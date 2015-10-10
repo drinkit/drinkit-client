@@ -25,7 +25,9 @@ package utils
 
         public function recipeWasShowed(recipeId:Number):void
         {
-            ServiceUtil.instance.sendRequest(Services.STATS_VIEWS + recipeId.toString(), new JSRequest("PATCH"), onStatsUpdated);
+            var statsRequest:JSRequest = new JSRequest("PATCH");
+            statsRequest.expectedStatus = 204;
+            ServiceUtil.instance.sendRequest(Services.STATS_VIEWS + recipeId.toString(), statsRequest, onStatsUpdated);
         }
 
         private function onStatsUpdated(response:String):void
