@@ -2,12 +2,15 @@
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
                 xmlns:flextras="spark.flextras.autoCompleteComboBox.*" xmlns:views="views.*"
                 xmlns:components="components.*" xmlns:subviews="views.subViews.*" width="1024"
-                creationComplete="creationCompleteHandler(event)"
+                creationComplete="creationCompleteHandler(event)" mouseFocusEnabled="true"
                 contentCreationComplete="bordercontainer1_contentCreationCompleteHandler(event)"
                 backgroundColor="0xffffff" borderVisible="false">
     <views:layout>
         <s:VerticalLayout clipAndEnableScrolling="false"/>
     </views:layout>
+    <fx:Metadata>
+        [Event(type="flash.events.Event", name="pageChanged")]
+    </fx:Metadata>
     <fx:Script>
 		<![CDATA[
         import controllers.CocktailBuilderController;
@@ -22,6 +25,7 @@
         import models.UserRoles;
         import models.events.AuthEvent;
         import models.supportClasses.CocktailTypes;
+        import models.supportClasses.FakeIngredient;
         import models.supportClasses.Ingredient;
         import models.supportClasses.OptionParameters;
 
@@ -40,42 +44,39 @@
         [Bindable]
         private var _model:CocktailBuilderModel;
 
-        public function get model():CocktailBuilderModel
-        {
+        public function get model():CocktailBuilderModel {
             return _model;
         }
 
         [Bindable]
         private var _controller:CocktailBuilderController;
 
-        public function get controller():CocktailBuilderController
-        {
+        public function get controller():CocktailBuilderController {
             return _controller;
         }
 
-        protected function onIngredientsChanged(event:IndexChangeEvent):void
-        {
-            if (event.newIndex >= 0)
-                _controller.addIngredientToQuery(ingrChoose.selectedItem);
-
-            ingrChoose.selectedIndex = -1;
-            ingrChoose.validateProperties();
+        protected function onIngredientsChanged(event:IndexChangeEvent):void {
+            if (event.newIndex >= 0) {
+                var ingredient:Ingredient = IngredientsModel.instance.getIngredientById(ingrChoose.selectedItem.groupId);
+                _controller.addIngredientToQuery(ingredient);
+                ingrChoose.selectedIndex = -1;
+                ingrChoose.validateProperties();
+                focusManager.setFocus(ingrChoose.textInput);
+                focusManager.showFocus();
+                ingrChoose.textInput.selectAll();
+                _controller.performSearch();
+            }
         }
 
-
-        private function filterCBList(item:Object):Boolean
-        {
+        private function filterCBList(item:Object):Boolean {
             var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
-            var ingr:Ingredient = Ingredient(item);
+            var ingr:FakeIngredient = FakeIngredient(item);
             return (String(ingr.name).toLowerCase().search(inputValue) > -1 && (_model.selectedIngredientsList.getItemIndex(item) == -1));
         }
 
-        protected function creationCompleteHandler(event:FlexEvent):void
-        {
+        protected function creationCompleteHandler(event:FlexEvent):void {
             _model = new CocktailBuilderModel();
-            _model.addEventListener(CocktailBuilderModel.SELECTED_INGREDIENTS_CHANGED, selectedIngredientsChangeHandler);
             _controller = new CocktailBuilderController(_model);
-            _controller.performSearch();
             IngredientsModel.instance.addEventListener(IngredientsModel.INGREDIENTS_LOADED, onIngredientsLoaded);
             //
             MainController.instance.requestIngredients();
@@ -85,57 +86,45 @@
             UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onAuthChanged);
         }
 
-        private function onAuthChanged(event:AuthEvent):void
-        {
+        private function onAuthChanged(event:AuthEvent):void {
             if (_model.cocktailsList) {
                 _model.cocktailsList.refresh();
                 _model.signalizeAboutChange();
             }
         }
 
-        private function onIngredientsLoaded(event:Event):void
-        {
+        private function onIngredientsLoaded(event:Event):void {
             _model.ingredientsList.filterFunction = filterCBList;
+            _controller.performSearch();
         }
 
-        private function onScroll(event:ScrollEvent):void
-        {
+        private function onScroll(event:ScrollEvent):void {
             // FIX: remove magic number!
-            if (event.position > 200)
-            {
+            if (event.position > 200) {
                 searchPanel.y = event.position - 200 + 5;
             }
-            else
-            {
+            else {
                 searchPanel.y = 5;
             }
         }
 
-        private function selectedIngredientsChangeHandler(event:Event):void
-        {
-            _controller.performSearch();
-        }
 
-        protected function cocktailTypeChangeHandler(event:Event):void
-        {
+        protected function cocktailTypeChangeHandler(event:Event):void {
             _controller.toggleCocktailType(uint(event.currentTarget.name), event.currentTarget.selected);
             _controller.performSearch();
         }
 
-        protected function optionChangeHandler(event:Event):void
-        {
+        protected function optionChangeHandler(event:Event):void {
             _controller.toggleOption(uint(event.currentTarget.name), event.currentTarget.selected);
             _controller.performSearch();
         }
 
-        protected function bordercontainer1_contentCreationCompleteHandler(event:FlexEvent):void
-        {
+        protected function bordercontainer1_contentCreationCompleteHandler(event:FlexEvent):void {
             validateNow();
             _searchPanelStartOffset = searchPanel.localToGlobal(new Point(0, searchPanel.y)).y;
         }
 
-        private function onResetButtonClick(event:MouseEvent):void
-        {
+        private function onResetButtonClick(event:MouseEvent):void {
             longDrinkButton.selected = false;
             shortDrinkButton.selected = false;
             shooterDrinkButton.selected = false;
@@ -153,19 +142,18 @@
             _controller.performSearch();
         }
 
-        private function onAddBarIngredientsButtonClick(event:MouseEvent):void
-        {
+        private function onAddBarIngredientsButtonClick(event:MouseEvent):void {
             if (!MyBarModel.instance.activeIngredients) {
                 return;
             }
 
-            for (var j:int = 0; j < MyBarModel.instance.activeIngredients.length; j++)
-            {
-                var ingredient:Ingredient = MyBarModel.instance.activeIngredients.getItemAt(j) as Ingredient;
-                _controller.addIngredientToQuery(ingredient);
-            }
-
+            _controller.addIngredientsToQuery(MyBarModel.instance.activeIngredients);
             ingrChoose.validateProperties();
+            _controller.performSearch();
+        }
+
+        private function onPageChanged(event:Event):void {
+            dispatchEvent(event);
         }
         ]]>
 	</fx:Script>
@@ -243,16 +231,15 @@
                     <s:Spacer width="100%" height="5"/>
                     <s:VGroup width="100%" height="100%">
                         <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="100%" height="26"
-                                                           change="onIngredientsChanged(event)"
+                                                           change="onIngredientsChanged(event)" focusAlpha="0"
                                                            dataProvider="{_model.ingredientsList}"
                                                            filterFunction="filterCBList" styleName="regularText"
                                                            itemRenderer="components.renderers.AutoCompleteRenderer"
                                                            skinClass="design.skins.LiveSearchComboBoxSkin"                                                           
-                                                           labelField="name" paddingLeft="0"
-                                                           prompt="Напишите ингредиент..."/>
-                        <s:List width="100%" minWidth="200" height="100%"
-                                dataProvider="{_model.selectedIngredientsList}"
-                                focusEnabled="false"
+                                                           labelField="caption" paddingLeft="0"
+                                                           prompt="напишите ингредиент..."/>
+                        <s:List width="100%" minWidth="200" maxHeight="250" hasFocusableChildren="false"
+                                dataProvider="{_model.selectedIngredientsList}" focusEnabled="false"
                                 itemRenderer="views.renderers.IngredientItemRenderer" labelField="name"
                                 borderVisible="false">
                             <s:layout>
@@ -260,19 +247,18 @@
                                                        paddingRight="5" paddingTop="5"/>
                             </s:layout>
                         </s:List>
-                        <s:Label text="Добавить ингредиенты из бара" fontSize="14" textDecoration="underline"
+                        <s:Label text="Добавить ингредиенты из бара" styleName="textButton"
                                  buttonMode="{UserInfoModel.instance.role >= UserRoles.USER}"
-                                 fontFamily="CenturyGothic" click="onAddBarIngredientsButtonClick(event)"
+                                 click="onAddBarIngredientsButtonClick(event)"
                                  enabled="{UserInfoModel.instance.role >= UserRoles.USER}"
                                  toolTip="{UserInfoModel.instance.role == UserRoles.ANONYMOUS ? ToolTipProvider.getToolTip(ToolTipProvider.USER_BAR_NOT_ALLOWED) : ''}"/>
-                        <s:Label text="Сбросить фильтры" fontSize="14" textDecoration="underline" buttonMode="true"
-                                 fontFamily="CenturyGothic" click="onResetButtonClick(event)"/>
+                        <s:Label text="Сбросить фильтры" buttonMode="true" styleName="textButton" click="onResetButtonClick(event)"/>
                     </s:VGroup>
                 </s:BorderContainer>
             </s:VGroup>
         </s:Group>
         <subviews:SearchResultsPanel width="100%" model="{_model}" clipAndEnableScrolling="false" itemsPerPage="20"
-                                     recipeRendererWidth="352"/>
+                                     recipeRendererWidth="352" pageChanged="onPageChanged(event)"/>
     </s:HGroup>
 
 </views:ViewBase>

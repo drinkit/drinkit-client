@@ -12,8 +12,10 @@ package controllers
     import models.supportClasses.OptionParameters;
 
     import mx.collections.ArrayCollection;
+import mx.collections.ArrayList;
+import mx.collections.IList;
 
-    import utils.CocktailUrlDecorator;
+import utils.CocktailUrlDecorator;
     import utils.JSONInstantiator;
     import utils.PerformanceAnalyzer;
     import utils.ServiceUtil;
@@ -31,7 +33,21 @@ package controllers
         public function addIngredientToQuery(ingr:Ingredient):void
         {
             if (_model.selectedIngredientsList.getItemIndex(ingr) == -1)
-                _model.selectedIngredientsList.addItem(ingr);
+                _model.selectedIngredientsList.addItemAt(ingr, 0);
+        }
+
+        public function addIngredientsToQuery(ingredients:IList):void {
+            var filteredIngredients:Array = [];
+            var ingredient:Ingredient;
+
+            for (var i:uint = 0; i < ingredients.length; i++) {
+                ingredient = ingredients.getItemAt(i) as Ingredient;
+                if (_model.selectedIngredientsList.getItemIndex(ingredient) == -1) {
+                    filteredIngredients.push(ingredient);
+                }
+            }
+
+            _model.selectedIngredientsList.addAllAt(new ArrayList(filteredIngredients), 0);
         }
 
         public function toggleCocktailType(id:uint, selected:Boolean):void
@@ -94,6 +110,11 @@ package controllers
             });
             _model.isNoCocktailsFound = !res || res.length == 0;
             _model.cocktailsList = new ArrayCollection(res);
+        }
+
+        public function removeIngredientFromQuery(ingredientData:Ingredient):void {
+            if (_model.selectedIngredientsList.getItemIndex(ingredientData) >= 0)
+                _model.selectedIngredientsList.removeItem(ingredientData);
         }
     }
 }

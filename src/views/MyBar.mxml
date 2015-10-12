@@ -86,7 +86,7 @@
         <!-- Place non-visual elements (e.g., services, value objects) here -->
     </fx:Declarations>
 
-    <s:VGroup width="100%" gap="15">
+    <s:VGroup width="100%" gap="15" paddingLeft="7" paddingRight="7">
         <flextras:AutoCompleteComboBoxLite id="ingrChoose" width="300" height="26"
                                            change="onIngredientsChanged(event)"
                                            filterFunction="filterCBList" styleName="regularText"
@@ -125,7 +125,7 @@
                                         quality="{BitmapFilterQuality.HIGH}"/>
                 </s:filters>
             </s:Rect>
-            <s:VGroup gap="10" width="100%" height="100%" paddingTop="10">
+            <s:VGroup gap="10" width="100%" height="100%" paddingTop="10" paddingBottom="5">
                 <s:Label width="100%" text="Закончились" textAlign="center" styleName="headerGreenText"/>
                 <s:List width="100%" minWidth="200" height="100%"
                         dataProvider="{_endedIngredients}" focusEnabled="false"

@@ -4,6 +4,7 @@ package models
     import flash.events.EventDispatcher;
 
     import mx.collections.ArrayCollection;
+import mx.collections.ArrayList;
 
     [Bindable]
     public class CocktailModel extends EventDispatcher
@@ -22,15 +23,25 @@ package models
         public var name:String;
         public var description:String;
         public var cocktailTypeId:int;
-        public var cocktailIngredients:Array;
+        private var _ingredientsWithQuantities:Array;
         public var options:Array;
         public var imageUrl:String;
         public var thumbnailUrl:String;
         public var published:Boolean;
 
-        public function get ingredientWithQuantitiesProvider():ArrayCollection
+        public function get ingredientsWithQuantitiesProvider():ArrayList
         {
-            return new ArrayCollection(cocktailIngredients);
+            return new ArrayList(_ingredientsWithQuantities);
+        }
+
+        public function get ingredientsWithQuantities():Array {
+            return _ingredientsWithQuantities;
+        }
+
+        public function set ingredientsWithQuantities(value:Array):void {
+            if (value) {
+                _ingredientsWithQuantities = value.sortOn("quantity", Array.NUMERIC | Array.DESCENDING);
+            }
         }
     }
 }

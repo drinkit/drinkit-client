@@ -32,6 +32,11 @@ s|TextInput {
     focusSkin: ClassReference("design.skins.TextInputFocusSkin");
 }
 
+s|TextInput:normalWithPrompt {
+    color: #000000;
+    fontStyle: italic;
+}
+
 s|TitleWindow {
     skinClass: ClassReference("design.skins.TitleWindowSkin");
     borderColor: #464077;

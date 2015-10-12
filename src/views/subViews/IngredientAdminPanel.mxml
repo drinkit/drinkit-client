@@ -34,54 +34,44 @@
             IngredientCategories.VIRGIN_DRINKS,
             IngredientCategories.OTHER]);
 
-        private function onCreateIngredientButtonClick(event:MouseEvent):void
-        {
+        private function onCreateIngredientButtonClick(event:MouseEvent):void {
             _controller.createNewIngredient();
         }
 
-        private function onDeleteClick(event:MouseEvent):void
-        {
+        private function onDeleteClick(event:MouseEvent):void {
             _controller.deleteIngredient();
         }
 
-        private function onSaveButtonClick(event:MouseEvent):void
-        {
+        private function onSaveButtonClick(event:MouseEvent):void {
             _controller.saveCurrentIngredient();
         }
 
-        private function onIngrChooseChange(event:IndexChangeEvent):void
-        {
+        private function onIngrChooseChange(event:IndexChangeEvent):void {
             _controller.loadIngredient(ingrChoose.selectedItem as Ingredient);
             setCategory(_model.category);
         }
 
-        private function onCreationComplete(event:FlexEvent):void
-        {
+        private function onCreationComplete(event:FlexEvent):void {
             _model = new Ingredient();
             _controller = new IngredientAdminController(_model);
         }
 
-        private function onVolumeChange(event:TextOperationEvent):void
-        {
+        private function onVolumeChange(event:TextOperationEvent):void {
             _model.vol = uint(volumeInput.text);
         }
 
-        private function filterList(item:Object):Boolean
-        {
+        private function filterList(item:Object):Boolean {
             var inputValue:String = ingrChoose.typeAheadText.toLowerCase();
             var ingr:Ingredient = Ingredient(item);
             return (String(ingr.name).toLowerCase().search(inputValue) > -1);
         }
 
-        private function onCategoryChange(event:IndexChangeEvent):void
-        {
+        private function onCategoryChange(event:IndexChangeEvent):void {
             _model.category = categoryComboBox.selectedItem;
         }
 
-        private function setCategory(category:String):void
-        {
-            for (var j:int = 0; j < _categories.length; j++)
-            {
+        private function setCategory(category:String):void {
+            for (var j:int = 0; j < _categories.length; j++) {
                 if (_categories.getItemAt(j) == category) {
                     categoryComboBox.selectedIndex = j;
                     return;
@@ -89,6 +79,10 @@
             }
 
             categoryComboBox.selectedIndex = -1;
+        }
+
+        private function onSynonymsChange(event:TextOperationEvent):void {
+            _model.alias = synonymsInput.text.split(" ");
         }
         ]]>
     </fx:Script>
@@ -114,6 +108,7 @@
         <s:TextInput id="ingredientName" text="@{_model.name}" width="300" prompt="название..."/>
         <s:DropDownList id="categoryComboBox" width="300" prompt="категория..." change="onCategoryChange(event)" dataProvider="{_categories}" />
     </s:HGroup>
+    <s:TextInput id="synonymsInput" width="606" text="{_model.alias.join(' ')}" change="onSynonymsChange(event)" prompt="Синонимы (перечеслять через пробел)" />
     <s:TextInput id="volumeInput" restrict="0-9" text="{_model.vol}" change="onVolumeChange(event)"
                  prompt="крепость..."/>
     <s:TextArea id="ingredientDescription" width="100%" height="100%" textAlign="left" verticalAlign="top"

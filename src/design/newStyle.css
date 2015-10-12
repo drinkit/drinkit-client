@@ -84,6 +84,16 @@ s|ButtonBarButton {
     advancedAntiAliasing: true;
 }
 
+.textButton {
+    fontSize: 14px;
+    textDecoration: "underline";
+    fontFamily: "CenturyGothic";
+}
+
+.textButton:disabled {
+    color: red;
+}
+
 global {
     vertical-align: middle;
 }

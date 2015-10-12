@@ -114,8 +114,8 @@
         {
             var scaledClipRect:Rectangle = new Rectangle();
             scaledClipRect.copyFrom(clipRect.getBounds(this));
-            scaledClipRect.x -= _scaledSourceRect.x;
-            scaledClipRect.y -= _scaledSourceRect.y;
+            scaledClipRect.x -= _scaledSourceRect ? _scaledSourceRect.x : 0;
+            scaledClipRect.y -= _scaledSourceRect ? _scaledSourceRect.y : 0;
             scaledClipRect.x /= _imageScaleFactor;
             scaledClipRect.y /= _imageScaleFactor;
             scaledClipRect.width /= _imageScaleFactor;

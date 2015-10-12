@@ -15,23 +15,15 @@
 
         import spark.components.Label;
 
-        protected function showErrorMessage(text:String):void
+        protected function showErrorMessage(text:String, errorLabel:Label):void
         {
-            var errorMessage:Label = new Label();
-            errorMessage.text = text;
-            errorMessage.styleName = "regularText";
-            errorMessage.setStyle("color", DesignModel.ORANGE_BEACH);
-            errorMessage.setStyle("fontSize", 14);
-            errorMessage.width = contentGroup.width - 10;
-            errorMessage.maxDisplayedLines = 3;
-            controlBarContent = [errorMessage];
-            controlBarVisible = true;
+            errorLabel.text = text;
+            errorLabel.visible = errorLabel.includeInLayout = true;
         }
 
-        protected function hideErrorMessage():void
+        protected function hideErrorMessage(errorLabel:Label):void
         {
-            controlBarContent = [];
-            controlBarVisible = false;
+            errorLabel.visible = errorLabel.includeInLayout = false;
         }
 
         protected function showErrorImmediately(target:UIComponent):void

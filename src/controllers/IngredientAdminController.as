@@ -51,6 +51,7 @@ package controllers
             _model.description = ingredient.description;
             _model.category = ingredient.category;
             _model.vol = ingredient.vol;
+            _model.alias = ingredient.alias;
         }
 
         public function deleteIngredient():void

@@ -4,7 +4,8 @@
 -->
 <views:ViewBase xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
                 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="views.*" xmlns:subviews="views.subViews.*"
-                viewChanged="onViewChanged(event)" borderVisible="false">
+                viewChanged="onViewChanged(event)" borderVisible="false" creationPolicy="all"
+                contentCreationComplete="onContentCreationComplete(event)">
     <views:layout>
         <s:VerticalLayout/>
     </views:layout>
@@ -12,16 +13,31 @@
         <![CDATA[
         import models.events.ViewEvent;
 
-        private function onViewChanged(event:ViewEvent):void
-        {
+        import mx.events.FlexEvent;
+
+        private function onViewChanged(event:ViewEvent):void {
             var cocktailId:Number = Number(event.viewData);
 
-            if (cocktailId && !isNaN(cocktailId))
-            {
-                adminBar.selectedIndex = 0;
-                cocktailAdminPanel.loadCocktail(cocktailId);
+            if (cocktailId && !isNaN(cocktailId)) {
+                if (adminBar && cocktailAdminPanel) {
+                    adminBar.selectedIndex = 0;
+                    cocktailAdminPanel.loadCocktail(cocktailId);
+                } else {
+                    _needLoadCocktailId = cocktailId;
+                }
             }
         }
+
+        private var _needLoadCocktailId:Number = NaN;
+
+        private function onContentCreationComplete(event:FlexEvent):void {
+            if (!isNaN(_needLoadCocktailId)) {
+                adminBar.selectedIndex = 0;
+                cocktailAdminPanel.loadCocktail(_needLoadCocktailId);
+                _needLoadCocktailId = NaN;
+            }
+        }
+
         ]]>
     </fx:Script>
     <s:TabBar id="adminBar" dataProvider="{stack}" width="100%"/>

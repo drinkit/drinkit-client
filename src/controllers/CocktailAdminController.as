@@ -101,7 +101,7 @@ package controllers
             cocktail.description = _model.description;
             cocktail.options = _model.selectedOptions;
             cocktail.published = _model.published;
-            cocktail.cocktailIngredients = convertSelectedIngredientsToIngredientsWithQuantities(_model.selectedIngredientsList);
+            cocktail.ingredientsWithQuantities = convertSelectedIngredientsToIngredientsWithQuantities(_model.selectedIngredientsList);
             cocktail.cocktailTypeId = _model.cocktailTypeId;
             var request:JSRequest = new JSRequest(URLRequestMethod.POST);
             request.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(cocktail));
@@ -121,7 +121,7 @@ package controllers
             cocktail.description = _model.description;
             cocktail.options = _model.selectedOptions;
             cocktail.published = _model.published;
-            cocktail.cocktailIngredients = convertSelectedIngredientsToIngredientsWithQuantities(_model.selectedIngredientsList);
+            cocktail.ingredientsWithQuantities = convertSelectedIngredientsToIngredientsWithQuantities(_model.selectedIngredientsList);
             cocktail.cocktailTypeId = _model.cocktailTypeId;
             var request:JSRequest = new JSRequest(URLRequestMethod.PUT);
             request.bodyParams = JSONUtil.escapeSpecialChars(JSON.stringify(cocktail));
@@ -178,7 +178,7 @@ package controllers
             _model.selectedOptions = _lastCocktailModel.options;
             _model.published = _lastCocktailModel.published;
             _model.imageUrl = _lastCocktailModel.imageUrl;
-            _model.selectedIngredientsList = convertIngredientsWithQuantitiesToSelectedIngredients(_lastCocktailModel.cocktailIngredients);
+            _model.selectedIngredientsList = convertIngredientsWithQuantitiesToSelectedIngredients(_lastCocktailModel.ingredientsWithQuantities);
             _model.dispatchEvent(new Event("modelUpdated"));
         }
 
@@ -186,17 +186,19 @@ package controllers
         {
             var result:Array = [];
             var curIngredient:Object;
-            var ingredient:Array;
+            var ingredient:Object;
 
-            for (var i:int = 0; i < source.length; i++)
-            {
-                ingredient = source[i];
-                curIngredient = {
-                    id: ingredient[0],
-                    name: IngredientsModel.instance.getIngredientById(ingredient[0]).name,
-                    quantity: ingredient[1]
-                };
-                result.push(curIngredient)
+            if (source) {
+                for (var i:int = 0; i < source.length; i++)
+                {
+                    ingredient = source[i];
+                    curIngredient = {
+                        id: ingredient.ingredientId,
+                        name: IngredientsModel.instance.getIngredientById(ingredient.ingredientId).name,
+                        quantity: ingredient.quantity
+                    };
+                    result.push(curIngredient)
+                }
             }
 
             return new ArrayList(result);
@@ -206,12 +208,12 @@ package controllers
         {
             var result:Array = [];
             var curIngredient:Object;
-            var ingredient:Array;
+            var ingredient:Object;
 
             for (var i:int = 0; i < source.length; i++)
             {
                 curIngredient = source.getItemAt(i);
-                ingredient = [curIngredient.id, curIngredient.quantity];
+                ingredient = {ingredientId: curIngredient.id, quantity: curIngredient.quantity};
                 result.push(ingredient);
             }
 
