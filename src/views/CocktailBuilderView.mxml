@@ -58,13 +58,15 @@
         protected function onIngredientsChanged(event:IndexChangeEvent):void {
             if (event.newIndex >= 0) {
                 var ingredient:Ingredient = IngredientsModel.instance.getIngredientById(ingrChoose.selectedItem.groupId);
-                _controller.addIngredientToQuery(ingredient);
                 ingrChoose.selectedIndex = -1;
                 ingrChoose.validateProperties();
                 focusManager.setFocus(ingrChoose.textInput);
                 focusManager.showFocus();
                 ingrChoose.textInput.selectAll();
-                _controller.performSearch();
+
+                if (_controller.addIngredientToQuery(ingredient)) {
+                    _controller.performSearch();
+                }
             }
         }
 

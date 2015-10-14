@@ -30,10 +30,14 @@ import utils.CocktailUrlDecorator;
 
         private var _model:CocktailBuilderModel;
 
-        public function addIngredientToQuery(ingr:Ingredient):void
+        public function addIngredientToQuery(ingr:Ingredient):Boolean
         {
-            if (_model.selectedIngredientsList.getItemIndex(ingr) == -1)
+            if (_model.selectedIngredientsList.getItemIndex(ingr) == -1) {
                 _model.selectedIngredientsList.addItemAt(ingr, 0);
+                return true;
+            }
+
+            return false;
         }
 
         public function addIngredientsToQuery(ingredients:IList):void {
