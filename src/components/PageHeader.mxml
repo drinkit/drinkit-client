@@ -26,48 +26,48 @@
 
         private var _authController:AuthController;
 
-        protected function onLogoClick(event:MouseEvent):void
-        {
+        protected function onLogoClick(event:MouseEvent):void {
             MainController.instance.changeView(MainModel.BUILDER_VIEW, null);
         }
 
-        protected function onSignInClick(event:MouseEvent):void
-        {
+        protected function onSignInClick(event:MouseEvent):void {
             LoginWindow.show();
         }
 
-        protected function onSignUpClick(event:MouseEvent):void
-        {
+        protected function onSignUpClick(event:MouseEvent):void {
             SignupWindow.show();
         }
 
-        protected function onCreationComplete(event:FlexEvent):void
-        {
+        protected function onCreationComplete(event:FlexEvent):void {
             _authController = new AuthController();
             UserInfoModel.instance.addEventListener(AuthEvent.AUTH_SUCCESS, onSuccessAuth);
             UserInfoModel.instance.addEventListener(AuthEvent.LOGOUT, onLogout);
         }
 
-        private function onSuccessAuth(event:AuthEvent):void
-        {
+        private function onSuccessAuth(event:AuthEvent):void {
             currentState = "authorised";
         }
 
-        private function onLogout(event:AuthEvent):void
-        {
+        private function onLogout(event:AuthEvent):void {
             currentState = "anonymous";
         }
 
-        protected function onLogoutClick(event:MouseEvent):void
-        {
+        protected function onLogoutClick(event:MouseEvent):void {
             _authController.logout();
         }
 
-        private function onSearchEnter(event:FlexEvent):void
-        {
+        private function onSearchEnter(event:FlexEvent):void {
             var searchModel:SearchResultsModel = new SearchResultsModel();
             var searchController:SearchController = new SearchController(searchModel);
             searchController.findCocktail(event.currentTarget.text);
+        }
+
+        private function onMouseFocusChange(event:FocusEvent):void {
+            var focusPoint:Point = new Point();
+            focusPoint.x = stage.mouseX;
+            focusPoint.y = stage.mouseY;
+            var i:int = (stage.getObjectsUnderPoint(focusPoint).length);
+            stage.focus = InteractiveObject(stage.getObjectsUnderPoint(focusPoint)[i - 1].parent);
         }
         ]]>
 	</fx:Script>
@@ -94,5 +94,5 @@
                  buttonMode="true" click="onLogoutClick(event)"/>
     </s:HGroup>
     <s:TextInput right="20" bottom="15" width="200" enter="onSearchEnter(event)" prompt="название коктейля..."
-                 skinClass="design.skins.RoundTextInputSkin"/>
+                 skinClass="design.skins.RoundTextInputSkin" mouseFocusChange="onMouseFocusChange(event)"/>
 </s:Group>

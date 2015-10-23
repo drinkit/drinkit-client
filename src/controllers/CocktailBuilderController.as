@@ -112,7 +112,7 @@ import utils.CocktailUrlDecorator;
             {
                 element = CocktailUrlDecorator.decorate(element);
             });
-            _model.isNoCocktailsFound = !res || res.length == 0;
+
             _model.cocktailsList = new ArrayCollection(res);
         }
 

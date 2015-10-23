@@ -13,19 +13,17 @@ package models
     [Event(name="change", type="flash.events.Event")]
     public class SearchResultsModel extends EventDispatcher
     {
-        public function SearchResultsModel()
-        {
-        }
-
-        [Bindable]
-        public var isNoCocktailsFound:Boolean;
-
         [Bindable(event="change")]
         private var _cocktailsList:ArrayCollection;
 
         public function get cocktailsList():ArrayCollection
         {
             return _cocktailsList;
+        }
+
+        [Bindable(event="change")]
+        public function get isNoCocktailsFound():Boolean {
+            return _cocktailsList.length == 0;
         }
 
         public function set cocktailsList(value:ArrayCollection):void

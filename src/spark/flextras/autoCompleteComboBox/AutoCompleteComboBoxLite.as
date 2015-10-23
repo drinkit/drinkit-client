@@ -18,13 +18,17 @@
  */
 package spark.flextras.autoCompleteComboBox
 {
+    import flash.display.InteractiveObject;
     import flash.events.Event;
+    import flash.events.FocusEvent;
+    import flash.geom.Point;
 
     import flashx.textLayout.operations.CopyOperation;
 
     import mx.collections.ListCollectionView;
     import mx.core.ClassFactory;
     import mx.core.IVisualElement;
+    import mx.core.UIComponent;
     import mx.core.mx_internal;
     import mx.events.FlexEvent;
 
@@ -245,8 +249,26 @@ package spark.flextras.autoCompleteComboBox
         {
             super.partAdded(partName, instance);
 
-            if (partName == "textInput")
-                this.textInput.addEventListener(FlexEvent.VALUE_COMMIT, onTextChange);
+            if (partName == "textInput") {
+                textInput.addEventListener(FlexEvent.VALUE_COMMIT, onTextChange);
+                textInput.addEventListener(FocusEvent.MOUSE_FOCUS_CHANGE, onTextInputFocusChange, false, 0, true);
+            }
+
+
+        }
+
+        private function onTextInputFocusChange(event:FocusEvent):void {
+            if (event.relatedObject.hasOwnProperty("document") &&
+                    UIComponent(event.relatedObject).document == event.currentTarget.document) {
+                return;
+            }
+
+            textInput.dispatchEvent(new FocusEvent(FocusEvent.FOCUS_OUT));
+            var focusPoint:Point = new Point();
+            focusPoint.x = stage.mouseX;
+            focusPoint.y = stage.mouseY;
+            var i:int = (stage.getObjectsUnderPoint(focusPoint).length);
+            stage.focus = InteractiveObject(stage.getObjectsUnderPoint(focusPoint)[i-1].parent);
         }
 
         //----------------------------------

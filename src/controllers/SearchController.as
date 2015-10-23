@@ -43,7 +43,7 @@ package controllers
             {
                 CocktailUrlDecorator.decorate(element);
             });
-            _model.isNoCocktailsFound = !res || res.length == 0;
+
             _model.cocktailsList = new ArrayCollection(res);
             MainController.instance.changeView(MainModel.SEARCH_BY_NAME_VIEW, _model);
         }
