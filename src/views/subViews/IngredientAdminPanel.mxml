@@ -82,7 +82,7 @@
         }
 
         private function onSynonymsChange(event:TextOperationEvent):void {
-            _model.alias = synonymsInput.text.split(" ");
+            _model.alias = synonymsInput.text.split(";");
         }
         ]]>
     </fx:Script>
@@ -108,7 +108,7 @@
         <s:TextInput id="ingredientName" text="@{_model.name}" width="300" prompt="название..."/>
         <s:ComboBox id="categoryComboBox" width="300" prompt="категория..." change="onCategoryChange(event)" dataProvider="{_categories}" />
     </s:HGroup>
-    <s:TextInput id="synonymsInput" width="606" text="{_model.alias.join(' ')}" change="onSynonymsChange(event)" prompt="Синонимы (перечеслять через пробел)" />
+    <s:TextInput id="synonymsInput" width="606" text="{_model.alias.join(';')}" change="onSynonymsChange(event)" prompt="Синонимы (перечеслять через пробел)" />
     <s:TextInput id="volumeInput" restrict="0-9" text="{_model.vol}" change="onVolumeChange(event)"
                  prompt="крепость..."/>
     <s:TextArea id="ingredientDescription" width="100%" height="100%" textAlign="left" verticalAlign="top"
