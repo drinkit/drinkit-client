@@ -21,7 +21,7 @@
 
             if (data) {
                 ingrName.text = IngredientsModel.instance.getIngredientById(data.ingredientId).name;
-                ingrQuantity.text = data.quantity ? data.quantity + " мл" : "немного";
+                ingrQuantity.text = data.quantity ? data.quantity + " " + data.unit : "немного";
                 var itemIndex:int = (owner as List).dataProvider.getItemIndex(data);
                 _isFirstItem = itemIndex == 0;
                 _isLastItem = itemIndex == (owner as List).dataProvider.length - 1;

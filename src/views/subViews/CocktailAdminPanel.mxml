@@ -168,7 +168,7 @@
             _controller.setCocktailType(List(event.currentTarget).selectedItem);
         }
 
-        private function onDataGridIngredientDeleter(event:KeyboardEvent):void {
+        private function onDataGridIngredientDelete(event:KeyboardEvent):void {
             if (event.keyCode == Keyboard.DELETE && selectedIngredientsGrid.selectedItem) {
                 _controller.removeIngredientFromCocktail(selectedIngredientsGrid.selectedItem.id);
             }
@@ -239,11 +239,26 @@
                                                        dataProvider="{IngredientsModel.instance.ingredientsList}"/>
                     <s:DataGrid id="selectedIngredientsGrid" width="100%" height="100%"
                                 dataProvider="{_model.selectedIngredientsList}"
-                                editable="true" keyUp="onDataGridIngredientDeleter(event)">
+                                editable="true" keyUp="onDataGridIngredientDelete(event)">
                         <s:columns>
                             <s:ArrayList>
                                 <s:GridColumn headerText="Название" dataField="name" editable="false"/>
                                 <s:GridColumn headerText="Количество" dataField="quantity" editable="true"/>
+                                <s:GridColumn headerText="Единицы" dataField="unit">
+                                    <s:itemEditor>
+                                        <fx:Component>
+                                            <s:ComboBoxGridItemEditor>
+                                                <s:dataProvider>
+                                                    <s:ArrayList>
+                                                        <fx:String>мл</fx:String>
+                                                        <fx:String>л</fx:String>
+                                                        <fx:String>шт</fx:String>
+                                                    </s:ArrayList>
+                                                </s:dataProvider>
+                                            </s:ComboBoxGridItemEditor>
+                                        </fx:Component>
+                                    </s:itemEditor>
+                                </s:GridColumn>
                             </s:ArrayList>
                         </s:columns>
                     </s:DataGrid>

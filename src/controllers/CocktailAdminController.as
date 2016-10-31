@@ -195,9 +195,10 @@ package controllers
                     curIngredient = {
                         id: ingredient.ingredientId,
                         name: IngredientsModel.instance.getIngredientById(ingredient.ingredientId).name,
-                        quantity: ingredient.quantity
+                        quantity: ingredient.quantity,
+                        unit: ingredient.unit
                     };
-                    result.push(curIngredient)
+                    result.push(curIngredient);
                 }
             }
 
@@ -213,7 +214,7 @@ package controllers
             for (var i:int = 0; i < source.length; i++)
             {
                 curIngredient = source.getItemAt(i);
-                ingredient = {ingredientId: curIngredient.id, quantity: curIngredient.quantity};
+                ingredient = {ingredientId: curIngredient.id, quantity: curIngredient.quantity, unit: curIngredient.unit};
                 result.push(ingredient);
             }
 
