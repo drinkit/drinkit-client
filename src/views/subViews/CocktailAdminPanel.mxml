@@ -252,7 +252,11 @@
                                                     <s:ArrayList>
                                                         <fx:String>мл</fx:String>
                                                         <fx:String>л</fx:String>
-                                                        <fx:String>шт</fx:String>
+                                                        <fx:String>шт.</fx:String>
+                                                        <fx:String>ч. л.</fx:String>
+                                                        <fx:String>ст. л.</fx:String>
+                                                        <fx:String>г</fx:String>
+                                                        <fx:String>кг</fx:String>
                                                     </s:ArrayList>
                                                 </s:dataProvider>
                                             </s:ComboBoxGridItemEditor>
