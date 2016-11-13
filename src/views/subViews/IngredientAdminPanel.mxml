@@ -82,7 +82,11 @@
         }
 
         private function onSynonymsChange(event:TextOperationEvent):void {
-            _model.alias = synonymsInput.text.split(";");
+            if (synonymsInput.text != "") {
+                _model.alias = synonymsInput.text.split(";");
+            } else {
+                _model.alias = [];
+            }
         }
         ]]>
     </fx:Script>
