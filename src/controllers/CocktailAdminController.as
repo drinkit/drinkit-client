@@ -96,6 +96,7 @@ package controllers
 
             var cocktail:Object = {};
             cocktail.name = _model.name;
+            cocktail.originalName = _model.originalName;
             cocktail.imageFileName = "";
             cocktail.thumbnailFileName = "";
             cocktail.description = _model.description;
@@ -118,6 +119,7 @@ package controllers
             var cocktail:Object = {};
             cocktail.id = _model.cocktailId;
             cocktail.name = _model.name;
+            cocktail.originalName = _model.originalName;
             cocktail.description = _model.description;
             cocktail.options = _model.selectedOptions;
             cocktail.published = _model.published;
@@ -173,6 +175,7 @@ package controllers
             _lastCocktailModel = CocktailUrlDecorator.decorate(JSONInstantiator.createInstance(response, CocktailModel, false) as CocktailModel);
             _model.cocktailId = _lastCocktailModel.id;
             _model.name = _lastCocktailModel.name;
+            _model.originalName = _lastCocktailModel.originalName;
             _model.description = _lastCocktailModel.description;
             _model.cocktailTypeId = _lastCocktailModel.cocktailTypeId;
             _model.selectedOptions = _lastCocktailModel.options;

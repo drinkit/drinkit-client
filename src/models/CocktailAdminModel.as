@@ -50,6 +50,9 @@ package models
         public var name:String;
 
         [Bindable]
+        public var originalName:String;
+
+        [Bindable]
         public var description:String;
 
         [Bindable]
@@ -61,6 +64,7 @@ package models
         {
             selectedOptions = [];
             name = "";
+            originalName = "";
             description = "";
             imageData = null;
             imageUrl = "";

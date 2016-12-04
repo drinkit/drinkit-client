@@ -21,6 +21,7 @@ import mx.collections.ArrayList;
 
         public var id:Number;
         public var name:String;
+        public var originalName:String;
         public var description:String;
         public var cocktailTypeId:int;
         private var _ingredientsWithQuantities:Array;

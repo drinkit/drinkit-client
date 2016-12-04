@@ -221,6 +221,7 @@
     <s:HGroup width="100%" height="100%">
         <s:VGroup width="100%" height="100%">
             <s:HGroup verticalAlign="middle">
+                <s:TextInput id="origNameInput" text="@{_model.originalName}" width="300" prompt="оригинальное название..."/>
                 <s:Image source="@Embed(source='/../assets/vop.png')" width="16" height="16" toolTip="&lt;b&gt;&lt;/b&gt; - жирное начертание&#13;&lt;i&gt;&lt;/i&gt; - курсив" />
                 <s:Label text="Описание:" verticalAlign="middle" />
             </s:HGroup>
